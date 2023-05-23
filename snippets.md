@@ -34,11 +34,33 @@ Limit search to files with extension md (markdown)
 `rg -t md`
 
 Search for files beginning with `jobc` and containing `'// TODO'`  
-`rg -g 'jobc*.md' '// TODO'`
+`rg -g 'jobc*.md' '// TODO'`  
+
+patterns from file
+`rg -f patternfile.txt` 
+
+search for title: in files ending with .md and open them in vim  
+`rg title: --glob=*.md | vim -`
+
+search for timebox in files containing url (no need for fd)  
+`rg timebox --glob *url*.md`
+
+search for ab or de  
+`rg ab | de`
+
+search for ab and de  
+`rg ab | rg de`
+
+Search over multiple lines, seems to work in many of my use cases but not always (requires further evaluation: think its the pattern part)
+`rg -i -U --multiline-dotall "pattern1.*pattern2.*pattern3"`
+
+
+
+
 
 
 ## imagemagick
-
+TODO
 
 ## robocopy
 Copy all *.docx files from the current directory to archive  
@@ -47,4 +69,9 @@ Copy all *.docx files from the current directory to archive
 ## fzf
 For windows use [ff](https://github.com/genotrance/ff) as wrapper for fzf.
 And define a shortcut like `ff -a gvim` to open the result from fzf in gvim.
+
+## Windows
+Check if python virtual environment is active  
+`echo %VIRTUAL_ENV%`
+
 
