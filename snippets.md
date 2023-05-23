@@ -64,14 +64,32 @@ TODO
 
 ## robocopy
 Copy all *.docx files from the current directory to archive  
-`robocopy . *.docx x:\archive\`  
+`robocopy . *.docx x:\archive\` 
+
+Poor man's mirror backup  
+`robocopy d:\source r:\sync\source /NP /S /TEE /E /MIR /MT:8 /R:5 /LOG+:d:\backup-source.log` 
+
+
 
 ## fzf
 For windows use [ff](https://github.com/genotrance/ff) as wrapper for fzf.
 And define a shortcut like `ff -a gvim` to open the result from fzf in gvim.
 
 ## Windows
-Check if python virtual environment is active  
+Check if a python virtual environment is active  
 `echo %VIRTUAL_ENV%`
+
+## RegEx
+
+> **NOTE**: untested :g can possibly be omitted
+
+Add " to the begin of the line (in Vim) -> : instead of / used for better readability  
+`:%s:^:":g`  
+
+Add " to the end of the line (in Vim) -> : instead of / used for better readability  
+`:%s:$:":g` 
+
+
+
 
 
