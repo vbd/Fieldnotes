@@ -79,15 +79,7 @@ And define a shortcut like `ff -a gvim` to open the result from fzf in gvim.
 Check if a python virtual environment is active  
 `echo %VIRTUAL_ENV%`
 
-## RegEx
 
-> **NOTE**: untested :g can possibly be omitted
-
-Add " to the begin of the line (in Vim) -> : instead of / used for better readability  
-`:%s:^:":g`  
-
-Add " to the end of the line (in Vim) -> : instead of / used for better readability  
-`:%s:$:":g` 
 
 
 
