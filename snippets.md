@@ -18,6 +18,14 @@ Find by date/time
 Find markdown files an run `wc -l` on them  
 `fd -e md --exec wc -l`  
 
+Copy files containing vim in name and extension txt to ziel (cmd is required because copy is part of MS Windows cmd)  
+`fd vim -e txt -x cmd /c copy {/} d:\ziel`
+
+Find files without extension  
+`fd "^[^.]*$" --type f`  
+
+
+
 
 
 ## rg (https://github.com/BurntSushi/ripgrep)
@@ -35,4 +43,8 @@ Search for files beginning with `jobc` and containing `'// TODO'`
 ## robocopy
 Copy all *.docx files from the current directory to archive  
 `robocopy . *.docx x:\archive\`  
+
+## fzf
+For windows use [ff](https://github.com/genotrance/ff) as wrapper for fzf.
+And define a shortcut like `ff -a gvim` to open the result from fzf in gvim.
 
