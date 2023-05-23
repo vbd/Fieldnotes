@@ -1,6 +1,7 @@
 # Vim
 
-> **Intern** Check Todo: notes.*, master.*, logger.*, todo.* and paper notes for examples.
+> **Intern** Check Todo: notes.*, master.*, logger.*, todo.* and paper notes for examples.  
+> Maybe useful: fb mapping, argdo, bufdo, search and replace without plugins, completions, navigate functions/methods
 
 
 ## Export to HTML including manual folds  
