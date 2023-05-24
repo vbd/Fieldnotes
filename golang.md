@@ -12,6 +12,13 @@ Here my hopefully helpful ressoures for the Go language.
 - [A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
 - [Charm libs Everything you need to build great stuff for the terminal.](https://charm.sh/)
 
+## CLI
+
+- [Struct-based argument parsing in Go](https://github.com/alexflint/go-arg)
+- [A simple, fast, and fun package for building command line apps in Go](https://github.com/urfave/cli)
+- [A Commander for modern Go CLI interactions](https://github.com/spf13/cobra) 
+
+
 ## GUI
 - [Build beautiful cross-platform applications using Go](https://wails.io/)
 
