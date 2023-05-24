@@ -77,6 +77,9 @@ Although I have been doing this for more than 25 years, I still read books to st
 - The Unicorn Project: A Novel about Developers, Digital Disruption, and Thriving in the Age of Data: https://www.amazon.de/Unicorn-Project-Developers-Disruption-Thriving-ebook/dp/B07QT9QR41/
 - Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Designing-Data-Intensive-Applications-Reliable-Maintainable-ebook/dp/B06XPJML5D/
 - Engineers Survival Guide: Advice, tactics, and tricks After a decade of working at Facebook, Snapchat, and Microsoft: https://www.amazon.de/gp/product/B09MBZBGFK/
+- Continuous Delivery: Reliable Software Releases Through Build, Test, and Deployment Automation: https://www.amazon.de/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/
+- Agile Estimating and Planning: https://www.amazon.de/Agile-Estimating-Planning-Robert-Martin/dp/0131479415/
+
 
  ## Algorithms, Math
 
