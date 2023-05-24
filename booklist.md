@@ -79,7 +79,8 @@ Although I have been doing this for more than 25 years, I still read books to st
 - Engineers Survival Guide: Advice, tactics, and tricks After a decade of working at Facebook, Snapchat, and Microsoft: https://www.amazon.de/gp/product/B09MBZBGFK/
 - Continuous Delivery: Reliable Software Releases Through Build, Test, and Deployment Automation: https://www.amazon.de/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/
 - Agile Estimating and Planning: https://www.amazon.de/Agile-Estimating-Planning-Robert-Martin/dp/0131479415/
-
+- System Design Interview – An insider's guide: https://www.amazon.de/dp/B08CMF2CQF/
+- System Design Interview – An Insider's Guide: Volume 2: https://www.amazon.de/System-Design-Interview-Insiders-Guide/dp/1736049119/ 
 
  ## Algorithms, Math
 
