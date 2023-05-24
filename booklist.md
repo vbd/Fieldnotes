@@ -38,6 +38,8 @@ I've read them all!
 ### Bonus
 - Writing An Interpreter In Go: https://www.amazon.de/Writing-Interpreter-Go-Thorsten-Ball/dp/3982016118/
 - Writing A Compiler In Go: https://www.amazon.de/Writing-Compiler-Go-Thorsten-Ball/dp/398201610X/
+- [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/) Download: [PDF / ePub](https://github.com/quii/learn-go-with-tests/releases)
+
 
 ---
 
