@@ -76,7 +76,8 @@ Although I have been doing this for more than 25 years, I still read books to st
 - The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win: https://www.amazon.de/Phoenix-Project-Helping-Business-English-ebook/dp/B09JWVXFNG/
 - The Unicorn Project: A Novel about Developers, Digital Disruption, and Thriving in the Age of Data: https://www.amazon.de/Unicorn-Project-Developers-Disruption-Thriving-ebook/dp/B07QT9QR41/
 - Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Designing-Data-Intensive-Applications-Reliable-Maintainable-ebook/dp/B06XPJML5D/
- 
+- Engineers Survival Guide: Advice, tactics, and tricks After a decade of working at Facebook, Snapchat, and Microsoft: https://www.amazon.de/gp/product/B09MBZBGFK/
+
  ## Algorithms, Math
 
 - Naked Statistics: Stripping the Dread from the Data: https://www.amazon.de/Naked-Statistics-Stripping-Dread-English-ebook/dp/B007Q6XLF2/
