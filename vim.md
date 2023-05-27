@@ -234,7 +234,7 @@ Additional info: https://stackoverflow.com/questions/3981535/using-the-w-option-
 
 
 
-### Convert German Umlaute
+## Convert German Umlaute
 
     conv.vim:
         :%s/Ã¶/ö/g
@@ -277,7 +277,7 @@ Capture ex command output to buffer e.g. `:version`
     "mp
 
 
-### Python in vim
+## Python and vim
 
     Check if Python and Vim are the same bit (64), not mixed!
 
