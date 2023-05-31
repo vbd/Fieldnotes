@@ -81,6 +81,7 @@ Although I have been doing this for more than 25 years, I still read books to st
 - Agile Estimating and Planning: https://www.amazon.de/Agile-Estimating-Planning-Robert-Martin/dp/0131479415/
 - System Design Interview – An insider's guide: https://www.amazon.de/dp/B08CMF2CQF/
 - System Design Interview – An Insider's Guide: Volume 2: https://www.amazon.de/System-Design-Interview-Insiders-Guide/dp/1736049119/ 
+- Code: The Hidden Language of Computer Hardware and Software: https://www.amazon.de/Code-Language-Computer-Hardware-Software/dp/0137909101/
 
  ## Algorithms, Math
 
