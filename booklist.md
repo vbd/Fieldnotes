@@ -38,8 +38,9 @@ I've read them all!
 ### Bonus
 - Writing An Interpreter In Go: https://www.amazon.de/Writing-Interpreter-Go-Thorsten-Ball/dp/3982016118/
 - Writing A Compiler In Go: https://www.amazon.de/Writing-Compiler-Go-Thorsten-Ball/dp/398201610X/
-- [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests/) Download: [PDF / ePub](https://github.com/quii/learn-go-with-tests/releases)
-
+- Learn Go with Tests: https://quii.gitbook.io/learn-go-with-tests/ Download PDF / ePub: https://github.com/quii/learn-go-with-tests/releases
+- 100 Go Mistakes and How to Avoid Them: https://www.amazon.de/100-Mistakes-Avoid-Them-English-ebook/dp/B0BBHQD8BQ/
+- Powerful Command-Line Applications in Go: https://pragprog.com/titles/rggo/powerful-command-line-applications-in-go/
 
 ---
 
@@ -82,6 +83,7 @@ Although I have been doing this for more than 25 years, I still read books to st
 - System Design Interview – An insider's guide: https://www.amazon.de/dp/B08CMF2CQF/
 - System Design Interview – An Insider's Guide: Volume 2: https://www.amazon.de/System-Design-Interview-Insiders-Guide/dp/1736049119/ 
 - Code: The Hidden Language of Computer Hardware and Software: https://www.amazon.de/Code-Language-Computer-Hardware-Software/dp/0137909101/
+- Code That Fits in Your Head : Heuristics for Software Engineering: https://www.amazon.de/Code-That-Fits-Your-Head/dp/0137464401/
 
  ## Algorithms, Math
 
@@ -96,6 +98,25 @@ Although I have been doing this for more than 25 years, I still read books to st
 - Human Compatible: AI and the Problem of Control: https://www.amazon.de/gp/product/B07QTYT1MG/
 - Ethik in KI und Robotik: https://www.amazon.de/Ethik-KI-Robotik-Christoph-Bartneck/dp/3446462279/ 
  
+## Security:
+
+- Black Hat Go: Go Programming For Hackers and Pentesters: https://www.amazon.de/Black-Hat-Go-Programming-Pentesters/dp/1593278659/
+- Hacking APIs: https://nostarch.com/hacking-apis  
+- Blitzscaling security: Diary of a security engineer (English Edition): https://www.amazon.de/Blitzscaling-security-Diary-engineer-English-ebook/dp/B0C4LC4FDW/
+- How to Hack Like a PORNSTAR: A step by step process for breaking into a BANK (Hacking the planet Book 1): https://www.amazon.de/How-Hack-Like-PORNSTAR-breaking-ebook/dp/B01MTDLGQQ/
+- How to Hack Like a GOD: Master the secrets of hacking through real life scenarios (Hacking the planet Book 2): https://www.amazon.de/How-Hack-Like-GOD-scenarios-ebook/dp/B06Y4HWHXC/
+- Ultimate Hacking Challenge: Train on dedicated machines to master the art of hacking (Hacking the planet Book 3): https://www.amazon.de/Ultimate-Hacking-Challenge-dedicated-machines-ebook/dp/B071ZXK2CR/
+- Ultimate Guide for being Anonymous: Avoiding prison time for fun and profit (Hacking the planet Book 4): https://www.amazon.de/Ultimate-Guide-being-Avoiding-Hacking-ebook/dp/B071RSW5M4/
+- How to Investigate Like a Rockstar: Live a real crisis to master the secrets of forensic analysis (Hacking the planet Book 5): https://www.amazon.de/How-Investigate-Like-Rockstar-forensic-ebook/dp/B074THN82S/
+- Ultimate Hacking Challenge Zeta: Train on dedicated machines to master the art of hacking (Hacking the planet Book 6): https://www.amazon.de/Ultimate-Hacking-Challenge-Zeta-dedicated-ebook/dp/B076ZH12MX/
+- How to Hack Like a LEGEND: A hacker’s tale breaking into a secretive offshore company (Hacking the planet, Band 7): https://www.amazon.de/How-Hack-Like-LEGEND-secretive/dp/1980792607/
+- How to Hack Like a GHOST: A detailed account of a breach to remember (Hacking the planet, Band 8): https://www.amazon.de/How-Hack-Like-GHOST-detailed/dp/B0858V3VMS/
+ 
+Vim
+- Practical Vim: https://pragprog.com/titles/dnvim2/practical-vim-second-edition/
+- Craft Your Development Environment with Vim 8 and Neovim: https://pragprog.com/titles/modvim/modern-vim/
+- Mastering Vim Quickly: From WTF to OMG in no time: https://www.amazon.de/Mastering-Vim-Quickly-WTF-time/dp/1983325740/ 
+
 > **NOTES**: 
 
 - I've read a lot book dealing with scrum. But I've to admit none of them convinced me that much and that's why i stayed with the scrum guide. So no special recommendation.
