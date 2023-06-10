@@ -31,4 +31,9 @@ Here my hopefully helpful ressoures for the Go language.
 - [BITFIELD CONSULTING friendly, professional Go mentoring](https://bitfieldconsulting.com/golang)
 - [Deliver Go binaries as fast and easily as possible](https://github.com/goreleaser/goreleaser)
 
+## Youtube
 
+- [Go Class](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6) by Matt KØDVB
+- [Go Programming – Golang Course with Bonus Projects](https://www.youtube.com/watch?v=un6ZyFkqFKo) by Freecodecamp
+- [Learn Go Programming - Golang Tutorial for Beginners](https://www.youtube.com/watch?v=YS4e4q9oBaU) by Freecodecamp
+- [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac) by Freecodecamp 
