@@ -21,3 +21,7 @@ For several years, in my spare time and without earning any money, I have been w
 - [How LLMs like ChatGPT can improve Project Managers' work](https://www.youtube.com/watch?v=ooCCvZjPPpo)
 - [Prompt Engineer Jobs](https://prompt-engineering-jobs.com/)
 
+## Cheatsheets
+- [ChatGPT cheatsheet](https://quickref.me/chatgpt.html)
+- [The ChatGPT Cheat Sheet](https://www.kdnuggets.com/publications/sheets/ChatGPT_Cheatsheet_Costa.pdf) (PDF)
+
