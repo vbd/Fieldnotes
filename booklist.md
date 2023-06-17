@@ -125,5 +125,5 @@ Vim
 - Write your notes in a simple language in a way that you would explain the topic to someone in an explain like I'm five style.
 - Use technical terms when appropriate.
 - Your customer wants solutions - normally he is not interested in the programming language and tools you use.
-- Write down decisions, when, why, what, who was involved.
+- Write down decisions: when, why, what, who was involved.
  
