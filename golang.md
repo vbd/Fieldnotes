@@ -68,9 +68,10 @@ Here my hopefully helpful ressoures for the Go language.
 - [We Work Remotely](https://weworkremotely.com/)
 
 
-## Learning by source
+## Learning to code with source
 
 - [Generate invoices from the command line](https://github.com/maaslalani/invoice)
+- [Simple command-line snippet manager, written in Go.](https://github.com/knqyf263/pet)
 
 ## Youtube
 
