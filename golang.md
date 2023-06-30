@@ -4,7 +4,7 @@ Here my hopefully helpful ressoures for the Go language.
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
 
-## Style guide, tempaltes...
+## Style guide, templates...
 - [Go Style](https://google.github.io/styleguide/go/index)
 - [golang-standards](https://github.com/golang-standards)
 
@@ -17,6 +17,12 @@ Here my hopefully helpful ressoures for the Go language.
 - [Struct-based argument parsing in Go](https://github.com/alexflint/go-arg)
 - [A simple, fast, and fun package for building command line apps in Go](https://github.com/urfave/cli)
 - [A Commander for modern Go CLI interactions](https://github.com/spf13/cobra) 
+
+## Podcasts
+- [Cup o' Go](https://cupogo.dev/) Stay up to date with the Go community in just 15 minutes per week.
+- [Ardan Labs Podcast](https://ardanlabs.buzzsprout.com/) This podcast features intimate conversations with engineers who are in the forefront of building or teaching technology.
+- [go podcast()](https://go.transistor.fm/episodes)
+- [Go Time](https://changelog.com/gotime)
 
 
 ## GUI / TUI
