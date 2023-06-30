@@ -4,6 +4,11 @@ Here my hopefully helpful ressoures for the Go language.
 ## Blogs
 - [Bitfield Consulting friendly, professional go mentoring](https://bitfieldconsulting.com/golang)
 - [Boldly Go](https://boldlygo.tech/media/)
+- [Eli Bendersky's website](https://eli.thegreenplace.net/tag/go) / [Golang tools](https://eli.thegreenplace.net/tag/go-tooling)
+- [Three Dots Labs](https://threedots.tech/start/)
+- [Go 101 Blog](https://go101.org/blog/101.html)
+- [The Go Blog](https://go.dev/blog/)
+
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
@@ -30,7 +35,6 @@ Here my hopefully helpful ressoures for the Go language.
 - [go podcast()](https://go.transistor.fm/episodes)
 - [Go Time](https://changelog.com/gotime)
 
-
 ## GUI / TUI
 - [Build desktop applications using Go & Web Technologies.](https://wails.io/)
 - [bubbletea, A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
@@ -44,11 +48,24 @@ Here my hopefully helpful ressoures for the Go language.
 - [Deliver Go binaries as fast and easily as possible](https://github.com/goreleaser/goreleaser)
 - [Structured, pluggable logging for Go.](https://github.com/sirupsen/logrus) :arrow_right: Go 1.21 will offer the new [slog package](https://tip.golang.org/doc/go1.21#slog)
 - [AI on the command line](https://github.com/charmbracelet/mods)
+- [A language for writing HTML user interfaces in Go.](https://github.com/a-h/templ)
   
 ## Cheatsheets
 - [An overview of Go syntax and features.](https://github.com/a8m/golang-cheat-sheet)
 - [cheat sheet GO](https://golang.sk/images/blog/cheatsheets/go-cheat-sheet.pdf) PDF
 - [Go Programming (Golang) Cheat Sheet](https://zerotomastery.io/cheatsheets/golang-cheat-sheet/)
+
+## "Career"
+- [Roadmap: Go Developer](https://roadmap.sh/golang)
+- [Roadmap: Backend Developer](https://roadmap.sh/backend)
+- [Roadmap: DevOps Roadmap](https://roadmap.sh/devops)
+- [Roadmap: System Design](https://roadmap.sh/system-design)
+- [Find your remote work here](https://www.opentoworkremote.com/) :arrow_right: it's backend on github [Collection of remote job opportunities from around the world.](https://github.com/maurobonfietti/remote-jobs)
+- [Remote Jobs](https://remotejobs.com/)
+- [Remote Software Engineering Jobs](https://remotesoftwareengineeringjobs.com/?tech=Golang)
+- [echojobs](https://echojobs.io/)
+- [German tech jobs](https://germantechjobs.de/jobs/Golang/all)
+- [We Work Remotely](https://weworkremotely.com/)
 
 
 ## Learning by source
