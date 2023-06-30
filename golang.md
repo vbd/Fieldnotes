@@ -19,9 +19,10 @@ Here my hopefully helpful ressoures for the Go language.
 - [A Commander for modern Go CLI interactions](https://github.com/spf13/cobra) 
 
 
-## GUI
-- [Build beautiful cross-platform applications using Go](https://wails.io/)
-
+## GUI / TUI
+- [Build desktop applications using Go & Web Technologies.](https://wails.io/)
+- [bubbletea, A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
+  
 ## Finding libs
 - [Trending Go Projects](https://www.libhunt.com/l/go)
 
@@ -30,6 +31,12 @@ Here my hopefully helpful ressoures for the Go language.
 - [Effective Go](https://go.dev/doc/effective_go)
 - [BITFIELD CONSULTING friendly, professional Go mentoring](https://bitfieldconsulting.com/golang)
 - [Deliver Go binaries as fast and easily as possible](https://github.com/goreleaser/goreleaser)
+
+## Cheatsheets
+- [An overview of Go syntax and features.](https://github.com/a8m/golang-cheat-sheet)
+- [cheat sheet GO](https://golang.sk/images/blog/cheatsheets/go-cheat-sheet.pdf) PDF
+- [Go Programming (Golang) Cheat Sheet](https://zerotomastery.io/cheatsheets/golang-cheat-sheet/)
+
 
 ## Youtube
 
