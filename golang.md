@@ -66,6 +66,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [echojobs](https://echojobs.io/)
 - [German tech jobs](https://germantechjobs.de/jobs/Golang/all)
 - [We Work Remotely](https://weworkremotely.com/)
+- [Go / Golang Jobs & developers](https://www.golangprojects.com/)
 
 
 ## Learning to code with source
