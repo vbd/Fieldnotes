@@ -218,5 +218,6 @@ Note: 2023-07-03 seems not to be any longer the case.
 - :tv: [Build AI Apps with ChatGPT, DALL-E, and GPT-4 – Full Course for Beginners](https://www.youtube.com/watch?v=jlogLBkPZ2A)
 - :tv: [Use ChatGPT to Code a Full Stack App – Full Course](https://www.youtube.com/watch?v=GizsSo-EevA)
 - :tv: [ChatGPT Course – Use The OpenAI API to Code 5 Projects](https://www.youtube.com/watch?v=uRQH2CFvedY)
+- [Prompt Engineering Roadmap](https://roadmap.sh/prompt-engineering)
 
 
