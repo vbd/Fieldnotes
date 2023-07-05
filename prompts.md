@@ -219,5 +219,9 @@ Note: 2023-07-03 seems not to be any longer the case.
 - :tv: [Use ChatGPT to Code a Full Stack App – Full Course](https://www.youtube.com/watch?v=GizsSo-EevA)
 - :tv: [ChatGPT Course – Use The OpenAI API to Code 5 Projects](https://www.youtube.com/watch?v=uRQH2CFvedY)
 - [Prompt Engineering Roadmap](https://roadmap.sh/prompt-engineering)
+- [ChatGPT Prompts: A Guide for Developers](https://dev.to/kanani_nirav/chatgpt-prompts-a-guide-for-developers-p6m)
+- [A collection of ChatGPT and GPT-3.5 instruction-based prompts for generating and classifying text.](https://github.com/kevinamiri/Instructgpt-prompts)
+- 🌶️[Dive into cheat sheets, AI courses, prompt engineering tutorials, and more to enhance your understanding and skills in AI.](https://www.aifire.co/c/ai-learning-resources)
+
 
 
