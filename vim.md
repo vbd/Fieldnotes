@@ -3,6 +3,35 @@
 > **Intern** Check Todo: notes.*, master.*, logger.*, todo.* and paper notes for examples.  
 > Maybe useful: fb mapping, argdo, bufdo, search and replace without plugins, completions, navigate functions/methods
 
+## Learning Vim
+
+I learned vim in a way most younger people can't imagine I didn't know any books, youtube wasn't available and I didn't know what a plugin is.
+My first vim contact was a remote session from Windows via telnet to a linux machine which I couldn't figure out to quit - no joke.  
+Finally I did alt+F4...
+
+But since that time I got hooked, and I didn't regret to learn it. I still use Vim today. I do 95% of my work with it.
+
+Today I would recommend the following:
+
+1. [Vim Tutorial for Beginners](https://www.youtube.com/watch?v=RZ4p-saaQkc)
+2. [How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
+3. Ask the great help, sometime it's a bit tricky to find the right keyword. You can take a full shot on the help file as PDF https://nathangrigg.com/vimhelp/vimhelp-a4.pdf
+4. [Vimcasts.org](http://vimcasts.org/episodes/)
+5. [Vim Cookbook by Steve Oualline](http://www.oualline.com/vim-cook.html). He wrote my [first Vim book I read](http://www.oualline.com/books/index.html) dated ~2000/2001/2002
+6. :books: Practical Vim: Edit Text at the Speed of Thought https://www.amazon.de/Practical-Vim-Edit-Speed-Thought/dp/1680501275/
+7. :books: Modern Vim: Craft Your Development Environment with Vim 8 and Neovim https://www.amazon.de/Modern-Vim-Development-Environment-Neovim/dp/168050262X/
+
+
+I try to watch as few vim videos on youtube as possible because they might distract me too much from my work but
+there are some greast youtuber's fiddling with vim/neovim e.g.:
+
+- [ThePrimeagen](https://www.youtube.com/@ThePrimeagen/search?query=vim)
+- [Ben Awad](https://www.youtube.com/@bawad/search?query=vim)
+- [SeniorMars](https://www.youtube.com/@SeniorMarsTries/search?query=vim)
+- [Sebastian Daschner](https://www.youtube.com/@SebastianDaschnerIT/search?query=vim)
+- [DistroTube](https://www.youtube.com/@DistroTube/search?query=vim)
+
+
 ## General
 
 ```
