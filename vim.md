@@ -321,6 +321,14 @@ Capture ex command output to buffer e.g. `:version`
 
     vim --startuptime perf
 
- 
+## Codeblocks
 
+### Remove ?utm from urls
+
+`:%s/?utm.*$//g`  
+- `:%s` replace in whole buffer  
+- `?utm.*$` is the search pattern that will match from starting `?utm` up to the end of the line.
+- `//` pattern which replace the match in this case it's empty.
+- `g` means global, will replace multiple occurences in line. Could be omitted because we replace from pattern start till end of line, but it's my (bad) habit.
+ 
 
