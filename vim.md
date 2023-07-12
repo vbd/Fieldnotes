@@ -332,3 +332,21 @@ Capture ex command output to buffer e.g. `:version`
 - `g` means global, will replace multiple occurences in line. Could be omitted because we replace from pattern start till end of line, but it's my (bad) habit.
  
 
+### Append text to the end of multiple lines
+
+before:
+
+    a
+    b
+    c
+
+after:
+
+    a TEXT
+    b TEXT
+    c TEXT
+
+- visual select lines
+- type `:norm A TEXT`, this will add TEXT to the end of all lines visually selected
+
+
