@@ -349,4 +349,37 @@ after:
 - visual select lines
 - type `:norm A TEXT`, this will add TEXT to the end of all lines visually selected
 
+### Prepend and append text to lines in command-line mode
 
+- used `:` insted of `/` for better readability
+- lines are marked visually `'<,'>` 
+
+before:
+
+    a
+    b
+    c
+
+`:'<,'>s:^:before`
+
+after:
+
+    before a
+    before b
+    before c
+
+
+before:
+
+    before a
+    before b
+    before c
+
+`:'<,'>s:$: after:`
+
+after:
+
+    before a after
+    before b after
+    before c after 
+ 
