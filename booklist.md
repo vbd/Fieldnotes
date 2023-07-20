@@ -69,6 +69,7 @@ Although I have been doing this for more than 25 years, I still read books to st
 
 ## Development in general, project management
 
+- Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Designing-Data-Intensive-Applications-Reliable-Maintainable-ebook/dp/B06XPJML5D/
 - Modern Software Engineering: Doing What Works to Build Better Software Faster: https://www.amazon.de/Modern-Software-Engineering-Better-English-ebook/dp/B09GG6XKS4/
 - The Pragmatic Programmer: https://www.amazon.de/Pragmatic-Programmer-journey-mastery-Anniversary-ebook/dp/B07VRS84D1/
 - The Goal: A Process of Ongoing Improvement: https://www.amazon.de/Goal-Process-Ongoing-Improvement/dp/0884271951/
@@ -76,14 +77,16 @@ Although I have been doing this for more than 25 years, I still read books to st
 - Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations: https://www.amazon.de/Accelerate-Software-Performing-Technology-Organizations-ebook/dp/B07B9F83WM/
 - The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win: https://www.amazon.de/Phoenix-Project-Helping-Business-English-ebook/dp/B09JWVXFNG/
 - The Unicorn Project: A Novel about Developers, Digital Disruption, and Thriving in the Age of Data: https://www.amazon.de/Unicorn-Project-Developers-Disruption-Thriving-ebook/dp/B07QT9QR41/
-- Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Designing-Data-Intensive-Applications-Reliable-Maintainable-ebook/dp/B06XPJML5D/
 - Engineers Survival Guide: Advice, tactics, and tricks After a decade of working at Facebook, Snapchat, and Microsoft: https://www.amazon.de/gp/product/B09MBZBGFK/
 - Continuous Delivery: Reliable Software Releases Through Build, Test, and Deployment Automation: https://www.amazon.de/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/
 - Agile Estimating and Planning: https://www.amazon.de/Agile-Estimating-Planning-Robert-Martin/dp/0131479415/
 - System Design Interview – An insider's guide: https://www.amazon.de/dp/B08CMF2CQF/
 - System Design Interview – An Insider's Guide: Volume 2: https://www.amazon.de/System-Design-Interview-Insiders-Guide/dp/1736049119/ 
 - Code: The Hidden Language of Computer Hardware and Software: https://www.amazon.de/Code-Language-Computer-Hardware-Software/dp/0137909101/
-- Code That Fits in Your Head : Heuristics for Software Engineering: https://www.amazon.de/Code-That-Fits-Your-Head/dp/0137464401/
+- Code That Fits in Your Head: Heuristics for Software Engineering: https://www.amazon.de/Code-That-Fits-Your-Head/dp/0137464401/
+- Everything curl - the book (free): https://curl.se/book.html
+- Git for Beginners: Zero to Hero (free): https://jdsalaro.com/tutorial/git/
+
 
  ## Algorithms, Math
 
