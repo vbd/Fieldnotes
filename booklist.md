@@ -115,6 +115,7 @@ Although I have been doing this for more than 25 years, I still read books to st
 - How to Hack Like a LEGEND: A hacker’s tale breaking into a secretive offshore company (Hacking the planet, Band 7): https://www.amazon.de/How-Hack-Like-LEGEND-secretive/dp/1980792607/
 - How to Hack Like a GHOST: A detailed account of a breach to remember (Hacking the planet, Band 8): https://www.amazon.de/How-Hack-Like-GHOST-detailed/dp/B0858V3VMS/
 - Privacy-Handbuch: https://www.privacy-handbuch.de/index.htm
+- 🌶️ Security Certification Roadmap: https://pauljerimy.com/security-certification-roadmap/
  
 Vim
 - Practical Vim: https://pragprog.com/titles/dnvim2/practical-vim-second-edition/
