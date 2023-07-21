@@ -10,21 +10,21 @@ There are no source codes created by me, because they are mostly created in the 
 
 ## Techstack
 
-Current: 
+Current. Sorted by use: 
 <p>
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=vim,bots,docker,fastapi,git,github,go,md,mastodon,mysql,php,python,regex,sqlite,stackoverflow,selenium,vscode&perline=8" />
+    <img src="https://skillicons.dev/icons?i=vim,go,python,md,php,mysql,git,github,sqlite,regex,docker,fastapi,selenium,bots,stackoverflow,vscode,mastodon&perline=8" />
   </a>
 </p> 
 
-Past, not used in project for longer time span:
+Past, not used in project for longer time span. Sorted alphabetical:
 <p>
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=angular,bootstrap,c,cpp,cs,dotnet,electron,js,jquery,latex,linux,perl,pytorch,r,rabbitmq,visualstudio,wordpress&perline=8" />
   </a>
 </p> 
 
-Played with it, just for fun, up to now never made something useful
+Played with it, just for fun, up to now never made something useful. Sorted alphabetical:
 <p>
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=clojure,coffeescript,godot,haxe,lua,nim,rust,twitter,wasm&perline=8" />
