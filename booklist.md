@@ -26,7 +26,8 @@ I've read them all!
 ### Bonus
 - Serious Python: Black-Belt Advice on Deployment, Scalability, Testing, and More: https://www.amazon.de/Serious-Python-Black-Belt-Deployment-Scalability/dp/1593278780/
 - Effective Pandas: Patterns for Data Manipulation: https://www.amazon.de/Effective-Pandas-Patterns-Manipulation-Treading/dp/B09MYXXSFM/
-- Practical Statistics for Data Scientists: 50+ Essential Concepts Using R and Python: https://www.amazon.de/Practical-Statistics-Data-Scientists-Essential/dp/149207294X/ 
+- Practical Statistics for Data Scientists: 50+ Essential Concepts Using R and Python: https://www.amazon.de/Practical-Statistics-Data-Scientists-Essential/dp/149207294X/
+- 🌶️ Scientific Python Lectures, one document to learn numerics, science, and data with Python (free): https://lectures.scientific-python.org/
 
 ---
 
