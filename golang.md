@@ -74,11 +74,17 @@ Here my hopefully helpful ressoures for the Go language.
 - [Go / Golang Jobs & developers](https://www.golangprojects.com/)
 
 
-## Learning to code with source
+## Learning to code from source
 
 - [Generate invoices from the command line](https://github.com/maaslalani/invoice)
 - [Simple command-line snippet manager, written in Go.](https://github.com/knqyf263/pet)
 - 🌶️[A small ecomerce site for buying books](https://github.com/madxmike/zenith-bookshop)
+- [Browsers Extensions Finder (BEXfinder) is a portable and cross-platform (Windows, Linux and MacOS) command-line tool to find out all web browsers (Google Chrome, Microsoft Edge, Brave Browser, Mozilla FireFox, Opera, etc.) extensions installed on system.](https://github.com/ch4meleon/BEXfinder)
+- [Command line tool written in Go. It allows developers to scan their local Git repositories and generate a visual contributions graph.](https://github.com/abdullah-alaadine/local-git-contributions-visualizer)
+- [CLI for interacting with the recreation.gov API](https://github.com/opencamp-hq/cli)
+- [Repositories in Golang by Mitchell Hashimoto](https://github.com/mitchellh)
+- [Storing IP addresses for quick CLI access](https://github.com/charlesdevelops/ipster)
+
 
 ## Youtube
 
