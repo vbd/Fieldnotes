@@ -88,4 +88,4 @@ Here my hopefully helpful ressoures for the Go language.
 ## WebDev
 
 - [bluemonday: a fast golang HTML sanitizer (inspired by the OWASP Java HTML Sanitizer) to scrub user generated content of XSS](https://github.com/microcosm-cc/bluemonday)
-
+- [How I write HTTP services after eight years.](https://pace.dev/blog/2018/05/09/how-I-write-http-services-after-eight-years.html)
