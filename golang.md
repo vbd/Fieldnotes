@@ -18,6 +18,9 @@ Here my hopefully helpful ressoures for the Go language.
 - [golang-standards](https://github.com/golang-standards)
 - [Tools for Go projects](https://github.com/nikolaydubina/go-recipes)
 - [How to start a Go project in 2023](https://boyter.org/posts/how-to-start-go-project-2023/)
+- [Go gotchas, surprises, puzzles](https://github.com/golang-leipzig/gotchas)
+- [Do you make these Go coding mistakes?](https://yourbasic.org/golang/gotcha/)
+
   
 ## TUI
 - [A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
