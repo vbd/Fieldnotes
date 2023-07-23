@@ -13,7 +13,7 @@ Here my hopefully helpful ressoures for the Go language.
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
 
-## Style guide, templates...
+## Style guide, "best" practices, templates...
 - [Go Style](https://google.github.io/styleguide/go/index)
 - [golang-standards](https://github.com/golang-standards)
 - [Tools for Go projects](https://github.com/nikolaydubina/go-recipes)
@@ -73,10 +73,16 @@ Here my hopefully helpful ressoures for the Go language.
 
 - [Generate invoices from the command line](https://github.com/maaslalani/invoice)
 - [Simple command-line snippet manager, written in Go.](https://github.com/knqyf263/pet)
+- 🌶️[A small ecomerce site for buying books](https://github.com/madxmike/zenith-bookshop)
 
 ## Youtube
 
 - [Go Class](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6) by Matt KØDVB
 - [Go Programming – Golang Course with Bonus Projects](https://www.youtube.com/watch?v=un6ZyFkqFKo) by Freecodecamp
 - [Learn Go Programming - Golang Tutorial for Beginners](https://www.youtube.com/watch?v=YS4e4q9oBaU) by Freecodecamp
-- [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac) by Freecodecamp 
+- [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac) by Freecodecamp
+
+## WebDev
+
+- [bluemonday: a fast golang HTML sanitizer (inspired by the OWASP Java HTML Sanitizer) to scrub user generated content of XSS](https://github.com/microcosm-cc/bluemonday)
+
