@@ -41,17 +41,19 @@ Here my hopefully helpful ressoures for the Go language.
 ## GUI / TUI
 - [Build desktop applications using Go & Web Technologies.](https://wails.io/)
 - [bubbletea, A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
+- [gocui - Minimalist Go package aimed at creating Console User Interfaces.](https://github.com/jroimartin/gocui)
   
 ## Finding libs
 - [Trending Go Projects](https://www.libhunt.com/l/go)
 
-## Miscellaneous
+## Learning & Miscellaneous
 
 - [Effective Go](https://go.dev/doc/effective_go)
 - [Deliver Go binaries as fast and easily as possible](https://github.com/goreleaser/goreleaser)
 - [Structured, pluggable logging for Go.](https://github.com/sirupsen/logrus) :arrow_right: Go 1.21 will offer the new [slog package](https://tip.golang.org/doc/go1.21#slog)
 - [AI on the command line](https://github.com/charmbracelet/mods)
 - [A language for writing HTML user interfaces in Go.](https://github.com/a-h/templ)
+- [Go by Example](https://gobyexample.com/)
   
 ## Cheatsheets
 - [An overview of Go syntax and features.](https://github.com/a8m/golang-cheat-sheet)
@@ -89,3 +91,6 @@ Here my hopefully helpful ressoures for the Go language.
 
 - [bluemonday: a fast golang HTML sanitizer (inspired by the OWASP Java HTML Sanitizer) to scrub user generated content of XSS](https://github.com/microcosm-cc/bluemonday)
 - [How I write HTTP services after eight years.](https://pace.dev/blog/2018/05/09/how-I-write-http-services-after-eight-years.html)
+- [go-app: A package to build progressive web apps with Go programming language and WebAssembly.](https://github.com/maxence-charriere/go-app)
+- [chi - lightweight, idiomatic and composable router for building Go HTTP services](https://github.com/go-chi/chi)
+
