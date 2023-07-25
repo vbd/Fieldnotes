@@ -63,7 +63,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [cheat sheet GO](https://golang.sk/images/blog/cheatsheets/go-cheat-sheet.pdf) PDF
 - [Go Programming (Golang) Cheat Sheet](https://zerotomastery.io/cheatsheets/golang-cheat-sheet/)
 
-## "Career"
+## Roadmaps, Jobs, Career
 - [Roadmap: Go Developer](https://roadmap.sh/golang)
 - [Roadmap: Backend Developer](https://roadmap.sh/backend)
 - [Roadmap: DevOps Roadmap](https://roadmap.sh/devops)
