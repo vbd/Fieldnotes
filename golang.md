@@ -12,6 +12,9 @@ Here my hopefully helpful ressoures for the Go language.
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
+- [Learning Go as a Python Developer: The Good and The Bad](https://new.pythonforengineers.com/blog/learning-go-as-a-python-developer-the-good-the-bad-and-the-ugly/)
+- [Go for Python Programmers](https://golang-for-python-programmers.readthedocs.io/en/latest/)
+
 
 ## Style guide, "best" practices, templates...
 - [Go Style](https://google.github.io/styleguide/go/index)
