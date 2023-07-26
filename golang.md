@@ -49,6 +49,19 @@ Here my hopefully helpful ressoures for the Go language.
 ## Finding libs
 - [Trending Go Projects](https://www.libhunt.com/l/go)
 
+## Profiling
+Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
+- [Profiling Go Programs](https://go.dev/blog/pprof)
+- [Profiling Go programs with pprof](https://jvns.ca/blog/2017/09/24/profiling-go-with-pprof/)
+- [How I investigated memory leaks in Go using pprof on a large codebase](https://www.freecodecamp.org/news/how-i-investigated-memory-leaks-in-go-using-pprof-on-a-large-codebase-4bec4325e192/)
+- [Go pprof – How to Understand Where There is Memory Retention](https://www.neteye-blog.com/2019/06/go-pprof-how-to-understand-where-there-is-memory-retention/)
+- 🌶️ [felixge's notes on the various go profiling methods that are available.](https://github.com/DataDog/go-profiler-notes)
+- [Package collectors provides implementations of prometheus.Collector to conveniently collect process and Go-related metrics.](https://pkg.go.dev/github.com/prometheus/client_golang@v1.16.0/prometheus/collectors)
+- [Parca is a continuous profiling project.](https://www.parca.dev/)
+- [Grafana Phlare lets you aggregate continuous profiling data with high availability, multi-tenancy, and durable storage.](https://grafana.com/oss/phlare/)
+- [Package trace contains facilities for programs to generate traces for the Go execution tracer.](https://pkg.go.dev/runtime/trace)
+
+
 ## Learning & Miscellaneous
 
 - [Effective Go](https://go.dev/doc/effective_go)
