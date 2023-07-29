@@ -9,6 +9,10 @@ Here my hopefully helpful ressoures for the Go language.
 - [Go 101 Blog](https://go101.org/blog/101.html)
 - [The Go Blog](https://go.dev/blog/)
 
+## Recommended readings
+- [Implementing WebSocket Protocol in Go](https://hassansin.github.io/implementing-websocket-protocol-in-go)
+- [Common pitfalls in Go benchmarking](https://eli.thegreenplace.net/2023/common-pitfalls-in-go-benchmarking/)
+
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
