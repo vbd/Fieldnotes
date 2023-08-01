@@ -16,6 +16,9 @@ The focus of my development projects were and are:
 - automation scripts
 - mostly backend, frontend only if I couldn't avoid or couldn't hand over to someone else. I'm not good in making shiny, fancy web frontends
 
+> Being a dev is not being a code monkey! A dev creates solutions to solve problems and to get things done in a more convenient way!
+
+
 ## My must have links for the beginning
 
 - 🌶️ The Missing Semester of Your CS Education: https://missing.csail.mit.edu/ :arrow_right: If it was available on my start it would have saved me ~5 years
