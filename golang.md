@@ -12,7 +12,8 @@ Here my hopefully helpful ressoures for the Go language.
 ## Recommended readings
 - [Implementing WebSocket Protocol in Go](https://hassansin.github.io/implementing-websocket-protocol-in-go)
 - [Common pitfalls in Go benchmarking](https://eli.thegreenplace.net/2023/common-pitfalls-in-go-benchmarking/)
-
+- [Avelinos awesome-go: A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
+- [Rob Muhlesteins awesome-go](https://github.com/rwxrob/awesome-go)
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
@@ -68,12 +69,18 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 
 ## Learning & Miscellaneous
 
+- my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
 - [Effective Go](https://go.dev/doc/effective_go)
 - [Deliver Go binaries as fast and easily as possible](https://github.com/goreleaser/goreleaser)
 - [Structured, pluggable logging for Go.](https://github.com/sirupsen/logrus) :arrow_right: Go 1.21 will offer the new [slog package](https://tip.golang.org/doc/go1.21#slog)
 - [AI on the command line](https://github.com/charmbracelet/mods)
 - [A language for writing HTML user interfaces in Go.](https://github.com/a-h/templ)
 - [Go by Example](https://gobyexample.com/)
+- :tv: [Learn Go Programming - Golang Tutorial for Beginners](https://www.youtube.com/watch?v=YS4e4q9oBaU)
+- :tv: [Go Programming – Golang Course with Bonus Projects](https://www.youtube.com/watch?v=un6ZyFkqFKo)
+- :tv: [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac)
+- On Udemy I can recommend the golang courses from [Trevor Sawler](https://www.udemy.com/user/trevor-sawler/)
+
   
 ## Cheatsheets
 - [An overview of Go syntax and features.](https://github.com/a8m/golang-cheat-sheet)
