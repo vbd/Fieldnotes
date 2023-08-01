@@ -16,3 +16,20 @@ The focus of my development projects were and are:
 - automation scripts
 - mostly backend, frontend only if I couldn't avoid or couldn't hand over to someone else. I'm not good in making shiny, fancy web frontends
 
+## My must have links for the beginning
+
+- 🌶️ The Missing Semester of Your CS Education: https://missing.csail.mit.edu/ :arrow_right: If it was available on my start it would have saved me ~5 years
+- Developer Roadmaps: https://roadmap.sh/ :arrow_right: Great ressource for topics
+- Go Developer: https://roadmap.sh/golang
+- Python Developer: https://roadmap.sh/python
+- Backend Developer: https://roadmap.sh/backend
+- DevOps Roadmap: https://roadmap.sh/devops
+- Cyber Security Expert: https://roadmap.sh/cyber-security :arrow_right: maybe a bit exaggerated but a number of topics are relevant for every developer
+- Security Certification Roadmap: https://pauljerimy.com/security-certification-roadmap/ :arrow_right: best overview for this topic
+- Git for Beginners: Zero to Hero (free): https://jdsalaro.com/tutorial/git/ :arrow_right: Time machine for everything text based. Besides git I like [fossil-scm](https://www2.fossil-scm.org/home/doc/trunk/www/index.wiki)
+ 
+## Some "easy" insights
+Todo
+
+
+
