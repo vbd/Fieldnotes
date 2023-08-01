@@ -28,3 +28,32 @@ I'm using Python since ~2003. So some resources maybe outdated or for Python 2. 
 
 ## Dealing with (big) data
 - [Data diffs: Algorithms for explaining what changed in a dataset](https://blog.marcua.net/2022/02/20/data-diffs-algorithms-for-explaining-what-changed-in-a-dataset.html#an-open-source-implementation-of-diff)
+
+## Learning Python
+
+- For books take a look [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#python)
+
+### Youtube
+
+#### Basics
+- 🌶️ [Harvard CS50’s Introduction to Programming with Python – Full University Course](https://www.youtube.com/watch?v=nLRL_NcnK-4)
+- 🌶️ [Harvard CS50’s Web Programming with Python and JavaScript – Full University Course](https://www.youtube.com/watch?v=vzGllw18DkA)
+- 🌶️ [Python API Development - Comprehensive Course for Beginners](https://www.youtube.com/watch?v=0sOvCWFmrtA)
+
+#### Intermediate
+- [Intermediate Python Programming Course](https://www.youtube.com/watch?v=HGOBQPFzWKo)
+- [Algorithms in Python – Full Course for Beginners](https://www.youtube.com/watch?v=fW_OS3LGB9Q)
+- [Data Structures and Algorithms in Python - Full Course for Beginners](https://www.youtube.com/watch?v=pkYVOmU3MgA)
+
+#### Data specific
+- [Data Analysis with Python - Full Course for Beginners (Numpy, Pandas, Matplotlib, Seaborn](https://www.youtube.com/watch?v=r-uOLxNrNk8)
+- [Pandas & Python for Data Analysis by Example – Full Course for Beginners](https://www.youtube.com/watch?v=gtjxAH8uaP0)
+
+#### ML basics
+- [Machine Learning for Everybody – Full Course](https://www.youtube.com/watch?v=i_LwzRVP7bg)
+
+#### Mixed
+- [Automate with Python – Full Course for Beginners](https://www.youtube.com/watch?v=PXMJ6FS7llk)
+- [FastAPI Course for Beginners](https://www.youtube.com/watch?v=tLKKmouUams)
+
+
