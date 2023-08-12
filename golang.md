@@ -112,7 +112,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [CLI for interacting with the recreation.gov API](https://github.com/opencamp-hq/cli)
 - [Repositories in Golang by Mitchell Hashimoto](https://github.com/mitchellh)
 - [Storing IP addresses for quick CLI access](https://github.com/charlesdevelops/ipster)
-
+- [A practical event-driven microservices demo built with Golang. Nomad, Consul Connect, Vault, and Terraform for deployment](https://github.com/thangchung/go-coffeeshop)
 
 ## Youtube
 
