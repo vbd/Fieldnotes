@@ -113,7 +113,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [Repositories in Golang by Mitchell Hashimoto](https://github.com/mitchellh)
 - [Storing IP addresses for quick CLI access](https://github.com/charlesdevelops/ipster)
 - [A practical event-driven microservices demo built with Golang. Nomad, Consul Connect, Vault, and Terraform for deployment](https://github.com/thangchung/go-coffeeshop)
-
+- [What are your favourite, opensource golang projects from a code quality perspective](https://www.reddit.com/r/golang/comments/15b146i/what_are_your_favourite_opensource_golang/)
 ## Youtube
 
 - [Go Class](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6) by Matt KØDVB
