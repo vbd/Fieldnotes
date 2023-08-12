@@ -80,6 +80,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - :tv: [Go Programming – Golang Course with Bonus Projects](https://www.youtube.com/watch?v=un6ZyFkqFKo)
 - :tv: [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac)
 - On Udemy I can recommend the golang courses from [Trevor Sawler](https://www.udemy.com/user/trevor-sawler/)
+- :tv: [Golang UK Conference 2017 | Achilleas Anagnostopoulos - Can you write an OS Kernel in Go?](https://www.youtube.com/watch?v=8T3VxGrrJwc)
 
   
 ## Cheatsheets
