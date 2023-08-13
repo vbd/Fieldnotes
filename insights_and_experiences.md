@@ -31,8 +31,22 @@ The focus of my development projects were and are:
 - Security Certification Roadmap: https://pauljerimy.com/security-certification-roadmap/ :arrow_right: best overview for this topic
 - Git for Beginners: Zero to Hero (free): https://jdsalaro.com/tutorial/git/ :arrow_right: Time machine for everything text based. Besides git I like [fossil-scm](https://www2.fossil-scm.org/home/doc/trunk/www/index.wiki)
  
+TODO:
 ## Some "easy" insights
-Todo
+## Finding and fixing bugs / technical debt
+## Getting into new codesbases
+## idea: Automation
+## Focus, flow and context switching
+## idea: "Green" software
+## Softskills
+## Being criticized and criticizing
+## Scrum, Agile, Watrefall, Kanban, ... or how I got my projects really done
+## Personal resilience and health and why I failed at it
+## Why freelancer a very personal view
+## Self-organization, not in the meaning of Scrum
+## idea: productivity, efficiency, effectiveness and self-optimization 10x devs etc.
+## idea: how to become "agile", why a certificate doesn't make you "agile" and why sometimes a certificate may be necessary
+## idea: In the face of AI: the future of software development (imho) more problem solving, solution-oriented and critical thinking, less code writing and hard, for many of us, more soft skills
 
 
 
