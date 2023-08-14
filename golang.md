@@ -14,6 +14,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [Common pitfalls in Go benchmarking](https://eli.thegreenplace.net/2023/common-pitfalls-in-go-benchmarking/)
 - [Avelinos awesome-go: A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
 - [Rob Muhlesteins awesome-go](https://github.com/rwxrob/awesome-go)
+- [Quick tip: A time-saving Makefile for your Go projects](https://www.alexedwards.net/blog/a-time-saving-makefile-for-your-go-projects)
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
