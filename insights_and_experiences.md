@@ -30,6 +30,11 @@ The focus of my development projects were and are:
 - Cyber Security Expert: https://roadmap.sh/cyber-security :arrow_right: maybe a bit exaggerated but a number of topics are relevant for every developer
 - Security Certification Roadmap: https://pauljerimy.com/security-certification-roadmap/ :arrow_right: best overview for this topic
 - Git for Beginners: Zero to Hero (free): https://jdsalaro.com/tutorial/git/ :arrow_right: Time machine for everything text based. Besides git I like [fossil-scm](https://www2.fossil-scm.org/home/doc/trunk/www/index.wiki)
+- How Web Works: https://github.com/vasanthk/how-web-works
+- System Design Cheatsheet: https://gist.github.com/vasanthk/485d1c25737e8e72759f
+- Web Security Basics: https://github.com/vasanthk/web-security-basics
+- Optional, but helpful<br>An opinionated guide on how to become a professional Web/Mobile App Developer: https://github.com/apptension/developer-handbook/tree/master
+ 
  
 TODO:
 ## Some "easy" insights
