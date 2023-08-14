@@ -28,6 +28,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [How to start a Go project in 2023](https://boyter.org/posts/how-to-start-go-project-2023/)
 - [Go gotchas, surprises, puzzles](https://github.com/golang-leipzig/gotchas)
 - [Do you make these Go coding mistakes?](https://yourbasic.org/golang/gotcha/)
+- 🧰 [golangci-lint](https://github.com/golangci/golangci-lint), fast linters Runner for Go
 
   
 ## TUI
