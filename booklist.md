@@ -6,8 +6,8 @@ soft skills etc. Here are my personal recommendations recommendations.
 
 
 > **HINT**: Learning x in e.g. 3 days / 2 weeks / x month is bullshit.  
-> I do software development for more than 25 years and get everyday a "today I learned"-moment.
-> Reading books books alone will not make you a software developer
+> I do software development for more than 25 years and get almost everyday a "today I learned"-moment.
+> Reading books alone will not make you a software developer
 >
 > The links lead mostly to amazon -> I don't use any affiliate link.  
 > You can buy your books where you want and surely you will do.  
