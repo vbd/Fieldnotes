@@ -8,6 +8,8 @@ Here my hopefully helpful ressoures for the Go language.
 - [Three Dots Labs](https://threedots.tech/start/)
 - [Go 101 Blog](https://go101.org/blog/101.html)
 - [The Go Blog](https://go.dev/blog/)
+- [Redowan's Reflections](https://rednafi.com/archives/)
+
 
 ## Recommended readings
 - [Implementing WebSocket Protocol in Go](https://hassansin.github.io/implementing-websocket-protocol-in-go)
