@@ -34,6 +34,41 @@ The focus of my development projects were and are:
 - System Design Cheatsheet: https://gist.github.com/vasanthk/485d1c25737e8e72759f
 - Web Security Basics: https://github.com/vasanthk/web-security-basics
 - Optional, but helpful<br>An opinionated guide on how to become a professional Web/Mobile App Developer: https://github.com/apptension/developer-handbook/tree/master
+
+## Some "easy" insights
+Being a software dev is about solving problems and creating solutions to solve these problems. Coding is only a part of it!
+
+Some may sound surprising, obvious, not worth talking about but that is some of my experience. Btw. I learned to code in a time Google doesn't exist. I learned from code listings printed on paper and published in magazines.
+Besides the first point not sorted in anyway.
+
+
+- organize yourself! Great books that may help you:
+    - Make it Stick: The Science of Successful Learning: https://www.amazon.de/Make-Stick-Science-Successful-Learning/dp/0674729013/
+    - How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking – for Students, Academics and Nonfiction Book Writers: https://www.amazon.de/gp/product/1542866502/
+    - Building a Second Brain: A Proven Method to Organise Your Digital Life and Unlock Your Creative Potential: https://www.amazon.de/Building-Second-Brain-Organise-Potential-ebook/dp/B09MDNDYYF/ 
+
+- make notes in a simple and easy searchable way (I use markdown, vim, rg, fd and git). Paper is also a great option, but it lack searchability.
+- comment code: code tells you how, comments tell you why
+- document decisions: often makes sense in retrospect why a decision was made that way
+- reduce your cognitive load
+- if you are stuck switch context, go on a walk etc. (I once spent a whole day debugging without getting any further. The next morning it took less than 15 minutes and the problem was discovered and solved. This is common and almost experienced any developer in one or another way)
+- don't start a war of beliefs about programming languages, editors etc. it's just not worth it and most of the time both sides are not right. This endless discussions are fruitless and cost energy. Energy which could be used for better.
+- avoid fomo (fear of missing out)
+- don't remember the source but it is so true: beginners, intermediate and advanced, be a teacher and a student we can all learn from each other!
+- software development is an iterative process!
+- don't overengineer, keep it simple and stupid.
+- as often as possible go on a walk and let your thoughts fly.
+- be curious and open minded
+- be friendly and patient
+- use AI when it's allowed and where it might be helpful. **Be careful what you reveal!**
+- don't copy code 1:1 if you don't understand it
+- don't grab and test every tool you can get, often it makes sense to stick by the top docs (git, make/makefile, ...)
+- you are a software developer not an imposter. So overcome it. (it's easy written, but it's hard)
+- you don't have to know everything, you just have to know where to look it up.
+- your piece of software should focus on one task and should do "it well".
+- data strutures are the central topic of coding. If the data structure fits, the algorithms almost always result by themselves. Don't let that hear the ML people :)
+
+
  
 
 ## How to "become" agile
@@ -120,8 +155,8 @@ Some keywords that may be of interest:
 - if possible within the project pick what works best for you and your time. Can be a mix of different methods/frameworks and so on.
 
  
+ 
 TODO:
-## Some "easy" insights
 ## Finding and fixing bugs / technical debt
 ## Getting into new codesbases
 ## idea: Automation
