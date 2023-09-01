@@ -31,6 +31,18 @@ there are some greast youtuber's fiddling with vim/neovim e.g.:
 - [Sebastian Daschner](https://www.youtube.com/@SebastianDaschnerIT/search?query=vim)
 - [DistroTube](https://www.youtube.com/@DistroTube/search?query=vim)
 
+Recently I came across a video series that is a kind of quantum leap for me ...
+
+- [Problem Solving with Vim - 1 (expression register)](https://www.youtube.com/watch?v=P7yTg1SdNNQ)
+- [Problem Solving with Vim - 2 (substitute, match group, expression register)](https://www.youtube.com/watch?v=ZK6WO-ZIjd0)
+- [Problem Solving with Vim - 3 (macro, sub-replace-expression)](https://www.youtube.com/watch?v=e5FkKJyleDg)
+- [Problem Solving with Vim - 4 (more expression substitution)](https://www.youtube.com/watch?v=pIeLl_uYV98)
+- [Problem Solving with Vim - 5](https://www.youtube.com/watch?v=uY22eECYorI)
+- [Problem Solving with Vim - 6 (Regular expression, scriptin arg)](https://www.youtube.com/watch?v=iwiHAbkr1vQ)
+- [Problem Solving with Vim - 7](https://www.youtube.com/watch?v=GJVwojkn8Io)
+ 
+
+
 
 ## General
 
