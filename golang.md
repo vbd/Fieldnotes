@@ -17,6 +17,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [Avelinos awesome-go: A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
 - [Rob Muhlesteins awesome-go](https://github.com/rwxrob/awesome-go)
 - [Quick tip: A time-saving Makefile for your Go projects](https://www.alexedwards.net/blog/a-time-saving-makefile-for-your-go-projects)
+- 🌶️ [Picnic-TUI - Where Go and Groceries Create a Command-Line Feast](https://dev.to/simonmartyr/picnic-tui-where-go-and-groceries-create-a-command-line-feast-1op4)
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
