@@ -163,7 +163,7 @@ TODO:
 ## Focus, flow and context switching
 ## idea: "Green" software
 ## Softskills
-## Being criticized and criticizing
+## Being criticized and criticizing / getting feedback, giving feedback
 ## Scrum, Agile, Watrefall, Kanban, ... or how I got my projects really done
 ## Personal resilience and health and why I failed at it
 ## Why freelancer a very personal view
