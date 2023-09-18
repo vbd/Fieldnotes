@@ -13,17 +13,28 @@ But since that time I got hooked, and I didn't regret to learn it. I still use V
 
 Today I would recommend the following:
 
-1. [Vim Tutorial for Beginners](https://www.youtube.com/watch?v=RZ4p-saaQkc)
-2. [How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
-3. Ask the great help, sometime it's a bit tricky to find the right keyword. You can take a full shot on the help file as PDF https://nathangrigg.com/vimhelp/vimhelp-a4.pdf
-4. [Vimcasts.org](http://vimcasts.org/episodes/)
-5. [Vim Cookbook by Steve Oualline](http://www.oualline.com/vim-cook.html). He wrote my [first Vim book I read](http://www.oualline.com/books/index.html) dated ~2000/2001/2002
-6. :books: Practical Vim: Edit Text at the Speed of Thought https://www.amazon.de/Practical-Vim-Edit-Speed-Thought/dp/1680501275/
-7. :books: Modern Vim: Craft Your Development Environment with Vim 8 and Neovim https://www.amazon.de/Modern-Vim-Development-Environment-Neovim/dp/168050262X/
-
+- [Vim Commands: A Beginner Guide with Examples](https://thevaluable.dev/vim-commands-beginner/)
+- [A Vim Guide for Intermediate Users](https://thevaluable.dev/vim-intermediate/)
+- [A Vim Guide for Advanced Users](https://thevaluable.dev/vim-advanced/)
+- [A Vim Guide for Adept Users](https://thevaluable.dev/vim-adept/)
+- [A Vim Guide For Veteran Users](https://thevaluable.dev/vim-veteran/)
+- [A Vim Guide For Experts](https://thevaluable.dev/vim-expert/)
+- [Vim Search and Replace With Examples](https://thevaluable.dev/vim-search-find-replace/)
+- [The Basics of Vim Regular Expressions](https://thevaluable.dev/regular-expression-basics-vim-grep/)
+- [How to Create Vim Text-Objects in Lua](https://thevaluable.dev/vim-create-text-objects/)
+- [Managing Local and Remote Filesystems with Vim and netrw](https://thevaluable.dev/vim-browsing-remote-netrw/)
+- [What's The Vim Runtime? A Guide With Examples](https://thevaluable.dev/vim-runtime-guide-example/)
+ 
+- [Vim Tutorial for Beginners](https://www.youtube.com/watch?v=RZ4p-saaQkc)
+- [How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
+- Ask the great help, sometime it's a bit tricky to find the right keyword. You can take a full shot on the help file as PDF https://nathangrigg.com/vimhelp/vimhelp-a4.pdf
+- [Vimcasts.org](http://vimcasts.org/episodes/)
+- [Vim Cookbook by Steve Oualline](http://www.oualline.com/vim-cook.html). He wrote my [first Vim book I read](http://www.oualline.com/books/index.html) dated ~2000/2001/2002
+- :books: Practical Vim: Edit Text at the Speed of Thought https://www.amazon.de/Practical-Vim-Edit-Speed-Thought/dp/1680501275/
+- :books: Modern Vim: Craft Your Development Environment with Vim 8 and Neovim https://www.amazon.de/Modern-Vim-Development-Environment-Neovim/dp/168050262X/
 
 I try to watch as few vim videos on youtube as possible because they might distract me too much from my work but
-there are some greast youtuber's fiddling with vim/neovim e.g.:
+there are some great youtuber's fiddling with vim/neovim e.g.:
 
 - [ThePrimeagen](https://www.youtube.com/@ThePrimeagen/search?query=vim)
 - [Ben Awad](https://www.youtube.com/@bawad/search?query=vim)
