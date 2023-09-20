@@ -18,6 +18,13 @@ Here my hopefully helpful ressoures for the Go language.
 - [Rob Muhlesteins awesome-go](https://github.com/rwxrob/awesome-go)
 - [Quick tip: A time-saving Makefile for your Go projects](https://www.alexedwards.net/blog/a-time-saving-makefile-for-your-go-projects)
 - 🌶️ [Picnic-TUI - Where Go and Groceries Create a Command-Line Feast](https://dev.to/simonmartyr/picnic-tui-where-go-and-groceries-create-a-command-line-feast-1op4)
+- [Use Abstraction to Improve Function Readability](https://testing.googleblog.com/2023/09/use-abstraction-to-improve-function.html)
+- [Disagreeing with "best practices"](https://blog.separateconcerns.com/2023-08-06-disagreeing-best-practices.html)
+- [Linear code is more readable](https://blog.separateconcerns.com/2023-09-11-linear-code.html) :arrow_right:
+There is always the danger that with time compact functions become real "monsters" that are hard to read or understand. one of my last experiences was a function where the indented code was only visible, without scrolling, on the last 20% of the monitor (49" Samsung CRG 9) on the right side.
+Not my code, should help to debug, will we need a 49" monitor for debugging or two of them side by side in future? A healthy balance would suit us all.
+
+
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
