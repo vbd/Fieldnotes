@@ -14,3 +14,6 @@ Before you can understand a technical term, you must at least have read or heard
 
 - Stakeholdermanagement, stakeholders are the ones who can influence the project the most from the outside (e.g. money). Get in good with them and understand their needs so that the project keeps going and you don't get kicked. Note to myself: stop using steakholder management as a gag - it's not funny
 
+- DoR, Definition of Ready (Scrum). [Definition](https://www.scruminc.com/definition-of-ready/)
+- DoD, definition of Done (Scrum). [Definition](https://scrumbook.org/value-stream/definition-of-done.html)
+- AC, acceptance criteria [Definition](https://en.wikipedia.org/wiki/Acceptance_testing#Acceptance_criteria)
