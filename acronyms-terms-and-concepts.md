@@ -75,7 +75,12 @@ Monte Carlo Simulation
 Bayesian
 Bayes' theorem  
 
-
-
+- scafollding
+- Proof of Work (PoW)
+- Proof of Stake (PoS)
+- Proof of Concept (PoC)
+- code coverage
+- seed paramter
+- 
  
 
