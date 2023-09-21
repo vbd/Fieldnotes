@@ -10,4 +10,4 @@ There are no source codes created by me, because they are mostly created in the 
 
 EDIT (2023-09-20): If you want support me, my work and my projects:
 
-<a href="https://www.buymeacoffee.com/vbduetsch"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a book&emoji=📖&slug=vbduetsch&button_colour=5F7FFF&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00" /></a>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="vbduetsch" data-color="#5F7FFF" data-emoji="📖"  data-font="Lato" data-text="Buy me a book" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
