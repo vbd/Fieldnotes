@@ -7,5 +7,5 @@ Before you can understand a technical term, you must at least have read or heard
 - Bol, Bill of labour aka Bill of work => Arbeitsplan
 - SBOM, Software bill of materials
 - SDLC, Systems (Software) development life circle, [definition](https://en.wikipedia.org/wiki/Systems_development_life_cycle)
-- JTBD, jobs to be done: framework with focus on customer. Customers buy a product to do a job/task, solve a problem.
+- JTBD, jobs to be done: framework with focus on customer. Customers buy a product to do a job/task, solve a problem. Understand what job this is and what is needed to sell your solution to the customer.
  
