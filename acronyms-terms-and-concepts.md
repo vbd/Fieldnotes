@@ -13,6 +13,9 @@ Before you can understand a technical term, you must at least have read or heard
 - SOLID, five design principles of oop. Even you don't code oop, know them or tell at least you have heared of them. [Definition](https://en.wikipedia.org/wiki/SOLID)
 - RACI matrix (project management). [Definition](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix)
 - Stakeholdermanagement, stakeholders are the ones who can influence the project the most from the outside (e.g. money). Get in good with them and understand their needs so that the project keeps going and you don't get kicked. Note to myself: stop using steakholder management as a gag - it's not funny
+- MoSCoW method (project management) [Definition](https://en.wikipedia.org/wiki/MoSCoW_method)
+- Lean coffee, strcutered format for a unstructured meeting without agenda, duration limited to the time you need to drink a cup of coffee (5 to 10 minutes). [Definition](https://t2informatik.de/en/smartpedia/lean-coffee/?noredirect=en-US)
+
 
 - DoR, Definition of Ready (Scrum). [Definition](https://www.scruminc.com/definition-of-ready/)
 - DoD, definition of Done (Scrum). [Definition](https://scrumbook.org/value-stream/definition-of-done.html)
