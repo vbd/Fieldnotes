@@ -20,6 +20,14 @@ Before you can understand a technical term, you must at least have read or heard
 
 
 TODO
+- gts, short for google that shit
+- rlhf, short for reinforcement learning from human feedback
+- dpo direct policy optimization
+- sft supervised finetuning
+- ppo proximal policy optimization
+- hyperparameter
+
+ 
 - unfix
 https://unfix.com/
 
@@ -28,4 +36,46 @@ https://www.fastagile.io/fast-guide
 
 - Design Thinking
 https://en.wikipedia.org/wiki/Design_thinking
+
+- cynefin
+- Big o notation
+- monkey patching
+- duck typing
+- mocking
+- complex vs complicated
+- value stream mapping
+- murphys law
+- conway law
+- rest api
+- protobuf
+- grpc
+- graphql
+- effective vs efficient vs productivity
+- Dasselbe vs. das gleiche
+- mono repo
+- seed parameter
+- supervised learning
+- unsupervised learning
+- hdi, human development index alternative approach to gross domestic product
+
+zen
+koan
+haiku 
+fuzzying
+mutex 
+xsrf
+cqrs
+Backpropagation
+random forests
+binary tree
+- Stereotype vs Prejudice (Stereotyp vs Vorurteil)
+- RAD
+- Markov Chains
+Monte Carlo Simulation
+Bayesian
+Bayes' theorem  
+
+
+
+ 
 
