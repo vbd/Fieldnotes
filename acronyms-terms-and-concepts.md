@@ -17,3 +17,13 @@ Before you can understand a technical term, you must at least have read or heard
 - SDLC, Systems (Software) development life circle, [Definition](https://en.wikipedia.org/wiki/Systems_development_life_cycle)
 - SOLID, five design principles of oop. Even you don't code oop, know them or tell at least you have heared of them. [Definition](https://en.wikipedia.org/wiki/SOLID)
 - Stakeholdermanagement, stakeholders are the ones who can influence the project the most from the outside (e.g. money). Get in good with them and understand their needs so that the project keeps going and you don't get kicked. Note to myself: stop using steakholder management as a gag - it's not funny
+
+- unfix
+https://unfix.com/
+
+- FaST Agile
+https://www.fastagile.io/fast-guide
+
+- Design Thinking
+https://en.wikipedia.org/wiki/Design_thinking
+
