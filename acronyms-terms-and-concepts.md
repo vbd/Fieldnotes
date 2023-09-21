@@ -11,7 +11,7 @@ Before you can understand a technical term, you must at least have read or heard
 - SBOM, Software bill of materials
 - SDLC, Systems (Software) development life circle, [Definition](https://en.wikipedia.org/wiki/Systems_development_life_cycle)
 - SOLID, five design principles of oop. Even you don't code oop, know them or tell at least you have heared of them. [Definition](https://en.wikipedia.org/wiki/SOLID)
-
+- RACI matrix (project management). [Definition](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix)
 - Stakeholdermanagement, stakeholders are the ones who can influence the project the most from the outside (e.g. money). Get in good with them and understand their needs so that the project keeps going and you don't get kicked. Note to myself: stop using steakholder management as a gag - it's not funny
 
 - DoR, Definition of Ready (Scrum). [Definition](https://www.scruminc.com/definition-of-ready/)
