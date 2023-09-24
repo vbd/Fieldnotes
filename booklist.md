@@ -43,7 +43,6 @@ I've read them all!
 - 100 Go Mistakes and How to Avoid Them: https://www.amazon.de/100-Mistakes-Avoid-Them-English-ebook/dp/B0BBHQD8BQ/
 - Powerful Command-Line Applications in Go: https://pragprog.com/titles/rggo/powerful-command-line-applications-in-go/
 - [How To Code in Go eBook](https://assets.digitalocean.com/books/how-to-code-in-go.pdf) free PDF by Digital Ocean :arrow_right: generics will be missing
-- Powerful Command-Line Applications in Go: Build Fast and Maintainable Tools: https://www.amazon.de/Powerful-Command-Line-Applications-Go-Maintainable/dp/168050696X/
 - Distributed Services with Go: Your Guide to Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Distributed-Services-Go-Reliable-Maintainable/dp/1680507605/
 
 > **INFO**: I normally recommend only books I have read. Here I would like to make an exception. I have read a lot of good things about the books and have also bought all of them, but have not yet been able to read them.
