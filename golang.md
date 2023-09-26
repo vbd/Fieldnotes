@@ -9,6 +9,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [Go 101 Blog](https://go101.org/blog/101.html)
 - [The Go Blog](https://go.dev/blog/)
 - [Redowan's Reflections](https://rednafi.com/archives/)
+- [Over-Engineered](https://totallygamerjet.hashnode.dev/)
 
 
 ## Recommended readings
