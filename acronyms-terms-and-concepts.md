@@ -58,23 +58,22 @@ https://en.wikipedia.org/wiki/Design_thinking
 - unsupervised learning
 - hdi, human development index alternative approach to gross domestic product
 
-zen
-koan
-haiku 
-fuzzying
-mutex 
-xsrf
-cqrs
-Backpropagation
-random forests
-binary tree
+- zen
+- koan
+- haiku 
+- fuzzying
+- mutex 
+- xsrf
+- cqrs
+- backpropagation
+- random forests
+- binary tree
 - Stereotype vs Prejudice (Stereotyp vs Vorurteil)
 - RAD
 - Markov Chains
-Monte Carlo Simulation
-Bayesian
-Bayes' theorem  
-
+- Monte Carlo Simulation
+- Bayesian
+- Bayes' theorem  
 - scafollding
 - Proof of Work (PoW)
 - Proof of Stake (PoS)
