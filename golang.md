@@ -139,6 +139,15 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [Go Programming – Golang Course with Bonus Projects](https://www.youtube.com/watch?v=un6ZyFkqFKo) by Freecodecamp
 - [Learn Go Programming - Golang Tutorial for Beginners](https://www.youtube.com/watch?v=YS4e4q9oBaU) by Freecodecamp
 - [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac) by Freecodecamp
+- [GPN18 - Go für Programmierer](https://www.youtube.com/watch?v=Bq9zubsyPSg)
+
+Some resources to find recorded talks from GopherCon Conferences:
+
+- [Gopher Academy](https://www.youtube.com/@GopherAcademy/playlists)
+- [GopherConAU](https://www.youtube.com/@gopherconau534/playlists)
+- [GopherCon Europe](https://www.youtube.com/@GopherConEurope)
+- [GopherCon UK](https://www.youtube.com/@GopherConUK/playlists) 
+
 
 ## WebDev
 
