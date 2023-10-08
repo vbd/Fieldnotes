@@ -156,3 +156,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [go-app: A package to build progressive web apps with Go programming language and WebAssembly.](https://github.com/maxence-charriere/go-app)
 - [chi - lightweight, idiomatic and composable router for building Go HTTP services](https://github.com/go-chi/chi)
 
+## Security & Malware
+
+- :tv: [DEF CON 29 - Ben Kurtz - Offensive Golang Bonanza: Writing Golang Malware](https://www.youtube.com/watch?v=3RQb05ITSyk)
+- [awesome-go-security](https://github.com/Binject/awesome-go-security) 
