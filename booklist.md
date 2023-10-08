@@ -52,6 +52,9 @@ I've read them all!
 - The Power of Go: Tests: https://bitfieldconsulting.com/books/tests
 - Know Go: Generics: https://bitfieldconsulting.com/books/generics
 
+Just found out that updates for these books are free, so I just got my The Power of Go: Tools (2024) for free. Thank you very much John!
+
+
 ---
 
 ## Rust
