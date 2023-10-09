@@ -40,8 +40,8 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [How to start a Go project in 2023](https://boyter.org/posts/how-to-start-go-project-2023/)
 - [Go gotchas, surprises, puzzles](https://github.com/golang-leipzig/gotchas)
 - [Do you make these Go coding mistakes?](https://yourbasic.org/golang/gotcha/)
-- 🧰 [golangci-lint](https://github.com/golangci/golangci-lint), fast linters Runner for Go
-
+- [golangci-lint](https://github.com/golangci/golangci-lint), fast linters Runner for Go
+- :hot_pepper: [JSON-to-Go, convert JSON to Go struct](https://mholt.github.io/json-to-go/)
   
 ## TUI
 - [A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
