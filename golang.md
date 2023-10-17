@@ -134,9 +134,11 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [What are your favourite, opensource golang projects from a code quality perspective](https://www.reddit.com/r/golang/comments/15b146i/what_are_your_favourite_opensource_golang/)
 - [Live collaboration tool built with Go backend and Next.js, Typescript, & Tailwind frontend](https://github.com/Wave-95/boards)
 
-## Learning by coding
+## Learning by coding and contributing
 
-- :hot_pepper: To find open source projects to contribute to check [good first issue](https://goodfirstissue.dev/language/go)
+- To find open source projects to contribute to check [good first issue](https://goodfirstissue.dev/language/go)
+- [Explore open source projects and jump in!](https://up-for-grabs.net/)
+- [Community-Powered, Connecting you with Open-Source](http://github-help-wanted.com/)
 
 ## Youtube
 
