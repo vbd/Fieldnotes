@@ -1,6 +1,7 @@
 # Vim
 
-> **Intern** Check Todo: notes.*, master.*, logger.*, todo.* and paper notes for examples.  
+> [!NOTE]
+> Intern check Todo: notes.*, master.*, logger.*, todo.* and paper notes for examples.  
 > Maybe useful: fb mapping, argdo, bufdo, search and replace without plugins, completions, navigate functions/methods
 
 ## Learning Vim
