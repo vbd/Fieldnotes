@@ -5,7 +5,8 @@ with product management, project management, agile, self organisation,
 soft skills etc. Here are my personal recommendations recommendations.
 
 
-> **HINT**: Learning x in e.g. 3 days / 2 weeks / x month is bullshit.  
+> [!WARNING]
+> Learning x in e.g. 3 days / 2 weeks / x month is bullshit.  
 > I do software development for more than 25 years and get almost everyday a "today I learned"-moment.
 > Reading books alone will not make you a software developer
 >
@@ -135,12 +136,12 @@ Vim
 - Craft Your Development Environment with Vim 8 and Neovim: https://pragprog.com/titles/modvim/modern-vim/
 - Mastering Vim Quickly: From WTF to OMG in no time: https://www.amazon.de/Mastering-Vim-Quickly-WTF-time/dp/1983325740/ 
 
-> **NOTES**: 
 
-- I've read a lot book dealing with scrum. But I've to admit none of them convinced me that much and that's why i stayed with the scrum guide. So no special recommendation.
-- Make notes of what you read and learned.
-- Write your notes in a simple language in a way that you would explain the topic to someone in an explain like I'm five style.
-- Use technical terms when appropriate.
-- Your customer wants solutions - normally he is not interested in the programming language and tools you use.
-- Write down decisions: when, why, what, who was involved.
+> [!IMPORTANT]
+> - I've read a lot book dealing with scrum. But I've to admit none of them convinced me that much and that's why i stayed with the scrum guide. So no special recommendation.
+> - Make notes of what you read and learned.
+> - Write your notes in a simple language in a way that you would explain the topic to someone in an explain like I'm five style.
+> - Use technical terms when appropriate.
+> - Your customer wants solutions - normally he is not interested in the programming language and tools you use.
+> - Write down decisions: when, why, what, who was involved.
  
