@@ -1,5 +1,12 @@
 # Acronyms, terms and concepts
 
+> [!WARNING]
+> There are thousands of sources that provide better explanations than my notes. However, it is helpful if you know the keywords to search for.
+> Merge with topicfinders
+
+> [!IMPORTANT]
+> heavy WIP even if it may not look like it at first
+
 The world of software developers is full of abbreviations and strange terms. This list should be a summary of the terms I have encountered so far. Some with my own explanation others with a link to further information. I hope the list helps you. Please link to the document, it may be that the document structure can change fundamentally over time.
 Before you can understand a technical term, you must at least have read or heard it before so that you can look it up.
 
