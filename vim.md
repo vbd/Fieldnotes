@@ -122,7 +122,39 @@ Recently I came across a video series that is a kind of quantum leap for me ...
     //
 ```
 
- 
+## Navigation
+
+
+
+### file / complete buffer
+~~~
+gg -> jump to begin of file
+G -> jump to end of file
+~~~
+
+### visible buffer
+~~~
+H -> buffer viewport high
+M -> buffer viewport middle
+L -> buffer viewport low
+~~~
+
+### line
+~~~
+0 -> jump to begin of line
+_ -> jump to begin of first char in line
+$ -> jump to end of line
+~~~
+
+### misc
+~~~
+[[, ]] -> jump between methods
+]c, c] -> jump between changes
+]g, g] -> jump between warning/error messages (lsp needed)
+ctrl+o, ctrl+i -> jump using jumplist
+~~~
+
+
 
 ## Export to HTML including manual folds  
 ```
