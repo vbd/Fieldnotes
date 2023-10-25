@@ -42,6 +42,10 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [Do you make these Go coding mistakes?](https://yourbasic.org/golang/gotcha/)
 - [golangci-lint](https://github.com/golangci/golangci-lint), fast linters Runner for Go
 - :hot_pepper: [JSON-to-Go, convert JSON to Go struct](https://mholt.github.io/json-to-go/)
+
+## Concurrency (aka Nebenläufigkeit)
+- [Hands on exercises with real-life examples to study and practice Go concurrency patterns. Test-cases are provided to verify your answers.](https://github.com/loong/go-concurrency-exercises)
+
   
 ## TUI
 - [A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
