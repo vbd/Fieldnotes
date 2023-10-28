@@ -8,7 +8,5 @@ There are no source codes created by me, because they are mostly created in the 
 
 ---
 
-EDIT (2023-09-20): If you want support me, my work and my projects:
-
-<a href="https://www.buymeacoffee.com/vbduetsch"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a book&emoji=📖&slug=vbduetsch&button_colour=5F7FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00" /></a>
+If you want to support me, my work and my projects you can do so by [Buy me a coffee! ☕](https://www.buymeacoffee.com/vbduetsch) it will keep my motivation high and I will be really thankful.
 
