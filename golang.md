@@ -153,6 +153,14 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac) by Freecodecamp
 - [GPN18 - Go für Programmierer](https://www.youtube.com/watch?v=Bq9zubsyPSg)
 
+Some resources to find recorded talks from GopherCon Conferences:
+
+- [Gopher Academy](https://www.youtube.com/@GopherAcademy/playlists)
+- [GopherConAU](https://www.youtube.com/@gopherconau534/playlists)
+- [GopherCon Europe](https://www.youtube.com/@GopherConEurope)
+- [GopherCon UK](https://www.youtube.com/@GopherConUK/playlists) 
+
+
 ## Youtuber
 
 - [https://www.youtube.com/@NicJackson/videos](https://www.youtube.com/@NicJackson/videos)
@@ -160,13 +168,8 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [https://www.youtube.com/@nicolasparada](https://www.youtube.com/@nicolasparada)
 - [https://www.youtube.com/@ChamiViews](https://www.youtube.com/@ChamiViews)
 - [https://www.youtube.com/@anthonygg_](https://www.youtube.com/@anthonygg_) 
+- [https://www.youtube.com/@NerdCademyDev/featured](https://www.youtube.com/@NerdCademyDev/featured)
 
-Some resources to find recorded talks from GopherCon Conferences:
-
-- [Gopher Academy](https://www.youtube.com/@GopherAcademy/playlists)
-- [GopherConAU](https://www.youtube.com/@gopherconau534/playlists)
-- [GopherCon Europe](https://www.youtube.com/@GopherConEurope)
-- [GopherCon UK](https://www.youtube.com/@GopherConUK/playlists) 
 
 
 ## WebDev
