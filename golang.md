@@ -108,7 +108,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [go_assessment](https://github.com/dmh2000/go_assessment), a port of Rebecca Murphey's js-assessment for Go. This is a tool for assessing or practicing beginner level programming in Golang.
 - [Tutorial: Getting started with fuzzing](https://go.dev/doc/tutorial/fuzz)
 - [Go Excellence: A Deep Dive into Error Handling](https://do-tech.medium.com/go-excellence-a-deep-dive-into-error-handling-4b74697f12a1)
-- 🌶️[A way to find golang projects on github](https://goodfirstissue.dev/language/go) to contribute and to learn from.
+
 
   
 ## Cheatsheets
