@@ -14,6 +14,10 @@ Here my hopefully helpful ressoures for the Go language.
 
 ## Recommended readings
 - [Go Proverbs](https://go-proverbs.github.io/)
+- [Coroutines for Go](https://research.swtch.com/coro)
+- [A Guide to the Go Garbage Collector](https://tip.golang.org/doc/gc-guide)
+- [Getting to Go: The Journey of Go's Garbage Collector](https://go.dev/blog/ismmkeynote)
+- [Writing and Optimizing Go code](https://github.com/dgryski/go-perfbook/blob/master/performance.md)
 - [Implementing WebSocket Protocol in Go](https://hassansin.github.io/implementing-websocket-protocol-in-go)
 - [Common pitfalls in Go benchmarking](https://eli.thegreenplace.net/2023/common-pitfalls-in-go-benchmarking/)
 - [Avelinos awesome-go: A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
