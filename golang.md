@@ -45,6 +45,7 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 
 ## Concurrency (aka Nebenläufigkeit)
 - [Hands on exercises with real-life examples to study and practice Go concurrency patterns. Test-cases are provided to verify your answers.](https://github.com/loong/go-concurrency-exercises)
+- [Google I/O 2013 - Advanced Go Concurrency Patterns](https://www.youtube.com/watch?v=QDDwwePbDtw)
 
   
 ## TUI
