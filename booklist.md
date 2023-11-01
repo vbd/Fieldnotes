@@ -19,18 +19,7 @@ I've read them all!
 
 ---
 
-## Python 
-- Python Crash Course, 3rd Edition: A Hands-On, Project-Based Introduction to Programming: https://www.amazon.de/Python-Crash-Course-Eric-Matthes/dp/1718502702/
-- Impractical Python Projects: Playful Programming Activities to Make You Smarter: https://www.amazon.de/Impractical-Python-Playful-Programming-Activities/dp/159327890X/
-- Fluent Python: Clear, Concise, and Effective Programming: https://www.amazon.de/Fluent-Python-Concise-Effective-Programming/dp/1492056359/
 
-### Bonus
-- Serious Python: Black-Belt Advice on Deployment, Scalability, Testing, and More: https://www.amazon.de/Serious-Python-Black-Belt-Deployment-Scalability/dp/1593278780/
-- Effective Pandas: Patterns for Data Manipulation: https://www.amazon.de/Effective-Pandas-Patterns-Manipulation-Treading/dp/B09MYXXSFM/
-- Practical Statistics for Data Scientists: 50+ Essential Concepts Using R and Python: https://www.amazon.de/Practical-Statistics-Data-Scientists-Essential/dp/149207294X/
-- 🌶️ Scientific Python Lectures, one document to learn numerics, science, and data with Python (free): https://lectures.scientific-python.org/
-
----
 
 ## Golang
 - Learning Go : An Idiomatic Approach to Real-World Go Programming: https://www.amazon.de/Learning-Go-Idiomatic-Real-World-Programming/dp/1492077216/
@@ -46,7 +35,8 @@ I've read them all!
 - [How To Code in Go eBook](https://assets.digitalocean.com/books/how-to-code-in-go.pdf) free PDF by Digital Ocean :arrow_right: generics will be missing
 - Distributed Services with Go: Your Guide to Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Distributed-Services-Go-Reliable-Maintainable/dp/1680507605/
 
-> **INFO**: I normally recommend only books I have read. Here I would like to make an exception. I have read a lot of good things about the books and have also bought all of them, but have not yet been able to read them.
+> [!NOTE]
+> I normally recommend only books I have read. Here I would like to make an exception. I have read a lot of good things about the books and have bought all of them, but have not yet been able to read them. 
 - Code For Your Life: https://bitfieldconsulting.com/books/code
 - For the Love of Go (2023): https://bitfieldconsulting.com/books/love
 - The Power of Go: Tools (2024): https://bitfieldconsulting.com/books/tools (I got the previous version)
@@ -55,6 +45,24 @@ I've read them all!
 
 Just found out that updates for these books are free, so I just got my The Power of Go: Tools (2024) for free. Thank you very much John!
 
+> [!NOTE]
+> Found some interesting free ebooks which I also not yet have read:
+- :blue_book: [Go With The Domain](https://threedots.tech/go-with-the-domain/) Building Modern Business Software in Go
+- :blue_book: [Spaceship Go](https://blasrodri.github.io/spaceship-go-gh-pages/cover.html) A journey into the Standard Library
+- :blue_book: [Go-SCP](https://checkmarx.gitbooks.io/go-scp/content/) Web Application Secure Coding Practices 
+
+---
+
+## Python 
+- Python Crash Course, 3rd Edition: A Hands-On, Project-Based Introduction to Programming: https://www.amazon.de/Python-Crash-Course-Eric-Matthes/dp/1718502702/
+- Impractical Python Projects: Playful Programming Activities to Make You Smarter: https://www.amazon.de/Impractical-Python-Playful-Programming-Activities/dp/159327890X/
+- Fluent Python: Clear, Concise, and Effective Programming: https://www.amazon.de/Fluent-Python-Concise-Effective-Programming/dp/1492056359/
+
+### Bonus
+- Serious Python: Black-Belt Advice on Deployment, Scalability, Testing, and More: https://www.amazon.de/Serious-Python-Black-Belt-Deployment-Scalability/dp/1593278780/
+- Effective Pandas: Patterns for Data Manipulation: https://www.amazon.de/Effective-Pandas-Patterns-Manipulation-Treading/dp/B09MYXXSFM/
+- Practical Statistics for Data Scientists: 50+ Essential Concepts Using R and Python: https://www.amazon.de/Practical-Statistics-Data-Scientists-Essential/dp/149207294X/
+- 🌶️ Scientific Python Lectures, one document to learn numerics, science, and data with Python (free): https://lectures.scientific-python.org/
 
 ---
 
