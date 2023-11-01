@@ -138,6 +138,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [A practical event-driven microservices demo built with Golang. Nomad, Consul Connect, Vault, and Terraform for deployment](https://github.com/thangchung/go-coffeeshop)
 - [What are your favourite, opensource golang projects from a code quality perspective](https://www.reddit.com/r/golang/comments/15b146i/what_are_your_favourite_opensource_golang/)
 - [Live collaboration tool built with Go backend and Next.js, Typescript, & Tailwind frontend](https://github.com/Wave-95/boards)
+- [htmx-hackernews](https://github.com/sunesimonsen/htmx-hackernews) Hackernews made with htmx and Go
 
 ## Learning by coding and contributing
 
