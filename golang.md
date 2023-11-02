@@ -176,7 +176,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [https://www.youtube.com/@ChamiViews](https://www.youtube.com/@ChamiViews)
 - [https://www.youtube.com/@anthonygg_](https://www.youtube.com/@anthonygg_) 
 - [https://www.youtube.com/@NerdCademyDev/featured](https://www.youtube.com/@NerdCademyDev/featured)
-
+- [https://www.youtube.com/@bmdavis419](https://www.youtube.com/@bmdavis419)
 
 
 ## WebDev
