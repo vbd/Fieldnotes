@@ -13,6 +13,7 @@ Here my hopefully helpful ressoures for the Go language.
 
 
 ## Recommended readings
+- [The Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [Go Proverbs](https://go-proverbs.github.io/)
 - [Coroutines for Go](https://research.swtch.com/coro)
 - [A Guide to the Go Garbage Collector](https://tip.golang.org/doc/gc-guide)
@@ -177,7 +178,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [https://www.youtube.com/@anthonygg_](https://www.youtube.com/@anthonygg_) 
 - [https://www.youtube.com/@NerdCademyDev/featured](https://www.youtube.com/@NerdCademyDev/featured)
 - [https://www.youtube.com/@bmdavis419](https://www.youtube.com/@bmdavis419)
-
+- [https://www.youtube.com/@ThomasLanghorst](https://www.youtube.com/@ThomasLanghorst)
 
 ## WebDev
 
