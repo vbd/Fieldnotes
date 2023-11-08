@@ -57,6 +57,7 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 ## TUI
 - [A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
 - [Charm libs Everything you need to build great stuff for the terminal.](https://charm.sh/)
+- [Terminal UI library with rich, interactive widgets — written in Golang](https://github.com/rivo/tview)
 
 ## CLI
 
