@@ -108,7 +108,7 @@ Although I have been doing this for more than 25 years, I still read books to st
 - Code That Fits in Your Head: Heuristics for Software Engineering: https://www.amazon.de/Code-That-Fits-Your-Head/dp/0137464401/
 - Everything curl - the book (free): https://curl.se/book.html
 - Git for Beginners: Zero to Hero (free): https://jdsalaro.com/tutorial/git/
-
+- A Visual Git Reference: https://marklodato.github.io/visual-git-guide/index-en.html
 
  ## Algorithms, Math
 
