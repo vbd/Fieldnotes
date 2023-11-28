@@ -119,6 +119,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [An overview of Go syntax and features.](https://github.com/a8m/golang-cheat-sheet)
 - [cheat sheet GO](https://golang.sk/images/blog/cheatsheets/go-cheat-sheet.pdf) PDF
 - [Go Programming (Golang) Cheat Sheet](https://zerotomastery.io/cheatsheets/golang-cheat-sheet/)
+- [Go cheatsheet](https://devhints.io/go)
 
 ## Roadmaps, Jobs, Career
 - [Roadmap: Go Developer](https://roadmap.sh/golang)
