@@ -10,10 +10,11 @@ I learned vim in a way most younger people can't imagine I didn't know any books
 My first vim contact was a remote session from Windows via telnet to a linux machine which I couldn't figure out to quit - no joke.  
 Finally I did alt+F4...
 
-But since that time I got hooked, and I didn't regret to learn it. I still use Vim today. I do 95% of my work with it.
+But since that time I got hooked, and I didn't regret to learn it. I still use Vim today. I do almost all of my work with it.
 
-Today I would recommend the following:
-
+> [!NOTE]
+> ♨️ Iif you prefer to learn by video rather than by book then I can recommend the [Vim Masterclass](https://www.udemy.com/course/vim-commands-cheat-sheet/) on Udemy. It certainly took me more than 8 years of learning by doing to learn what is taught in the course. It's not an affiliate link.
+ 
 - [Vim Commands: A Beginner Guide with Examples](https://thevaluable.dev/vim-commands-beginner/)
 - [A Vim Guide for Intermediate Users](https://thevaluable.dev/vim-intermediate/)
 - [A Vim Guide for Advanced Users](https://thevaluable.dev/vim-advanced/)
