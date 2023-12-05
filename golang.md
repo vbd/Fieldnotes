@@ -2,6 +2,7 @@ In the projects, in which I work, it comes up that I am asked what I recommend f
 Here my hopefully helpful ressoures for the Go language.
 
 ## Blogs
+- [research!rsc](https://research.swtch.com/) Thoughts and links about programming, by Russ Cox
 - [Bitfield Consulting friendly, professional go mentoring](https://bitfieldconsulting.com/golang)
 - [Boldly Go](https://boldlygo.tech/media/)
 - [Eli Bendersky's website](https://eli.thegreenplace.net/tag/go) / [Golang tools](https://eli.thegreenplace.net/tag/go-tooling)
