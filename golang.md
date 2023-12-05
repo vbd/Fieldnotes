@@ -49,6 +49,7 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [golangci-lint](https://github.com/golangci/golangci-lint), fast linters Runner for Go
 - :hot_pepper: [JSON-to-Go, convert JSON to Go struct](https://mholt.github.io/json-to-go/)
 
+
 ## Concurrency (aka Nebenläufigkeit)
 - [Hands on exercises with real-life examples to study and practice Go concurrency patterns. Test-cases are provided to verify your answers.](https://github.com/loong/go-concurrency-exercises)
 - [Google I/O 2013 - Advanced Go Concurrency Patterns](https://www.youtube.com/watch?v=QDDwwePbDtw)
@@ -78,6 +79,8 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
   
 ## Finding libs
 - [Trending Go Projects](https://www.libhunt.com/l/go)
+- [grank.dev](https://www.grank.dev/) tries to help to choose the right dependencies for your next golang project.
+
 
 ## Profiling
 Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
