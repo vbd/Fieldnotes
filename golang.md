@@ -159,6 +159,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [Live collaboration tool built with Go backend and Next.js, Typescript, & Tailwind frontend](https://github.com/Wave-95/boards)
 - [htmx-hackernews](https://github.com/sunesimonsen/htmx-hackernews) Hackernews made with htmx and Go
 - [gotes-mx](https://github.com/muhwyndhamhp/gotes-mx) This is a teeny tiny template repo for my own personal use. This setup meant for a fullstack Go project with templating support with HTMX.
+- [cli generator for .ignore files](https://github.com/neptunsk1y/ignore)
 
 ## Learning by coding and contributing
 
