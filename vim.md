@@ -382,9 +382,10 @@ Capture ex command output to buffer e.g. `:version`
 
     vim --startuptime perf
 
-## Codeblocks
+## Search for a pattern and if found delete to end of line
+`:%s/pattern.*//g`
 
-### Remove ?utm from urls
+Let pattern be `?utm`:
 
 `:%s/?utm.*$//g`  
 - `:%s` replace in whole buffer  
@@ -393,7 +394,7 @@ Capture ex command output to buffer e.g. `:version`
 - `g` means global, will replace multiple occurences in line. Could be omitted because we replace from pattern start till end of line, but it's my (bad) habit.
  
 
-### Append text to the end of multiple lines
+## Append text to the end of multiple lines
 
 before:
 
