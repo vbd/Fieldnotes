@@ -12,6 +12,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [Redowan's Reflections](https://rednafi.com/archives/)
 - [Over-Engineered](https://totallygamerjet.hashnode.dev/)
 - [Practical Go](https://dave.cheney.net/practical-go) A collection of real world advice for writing maintainable Go programs.
+- [willem.dev](https://www.willem.dev/articles/)
 
 
 ## Recommended readings
