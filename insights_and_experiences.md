@@ -34,6 +34,8 @@ The focus of my development projects were and are:
 - System Design Cheatsheet: https://gist.github.com/vasanthk/485d1c25737e8e72759f
 - Web Security Basics: https://github.com/vasanthk/web-security-basics
 - Optional, but helpful<br>An opinionated guide on how to become a professional Web/Mobile App Developer: https://github.com/apptension/developer-handbook/tree/master
+- The XY Problem: https://xyproblem.info/
+- How To Ask Questions The Smart Way: http://www.catb.org/esr/faqs/smart-questions.html
 
 ## Some "easy" insights
 Being a software dev is about solving problems and creating solutions to solve these problems. Coding is only a part of it!
