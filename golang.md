@@ -99,7 +99,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [Parca is a continuous profiling project.](https://www.parca.dev/)
 - [Grafana Phlare lets you aggregate continuous profiling data with high availability, multi-tenancy, and durable storage.](https://grafana.com/oss/phlare/)
 - [Package trace contains facilities for programs to generate traces for the Go execution tracer.](https://pkg.go.dev/runtime/trace)
-
+- 🌶️ [Go by Example: Testing and Benchmarking](https://gobyexample.com/testing-and-benchmarking)
 
 ## Learning & Miscellaneous
 
