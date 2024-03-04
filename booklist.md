@@ -25,12 +25,12 @@ I've read them all!
 - Learning Go : An Idiomatic Approach to Real-World Go Programming: https://www.amazon.de/Learning-Go-Idiomatic-Real-World-Programming/dp/1492077216/
 - Learn to Build Professional Web Applications with Go: https://lets-go.alexedwards.net/
 - Advanced patterns for building APIs and web applications in Go: https://lets-go-further.alexedwards.net/
-
+- 100 Go Mistakes and How to Avoid Them: https://www.amazon.de/100-Mistakes-Avoid-Them-English-ebook/dp/B0BBHQD8BQ/
+  
 ### Bonus
 - Writing An Interpreter In Go: https://www.amazon.de/Writing-Interpreter-Go-Thorsten-Ball/dp/3982016118/
 - Writing A Compiler In Go: https://www.amazon.de/Writing-Compiler-Go-Thorsten-Ball/dp/398201610X/
 - Learn Go with Tests: https://quii.gitbook.io/learn-go-with-tests/ Download PDF / ePub: https://github.com/quii/learn-go-with-tests/releases
-- 100 Go Mistakes and How to Avoid Them: https://www.amazon.de/100-Mistakes-Avoid-Them-English-ebook/dp/B0BBHQD8BQ/
 - Powerful Command-Line Applications in Go: https://pragprog.com/titles/rggo/powerful-command-line-applications-in-go/
 - [How To Code in Go eBook](https://assets.digitalocean.com/books/how-to-code-in-go.pdf) free PDF by Digital Ocean :arrow_right: generics will be missing
 - Distributed Services with Go: Your Guide to Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Distributed-Services-Go-Reliable-Maintainable/dp/1680507605/
