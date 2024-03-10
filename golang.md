@@ -149,9 +149,11 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 
 ## Learning to code from source
 
-- [Generate invoices from the command line](https://github.com/maaslalani/invoice)
-- [Simple command-line snippet manager, written in Go.](https://github.com/knqyf263/pet)
-- 🌶️[A small ecomerce site for buying books](https://github.com/madxmike/zenith-bookshop)
+Starting projects to learn from source and to get ideas what to build to learn and improve your skills.
+
+- :hotsprings: [Generate invoices from the command line](https://github.com/maaslalani/invoice)
+- :hotsprings: [Simple command-line snippet manager, written in Go.](https://github.com/knqyf263/pet)
+- :hotsprings: [A small ecomerce site for buying books](https://github.com/madxmike/zenith-bookshop)
 - [Browsers Extensions Finder (BEXfinder) is a portable and cross-platform (Windows, Linux and MacOS) command-line tool to find out all web browsers (Google Chrome, Microsoft Edge, Brave Browser, Mozilla FireFox, Opera, etc.) extensions installed on system.](https://github.com/ch4meleon/BEXfinder)
 - [Command line tool written in Go. It allows developers to scan their local Git repositories and generate a visual contributions graph.](https://github.com/abdullah-alaadine/local-git-contributions-visualizer)
 - [CLI for interacting with the recreation.gov API](https://github.com/opencamp-hq/cli)
@@ -163,6 +165,38 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [htmx-hackernews](https://github.com/sunesimonsen/htmx-hackernews) Hackernews made with htmx and Go
 - [gotes-mx](https://github.com/muhwyndhamhp/gotes-mx) This is a teeny tiny template repo for my own personal use. This setup meant for a fullstack Go project with templating support with HTMX.
 - [cli generator for .ignore files](https://github.com/neptunsk1y/ignore)
+- [Go-based web crawler for data extraction](https://github.com/AgentGino/krawl)
+- [Simple CLI tool for working with Gitlab issues](https://github.com/ArjArav98/Issue)
+- [Telegram bot](https://github.com/Arturomtz8/github-inspector-telegram)
+- [Language Server (LSP) für die Deutsche Programmiersprache](https://github.com/DDP-Projekt/DDPLS)
+- [YouTube description and information downloader.](https://github.com/HaloGamer33/YouTube-Stat-Scraper)
+- [A TUI app for finding anime scenes by image.](https://github.com/acgtools/trace-moe-go)
+- [clipboard for golang](https://github.com/atotto/clipboard)
+- [Making it easy to write shell-like scripts in Go](https://github.com/bitfield/script)
+- [Self-hosted file converter server](https://github.com/danvergara/morphos)
+- [A CLI tool for displaying data related to the English Premier League.](https://github.com/digitalghost-dev/pl-cli/tree/main)
+- [Airbnb scraper made in Go](https://github.com/johnbalvin/gobnb)
+- [Amazon crawler made in Go](https://github.com/johnbalvin/gozon)
+- [A commands bookmark for terminal](https://github.com/linhx/tbmk)
+- [Bookmarking CLI tool with automatic sync](https://github.com/loghinalexandru/anchor)
+- [minesweeper cli](https://github.com/maxpaulus43/go-sweep)
+- [Terminal dictionary for English Learners](https://github.com/mburakerman/cambridge-cli)
+- [Go programs for interacting with Mastodon](https://github.com/mischavandenburg/mastodon)
+- [A reddit multimedia downloader](https://github.com/noornee/reddit-dl)
+- [Reddit Top Posts Scraper](https://github.com/nyx6965/grawddit)
+- [A CLI based daily timer](https://github.com/pedrojreis/ScrumChrono)
+- [HTTP status codes on speed dial](https://github.com/rednafi/httpurr)
+- [graft is a tool to find and transfer files written in go](https://github.com/sandreas/graft)
+- [This command-line application generates random words based on user preferences and allows you to save them to a file.](https://github.com/seandadonntech/wordago)
+- :hotsprings: [A highly customisable CLI tool for writing conventional commits](https://github.com/stefanlogue/meteor)
+- [Spotify TUI player, written in Go](https://github.com/szktkfm/sptui)
+- [Create GIFs on the fly with ffmpeg](https://github.com/theIYD/go-gif-maker)
+- [Cemetery Escape is a game that you can play in your terminal.](https://github.com/tom-on-the-internet/cemetery-escape)
+- [A CLI tool for importing and utilizing exported social media data from popular services on Hugo websites.](https://github.com/ttybitnik/diego)
+
+
+
+
 
 ## Learning by coding and contributing
 
@@ -193,7 +227,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [https://www.youtube.com/@nicolasparada](https://www.youtube.com/@nicolasparada)
 - [https://www.youtube.com/@ChamiViews](https://www.youtube.com/@ChamiViews)
 - [https://www.youtube.com/@anthonygg_](https://www.youtube.com/@anthonygg_) 
-- [https://www.youtube.com/@NerdCademyDev/featured](https://www.youtube.com/@NerdCademyDev/featured)
+- ~~[https://www.youtube.com/@NerdCademyDev/featured](https://www.youtube.com/@NerdCademyDev/featured)~~
 - [https://www.youtube.com/@bmdavis419](https://www.youtube.com/@bmdavis419)
 - [https://www.youtube.com/@ThomasLanghorst](https://www.youtube.com/@ThomasLanghorst)
 
