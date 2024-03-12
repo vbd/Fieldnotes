@@ -156,7 +156,10 @@ Some keywords that may be of interest:
 - mix of methods and frameworks
 - if possible within the project pick what works best for you and your time. Can be a mix of different methods/frameworks and so on.
 
- 
+## Becoming a senior software engineer
+[Path to Senior Engineer handbook](https://github.com/jordan-cutler/path-to-senior-engineer-handbook) This repo has all the resources you need to reach Senior Software Engineer!
+
+More todo.
  
 TODO:
 ## Finding and fixing bugs / technical debt
