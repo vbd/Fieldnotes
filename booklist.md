@@ -71,7 +71,7 @@ Just found out that updates for these books are free, so I just got my The Power
 - Zero To Production In Rust: An introduction to backend development: https://www.amazon.de/Zero-Production-Rust-introduction-development/dp/B0BHLDMFDQ/
 - Command-Line Rust: A Project-Based Primer for Writing Rust CLIs: https://www.amazon.de/Command-Line-Rust-Project-Based-Primer-Writing/dp/1098109430/
 - Rust Web Development: With Warp, Takio, and Reqwest: https://www.amazon.de/Rust-Web-Development-Bastian-Gruber/dp/1617299006/ 
- 
+- Rust for C#/.NET Developers: https://microsoft.github.io/rust-for-dotnet-devs/latest/ 
  ---
  
 Books that have had a lasting influence on my way of thinking and approaching things.
