@@ -89,7 +89,7 @@ Although I have been doing this for more than 25 years, I still read books to st
 - Soft Skills: The Software Developer's Life Manual: https://www.amazon.de/Soft-Skills-Software-Developers-English-ebook/dp/B08N9KTYW6/
 
 
-## Development in general, project management
+## Development in general, project management, git
 
 - Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Designing-Data-Intensive-Applications-Reliable-Maintainable-ebook/dp/B06XPJML5D/
 - Modern Software Engineering: Doing What Works to Build Better Software Faster: https://www.amazon.de/Modern-Software-Engineering-Better-English-ebook/dp/B09GG6XKS4/
@@ -109,6 +109,7 @@ Although I have been doing this for more than 25 years, I still read books to st
 - Everything curl - the book (free): https://curl.se/book.html
 - Git for Beginners: Zero to Hero (free): https://jdsalaro.com/tutorial/git/
 - A Visual Git Reference: https://marklodato.github.io/visual-git-guide/index-en.html
+- Git by example: Interactive guide: https://antonz.org/git-by-example/
 
  ## Algorithms, Math
 
