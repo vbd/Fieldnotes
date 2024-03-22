@@ -57,6 +57,9 @@ Recently I came across a video series that is a kind of quantum leap for me ...
 - [Problem Solving with Vim - 6 (Regular expression, scriptin arg)](https://www.youtube.com/watch?v=iwiHAbkr1vQ)
 - [Problem Solving with Vim - 7](https://www.youtube.com/watch?v=GJVwojkn8Io)
 - [Problem Solving with Vim - 8 (Abusing Vim)](https://www.youtube.com/watch?v=7c50GG3w-0M)
+- [Problem Solving with Vim (9th edition) My favorite substitute](https://www.youtube.com/watch?v=QE5c_bWyJ-k)
+- [Problem Solving with Vim (10th edition) - Key Code Hell](https://www.youtube.com/watch?v=j3psP-s9FOM)
+
 
  
 
