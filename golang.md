@@ -104,6 +104,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 ## Learning & Miscellaneous
 
 - my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
+- [List of Golang books](https://github.com/dariubs/GoBooks?tab=readme-ov-file)
 - 🌶️ [Algorithms and Data Structures implemented in Go for beginners, following best practices.](https://github.com/TheAlgorithms/Go)
 - [Effective Go](https://go.dev/doc/effective_go)
 - [govulncheck](https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck) Govulncheck reports known vulnerabilities that affect Go code.
