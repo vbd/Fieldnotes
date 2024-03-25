@@ -75,7 +75,7 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 ## Podcasts
 - [Cup o' Go](https://cupogo.dev/) Stay up to date with the Go community in just 15 minutes per week.
 - [Ardan Labs Podcast](https://ardanlabs.buzzsprout.com/) This podcast features intimate conversations with engineers who are in the forefront of building or teaching technology.
-- [go podcast()](https://go.transistor.fm/episodes)
+- [go podcast()](https://gopodcast.dev/episodes)
 - [Go Time](https://changelog.com/gotime)
 
 ## GUI / TUI
@@ -105,9 +105,11 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 
 - my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
 - [List of Golang books](https://github.com/dariubs/GoBooks?tab=readme-ov-file)
+- :sound: [Jumping into an existing codebase](https://changelog.com/gotime/307)
 - 🌶️ [Algorithms and Data Structures implemented in Go for beginners, following best practices.](https://github.com/TheAlgorithms/Go)
 - [Effective Go](https://go.dev/doc/effective_go)
 - [govulncheck](https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck) Govulncheck reports known vulnerabilities that affect Go code.
+- [Crash Course on Go Interfaces (https://www.calhoun.io/crash-course-on-go-interfaces/)
 - [Deliver Go binaries as fast and easily as possible](https://github.com/goreleaser/goreleaser)
 - [Structured, pluggable logging for Go.](https://github.com/sirupsen/logrus) :arrow_right: Go 1.21 will offer the new [slog package](https://tip.golang.org/doc/go1.21#slog)
 - [AI on the command line](https://github.com/charmbracelet/mods)
