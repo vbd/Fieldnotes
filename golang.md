@@ -86,7 +86,9 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 ## Finding libs
 - [Trending Go Projects](https://www.libhunt.com/l/go)
 - [grank.dev](https://www.grank.dev/) tries to help to choose the right dependencies for your next golang project.
-
+- [Go packages](https://pkg.go.dev/)
+- [A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
+- [Awesome-go list with stars. Automatically updated.](https://github.com/amanbolat/awesome-go-with-stars) 
 
 ## Profiling
 Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
