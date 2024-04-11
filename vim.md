@@ -175,6 +175,7 @@ In insert mode
 Rg ®
 TM ™
 Co ©
+OK ✓ 
 ```
 :dig
 
@@ -182,6 +183,7 @@ More: https://devhints.io/vim-digraphs
 
 To insert a Unicode character while in insert mode, type `ctrl+vuxxxx` e.g. `ctrl+vu2713`.
 
+A table of digraphs can be shown with: `:h digraph-table`
 
 ## Encryption
 
@@ -449,3 +451,5 @@ after:
     before b after
     before c after 
  
+---
+If you find this notes helpful and want to support me, you can do so by [Buy me a coffee! ☕](https://www.buymeacoffee.com/vbduetsch) it will keep my motivation high and I will be really thankful.
