@@ -177,13 +177,11 @@ TM ™
 Co ©
 OK ✓ 
 ```
-:dig
-
-More: https://devhints.io/vim-digraphs
-
-To insert a Unicode character while in insert mode, type `ctrl+vuxxxx` e.g. `ctrl+vu2713`.
-
-A table of digraphs can be shown with: `:h digraph-table`
+- `:dig`
+- To insert a Unicode character while in insert mode, type `ctrl+vuxxxx` e.g. `ctrl+vu2713`.
+- A table of digraphs can be shown with: `:h digraph-table`
+- to search for digrpahs, take a look at the Unicode-Plugin https://github.com/chrisbra/unicode.vim written by Christian Brabandt.
+- More: https://devhints.io/vim-digraphs
 
 ## Encryption
 
