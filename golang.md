@@ -252,4 +252,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 ## Security & Malware
 
 - :tv: [DEF CON 29 - Ben Kurtz - Offensive Golang Bonanza: Writing Golang Malware](https://www.youtube.com/watch?v=3RQb05ITSyk)
-- [awesome-go-security](https://github.com/Binject/awesome-go-security) 
+- [awesome-go-security](https://github.com/Binject/awesome-go-security)
+
+---
+If you find this notes helpful and want to support me, you can do so by [Buy me a coffee! ☕](https://www.buymeacoffee.com/vbduetsch) it will keep my motivation high and I will be really thankful.
