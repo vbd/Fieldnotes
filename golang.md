@@ -92,6 +92,9 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 
 ## Profiling
 Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
+
+- [The Busy Developer's Guide to Go Profiling, Tracing and Observability](https://github.com/DataDog/go-profiler-notes/blob/main/guide/README.md)
+- [Debugging Go Code: Using pprof and trace to Diagnose and Fix Performance Issues](https://www.infoq.com/articles/debugging-go-programs-pprof-trace/)
 - [Profiling Go Programs](https://go.dev/blog/pprof)
 - [Profiling Go programs with pprof](https://jvns.ca/blog/2017/09/24/profiling-go-with-pprof/)
 - [How I investigated memory leaks in Go using pprof on a large codebase](https://www.freecodecamp.org/news/how-i-investigated-memory-leaks-in-go-using-pprof-on-a-large-codebase-4bec4325e192/)
