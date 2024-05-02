@@ -8,8 +8,8 @@
     - watch: https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6 imho the best free video course
     - read effective go: https://go.dev/doc/effective_go
     - read Uber Go Style Guide: https://github.com/uber-go/guide/blob/master/style.md and Google Go Style: https://google.github.io/styleguide/go/index
-4. Avoid tutorial hell -- start with "fun" projects write a cli etc. help for ideas: https://goodfirstissue.dev/language/go
-5. For cli don't miss https://charm.sh/libs/
+4. Avoid tutorial hell -- start with "fun" projects write a cli etc. help for ideas: https://goodfirstissue.dev/language/go. For cli don't miss https://charm.sh/libs/
+5. Start to write down your achivements e.g. what you learned today, what you did today. This helps you to document your progress and you don't even get the feeling of not moving anything.
 6. Read Go Wiki: Common Mistakes: https://go.dev/wiki/CommonMistakes
 7. Read Go Wiki: Go Code Review Comments: https://go.dev/wiki/CodeReviewComments
 8. Read golang documentation: https://go.dev/doc/
