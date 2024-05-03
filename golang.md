@@ -16,6 +16,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [Sameer Ajmani](https://ajmani.net/go/)
 
 ## Recommended readings
+- my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
 - [The Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [Go Proverbs](https://go-proverbs.github.io/)
 - [Coroutines for Go](https://research.swtch.com/coro)
@@ -35,7 +36,11 @@ There is always the danger that with time compact functions become real "monster
 Not my code, should help to debug, will we need a 49" monitor for debugging or two of them side by side in future? A healthy balance would suit us all.
 - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) This page collects common comments made during reviews of Go code, so that a single detailed explanation can be referred to by shorthands. This is a laundry list of common style issues, not a comprehensive style guide.
 
+## Asking go questions
 
+- Go Forum: https://forum.golangbridge.org/
+- Go Forum: https://godev.com/
+- r/golang: https://www.reddit.com/r/golang/
 
 ## Coming from Python
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
@@ -63,7 +68,7 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
   
 ## TUI
 - [A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
-- [Charm libs Everything you need to build great stuff for the terminal.](https://charm.sh/)
+- :hot_pepper: [Charm libs Everything you need to build great stuff for the terminal.](https://charm.sh/)
 - [Terminal UI library with rich, interactive widgets — written in Golang](https://github.com/rivo/tview)
 
 ## CLI
