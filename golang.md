@@ -41,6 +41,7 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - Go Forum: https://forum.golangbridge.org/
 - Go Forum: https://godev.com/
 - r/golang: https://www.reddit.com/r/golang/
+- golang-nuts: https://groups.google.com/g/golang-nuts
 - golang-dev: https://groups.google.com/g/golang-dev
 
 ## Coming from Python
