@@ -1,6 +1,6 @@
 # How to become a developer
 
-1. _Read: "Make It Stick: The Science of Successful Learening"_
+1. _Read: "Make It Stick: The Science of Successful Learning"_
 2. _Read: "Soft Skills: The Software Developer's Life Manual"_
 3. Learn a program language in this case it is go ak golang
     - read tour of go: https://go.dev/tour/welcome/1
