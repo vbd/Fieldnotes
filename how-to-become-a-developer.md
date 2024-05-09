@@ -29,7 +29,7 @@ _Don't underestimate the cursive marked lines_: a developer is a problem solver,
 
 Some general notes:
 - Take time, learn, take notes. Get experience by doing projects. Practice and experience, is important. Improve have fun.
-- If you are criticised don't take it personal!
+- If you are criticised don't take it personally!
 - If you criticise don't get personally!
 - Bloom's Taxonomy: Remember - Understand - Do / Apply - Analyze - Evaluate - Create
 - Iterative approach, communication, getting feedback, giving feedback and common sense. That's my 5 cent. 
