@@ -1,37 +1,71 @@
 # How to become a developer
 
-1. _Read: "Make It Stick: The Science of Successful Learning"_
-2. _Read: "Soft Skills: The Software Developer's Life Manual"_
-3. Learn a program language in this case it is go aka golang
-    - read tour of go: https://go.dev/tour/welcome/1
-    - read go by example: https://gobyexample.com/
-    - watch: https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6 imho the best free video course
-    - read effective go: https://go.dev/doc/effective_go
-    - read Uber Go Style Guide: https://github.com/uber-go/guide/blob/master/style.md and Google Go Style: https://google.github.io/styleguide/go/index
-4. Avoid tutorial hell -- start with "fun" projects write a cli etc. help for ideas: https://goodfirstissue.dev/language/go. For go and cli don't miss https://charm.sh/libs/
-5. Start to write down your achievements e.g. what you learned today, what you did today. This helps you to document your progress, and you don't even get the feeling of not moving anything.
-6. Read Go Wiki: Common Mistakes: https://go.dev/wiki/CommonMistakes
-7. Read Go Wiki: Go Code Review Comments: https://go.dev/wiki/CodeReviewComments
-8. Read golang documentation: https://go.dev/doc/
-9. Read: "let's go": https://lets-go.alexedwards.net/
-10. Read: "let's go further": https://lets-go-further.alexedwards.net/
-11. Read: "100 Go Mistakes and How to Avoid Them". It's one of the best books to deepen your knowledge in Go.
-12. Read: Pro git: https://git-scm.com/book/de/v2
-13. Read: Agile Manifest: https://agilemanifesto.org/
-14. Read: Scrum Guide: https://scrumguides.org/index.html
-15. _"Learn" problem-solving, read: "Problem Solving 101: A simple book for smart people"_
-16. _"Learn" Critical thinking, read: "Critical Thinking (The MIT Press Essential Knowledge series)"_
-17. Read: "Scrum: The Art of Doing Twice the Work in Half the Time" 
-18. Read: "The Scrum Fieldbook: Faster performance. Better results. Starting now."
-20. Read: "The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win"
+- A developer is a problem solver, who develops solutions to solve own or others problems, not only a coder!
+- This is not a step-by-step guide.
+- I try to summarize what it imho takes to get the fundamentals as software developer/engineer.
+- I'm not a great coder. But I learned how to carve solutions so I see myself a "solution carver". This has worked quite well for almost 30 years, yet.
 
-_Don't underestimate the cursive marked lines_: a developer is a problem solver, who develops solutions to solve own or others problems, not only a coder!
+## Prepare to learn
+You will be life long learning. So imho organize your learning and note taking at best from start.
+- Read "Make It Stick: The Science of Successful Learning" by Peter C. Brown, Henry L. Roediger III, Mark A. McDaniel
+- Read "How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking" by Sönke Ahrens
+- Read "Building a Second Brain: A Proven Method to Organise Your Digital Life and Unlock Your Creative Potential" by Tiago Forte
 
-Some general notes:
+## "Human interaction"
+Many of the devs I got to know became developers because they wanted to have as little to do with other people as possible. This is a mistake! You will have to deal with others often enough. Prepare by reading "Soft Skills: The Software Developer's Life Manual" by John Sonmez
+
+## Learn a coding language
+Choose a programming language to start and get fluent with it e.g. Golang, Rust, Python, Typescript. Be open for other languages and concepts.
+I like Golang a lot so my recommendations for it:
+- Read tour of go: https://go.dev/tour/welcome/1
+- Read go by example: https://gobyexample.com/
+- Watch: https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6 imho the best free video course
+- Read effective go: https://go.dev/doc/effective_go
+- Read Uber Go Style Guide: https://github.com/uber-go/guide/blob/master/style.md and Google Go Style: https://google.github.io/styleguide/go/index
+- Read Go Wiki: Common Mistakes: https://go.dev/wiki/CommonMistakes
+- Read Go Wiki: Go Code Review Comments: https://go.dev/wiki/CodeReviewComments
+- Read Golang documentation: https://go.dev/doc/
+- Read: "Let's go" by Alex Edwards: https://lets-go.alexedwards.net/
+- Read: "Let's go further" by Alex Edwards: https://lets-go-further.alexedwards.net/
+- Read: "100 Go Mistakes and How to Avoid Them" by Teiva Harsanyi. It's one of the best books to deepen your knowledge in Go.
+- For cli projects don't miss https://charm.sh/libs/
+
+## Version control & Collaboration
+
+- Git is the standard so read: Pro git: https://git-scm.com/book/de/v2
+- To learn to work together and understand concepts, read "Extreme Programming Explained: Embrace Change" by Kent Beck, Cynthia Andres
+
+## Problem solving & critical thinking
+Imho the most important skills a dev should develop.
+
+- Read: "Problem Solving 101: A simple book for smart people" by Ken Watanabe
+- Read: "Critical Thinking (The MIT Press Essential Knowledge series)" by Jonathan Haber
+- Read: "Thinking, Fast and Slow" by Daniel Kahneman
+- Read: "Start With Why" by Simon Sinek
+
+## Agile
+- Read: Agile Manifest: https://agilemanifesto.org/
+- Read: Scrum Guide: https://scrumguides.org/index.html
+- Read: "Scrum: The Art of Doing Twice the Work in Half the Time" by Jeff Sutherland und J.J. Sutherland
+- Read: "The Scrum Fieldbook: Faster performance. Better results. Starting now." by J.J. Sutherland 
+
+## Devops
+
+- Read: "The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win" by Gene Kim, Kevin Behr, George Spafford
+- Read "The Unicorn Project: A Novel about Developers, Digital Disruption, and Thriving in the Age of Data" by Gene Kim
+
+
+## General notes
+
+- Avoid tutorial hell -- start with "fun" projects write a cli etc. help for ideas: https://goodfirstissue.dev/language/go.
+- You won't learn to be a developer by only reading books, watching youtube videos etc. do projects
+- Visit: "The Missing Semester of Your CS Education": https://missing.csail.mit.edu/
+- Watch "Alex Martelli - "Good enough" is good enough!": https://www.youtube.com/watch?v=gHG9FRSlPxw
+- Start to write down your achievements e.g. what you learned today, what you did today. This helps you to document your progress, and you don't even get the feeling of not moving forward.
 - Take time, learn, take notes. Get experience by doing projects. Practice and experience, is important. Improve have fun.
 - If you are criticised don't take it personally!
 - If you criticise don't get personally!
-- Bloom's Taxonomy: Remember - Understand - Do / Apply - Analyze - Evaluate - Create
-- Iterative approach, communication, getting feedback, giving feedback and common sense. That's my 5 cent. 
+- It's all "Bloom's Taxonomy: Remember - Understand - Do / Apply - Analyze - Evaluate - Create": https://en.wikipedia.org/wiki/Bloom%27s_taxonomy
+- Iterative approach, communication, getting feedback, giving feedback and common sense.
 
 
