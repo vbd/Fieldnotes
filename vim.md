@@ -27,6 +27,7 @@ But since that time I got hooked, and I didn't regret to learn it. I still use V
 - [How to Create Vim Text-Objects in Lua](https://thevaluable.dev/vim-create-text-objects/)
 - [Managing Local and Remote Filesystems with Vim and netrw](https://thevaluable.dev/vim-browsing-remote-netrw/)
 - [What's The Vim Runtime? A Guide With Examples](https://thevaluable.dev/vim-runtime-guide-example/)
+- [Vim Text Objects: The Definitive Guide](https://blog.carbonfive.com/vim-text-objects-the-definitive-guide/)
  
 - :tv: [Vim Tutorial for Beginners](https://www.youtube.com/watch?v=RZ4p-saaQkc)
 - :tv: [How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
