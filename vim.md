@@ -14,7 +14,8 @@ But since that time I got hooked, and I didn't regret to learn it. I still use V
 
 > [!NOTE]
 > ♨️ If you prefer to learn by video rather than by book then I can recommend the [Vim Masterclass](https://www.udemy.com/course/vim-commands-cheat-sheet/) on Udemy. It certainly took me more years of "learning by doing" to learn what is taught in the course. It's not an affiliate link.
- 
+
+- Seven habits of effective text editing: https://www.moolenaar.net/habits.html by Bram Moolenaar 
 - ♨️ [Learn Vim the Smart Way](https://learnvim.irian.to/)
 - [Vim Commands: A Beginner Guide with Examples](https://thevaluable.dev/vim-commands-beginner/)
 - [A Vim Guide for Intermediate Users](https://thevaluable.dev/vim-intermediate/)
