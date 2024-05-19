@@ -29,6 +29,7 @@ I like Golang a lot so my recommendations for it:
 - Read: "Let's go further" by Alex Edwards: https://lets-go-further.alexedwards.net/
 - Read: "100 Go Mistakes and How to Avoid Them" by Teiva Harsanyi. It's one of the best books to deepen your knowledge in Go.
 - For cli projects don't miss https://charm.sh/libs/
+- Take a look at Rob Muhlestein aka rwxrob "My Personal "Awesome" Go List": https://github.com/rwxrob/awesome-go
 
 ## Version control & Collaboration
 
@@ -57,6 +58,8 @@ Imho the most important skills a dev should develop.
 
 ## General notes
 
+- Watch "Basic computer skills for IT": https://www.youtube.com/watch?v=ZeKEUgHW3dE
+- Watch "Write it down (and run it)": https://www.youtube.com/watch?v=jD_MAEKMOQo
 - Avoid tutorial hell -- start with "fun" projects write a cli etc. help for ideas: https://goodfirstissue.dev/language/go.
 - You won't learn to be a developer by only reading books, watching youtube videos etc. do projects
 - Visit: "The Missing Semester of Your CS Education": https://missing.csail.mit.edu/
@@ -67,5 +70,10 @@ Imho the most important skills a dev should develop.
 - If you criticise don't get personally!
 - It's all "Bloom's Taxonomy: Remember - Understand - Do / Apply - Analyze - Evaluate - Create": https://en.wikipedia.org/wiki/Bloom%27s_taxonomy
 - Iterative approach, communication, getting feedback, giving feedback and common sense.
+- Watch "Ron Pressler - Why Writing Correct Software Is Hard and Why Math (Alone) Won’t Help Us - Curry On": https://youtu.be/dWdy_AngDp0
+- Watch "Can I put it on my resume if I'm still just learning it?": https://www.youtube.com/watch?v=JuZztAYpoSo
 
+
+
+ 
 
