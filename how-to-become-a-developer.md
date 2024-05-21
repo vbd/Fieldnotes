@@ -59,8 +59,10 @@ Imho the most important skills a dev should develop.
 ## General notes
 
 - Watch "Basic computer skills for IT": https://www.youtube.com/watch?v=ZeKEUgHW3dE
-- Watch "Q: What app do you use to take notes?": https://www.youtube.com/watch?v=26X2onaKGc0
 - Watch "Write it down (and run it)": https://www.youtube.com/watch?v=jD_MAEKMOQo
+- Watch "Q: What app do you use to take notes?": https://www.youtube.com/watch?v=26X2onaKGc0
+- Watch "I Suck." ... "I Rock!": https://www.youtube.com/watch?v=cFIF46j59LY It's "a lengthy description of the two extremes: impostor syndrome (undervaluing your skills) and Dunning-Kruger effect (not knowing that you don't know)."
+
 - Watch "Beginner Boost 2021" a great playlist where you learn what you really need: https://www.youtube.com/playlist?list=PLrK9UeDMcQLre1yPasCnuKvWvyXKzmKhW
 - Avoid tutorial hell -- start with "fun" projects write a cli etc. help for ideas: https://goodfirstissue.dev/language/go.
 - You won't learn to be a developer by only reading books, watching youtube videos etc. do projects
