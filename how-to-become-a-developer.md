@@ -45,8 +45,8 @@ Imho the most important skills a dev should develop.
 - Read: "Start With Why" by Simon Sinek
 
 ## Agile
-- Read: Agile Manifest: https://agilemanifesto.org/
-- Read: Scrum Guide: https://scrumguides.org/index.html
+- Read: "Agile Manifest": https://agilemanifesto.org/
+- Read: "Scrum Guide": https://scrumguides.org/index.html
 - Read: "Scrum: The Art of Doing Twice the Work in Half the Time" by Jeff Sutherland und J.J. Sutherland
 - Read: "The Scrum Fieldbook: Faster performance. Better results. Starting now." by J.J. Sutherland 
 
@@ -77,7 +77,20 @@ Imho the most important skills a dev should develop.
 - Watch "Ron Pressler - Why Writing Correct Software Is Hard and Why Math (Alone) Won’t Help Us - Curry On": https://youtu.be/dWdy_AngDp0
 - Watch "Can I put it on my resume if I'm still just learning it?": https://www.youtube.com/watch?v=JuZztAYpoSo
 
+## Next steps
 
+> [!NOTE]
+> Don't be put off by the size, remember to take it step by step, eat the elephant bite by bite.
 
+All books are not language specific, they apply in general, also they may include code examples in languages you don't intend to use. No particular order.
+
+- Read "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems" by Martin Kleppmann
+- Read "Code" by Charles Petzold
+- Read "Modern Software Engineering" by David Farley
+- Read "The Pragmatic Programmer: Your journey to mastery, 20th Anniversary Edition" by David Thomas and Andrew Hunt
+- Read "The Mythical Man-Month. Essays on Software Engineering" by Frederick Brooks
+- Read "A Philosophy of Software Design" by John Ousterhout
+- Read "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" by Jez Humble and David Farley 
  
+TODO: Network Stuff (MITP Ethernet, MITP TCP/IP?) Better options nowadays?
 
