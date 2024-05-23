@@ -50,6 +50,9 @@ Imho the most important skills a dev should develop.
 - Read: "Scrum: The Art of Doing Twice the Work in Half the Time" by Jeff Sutherland und J.J. Sutherland
 - Read: "The Scrum Fieldbook: Faster performance. Better results. Starting now." by J.J. Sutherland 
 
+There are still a few things outside of Scrum. Scrum is the most widespread. Nevertheless, here are a few keywords with which you can find other approaches: Kanban, Cynefin, Jobs to be done (jtbd), Design thinking, FAST Agile ... don't forget Waterfall and V-Model ...
+
+
 ## Devops
 
 - Read: "The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win" by Gene Kim, Kevin Behr, George Spafford
