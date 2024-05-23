@@ -92,5 +92,7 @@ All books are not language specific, they apply in general, also they may includ
 - Read "A Philosophy of Software Design" by John Ousterhout
 - Read "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" by Jez Humble and David Farley 
  
-TODO: Network Stuff (MITP Ethernet, MITP TCP/IP?) Better options nowadays?
+TODO: 
+- Network Stuff (MITP Ethernet, MITP TCP/IP?) Better options nowadays?
+- Productivity, self care, self optimization? Not too many titles.
 
