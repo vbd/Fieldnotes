@@ -112,6 +112,10 @@ I read the 4th edition. Imho the best book to start. Covers topics like some of 
 - Git for Beginners: Zero to Hero (free): https://jdsalaro.com/tutorial/git/
 - A Visual Git Reference: https://marklodato.github.io/visual-git-guide/index-en.html
 - Git by example: Interactive guide: https://antonz.org/git-by-example/
+- Building Green Software: https://www.amazon.de/Building-Green-Software-Sustainable-Development/dp/1098150627/
+- Network Programmability and Automation: https://www.amazon.de/Network-Programmability-Automation-English-Oswalt-ebook/dp/B0CFXDRM12/
+- Hypermedia Systems: https://www.amazon.de/Hypermedia-Systems-English-Carson-Gross-ebook/dp/B0CC315VJK/
+ 
 
  ## Algorithms, Math
 
