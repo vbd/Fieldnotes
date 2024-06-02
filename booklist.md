@@ -80,6 +80,8 @@ Although I have been doing this for more than 25 years, I still read books to st
  
  
 ## Self organisation, thinking
+- :hot_pepper: The Study Skills Handbook: https://www.amazon.de/Study-Skills-Handbook-Bloomsbury/dp/1350421278/
+I read the 4th edition. Imho the best book to start. Covers topics like some of the other books mentioned here, but not in the same depth. But it's more than enough to get you started.
 
 - Make it Stick: The Science of Successful Learning: https://www.amazon.de/Make-Stick-Science-Successful-Learning/dp/0674729013/
 - How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking – for Students, Academics and Nonfiction Book Writers: https://www.amazon.de/gp/product/1542866502/
