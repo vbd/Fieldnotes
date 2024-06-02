@@ -94,9 +94,9 @@ I read the 4th edition. Imho the best book to start. Covers topics like some of 
 - The 4 Pillars of Problem-Solving: 169 Techniques & Hacks to Solve Challenges With Strategic Thinking. Build Relationships... : https://www.amazon.de/Pillars-Problem-Solving-Techniques-Relationships-Collaborate-ebook/dp/B0CNKRKMQ5
 - Problem Solving 101: A simple book for smart people: https://www.amazon.de/Problem-Solving-101-simple-English-ebook/dp/B003ULP3M6/ 
 - Getting Things Done: The Art of Stress-Free Productivity: https://www.amazon.de/Getting-Things-Done-Stress-free-Productivity-ebook/dp/B00SHL3V8M/
-- How Big Things Get Done: The Surprising Factors That Determine the Fate of Every Project, from Home Renovations to Space Exploration and Everything In Between (English Edition): https://www.amazon.de/How-Big-Things-Get-Done-ebook/dp/B0B3HS4C98/
+- How Big Things Get Done: The Surprising Factors That Determine the Fate of Every Project, from Home Renovations to Space Exploration and Everything In Between: https://www.amazon.de/How-Big-Things-Get-Done-ebook/dp/B0B3HS4C98/
 - Start With Why: https://www.amazon.de/Start-Why-Leaders-Inspire-Everyone/dp/0241958229/
-- Writing to Learn: How to Write - and Think - Clearly About Any Subject at All (English Edition): https://www.amazon.de/Writing-Learn-Clearly-Subject-English-ebook/dp/B00BOQEBFE/
+- Writing to Learn: How to Write - and Think - Clearly About Any Subject at All: https://www.amazon.de/Writing-Learn-Clearly-Subject-English-ebook/dp/B00BOQEBFE/
   
 ## Development in general, project management, git
 
