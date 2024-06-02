@@ -79,18 +79,25 @@ I wished some of them would have been published earlier. Others have confirmed, 
 Although I have been doing this for more than 25 years, I still read books to stay up to date and learn new things. However, I have not been following every trend for a long time.
  
  
-## Self organisation, thinking
+## Self organisation, thinking, problem solving
 - :hot_pepper: The Study Skills Handbook: https://www.amazon.de/Study-Skills-Handbook-Bloomsbury/dp/1350421278/
 I read the 4th edition. Imho the best book to start. Covers topics like some of the other books mentioned here, but not in the same depth. But it's more than enough to get you started.
-
 - Make it Stick: The Science of Successful Learning: https://www.amazon.de/Make-Stick-Science-Successful-Learning/dp/0674729013/
+- Uncommon Sense Teaching: Practical Insights in Brain Science to Help Students Learn (English Edition): https://www.amazon.de/Uncommon-Sense-Teaching-Practical-Insights-ebook/dp/B08M5Y7PV5/
 - How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking – for Students, Academics and Nonfiction Book Writers: https://www.amazon.de/gp/product/1542866502/
 - Building a Second Brain: A Proven Method to Organise Your Digital Life and Unlock Your Creative Potential: https://www.amazon.de/Building-Second-Brain-Organise-Potential-ebook/dp/B09MDNDYYF/
 - Learn to Code by Solving Problems: A Python Programming Primer: https://www.amazon.de/Program-Solving-Problems-Daniel-Zingaro/dp/1718501323/
 - Bulletproof Problem Solving: The One Skill That Changes Everything: https://www.amazon.de/Bulletproof-Problem-Solving-Changes-Everything-ebook/dp/B07PFRCCY4/
 - Soft Skills: The Software Developer's Life Manual: https://www.amazon.de/Soft-Skills-Software-Developers-English-ebook/dp/B08N9KTYW6/
-
-
+- Critical thinking, Logic & Problem Solving: The Ultimate Guide to Better Thinking, Systematic Problem Solving ...: https://www.amazon.de/Critical-Thinking-Logic-Problem-Solving-ebook/dp/B0CK9WJVWT/
+- The 4 Pillars of Critical Thinking: 103 Techniques & Hacks to Improve Your Work and Personal Life by Mastering Mental Skills. ...: https://www.amazon.de/Pillars-Critical-Thinking-Techniques-Situations-ebook/dp/B0CPVZDVGQ/
+- The 4 Pillars of Problem-Solving: 169 Techniques & Hacks to Solve Challenges With Strategic Thinking. Build Relationships ...: https://www.amazon.de/Pillars-Problem-Solving-Techniques-Relationships-Collaborate-ebook/dp/B0CNKRKMQ5
+- Problem Solving 101: A simple book for smart people: https://www.amazon.de/Problem-Solving-101-simple-English-ebook/dp/B003ULP3M6/ 
+- Getting Things Done: The Art of Stress-Free Productivity: https://www.amazon.de/Getting-Things-Done-Stress-free-Productivity-ebook/dp/B00SHL3V8M/
+- How Big Things Get Done: The Surprising Factors That Determine the Fate of Every Project, from Home Renovations to Space Exploration and Everything In Between (English Edition): https://www.amazon.de/How-Big-Things-Get-Done-ebook/dp/B0B3HS4C98/
+- Start With Why: https://www.amazon.de/Start-Why-Leaders-Inspire-Everyone/dp/0241958229/
+- Writing to Learn: How to Write - and Think - Clearly About Any Subject at All (English Edition): https://www.amazon.de/Writing-Learn-Clearly-Subject-English-ebook/dp/B00BOQEBFE/
+  
 ## Development in general, project management, git
 
 - Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Designing-Data-Intensive-Applications-Reliable-Maintainable-ebook/dp/B06XPJML5D/
