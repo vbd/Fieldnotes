@@ -255,6 +255,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [https://www.youtube.com/@ThomasLanghorst](https://www.youtube.com/@ThomasLanghorst)
 - [https://www.youtube.com/@anthonygg_](https://www.youtube.com/@anthonygg_)
 - [https://www.youtube.com/@MelkeyDev](https://www.youtube.com/@MelkeyDev)
+- [https://www.youtube.com/@codeheim](https://www.youtube.com/@codeheim)
   
 
 ## WebDev
