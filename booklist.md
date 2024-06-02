@@ -89,9 +89,9 @@ I read the 4th edition. Imho the best book to start. Covers topics like some of 
 - Learn to Code by Solving Problems: A Python Programming Primer: https://www.amazon.de/Program-Solving-Problems-Daniel-Zingaro/dp/1718501323/
 - Bulletproof Problem Solving: The One Skill That Changes Everything: https://www.amazon.de/Bulletproof-Problem-Solving-Changes-Everything-ebook/dp/B07PFRCCY4/
 - Soft Skills: The Software Developer's Life Manual: https://www.amazon.de/Soft-Skills-Software-Developers-English-ebook/dp/B08N9KTYW6/
-- Critical thinking, Logic & Problem Solving: The Ultimate Guide to Better Thinking, Systematic Problem Solving ...: https://www.amazon.de/Critical-Thinking-Logic-Problem-Solving-ebook/dp/B0CK9WJVWT/
-- The 4 Pillars of Critical Thinking: 103 Techniques & Hacks to Improve Your Work and Personal Life by Mastering Mental Skills. ...: https://www.amazon.de/Pillars-Critical-Thinking-Techniques-Situations-ebook/dp/B0CPVZDVGQ/
-- The 4 Pillars of Problem-Solving: 169 Techniques & Hacks to Solve Challenges With Strategic Thinking. Build Relationships ...: https://www.amazon.de/Pillars-Problem-Solving-Techniques-Relationships-Collaborate-ebook/dp/B0CNKRKMQ5
+- Critical thinking, Logic & Problem Solving: The Ultimate Guide to Better Thinking, Systematic Problem Solving... : https://www.amazon.de/Critical-Thinking-Logic-Problem-Solving-ebook/dp/B0CK9WJVWT/
+- The 4 Pillars of Critical Thinking: 103 Techniques & Hacks to Improve Your Work and Personal Life by Mastering Mental Skills... : https://www.amazon.de/Pillars-Critical-Thinking-Techniques-Situations-ebook/dp/B0CPVZDVGQ/
+- The 4 Pillars of Problem-Solving: 169 Techniques & Hacks to Solve Challenges With Strategic Thinking. Build Relationships... : https://www.amazon.de/Pillars-Problem-Solving-Techniques-Relationships-Collaborate-ebook/dp/B0CNKRKMQ5
 - Problem Solving 101: A simple book for smart people: https://www.amazon.de/Problem-Solving-101-simple-English-ebook/dp/B003ULP3M6/ 
 - Getting Things Done: The Art of Stress-Free Productivity: https://www.amazon.de/Getting-Things-Done-Stress-free-Productivity-ebook/dp/B00SHL3V8M/
 - How Big Things Get Done: The Surprising Factors That Determine the Fate of Every Project, from Home Renovations to Space Exploration and Everything In Between (English Edition): https://www.amazon.de/How-Big-Things-Get-Done-ebook/dp/B0B3HS4C98/
