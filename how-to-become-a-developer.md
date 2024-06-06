@@ -14,7 +14,7 @@ You will be life long learning. So imho organize your learning and note taking a
 ## "Human interaction"
 Many of the devs I got to know became developers because they wanted to have as little to do with other people as possible. This is a mistake! You will have to deal with others often enough. Prepare by reading "Soft Skills: The Software Developer's Life Manual" by John Sonmez
 
-## Learn a coding language
+## Choose a language
 Choose a programming language to start and get fluent with it e.g. Golang, Rust, Python, Typescript. Be open for other languages and concepts.
 I like Golang a lot so my recommendations for it:
 - Read tour of go: https://go.dev/tour/welcome/1
