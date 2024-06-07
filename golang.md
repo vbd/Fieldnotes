@@ -260,6 +260,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [https://www.youtube.com/@MelkeyDev](https://www.youtube.com/@MelkeyDev)
 - [https://www.youtube.com/@codeheim](https://www.youtube.com/@codeheim)
 - [https://www.youtube.com/@TiagoTaquelim/](https://www.youtube.com/@TiagoTaquelim/)
+- <https://www.youtube.com/@joshrosso/> (seems inactive, but anyways interesting)
 - <https://www.youtube.com/@programmingpercy/>
 - <https://www.youtube.com/@AkhilSharmaTech/>
 - <https://www.youtube.com/@DonaldFeury/> (dated, but interesting)
