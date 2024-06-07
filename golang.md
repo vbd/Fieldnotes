@@ -234,6 +234,10 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - [Learn Go Programming - Golang Tutorial for Beginners](https://www.youtube.com/watch?v=YS4e4q9oBaU) by Freecodecamp
 - [Learn Go Programming by Building 11 Projects – Full Course](https://www.youtube.com/watch?v=jFfo23yIWac) by Freecodecamp
 - [GPN18 - Go für Programmierer](https://www.youtube.com/watch?v=Bq9zubsyPSg)
+- [Advanced Golang](https://www.youtube.com/playlist?list=PLYEESps429vo2vvoUuAA6-fEDVgeqx3HW)
+- [Golang By Example For Beginners](https://www.youtube.com/playlist?list=PL0xRBLFXXsP5cru52B5GAQmIrTTAL8A66)
+- [10x Golang Engineer](https://www.youtube.com/playlist?list=PLkTEMR8VpCyns8PG4yNvxo5XyxGX2ScF3) 
+
 
 Some resources to find recorded talks from GopherCon Conferences:
 
