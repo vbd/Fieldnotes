@@ -253,10 +253,14 @@ Some resources to find recorded talks from GopherCon Conferences:
 - ~~[https://www.youtube.com/@NerdCademyDev/featured](https://www.youtube.com/@NerdCademyDev/featured)~~
 - [https://www.youtube.com/@bmdavis419](https://www.youtube.com/@bmdavis419)
 - [https://www.youtube.com/@ThomasLanghorst](https://www.youtube.com/@ThomasLanghorst)
-- [https://www.youtube.com/@anthonygg_](https://www.youtube.com/@anthonygg_)
 - [https://www.youtube.com/@MelkeyDev](https://www.youtube.com/@MelkeyDev)
 - [https://www.youtube.com/@codeheim](https://www.youtube.com/@codeheim)
-  
+- [https://www.youtube.com/@TiagoTaquelim/](https://www.youtube.com/@TiagoTaquelim/)
+- <https://www.youtube.com/@programmingpercy/>
+- <https://www.youtube.com/@AkhilSharmaTech/>
+- <https://www.youtube.com/@NicJackson/>
+- <https://www.youtube.com/@DonaldFeury/> (dated, but interesting)
+- <https://www.youtube.com/@samxsmith9102/>
 
 ## WebDev
 
