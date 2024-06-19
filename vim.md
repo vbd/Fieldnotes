@@ -44,11 +44,29 @@ But since that time I got hooked, and I didn't regret to learn it. I still use V
 I try to watch as few vim videos on youtube as possible because they might distract me too much from my work but
 there are some great youtuber's fiddling with vim/neovim e.g.:
 
-- [ThePrimeagen](https://www.youtube.com/@ThePrimeagen/search?query=vim)
-- [Ben Awad](https://www.youtube.com/@bawad/search?query=vim)
-- [SeniorMars](https://www.youtube.com/@SeniorMarsTries/search?query=vim)
-- [Sebastian Daschner](https://www.youtube.com/@SebastianDaschnerIT/search?query=vim)
-- [DistroTube](https://www.youtube.com/@DistroTube/search?query=vim)
+- https://www.youtube.com/@DistroTube/search?query=vim
+- https://www.youtube.com/@ElijahManor/videos
+- https://www.youtube.com/@GavinFreeborn/search?query=vim
+- https://www.youtube.com/@GregHurrell
+- https://www.youtube.com/@LukeSmithxyz/search?query=vim
+- https://www.youtube.com/@SebastianDaschnerIT/search?query=vim
+- https://www.youtube.com/@SeniorMarsTries/search?query=vim
+- https://www.youtube.com/@TheNycRat/search?query=vim
+- https://www.youtube.com/@ThePrimeagen/search?query=vim
+- https://www.youtube.com/@bawad/search?query=vim
+- https://www.youtube.com/@chrisatmachine/videos
+- https://www.youtube.com/@denvaar/search?query=vim
+- https://www.youtube.com/@devaslife/videos
+- https://www.youtube.com/@devopstoolbox/videos
+- https://www.youtube.com/@leeren_/videos
+- https://www.youtube.com/@nirlichtman/search?query=vim
+- https://www.youtube.com/@rwxrob/search?query=vim
+- https://www.youtube.com/@semicolonsons/search?query=vim
+- https://www.youtube.com/@teej_dv/videos
+- https://www.youtube.com/@theena/search?query=vim
+- https://www.youtube.com/@typecraft_dev/videos
+- https://www.youtube.com/@vimjoyer/search?query=vim
+- https://www.youtube.com/@yukiuthman8358/videos 
 
 Recently I came across a video series that is a kind of quantum leap for me ...
 
