@@ -35,6 +35,7 @@ Here my hopefully helpful ressoures for the Go language.
 There is always the danger that with time compact functions become real "monsters" that are hard to read or understand. one of my last experiences was a function where the indented code was only visible, without scrolling, on the last 20% of the monitor (49" Samsung CRG 9) on the right side.
 Not my code, should help to debug, will we need a 49" monitor for debugging or two of them side by side in future? A healthy balance would suit us all.
 - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) This page collects common comments made during reviews of Go code, so that a single detailed explanation can be referred to by shorthands. This is a laundry list of common style issues, not a comprehensive style guide.
+- A curated list of awesome Machine Learning frameworks, libraries and software.: https://github.com/josephmisiti/awesome-machine-learning?tab=readme-ov-file#go
 
 ## Asking go questions
 
@@ -95,7 +96,9 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [grank.dev](https://www.grank.dev/) tries to help to choose the right dependencies for your next golang project.
 - [Go packages](https://pkg.go.dev/)
 - [A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
-- [Awesome-go list with stars. Automatically updated.](https://github.com/amanbolat/awesome-go-with-stars) 
+- [Awesome-go list with stars. Automatically updated.](https://github.com/amanbolat/awesome-go-with-stars)
+- Golang Jobs - OnSite and Remote Golang Jobs: https://golangjob.xyz/
+- A curated list of awesome remote jobs and resources. Inspired by: https://github.com/lukasz-madon/awesome-remote-job 
 
 ## Profiling
 Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
