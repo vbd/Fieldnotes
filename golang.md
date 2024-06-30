@@ -268,6 +268,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - <https://www.youtube.com/@AkhilSharmaTech/>
 - <https://www.youtube.com/@DonaldFeury/> (dated, but interesting)
 - <https://www.youtube.com/@samxsmith9102/>
+- <https://www.youtube.com/@samvcodes>
 
 ## WebDev
 
