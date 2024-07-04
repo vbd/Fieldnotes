@@ -11,6 +11,10 @@ You will be life long learning. So imho organize your learning and note taking a
 - Read "How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking" by Sönke Ahrens
 - Read "Building a Second Brain: A Proven Method to Organise Your Digital Life and Unlock Your Creative Potential" by Tiago Forte
 
+I can't emphasise how important it is to build up a sensible note taking system.
+- Watch: Everything Starts with a Note-taking System: https://www.youtube.com/watch?v=Xw3SkhB4dMk
+- Watch: Note-taking Apps for Command-line People: https://www.youtube.com/watch?v=L1ALavX0pKo
+
 ## "Human interaction"
 Many of the devs I got to know became developers because they wanted to have as little to do with other people as possible. This is a mistake! You will have to deal with others often enough. Prepare by reading "Soft Skills: The Software Developer's Life Manual" by John Sonmez
 
