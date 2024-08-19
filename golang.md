@@ -160,6 +160,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [Go cheatsheet](https://devhints.io/go)
 
 ## Roadmaps, Jobs, Career
+- :hotsprings: [Stream: Go 10 Week Backend Eng Onboarding](https://stream-wiki.notion.site/Stream-Go-10-Week-Backend-Eng-Onboarding-625363c8c3684753b7f2b7d829bcd67a)
 - [Companies using Go](https://docs.google.com/spreadsheets/d/17hsYk_qUTQgXujbyuKdd4G1r07LmX5_6K8YeXWYbp3k/edit?gid=0#gid=0)
 - [Roadmap: Go Developer](https://roadmap.sh/golang)
 - [Roadmap: Backend Developer](https://roadmap.sh/backend)
