@@ -8,12 +8,15 @@
 ## Prepare to learn
 You will be life long learning. So imho organize your learning and note taking at best from start.
 - Read "Make It Stick: The Science of Successful Learning" by Peter C. Brown, Henry L. Roediger III, Mark A. McDaniel
-- Read "How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking" by Sönke Ahrens
+- Read "A System for Writing: How an Unconventional Approach to Note-Making Can Help You Capture Ideas, Think Wildly, and Write Constantly - A Zettelkasten Primer": https://www.amazon.de/dp/B0D18J83VB/
 - Read "Building a Second Brain: A Proven Method to Organise Your Digital Life and Unlock Your Creative Potential" by Tiago Forte
 
 I can't emphasise how important it is to build up a sensible note taking system.
 - Watch: Everything Starts with a Note-taking System: https://www.youtube.com/watch?v=Xw3SkhB4dMk
 - Watch: Note-taking Apps for Command-line People: https://www.youtube.com/watch?v=L1ALavX0pKo
+- Watch: Note-taking with Zettelkasten - An Introduction: https://www.youtube.com/watch?v=o1NJYnZCfmY
+- Watch: Zettelkasten: Note-taking & the UNIX Philosophy: https://www.youtube.com/watch?v=vXkyGgp2HWM
+- Watch: Note-taking with the PARA method - Best for Beginners: https://www.youtube.com/watch?v=oxUVn37-Igk 
 
 ## "Human interaction"
 Many of the devs I got to know became developers because they wanted to have as little to do with other people as possible. This is a mistake! You will have to deal with others often enough. Prepare by reading "Soft Skills: The Software Developer's Life Manual" by John Sonmez
@@ -24,10 +27,14 @@ I like Golang a lot so my recommendations for it:
 - Read tour of go: https://go.dev/tour/welcome/1
 - Read go by example: https://gobyexample.com/
 - Watch: https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6 imho the best free video course
+- Visit "Go go-to guide": https://yourbasic.org/golang/
+- Visit "Golang tutorial series": https://golangbot.com/learn-golang-series/ 
 - Read effective go: https://go.dev/doc/effective_go
 - Read Uber Go Style Guide: https://github.com/uber-go/guide/blob/master/style.md and Google Go Style: https://google.github.io/styleguide/go/index
+- Read "Organizing a Go module": https://go.dev/doc/modules/layout
 - Read Go Wiki: Common Mistakes: https://go.dev/wiki/CommonMistakes
 - Read Go Wiki: Go Code Review Comments: https://go.dev/wiki/CodeReviewComments
+- Read Making Regex From Scratch in Go: https://lewismetcalf.com/series/making-regex-from-scratch-in-go/
 - Read Golang documentation: https://go.dev/doc/
 - Read: "Let's go" by Alex Edwards: https://lets-go.alexedwards.net/
 - Read: "Let's go further" by Alex Edwards: https://lets-go-further.alexedwards.net/
