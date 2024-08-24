@@ -90,6 +90,9 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [Build desktop applications using Go & Web Technologies.](https://wails.io/)
 - [bubbletea, A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
 - [gocui - Minimalist Go package aimed at creating Console User Interfaces.](https://github.com/jroimartin/gocui)
+- React-like desktop GUI toolkit for Go: https://github.com/roblillack/spot/
+- Cogent Core - A free and open source framework for building powerful, fast, elegant 2D and 3D apps that run on macOS, Windows, Linux, iOS, Android, and the web with a single Go codebase, allowing you to Code Once, Run Everywhere.: https://github.com/cogentcore/core
+- nucular: https://github.com/aarzilli/nucular
   
 ## Finding libs
 - [Trending Go Projects](https://www.libhunt.com/l/go)
