@@ -105,8 +105,11 @@ All books are not language specific, they apply in general, also they may includ
 - Read "The Mythical Man-Month. Essays on Software Engineering" by Frederick Brooks
 - Read "A Philosophy of Software Design" by John Ousterhout
 - Read "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" by Jez Humble and David Farley 
- 
+- Read "Fundamentals of Software Architecture: An Engineering Approach": https://www.amazon.de/dp/1492043451/
+- Read "Fundamentals of Data Engineering": https://www.amazon.de/dp/B0B4VH4T37/
+- Read "HTTP: The Definitive Guide": https://www.amazon.de/dp/1565925092/ (dated but still the best I've read)
+- Read "The TCP/IP-Guide: A Comprehensive, Illustrated Internet Protocols Reference": https://www.amazon.de/dp/159327047X/ (also dated but still the best I've read) 
+
 TODO: 
-- Network Stuff (MITP Ethernet, MITP TCP/IP?) Better options nowadays?
 - Productivity, self care, self optimization? Not too many titles.
 
