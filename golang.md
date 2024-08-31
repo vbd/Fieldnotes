@@ -318,7 +318,90 @@ Drop by and learn!
 - https://github.com/rsc
 
 
+## Reminder: Some of the libraries already used in projects
 
+- :memo: age: A simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability.  
+https://github.com/FiloSottile/age
+
+- mage: a Make/rake-like dev tool using Go  
+https://github.com/magefile/mage
+
+- :memo: go-winres: Command line tool for adding Windows resources to executable files  
+https://github.com/tc-hib/go-winres
+
+- go-sqlite-bench: Benchmarks for Golang SQLite Drivers  
+https://github.com/cvilsmeier/go-sqlite-bench
+
+- go-fswatch: Go bindings for libfswatch  
+https://github.com/dunglas/go-fswatch
+
+- Copier: for golang, copy value from struct to struct and more  
+https://github.com/jinzhu/copier
+
+- lo: Iterate over slices, maps, channels...  
+https://github.com/samber/lo?tab=readme-ov-file
+
+- dblab: The database client every command line junkie deserves.  
+https://github.com/danvergara/dblab
+
+- anyquery: Query anything (JSON, CSV, GitHub, Notion, Airtable, etc.) with SQL  
+https://github.com/julien040/anyquery
+
+- formulosity: Self-hosted Surveys as Code platform.  
+https://github.com/plutov/formulosity
+
+- :memo: gocron: Easy and fluent Go cron scheduling.  
+https://github.com/go-co-op/gocron
+
+- prs: Stay updated on PRs from your terminal  
+https://github.com/dhth/prs
+
+- :memo: sqlc: Generate type-safe code from SQL  
+https://github.com/sqlc-dev/sqlc
+
+- conc: Better structured concurrency for go  
+https://github.com/sourcegraph/conc
+
+- testify: A toolkit with common assertions and mocks that plays nicely with the standard library  
+https://github.com/stretchr/testify
+
+- color: Color package for Go (golang)  
+https://github.com/fatih/color
+
+- tb.go: Tasks, boards & notes for the command-line habitat  
+https://github.com/araaha/tb.go
+
+- gofumpt: A stricter gofmt  
+https://github.com/mvdan/gofumpt
+
+- modfmt: Tidy up your go.mod files by merging the require blocks  
+https://github.com/abhijit-hota/modfmt
+
+- koanf: Simple, extremely lightweight, extensible, configuration management library for Go. Support for JSON, TOML, YAML, env, command line, file, S3 etc. Alternative to viper.  
+https://github.com/knadh/koanf
+
+- :memo: Kong is a command-line parser for Go  
+https://github.com/alecthomas/kong
+
+- env: A simple, zero-dependencies library to parse environment variables into structs  
+https://github.com/caarlos0/env
+
+- cleanenv: Clean and minimalistic environment configuration reader for Golang  
+https://github.com/ilyakaznacheev/cleanenv
+
+- konf: The simplest config loader for Go that reads/watches from file, env, flag and clouds (AWS, Azure, GCP).  
+https://github.com/nil-go/konf
+
+- :memo: bubbletea: A powerful little TUI framework  
+https://github.com/charmbracelet/bubbletea
+
+- :memo: rod: A Chrome DevTools Protocol driver for web automation and scraping.  
+https://github.com/go-rod/rod
+ 
+## Reminder: libraries for use in future projects?
+
+- pulse: Like a fitness tracker for your coding sessions  
+https://github.com/creativecreature/pulse
 
 
 ---
