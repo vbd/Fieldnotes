@@ -79,7 +79,9 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [Struct-based argument parsing in Go](https://github.com/alexflint/go-arg)
 - [A simple, fast, and fun package for building command line apps in Go](https://github.com/urfave/cli)
 - [A Commander for modern Go CLI interactions](https://github.com/spf13/cobra) 
-- [Kong is a command-line parser for Go](https://github.com/alecthomas/kong)
+- :hot_pepper: [Kong is a command-line parser for Go](https://github.com/alecthomas/kong)
+- [Simple, extremely lightweight, extensible, configuration management library for Go](https://github.com/knadh/koanf) Support for JSON, TOML, YAML, env, command line, file, S3 etc. Alternative to viper.
+- [The simplest config loader for Go that reads/watches from file, env, flag and clouds (AWS, Azure, GCP)](https://github.com/nil-go/konf)
 
 
 ## Podcasts
