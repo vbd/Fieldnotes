@@ -79,6 +79,8 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [Struct-based argument parsing in Go](https://github.com/alexflint/go-arg)
 - [A simple, fast, and fun package for building command line apps in Go](https://github.com/urfave/cli)
 - [A Commander for modern Go CLI interactions](https://github.com/spf13/cobra) 
+- [Kong is a command-line parser for Go](https://github.com/alecthomas/kong)
+
 
 ## Podcasts
 - [Cup o' Go](https://cupogo.dev/) Stay up to date with the Go community in just 15 minutes per week.
