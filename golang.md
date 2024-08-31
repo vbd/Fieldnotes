@@ -82,6 +82,9 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - :hot_pepper: [Kong is a command-line parser for Go](https://github.com/alecthomas/kong)
 - [Simple, extremely lightweight, extensible, configuration management library for Go](https://github.com/knadh/koanf) Support for JSON, TOML, YAML, env, command line, file, S3 etc. Alternative to viper.
 - [The simplest config loader for Go that reads/watches from file, env, flag and clouds (AWS, Azure, GCP)](https://github.com/nil-go/konf)
+- Config file validator: Cross Platform tool to validate configuration files:  
+https://github.com/Boeing/config-file-validator
+
 
 
 ## Podcasts
