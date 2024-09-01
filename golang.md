@@ -397,6 +397,12 @@ https://github.com/charmbracelet/bubbletea
 
 - :memo: rod: A Chrome DevTools Protocol driver for web automation and scraping.  
 https://github.com/go-rod/rod
+
+- :memo: goawk: A POSIX-compliant AWK interpreter written in Go, with CSV support  
+https://github.com/benhoyt/goawk
+
+- :memo: miller: is like awk, sed, cut, join, and sort for name-indexed data such as CSV, TSV, and tabular JSON  
+https://github.com/johnkerl/miller 
  
 ## Reminder: libraries for use in future projects?
 
