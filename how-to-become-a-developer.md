@@ -42,6 +42,11 @@ I like Golang a lot so my recommendations for it:
 - For cli projects don't miss https://charm.sh/libs/
 - Take a look at Rob Muhlestein aka rwxrob "My Personal "Awesome" Go List": https://github.com/rwxrob/awesome-go
 
+> [!Note]
+> Don't forget to practice: code - code - code  
+> If you need ideas check Five Go Projects: https://github.com/dreamsofcode-io/goprojects  
+> Not only five ideas also **includes** code!
+
 ## Version control & Collaboration
 
 - Git is the standard so read: Pro git: https://git-scm.com/book/de/v2
