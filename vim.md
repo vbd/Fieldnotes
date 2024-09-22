@@ -459,6 +459,13 @@ after:
     before a after
     before b after
     before c after 
+
+
+## moving text
+
+### move lines containing PATTERN to top of current buffer.
+`g:PATTERN:m0` 
+
  
 ---
 If you find this notes helpful and want to support me, you can do so by [Buy me a coffee! ☕](https://www.buymeacoffee.com/vbduetsch) it will keep my motivation high and I will be really thankful.
