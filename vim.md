@@ -466,7 +466,18 @@ after:
 ### move lines containing PATTERN to top of current buffer.
 `g:PATTERN:m0` 
 
+### move lines matching match to another buffer
 
+```
+qaq -- to make sure named buffer a is empty
+:g/match/y A -- to yank all matching lines into named buffer a (capital a to append)
+:b2 -- to switch buffer
+"ap -- to paste named buffer a
+```
+
+
+source https://www.reddit.com/r/vim/comments/1fmq9c8/comment/loch0vq/
+ 
 
 
 
