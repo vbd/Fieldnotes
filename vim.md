@@ -382,18 +382,6 @@ Very very, crude way!
     new | r! java -Dfile.encoding=UTF-8 -jar d:\apps\LanguageTool-5.1\languagetool-commandline.jar -c utf-8 -d WHITESPACE_RULE,EN_QUOTES -l de-DE
 
 
-## Troubleshooting
-
-Info: https://vi.stackexchange.com/questions/2003/how-do-i-debug-my-vimrc-file
-
-`vim -u NONE -U NONE -N`
-
-Capture ex command output to buffer e.g. `:version`
-
-    :redir @m | silent version | redir END
-    "mp
-
-
 ## Python and vim
 
     Check if Python and Vim are the same bit (64), not mixed!
