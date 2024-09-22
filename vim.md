@@ -106,10 +106,10 @@ Recently I came across a video series that is a kind of quantum leap for me ...
     To turn off highlighting until the next search
     :noh
 
-    Indent in insert mode
-    Indent: ctrl+t
-    Unindent: ctrl+d
-
+    Indent text
+    - insert mode: ctrl-t / ctrl-d
+    - normal mode: >> / <<
+    
     Movement command in insert mode e.g. to go forward one word type 
     ctrl+o w
 
@@ -466,6 +466,9 @@ after:
 ### move lines containing PATTERN to top of current buffer.
 `g:PATTERN:m0` 
 
- 
+
+
+
+
 ---
 If you find this notes helpful and want to support me, you can do so by [Buy me a coffee! ☕](https://www.buymeacoffee.com/vbduetsch) it will keep my motivation high and I will be really thankful.
