@@ -469,10 +469,10 @@ after:
 ### move lines matching match to another buffer
 
 ```
-qaq -- to make sure named buffer a is empty
-:g/match/y A -- to yank all matching lines into named buffer a (capital a to append)
+qaq -- to make sure named register a is empty
+:g/match/y A -- to yank all matching lines into named register a (capital a to append)
 :b2 -- to switch buffer
-"ap -- to paste named buffer a
+"ap -- to paste named register a
 ```
 
 
