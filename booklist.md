@@ -30,20 +30,23 @@ I've read them all!
 ### Bonus
 - Writing An Interpreter In Go: https://www.amazon.de/Writing-Interpreter-Go-Thorsten-Ball/dp/3982016118/
 - Writing A Compiler In Go: https://www.amazon.de/Writing-Compiler-Go-Thorsten-Ball/dp/398201610X/
+- Learn Go with Pocket-Sized Projects: https://www.manning.com/books/learn-go-with-pocket-sized-projects :arrow_right: It's still MEAP (Manning Early Access Program) but imho almost complete. And it is worth to be on my list.
 - Learn Go with Tests: https://quii.gitbook.io/learn-go-with-tests/ Download PDF / ePub: https://github.com/quii/learn-go-with-tests/releases
 - Powerful Command-Line Applications in Go: https://pragprog.com/titles/rggo/powerful-command-line-applications-in-go/
 - [How To Code in Go eBook](https://assets.digitalocean.com/books/how-to-code-in-go.pdf) free PDF by Digital Ocean :arrow_right: generics will be missing
 - Distributed Services with Go: Your Guide to Reliable, Scalable, and Maintainable Systems: https://www.amazon.de/Distributed-Services-Go-Reliable-Maintainable/dp/1680507605/
-
-> [!NOTE]
-> I normally recommend only books I have read. Here I would like to make an exception. I have read a lot of good things about the books and have bought all of them, but have not yet been able to read them. 
 - Code For Your Life: https://bitfieldconsulting.com/books/code
 - For the Love of Go (2023): https://bitfieldconsulting.com/books/love
 - The Power of Go: Tools (2024): https://bitfieldconsulting.com/books/tools (I got the previous version)
+
+> [!NOTE]
+> Just found out that updates for these books are free, so I just got my The Power of Go: Tools (2024) for free. Thank you very much John!
+>
+> I normally recommend only books I have read. Here I would like to make an exception. I have read a lot of good things about the books and have bought all of them, but have not yet been able to read them. 3 books read and they are on my list (Code for your life, For the love of Go, The power of Go), still two to go:
 - The Power of Go: Tests: https://bitfieldconsulting.com/books/tests
 - Know Go: Generics: https://bitfieldconsulting.com/books/generics
 
-Just found out that updates for these books are free, so I just got my The Power of Go: Tools (2024) for free. Thank you very much John!
+
 
 > [!NOTE]
 > Found some interesting free ebooks which I also not yet have read:
