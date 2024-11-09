@@ -135,7 +135,8 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - Golang tutorial series: https://golangbot.com/learn-golang-series/ by Naveen Ramanathan
 - Practical Go: Real world advice for writing maintainable Go programs:  
 https://dave.cheney.net/practical-go/presentations/gophercon-singapore-2019.html
-
+- Concurrency vs. Parallelism:  
+https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - :sound: [Jumping into an existing codebase](https://changelog.com/gotime/307)
 - 🌶️ [Algorithms and Data Structures implemented in Go for beginners, following best practices.](https://github.com/TheAlgorithms/Go)
 - [Effective Go](https://go.dev/doc/effective_go)
