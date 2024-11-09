@@ -133,6 +133,9 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [List of Golang books](https://github.com/dariubs/GoBooks?tab=readme-ov-file)
 - Go go-to guide: https://yourbasic.org/golang/ by Stefan Nilsson
 - Golang tutorial series: https://golangbot.com/learn-golang-series/ by Naveen Ramanathan
+- Practical Go: Real world advice for writing maintainable Go programs:  
+https://dave.cheney.net/practical-go/presentations/gophercon-singapore-2019.html
+
 - :sound: [Jumping into an existing codebase](https://changelog.com/gotime/307)
 - 🌶️ [Algorithms and Data Structures implemented in Go for beginners, following best practices.](https://github.com/TheAlgorithms/Go)
 - [Effective Go](https://go.dev/doc/effective_go)
