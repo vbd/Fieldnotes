@@ -114,7 +114,8 @@ https://github.com/Boeing/config-file-validator
 - goreleaser - Deliver Go binaries as fast and easily as possible: https://github.com/goreleaser/goreleaser
 - The ultimate justfile for any golang project: https://github.com/crazywolf132/ultimate-gojust
 - What do you use as build system?: https://www.reddit.com/r/golang/comments/196cowu/what_do_you_use_as_build_system/
-
+- task/taskfile - task runner/simpler Make alternative written in Go: https://github.com/go-task/task
+- just - a command runner: https://github.com/casey/just
 
 ## Profiling
 Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
