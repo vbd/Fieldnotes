@@ -110,6 +110,12 @@ https://github.com/Boeing/config-file-validator
 - Golang Jobs - OnSite and Remote Golang Jobs: https://golangjob.xyz/
 - A curated list of awesome remote jobs and resources. Inspired by: https://github.com/lukasz-madon/awesome-remote-job 
 
+## Release / Deployment
+- goreleaser - Deliver Go binaries as fast and easily as possible: https://github.com/goreleaser/goreleaser
+- The ultimate justfile for any golang project: https://github.com/crazywolf132/ultimate-gojust
+- What do you use as build system?: https://www.reddit.com/r/golang/comments/196cowu/what_do_you_use_as_build_system/
+
+
 ## Profiling
 Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
 
