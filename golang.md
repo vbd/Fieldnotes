@@ -136,6 +136,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 ## Learning & Miscellaneous
 
 - my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
+- GoLab is a collection of simple Go projects designed to help learn and explore the Go programming language.: https://github.com/MuhammadSaim/go-lab
 - Five Go Projects: https://github.com/dreamsofcode-io/goprojects Not only five ideas to start with also **includes** code!
 - [List of Golang books](https://github.com/dariubs/GoBooks?tab=readme-ov-file)
 - Go go-to guide: https://yourbasic.org/golang/ by Stefan Nilsson
