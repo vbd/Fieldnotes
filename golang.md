@@ -14,6 +14,7 @@ Here my hopefully helpful ressoures for the Go language.
 - [Practical Go](https://dave.cheney.net/practical-go) A collection of real world advice for writing maintainable Go programs.
 - [willem.dev](https://www.willem.dev/articles/)
 - [Sameer Ajmani](https://ajmani.net/go/)
+- [Noam Yadgar](https://nyadgar.com/)
 
 ## Recommended readings
 - my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
