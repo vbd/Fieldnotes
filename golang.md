@@ -295,7 +295,14 @@ Some resources to find recorded talks from GopherCon Conferences:
 - <https://www.youtube.com/@DonaldFeury/> (dated, but interesting)
 - <https://www.youtube.com/@samxsmith9102/>
 - <https://www.youtube.com/@samvcodes>
-- <https://www.youtube.com/@rwxrob/> 
+- <https://www.youtube.com/@rwxrob/>
+- <https://www.youtube.com/@JustForFunc/> (dated, but still interesting)
+- <https://www.youtube.com/@TsodingDaily/search?query=golang>
+- <https://www.youtube.com/@mr_mux408/search?query=golang>
+- <https://www.youtube.com/@FloWoelki/search?query=golang>
+- <https://www.youtube.com/@kantancoding/videos> (not about golang, but interesting for coding in general)
+- <https://www.youtube.com/@softwarechats9307/videos> (short videos with ideas to think about)
+- <https://www.youtube.com/@NetNinja/search?query=golang>
 
 ## WebDev
 
