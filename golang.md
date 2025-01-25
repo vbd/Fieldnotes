@@ -428,10 +428,16 @@ https://github.com/benhoyt/goawk
 - :memo: miller: is like awk, sed, cut, join, and sort for name-indexed data such as CSV, TSV, and tabular JSON  
 https://github.com/johnkerl/miller 
  
-## Reminder: libraries for use in future projects?
+## Reminder: libraries to use / to test in future projects?
 
 - pulse: Like a fitness tracker for your coding sessions  
 https://github.com/creativecreature/pulse
+
+- revive: ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint  
+https://github.com/mgechev/revive
+
+- pipet: Swiss-army tool for scraping and extracting data from online assets, made for hackers  
+https://github.com/bjesus/pipet
 
 
 ---
