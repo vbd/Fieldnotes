@@ -95,6 +95,8 @@ There are still a few things outside of Scrum. Scrum is the most widespread. Nev
 - Iterative approach, communication, getting feedback, giving feedback and common sense.
 - Watch "Ron Pressler - Why Writing Correct Software Is Hard and Why Math (Alone) Won’t Help Us - Curry On": https://youtu.be/dWdy_AngDp0
 - Watch "Can I put it on my resume if I'm still just learning it?": https://www.youtube.com/watch?v=JuZztAYpoSo
+- Boring is good for your brain, read "Cognitive load is what matters": https://github.com/zakirullin/cognitive-load
+- Overcome fomo.
 
 ## Next steps
 
