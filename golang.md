@@ -1,5 +1,5 @@
 In the projects, in which I work, it comes up that I am asked what I recommend for xyz. So that I don't forget half of the information, I'll started to collect it thematically and in a more or less structured way and publish it here.
-Here my hopefully helpful ressoures for the Go language.
+Here my hopefully helpful resources for the Go language.
 
 ## Blogs
 - [research!rsc](https://research.swtch.com/) Thoughts and links about programming, by Russ Cox
