@@ -96,6 +96,8 @@ There are still a few things outside of Scrum. Scrum is the most widespread. Nev
 - Watch "Ron Pressler - Why Writing Correct Software Is Hard and Why Math (Alone) Won’t Help Us - Curry On": https://youtu.be/dWdy_AngDp0
 - Watch "Can I put it on my resume if I'm still just learning it?": https://www.youtube.com/watch?v=JuZztAYpoSo
 - Boring is good for your brain, read "Cognitive load is what matters": https://github.com/zakirullin/cognitive-load
+- Try to avoid context switching to a minimum. Context switching is not only bad for your work and thus for your productivity you also get stressed.
+
 - Overcome fomo.
 
 ## Next steps
