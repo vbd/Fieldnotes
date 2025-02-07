@@ -11,7 +11,7 @@
 
 ## Tools
 
-- bat:https://github.com/sharkdp/bat
+- bat: https://github.com/sharkdp/bat
 - delta: https://github.com/dandavison/delta
 - dust: https://github.com/bootandy/dust
 - fastfetch: https://github.com/fastfetch-cli/fastfetch
@@ -47,6 +47,10 @@
     - https://the-lum.github.io/puml-themes-gallery/themes/
     - https://real-world-plantuml.com/
     - https://scripter.co/notes/plantuml
+    - https://medium.com/@vbd_9699/plantuml-for-mindmaps-a0e058869067
+    - https://www.drawio.com/blog/plantuml-mindmaps-from-text
+    - https://github.com/plantuml/plantuml/issues/1047
+    - https://github.com/mattjhayes/PlantUML-Examples/tree/master
 
 ## mdbook
 - https://github.com/rust-lang/mdBook
