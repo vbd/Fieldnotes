@@ -16,6 +16,13 @@ Here my hopefully helpful resources for the Go language.
 - [Sameer Ajmani](https://ajmani.net/go/)
 - [Noam Yadgar](https://nyadgar.com/)
 
+## Newsletter
+
+- Go Weekly: https://golangweekly.com/issues/
+- Golang Weekly @Medium: https://golang.thisweekin.io/
+- Golang Nugget: https://golangnugget.com/
+- The applied Go weekly newsletter: https://newsletter.appliedgo.net/archive
+
 ## Recommended readings
 - my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
 - [The Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
@@ -108,8 +115,6 @@ https://github.com/Boeing/config-file-validator
 - [Go packages](https://pkg.go.dev/)
 - [A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
 - [Awesome-go list with stars. Automatically updated.](https://github.com/amanbolat/awesome-go-with-stars)
-- Golang Jobs - OnSite and Remote Golang Jobs: https://golangjob.xyz/
-- A curated list of awesome remote jobs and resources. Inspired by: https://github.com/lukasz-madon/awesome-remote-job 
 
 ## Release / Deployment
 - goreleaser - Deliver Go binaries as fast and easily as possible: https://github.com/goreleaser/goreleaser
@@ -200,6 +205,9 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - [German tech jobs](https://germantechjobs.de/jobs/Golang/all)
 - [We Work Remotely](https://weworkremotely.com/)
 - [Go / Golang Jobs & developers](https://www.golangprojects.com/)
+- Golang Jobs - OnSite and Remote Golang Jobs: https://golangjob.xyz/
+- A curated list of awesome remote jobs and resources. Inspired by: https://github.com/lukasz-madon/awesome-remote-job 
+
 
 
 ## Learning to code from source
