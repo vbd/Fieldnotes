@@ -254,12 +254,18 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - :hotsprings: [A highly customisable CLI tool for writing conventional commits](https://github.com/stefanlogue/meteor)
 - [Spotify TUI player, written in Go](https://github.com/szktkfm/sptui)
 - [Create GIFs on the fly with ffmpeg](https://github.com/theIYD/go-gif-maker)
-- [Cemetery Escape is a game that you can play in your terminal.](https://github.com/tom-on-the-internet/cemetery-escape)
 - [A CLI tool for importing and utilizing exported social media data from popular services on Hugo websites.](https://github.com/ttybitnik/diego)
 - A distributed, fault-tolerant task queue: https://github.com/hatchet-dev/hatchet
 - ClickUp is a Go-based CLI tool that fetches and organizes tasks from ClickUp using their API: https://github.com/halabito8/clickup-tasks/tree/master
 - boring: The `boring` SSH tunnel manager: https://github.com/alebeck/boring
 
+
+## Learning game development from source
+- Cemetery Escape is a game that you can play in your terminal: https://github.com/tom-on-the-internet/cemetery-escape
+- Clone of the MicroProse game, Master of Magic: https://github.com/kazzmir/master-of-magic
+- A simple shooting game using ebitengine and golang: https://github.com/yohamta/godanmaku
+- top down panzer game written in golang and ebiten: https://github.com/brotherhood-of-recursive-descent/tankism
+- Roguelite game made with Go and Raylib - Demo & Game is available on Steam: https://github.com/unklnik/mr_snuggles_dungeon_adventure
 
 ## Learning by coding and contributing
 
@@ -317,7 +323,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - <https://www.youtube.com/@BekBrace/>
 - <https://www.youtube.com/@bastisprogrammingcorner/>
 - <https://www.youtube.com/@codingwithsphere/>
-
+- <https://www.youtube.com/@packagemain/>
 
 ## WebDev
 
