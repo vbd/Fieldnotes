@@ -2,6 +2,7 @@ In the projects, in which I work, it comes up that I am asked what I recommend f
 Here my hopefully helpful resources for the Go language.
 
 ## Blogs
+
 - [research!rsc](https://research.swtch.com/) Thoughts and links about programming, by Russ Cox
 - [Bitfield Consulting friendly, professional go mentoring](https://bitfieldconsulting.com/golang)
 - [Boldly Go](https://boldlygo.tech/media/)
@@ -9,7 +10,7 @@ Here my hopefully helpful resources for the Go language.
 - [Three Dots Labs](https://threedots.tech/start/)
 - [Go 101 Blog](https://go101.org/blog/101.html)
 - [The Go Blog](https://go.dev/blog/)
-- [Redowan's Reflections](https://rednafi.com/archives/)
+- [Redowan's Reflections](https://rednafi.com/archive/)
 - [Over-Engineered](https://totallygamerjet.hashnode.dev/)
 - [Practical Go](https://dave.cheney.net/practical-go) A collection of real world advice for writing maintainable Go programs.
 - [willem.dev](https://www.willem.dev/articles/)
@@ -24,6 +25,7 @@ Here my hopefully helpful resources for the Go language.
 - The applied Go weekly newsletter: https://newsletter.appliedgo.net/archive
 
 ## Recommended readings
+
 - my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
 - [The Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [Go Proverbs](https://go-proverbs.github.io/)
@@ -40,8 +42,8 @@ Here my hopefully helpful resources for the Go language.
 - [Use Abstraction to Improve Function Readability](https://testing.googleblog.com/2023/09/use-abstraction-to-improve-function.html)
 - [Disagreeing with "best practices"](https://blog.separateconcerns.com/2023-08-06-disagreeing-best-practices.html)
 - [Linear code is more readable](https://blog.separateconcerns.com/2023-09-11-linear-code.html) :arrow_right:
-There is always the danger that with time compact functions become real "monsters" that are hard to read or understand. one of my last experiences was a function where the indented code was only visible, without scrolling, on the last 20% of the monitor (49" Samsung CRG 9) on the right side.
-Not my code, should help to debug, will we need a 49" monitor for debugging or two of them side by side in future? A healthy balance would suit us all.
+  There is always the danger that with time compact functions become real "monsters" that are hard to read or understand. one of my last experiences was a function where the indented code was only visible, without scrolling, on the last 20% of the monitor (49" Samsung CRG 9) on the right side.
+  Not my code, should help to debug, will we need a 49" monitor for debugging or two of them side by side in future? A healthy balance would suit us all.
 - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) This page collects common comments made during reviews of Go code, so that a single detailed explanation can be referred to by shorthands. This is a laundry list of common style issues, not a comprehensive style guide.
 - A curated list of awesome Machine Learning frameworks, libraries and software.: https://github.com/josephmisiti/awesome-machine-learning?tab=readme-ov-file#go
 
@@ -54,12 +56,13 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - golang-dev: https://groups.google.com/g/golang-dev
 
 ## Coming from Python
+
 - [Go vs. Python: an introduction to Go for senior (Python) developers](https://www.augmentedmind.de/2023/01/22/go-vs-python-senior-developers/)
 - [Learning Go as a Python Developer: The Good and The Bad](https://new.pythonforengineers.com/blog/learning-go-as-a-python-developer-the-good-the-bad-and-the-ugly/)
 - [Go for Python Programmers](https://golang-for-python-programmers.readthedocs.io/en/latest/)
 
-
 ## Style guide, "best" practices, templates...
+
 - [Go Style](https://google.github.io/styleguide/go/index)
 - [golang-standards](https://github.com/golang-standards)
 - [Tools for Go projects](https://github.com/nikolaydubina/go-recipes)
@@ -69,15 +72,14 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [golangci-lint](https://github.com/golangci/golangci-lint), fast linters Runner for Go
 - :hot_pepper: [JSON-to-Go, convert JSON to Go struct](https://mholt.github.io/json-to-go/)
 
-
 ## Concurrency (aka Nebenläufigkeit)
+
 - [Hands on exercises with real-life examples to study and practice Go concurrency patterns. Test-cases are provided to verify your answers.](https://github.com/loong/go-concurrency-exercises)
 - [Google I/O 2013 - Advanced Go Concurrency Patterns](https://www.youtube.com/watch?v=QDDwwePbDtw)
 - [Mastering Concurrency: Unveiling the Magic of Go's Scheduler](https://community.sap.com/t5/additional-blogs-by-sap/mastering-concurrency-unveiling-the-magic-of-go-s-scheduler/ba-p/13577437)
 
-
-  
 ## TUI
+
 - [A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
 - :hot_pepper: [Charm libs Everything you need to build great stuff for the terminal.](https://charm.sh/)
 - [Terminal UI library with rich, interactive widgets — written in Golang](https://github.com/rivo/tview)
@@ -86,30 +88,31 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 
 - [Struct-based argument parsing in Go](https://github.com/alexflint/go-arg)
 - [A simple, fast, and fun package for building command line apps in Go](https://github.com/urfave/cli)
-- [A Commander for modern Go CLI interactions](https://github.com/spf13/cobra) 
+- [A Commander for modern Go CLI interactions](https://github.com/spf13/cobra)
 - :hot_pepper: [Kong is a command-line parser for Go](https://github.com/alecthomas/kong)
 - [Simple, extremely lightweight, extensible, configuration management library for Go](https://github.com/knadh/koanf) Support for JSON, TOML, YAML, env, command line, file, S3 etc. Alternative to viper.
 - [The simplest config loader for Go that reads/watches from file, env, flag and clouds (AWS, Azure, GCP)](https://github.com/nil-go/konf)
 - Config file validator: Cross Platform tool to validate configuration files:  
-https://github.com/Boeing/config-file-validator
-
-
+  https://github.com/Boeing/config-file-validator
 
 ## Podcasts
+
 - [Cup o' Go](https://cupogo.dev/) Stay up to date with the Go community in just 15 minutes per week.
 - [Ardan Labs Podcast](https://ardanlabs.buzzsprout.com/) This podcast features intimate conversations with engineers who are in the forefront of building or teaching technology.
 - [go podcast()](https://gopodcast.dev/episodes)
 - [Go Time](https://changelog.com/gotime)
 
 ## GUI / TUI
+
 - [Build desktop applications using Go & Web Technologies.](https://wails.io/)
 - [bubbletea, A powerful little TUI framework](https://github.com/charmbracelet/bubbletea)
 - [gocui - Minimalist Go package aimed at creating Console User Interfaces.](https://github.com/jroimartin/gocui)
 - React-like desktop GUI toolkit for Go: https://github.com/roblillack/spot/
 - Cogent Core - A free and open source framework for building powerful, fast, elegant 2D and 3D apps that run on macOS, Windows, Linux, iOS, Android, and the web with a single Go codebase, allowing you to Code Once, Run Everywhere.: https://github.com/cogentcore/core
 - nucular: https://github.com/aarzilli/nucular
-  
+
 ## Finding libs
+
 - [Trending Go Projects](https://www.libhunt.com/l/go)
 - [grank.dev](https://www.grank.dev/) tries to help to choose the right dependencies for your next golang project.
 - [Go packages](https://pkg.go.dev/)
@@ -117,6 +120,7 @@ https://github.com/Boeing/config-file-validator
 - [Awesome-go list with stars. Automatically updated.](https://github.com/amanbolat/awesome-go-with-stars)
 
 ## Release / Deployment
+
 - goreleaser - Deliver Go binaries as fast and easily as possible: https://github.com/goreleaser/goreleaser
 - The ultimate justfile for any golang project: https://github.com/crazywolf132/ultimate-gojust
 - What do you use as build system?: https://www.reddit.com/r/golang/comments/196cowu/what_do_you_use_as_build_system/
@@ -124,6 +128,7 @@ https://github.com/Boeing/config-file-validator
 - just - a command runner: https://github.com/casey/just
 
 ## Profiling
+
 Based on a question from my team mate who is used to Pythons line_profiler (%lprun) and memory_profiler (%mprun).
 
 - [The Busy Developer's Guide to Go Profiling, Tracing and Observability](https://github.com/DataDog/go-profiler-notes/blob/main/guide/README.md)
@@ -140,7 +145,6 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - 🌶️ [Go by Example: Testing and Benchmarking](https://gobyexample.com/testing-and-benchmarking)
 - [Profiling and Optimising Go Code](https://medium.com/@ajitem/performance-optimization-in-go-checkmate-performance-using-chess-piece-movements-as-an-example-920a2b22be19)
 
-
 ## Learning & Miscellaneous
 
 - my recommend books on golang can be found [here](https://github.com/vbd/Fieldnotes/blob/main/booklist.md#golang)
@@ -151,9 +155,9 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - Go go-to guide: https://yourbasic.org/golang/ by Stefan Nilsson
 - Golang tutorial series: https://golangbot.com/learn-golang-series/ by Naveen Ramanathan
 - Practical Go: Real world advice for writing maintainable Go programs:  
-https://dave.cheney.net/practical-go/presentations/gophercon-singapore-2019.html
+  https://dave.cheney.net/practical-go/presentations/gophercon-singapore-2019.html
 - Concurrency vs. Parallelism:  
-https://www.thecoder.cafe/p/concurrency-is-not-parallelism
+  https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - :sound: [Jumping into an existing codebase](https://changelog.com/gotime/307)
 - 🌶️ [Algorithms and Data Structures implemented in Go for beginners, following best practices.](https://github.com/TheAlgorithms/Go)
 - [Effective Go](https://go.dev/doc/effective_go)
@@ -178,18 +182,17 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - [Go Excellence: A Deep Dive into Error Handling](https://do-tech.medium.com/go-excellence-a-deep-dive-into-error-handling-4b74697f12a1)
 - [Visualize Go slices and arrays](https://www.willem.dev/projects/slice-visualizer/) Explore the connection between slices and arrays by generating diagrams from Go code.
 - [Go Tutorials & Examples](https://gosamples.dev/)
-- :memo: [go-form](https://github.com/donseba/go-form) Render forms in go based on struct layout 
+- :memo: [go-form](https://github.com/donseba/go-form) Render forms in go based on struct layout
 
-
-
-  
 ## Cheatsheets
+
 - [An overview of Go syntax and features.](https://github.com/a8m/golang-cheat-sheet)
 - [cheat sheet GO](https://golang.sk/images/blog/cheatsheets/go-cheat-sheet.pdf) PDF
 - [Go Programming (Golang) Cheat Sheet](https://zerotomastery.io/cheatsheets/golang-cheat-sheet/)
 - [Go cheatsheet](https://devhints.io/go)
 
 ## Roadmaps, Jobs, Career
+
 - :hotsprings: [Stream: Go 10 Week Backend Eng Onboarding](https://stream-wiki.notion.site/Stream-Go-10-Week-Backend-Eng-Onboarding-625363c8c3684753b7f2b7d829bcd67a)
 - [Companies using Go](https://docs.google.com/spreadsheets/d/17hsYk_qUTQgXujbyuKdd4G1r07LmX5_6K8YeXWYbp3k/edit?gid=0#gid=0)
 - [Roadmap: Go Developer](https://roadmap.sh/golang)
@@ -204,9 +207,7 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - [We Work Remotely](https://weworkremotely.com/)
 - [Go / Golang Jobs & developers](https://www.golangprojects.com/)
 - Golang Jobs - OnSite and Remote Golang Jobs: https://golangjob.xyz/
-- A curated list of awesome remote jobs and resources. Inspired by: https://github.com/lukasz-madon/awesome-remote-job 
-
-
+- A curated list of awesome remote jobs and resources. Inspired by: https://github.com/lukasz-madon/awesome-remote-job
 
 ## Learning to code from source
 
@@ -257,8 +258,8 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - ClickUp is a Go-based CLI tool that fetches and organizes tasks from ClickUp using their API: https://github.com/halabito8/clickup-tasks/tree/master
 - boring: The `boring` SSH tunnel manager: https://github.com/alebeck/boring
 
-
 ## Learning game development from source
+
 - Cemetery Escape is a game that you can play in your terminal: https://github.com/tom-on-the-internet/cemetery-escape
 - Clone of the MicroProse game, Master of Magic: https://github.com/kazzmir/master-of-magic
 - A simple shooting game using ebitengine and golang: https://github.com/yohamta/godanmaku
@@ -293,8 +294,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [Gopher Academy](https://www.youtube.com/@GopherAcademy/playlists)
 - [GopherConAU](https://www.youtube.com/@gopherconau534/playlists)
 - [GopherCon Europe](https://www.youtube.com/@GopherConEurope)
-- [GopherCon UK](https://www.youtube.com/@GopherConUK/playlists) 
-
+- [GopherCon UK](https://www.youtube.com/@GopherConUK/playlists)
 
 ## Youtuber
 
@@ -302,7 +302,7 @@ Some resources to find recorded talks from GopherCon Conferences:
 - [https://www.youtube.com/@MarioCarrion](https://www.youtube.com/@MarioCarrion)
 - [https://www.youtube.com/@nicolasparada](https://www.youtube.com/@nicolasparada)
 - [https://www.youtube.com/@ChamiViews](https://www.youtube.com/@ChamiViews)
-- [https://www.youtube.com/@anthonygg_](https://www.youtube.com/@anthonygg_) 
+- [https://www.youtube.com/@anthonygg\_](https://www.youtube.com/@anthonygg_)
 - ~~[https://www.youtube.com/@NerdCademyDev/featured](https://www.youtube.com/@NerdCademyDev/featured)~~ no longer active
 - [https://www.youtube.com/@bmdavis419](https://www.youtube.com/@bmdavis419)
 - [https://www.youtube.com/@ThomasLanghorst](https://www.youtube.com/@ThomasLanghorst)
@@ -363,104 +363,103 @@ Drop by and learn!
 - https://github.com/rs
 - https://github.com/rsc
 
-
 ## Reminder: Some of the libraries already used in projects
 
 - :memo: age: A simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability.  
-https://github.com/FiloSottile/age
+  https://github.com/FiloSottile/age
 
 - mage: a Make/rake-like dev tool using Go  
-https://github.com/magefile/mage
+  https://github.com/magefile/mage
 
 - :memo: go-winres: Command line tool for adding Windows resources to executable files  
-https://github.com/tc-hib/go-winres
+  https://github.com/tc-hib/go-winres
 
 - go-sqlite-bench: Benchmarks for Golang SQLite Drivers  
-https://github.com/cvilsmeier/go-sqlite-bench
+  https://github.com/cvilsmeier/go-sqlite-bench
 
 - go-fswatch: Go bindings for libfswatch  
-https://github.com/dunglas/go-fswatch
+  https://github.com/dunglas/go-fswatch
 
 - Copier: for golang, copy value from struct to struct and more  
-https://github.com/jinzhu/copier
+  https://github.com/jinzhu/copier
 
 - lo: Iterate over slices, maps, channels...  
-https://github.com/samber/lo?tab=readme-ov-file
+  https://github.com/samber/lo?tab=readme-ov-file
 
 - dblab: The database client every command line junkie deserves.  
-https://github.com/danvergara/dblab
+  https://github.com/danvergara/dblab
 
 - anyquery: Query anything (JSON, CSV, GitHub, Notion, Airtable, etc.) with SQL  
-https://github.com/julien040/anyquery
+  https://github.com/julien040/anyquery
 
 - formulosity: Self-hosted Surveys as Code platform.  
-https://github.com/plutov/formulosity
+  https://github.com/plutov/formulosity
 
 - :memo: gocron: Easy and fluent Go cron scheduling.  
-https://github.com/go-co-op/gocron
+  https://github.com/go-co-op/gocron
 
 - prs: Stay updated on PRs from your terminal  
-https://github.com/dhth/prs
+  https://github.com/dhth/prs
 
 - :memo: sqlc: Generate type-safe code from SQL  
-https://github.com/sqlc-dev/sqlc
+  https://github.com/sqlc-dev/sqlc
 
 - conc: Better structured concurrency for go  
-https://github.com/sourcegraph/conc
+  https://github.com/sourcegraph/conc
 
 - testify: A toolkit with common assertions and mocks that plays nicely with the standard library  
-https://github.com/stretchr/testify
+  https://github.com/stretchr/testify
 
 - color: Color package for Go (golang)  
-https://github.com/fatih/color
+  https://github.com/fatih/color
 
 - tb.go: Tasks, boards & notes for the command-line habitat  
-https://github.com/araaha/tb.go
+  https://github.com/araaha/tb.go
 
 - gofumpt: A stricter gofmt  
-https://github.com/mvdan/gofumpt
+  https://github.com/mvdan/gofumpt
 
 - modfmt: Tidy up your go.mod files by merging the require blocks  
-https://github.com/abhijit-hota/modfmt
+  https://github.com/abhijit-hota/modfmt
 
 - koanf: Simple, extremely lightweight, extensible, configuration management library for Go. Support for JSON, TOML, YAML, env, command line, file, S3 etc. Alternative to viper.  
-https://github.com/knadh/koanf
+  https://github.com/knadh/koanf
 
 - :memo: Kong is a command-line parser for Go  
-https://github.com/alecthomas/kong
+  https://github.com/alecthomas/kong
 
 - env: A simple, zero-dependencies library to parse environment variables into structs  
-https://github.com/caarlos0/env
+  https://github.com/caarlos0/env
 
 - cleanenv: Clean and minimalistic environment configuration reader for Golang  
-https://github.com/ilyakaznacheev/cleanenv
+  https://github.com/ilyakaznacheev/cleanenv
 
 - konf: The simplest config loader for Go that reads/watches from file, env, flag and clouds (AWS, Azure, GCP).  
-https://github.com/nil-go/konf
+  https://github.com/nil-go/konf
 
 - :memo: bubbletea: A powerful little TUI framework  
-https://github.com/charmbracelet/bubbletea
+  https://github.com/charmbracelet/bubbletea
 
 - :memo: rod: A Chrome DevTools Protocol driver for web automation and scraping.  
-https://github.com/go-rod/rod
+  https://github.com/go-rod/rod
 
 - :memo: goawk: A POSIX-compliant AWK interpreter written in Go, with CSV support  
-https://github.com/benhoyt/goawk
+  https://github.com/benhoyt/goawk
 
 - :memo: miller: is like awk, sed, cut, join, and sort for name-indexed data such as CSV, TSV, and tabular JSON  
-https://github.com/johnkerl/miller 
- 
+  https://github.com/johnkerl/miller
+
 ## Reminder: libraries to use / to test in future projects?
 
 - pulse: Like a fitness tracker for your coding sessions  
-https://github.com/creativecreature/pulse
+  https://github.com/creativecreature/pulse
 
 - revive: ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint  
-https://github.com/mgechev/revive
+  https://github.com/mgechev/revive
 
 - pipet: Swiss-army tool for scraping and extracting data from online assets, made for hackers  
-https://github.com/bjesus/pipet
-
+  https://github.com/bjesus/pipet
 
 ---
+
 If you find this notes helpful and want to support me, you can do so by [Buy me a coffee! ☕](https://www.buymeacoffee.com/vbduetsch) it will keep my motivation high and I will be really thankful.
