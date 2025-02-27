@@ -9,7 +9,7 @@ Here my hopefully helpful resources for the Go language.
 - [Three Dots Labs](https://threedots.tech/start/)
 - [Go 101 Blog](https://go101.org/blog/101.html)
 - [The Go Blog](https://go.dev/blog/)
-- [Redowan's Reflections](https://rednafi.com/archives/)
+- [Redowan's Reflections](https://rednafi.com/archive/)
 - [Over-Engineered](https://totallygamerjet.hashnode.dev/)
 - [Practical Go](https://dave.cheney.net/practical-go) A collection of real world advice for writing maintainable Go programs.
 - [willem.dev](https://www.willem.dev/articles/)
