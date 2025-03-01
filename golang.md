@@ -139,7 +139,7 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - [Package trace contains facilities for programs to generate traces for the Go execution tracer.](https://pkg.go.dev/runtime/trace)
 - 🌶️ [Go by Example: Testing and Benchmarking](https://gobyexample.com/testing-and-benchmarking)
 - [Profiling and Optimising Go Code](https://medium.com/@ajitem/performance-optimization-in-go-checkmate-performance-using-chess-piece-movements-as-an-example-920a2b22be19)
-
+- Tips to debug hanging Go programs: https://michael.stapelberg.ch/posts/2025-02-27-debug-hanging-go-programs/
 
 ## Learning & Miscellaneous
 
@@ -256,6 +256,7 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - A distributed, fault-tolerant task queue: https://github.com/hatchet-dev/hatchet
 - ClickUp is a Go-based CLI tool that fetches and organizes tasks from ClickUp using their API: https://github.com/halabito8/clickup-tasks/tree/master
 - boring: The `boring` SSH tunnel manager: https://github.com/alebeck/boring
+- An persistent relational database built in Go.: https://github.com/Sahilb315/AtomixDB
 
 
 ## Learning game development from source
