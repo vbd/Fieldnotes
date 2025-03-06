@@ -115,6 +115,7 @@ https://github.com/Boeing/config-file-validator
 - [Go packages](https://pkg.go.dev/)
 - [A curated list of awesome Go frameworks, libraries and software](https://github.com/avelino/awesome-go)
 - [Awesome-go list with stars. Automatically updated.](https://github.com/amanbolat/awesome-go-with-stars)
+- Top Go Libraries 2025: https://libs.tech/go
 
 ## Release / Deployment
 - goreleaser - Deliver Go binaries as fast and easily as possible: https://github.com/goreleaser/goreleaser
@@ -201,12 +202,13 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - [Remote Software Engineering Jobs](https://remotesoftwareengineeringjobs.com/?tech=Golang)
 - [echojobs](https://echojobs.io/)
 - [German tech jobs](https://germantechjobs.de/jobs/Golang/all)
-- [We Work Remotely](https://weworkremotely.com/)
 - [Go / Golang Jobs & developers](https://www.golangprojects.com/)
 - Golang Jobs - OnSite and Remote Golang Jobs: https://golangjob.xyz/
 - A curated list of awesome remote jobs and resources. Inspired by: https://github.com/lukasz-madon/awesome-remote-job 
-
-
+- Working Nomads: https://www.workingnomads.com/jobs?tag=golang
+- Remote OK: https://remoteok.com/remote-golang-jobs
+- We Work Remotely: https://weworkremotely.com/remote-jobs/search?term=golang
+- foundit.in (mostly India): https://www.foundit.in/srp/results?query=golang
 
 ## Learning to code from source
 
@@ -257,7 +259,7 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - ClickUp is a Go-based CLI tool that fetches and organizes tasks from ClickUp using their API: https://github.com/halabito8/clickup-tasks/tree/master
 - boring: The `boring` SSH tunnel manager: https://github.com/alebeck/boring
 - An persistent relational database built in Go.: https://github.com/Sahilb315/AtomixDB
-
+- A modern command-line interface for TickTick task management: https://github.com/sho0pi/tickli
 
 ## Learning game development from source
 - Cemetery Escape is a game that you can play in your terminal: https://github.com/tom-on-the-internet/cemetery-escape
