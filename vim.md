@@ -492,13 +492,14 @@ Example:
     20
 
 1. Join all lines
-
+```
     20 5 10 20 10 20
-
+```
 
 2. :s: :+:g
-
+```
     20+5+10+20+10+20
+```
 
 3. yank line
 4. :ctrl-r = ctrl-*
