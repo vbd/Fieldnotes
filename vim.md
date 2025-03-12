@@ -487,17 +487,17 @@ source https://www.reddit.com/r/vim/comments/1fmq9c8/comment/loch0vq/
     a, b, c[,] d, e
 
     dt,
-    a, b, c, e
+    a, b, c[,] e
 
     df,
-    a, b, c e
+    a, b, c[ ]e
 
     dT,
-    a, b,, d, e
+    a, b,[,] d, e
 
     dF,
-    a, b, d, e
-
+    a, b[,] d, e
+ 
 ```
 
 ## Simple sum up calculations
