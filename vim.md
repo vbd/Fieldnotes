@@ -479,6 +479,33 @@ qaq -- to make sure named register a is empty
 source https://www.reddit.com/r/vim/comments/1fmq9c8/comment/loch0vq/
  
 
+## Simple sum up calculations
+
+
+Example:
+
+    20
+    5
+    10
+    20
+    10
+    20
+
+1. Join all lines
+
+    20 5 10 20 10 20
+
+
+2. :s: :+:g
+
+    20+5+10+20+10+20
+
+3. yank line
+4. :ctrl-r = ctrl-*
+
+To get floats change e.g. 20 to 20.0. One number is enough!
+
+
 
 
 ---
