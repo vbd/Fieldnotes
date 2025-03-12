@@ -477,7 +477,28 @@ qaq -- to make sure named register a is empty
 
 
 source https://www.reddit.com/r/vim/comments/1fmq9c8/comment/loch0vq/
- 
+
+
+### dt, df, dT, dF -- delete movement
+```
+   Starting point:
+    [,] where cursor is located
+
+    a, b, c[,] d, e
+
+    dt,
+    a, b, c, e
+
+    df,
+    a, b, c e
+
+    dT,
+    a, b,, d, e
+
+    dF,
+    a, b, d, e
+
+```
 
 ## Simple sum up calculations
 
