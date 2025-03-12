@@ -116,6 +116,9 @@ Recently I came across a video series that is a kind of quantum leap for me ...
     jump to next / previous empty line
     } / {
 
+    copy line without CR
+    yg_
+
     cancel auto completion
     ctrl + e
 
