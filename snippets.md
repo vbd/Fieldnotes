@@ -24,9 +24,22 @@ Copy files containing vim in name and extension txt to ziel (cmd is required bec
 Find files without extension  
 `fd "^[^.]*$" --type f`  
 
+find all files consisting of exactly one letter  
+`fd '^[a-zA-Z]$'`  
 
+find all files named a  
+`fd '^a$'`  
+or  
+`fd -g a`
 
+Finding exact matches  
+`fd -g go` 
 
+Show only dirs, one level deep from current working directory  
+`fd -t d -d 1`
+
+Finding files containing `go` and `domain` in name and show their full path (-a)  
+`fd go --and domain -a`
 
 ## rg (https://github.com/BurntSushi/ripgrep)
 
