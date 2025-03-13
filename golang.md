@@ -260,6 +260,11 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - boring: The `boring` SSH tunnel manager: https://github.com/alebeck/boring
 - An persistent relational database built in Go.: https://github.com/Sahilb315/AtomixDB
 - A modern command-line interface for TickTick task management: https://github.com/sho0pi/tickli
+- Visualize your local Git contributions with Go: https://flaviocopes.com/go-git-contributions/
+- Build a Command Line app with Go: lolcat: https://flaviocopes.com/go-tutorial-lolcat/
+- Building a CLI command with Go: cowsay: https://flaviocopes.com/go-tutorial-cowsay/
+- Go CLI tutorial: fortune clone: https://flaviocopes.com/go-tutorial-fortune/
+- Use Go to get a list of repositories from GitHub: https://flaviocopes.com/go-github-api/
 
 ## Learning game development from source
 - Cemetery Escape is a game that you can play in your terminal: https://github.com/tom-on-the-internet/cemetery-escape
