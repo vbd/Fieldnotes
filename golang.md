@@ -265,6 +265,11 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - Building a CLI command with Go: cowsay: https://flaviocopes.com/go-tutorial-cowsay/
 - Go CLI tutorial: fortune clone: https://flaviocopes.com/go-tutorial-fortune/
 - Use Go to get a list of repositories from GitHub: https://flaviocopes.com/go-github-api/
+- Command line weather app written in Go: https://github.com/josephburgess/gust
+- cz is a command-line tool for creating consistent, semantic commit messages with an interactive and user-friendly interface.: https://github.com/rockingrohit9639/cz
+- A CLI tool written in Go that allows you to view data about Pokémon from the terminal.: https://github.com/digitalghost-dev/poke-cli
+- A no-frills time tracking toolkit for command line nerds: https://github.com/dhth/hours
+- GoTOTP is a Simple Time-Based One-Time Password (TOTP) Library: https://github.com/MrTuNNe/GoTOTP
 
 ## Learning game development from source
 - Cemetery Escape is a game that you can play in your terminal: https://github.com/tom-on-the-internet/cemetery-escape
