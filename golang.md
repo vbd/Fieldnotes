@@ -209,6 +209,7 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - Remote OK: https://remoteok.com/remote-golang-jobs
 - We Work Remotely: https://weworkremotely.com/remote-jobs/search?term=golang
 - foundit.in (mostly India): https://www.foundit.in/srp/results?query=golang
+- gojobs: https://gojobs.run/
 
 ## Learning to code from source
 
