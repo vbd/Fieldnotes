@@ -48,7 +48,7 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 ## Asking go questions
 
 - Go Forum: https://forum.golangbridge.org/
-- Go Forum: https://godev.com/
+- ~~Go Forum: https://godev.com/~~ 2025-03-18: no longer accessible
 - r/golang: https://www.reddit.com/r/golang/
 - golang-nuts: https://groups.google.com/g/golang-nuts
 - golang-dev: https://groups.google.com/g/golang-dev
@@ -210,6 +210,7 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - We Work Remotely: https://weworkremotely.com/remote-jobs/search?term=golang
 - foundit.in (mostly India): https://www.foundit.in/srp/results?query=golang
 - gojobs: https://gojobs.run/
+- Jobs for developers: https://jobsfordevelopers.com/golang-jobs
 
 ## Learning to code from source
 
