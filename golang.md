@@ -68,6 +68,8 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [Do you make these Go coding mistakes?](https://yourbasic.org/golang/gotcha/)
 - [golangci-lint](https://github.com/golangci/golangci-lint), fast linters Runner for Go
 - :hot_pepper: [JSON-to-Go, convert JSON to Go struct](https://mholt.github.io/json-to-go/)
+- When is it OK to panic in Go?: https://www.alexedwards.net/blog/when-is-it-ok-to-panic-in-go
+- On the uses and misuses of panics in Go: https://eli.thegreenplace.net/2018/on-the-uses-and-misuses-of-panics-in-go/
 
 
 ## Concurrency (aka Nebenläufigkeit)
@@ -141,6 +143,8 @@ Based on a question from my team mate who is used to Pythons line_profiler (%lpr
 - 🌶️ [Go by Example: Testing and Benchmarking](https://gobyexample.com/testing-and-benchmarking)
 - [Profiling and Optimising Go Code](https://medium.com/@ajitem/performance-optimization-in-go-checkmate-performance-using-chess-piece-movements-as-an-example-920a2b22be19)
 - Tips to debug hanging Go programs: https://michael.stapelberg.ch/posts/2025-02-27-debug-hanging-go-programs/
+- Unlocking Hidden Performance Bottlenecks in Golang using GoFr: The Underrated Power of pprof: https://dev.to/aryanmehrotra/unlocking-hidden-performance-bottlenecks-in-golang-using-gofr-the-underrated-power-of-pprof-2dc7
+- Patterns and Techniques for Writing High-Performance Applications with Go: https://goperf.dev/
 
 ## Learning & Miscellaneous
 
