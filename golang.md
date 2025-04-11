@@ -184,8 +184,8 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - [Visualize Go slices and arrays](https://www.willem.dev/projects/slice-visualizer/) Explore the connection between slices and arrays by generating diagrams from Go code.
 - [Go Tutorials & Examples](https://gosamples.dev/)
 - :memo: [go-form](https://github.com/donseba/go-form) Render forms in go based on struct layout 
-
-
+- Official Golang Frequently Asked Questions (FAQ): https://go.dev/doc/faq
+- r/golang FAQ: https://www.reddit.com/r/golang/wiki/r_golang_faqs/
 
   
 ## Cheatsheets
