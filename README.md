@@ -12,10 +12,3 @@ If you want to support me, my work and my projects you can do so by [Buy me a co
 
 ---
 
-<a href="https://www.star-history.com/#vbd/fieldnotes&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=vbd/fieldnotes&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=vbd/fieldnotes&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=vbd/fieldnotes&type=Date" />
- </picture>
-</a>
