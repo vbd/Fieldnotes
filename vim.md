@@ -30,7 +30,13 @@ But since that time I got hooked, and I didn't regret to learn it. I still use V
 - [How to Create Vim Text-Objects in Lua](https://thevaluable.dev/vim-create-text-objects/)
 - [Managing Local and Remote Filesystems with Vim and netrw](https://thevaluable.dev/vim-browsing-remote-netrw/)
 - [What's The Vim Runtime? A Guide With Examples](https://thevaluable.dev/vim-runtime-guide-example/)
-- [Vim Text Objects: The Definitive Guide](https://blog.carbonfive.com/vim-text-objects-the-definitive-guide/)
+- ~~[Vim Text Objects: The Definitive Guide](https://blog.carbonfive.com/vim-text-objects-the-definitive-guide/)~~ -- 2025-04-08 no longer available
+
+- Books about Vim<br>https://gist.github.com/yegappan/494e9597aeb9df37c6c02294f1511cf3
+- Updating a quickfix/location list asynchronously without interfering with another plugin<br>https://gist.github.com/yegappan/3b50ec9ea86ad4511d3a213ee39f1ee0
+- My development process for contributing to Vim<br>https://gist.github.com/yegappan/1e88a9aed4f9f266d91d768b633487f3
+- My Vim-related gists<br>https://gist.github.com/romainl/4b9f139d2a8694612b924322de1025ce
+
  
 - :tv: [Vim Tutorial for Beginners](https://www.youtube.com/watch?v=RZ4p-saaQkc)
 - :tv: [How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
@@ -83,9 +89,8 @@ Recently I came across a video series that is a kind of quantum leap for me ...
 - [Problem Solving with Vim (9th edition) My favorite substitute](https://www.youtube.com/watch?v=QE5c_bWyJ-k)
 - [Problem Solving with Vim (10th edition) - Key Code Hell](https://www.youtube.com/watch?v=j3psP-s9FOM)
 
-
- 
-
+Great ressource for for people who are familiar with Python and want to start with Vim9 script
+- Vim9 Script for Python Developers<br>https://github.com/yegappan/Vim9ScriptForPythonDevelopers/blob/main/Vim9ScriptForPythonDevelopers.md
 
 
 ## General
@@ -116,7 +121,7 @@ Recently I came across a video series that is a kind of quantum leap for me ...
     jump to next / previous empty line
     } / {
 
-    copy line without CR
+    yank / copy line without CR
     yg_
 
     cancel auto completion
@@ -151,6 +156,15 @@ Recently I came across a video series that is a kind of quantum leap for me ...
 
     To run your last search again
     //
+
+    To search for word under cursor with word boundaries /\<word\>
+    *
+
+    To search for word under cursor without word boundaries
+    g*
+
+    Join without additional space
+    gJ
 ```
 
 ## Navigation
