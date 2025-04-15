@@ -109,10 +109,11 @@ Both books are not required for the certification process but I think knowledge 
 For the certification process:
 
 1. follow the Scrum Master Learning Path on scrum.org: https://www.scrum.org/pathway/scrum-master
-2. read the Scrum Guide: https://scrumguides.org/
-3. take and retake the scrum pre tests until you reach constantly 95%+: https://www.scrum.org/open-assessments/scrum-open
-4. also read the Scrum Guide multiple times
-5. take the PSM1 certification
+2. visit the Scrum.orgs resource-center: https://www.scrum.org/resource-center
+3. read the Scrum Guide: https://scrumguides.org/
+4. take and retake the scrum pre tests until you reach constantly 95%+: https://www.scrum.org/open-assessments/scrum-open
+5. also read the Scrum Guide multiple times
+6. take the PSM1 certification
 
 
 ### To work agile and to be agile
