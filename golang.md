@@ -94,6 +94,8 @@ Not my code, should help to debug, will we need a 49" monitor for debugging or t
 - [The simplest config loader for Go that reads/watches from file, env, flag and clouds (AWS, Azure, GCP)](https://github.com/nil-go/konf)
 - Config file validator: Cross Platform tool to validate configuration files:  
 https://github.com/Boeing/config-file-validator
+- go-flags: go command line option parser<br>https://github.com/jessevdk/go-flags
+- go-arg: Struct-based argument parsing in Go<br>https://github.com/alexflint/go-arg
 
 
 
