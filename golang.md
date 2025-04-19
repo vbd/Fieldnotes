@@ -188,6 +188,7 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - :memo: [go-form](https://github.com/donseba/go-form) Render forms in go based on struct layout 
 - Official Golang Frequently Asked Questions (FAQ): https://go.dev/doc/faq
 - r/golang FAQ: https://www.reddit.com/r/golang/wiki/r_golang_faqs/
+- Code to Read When Learning Go<br>https://www.somethingsimilar.com/2013/12/26/code-to-read-when-learning-go/
 
   
 ## Cheatsheets
