@@ -218,6 +218,8 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - foundit.in (mostly India): https://www.foundit.in/srp/results?query=golang
 - gojobs: https://gojobs.run/
 - Jobs for developers: https://jobsfordevelopers.com/golang-jobs
+- Career Strategy: A Proven Guide to Building Your Path to Success<br>https://diamantinoalmeida.com/career-strategy-a-proven-guide-to-building-your-path-to-success/
+
 
 ## Learning to code from source
 
@@ -279,6 +281,17 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - A CLI tool written in Go that allows you to view data about Pokémon from the terminal.: https://github.com/digitalghost-dev/poke-cli
 - A no-frills time tracking toolkit for command line nerds: https://github.com/dhth/hours
 - GoTOTP is a Simple Time-Based One-Time Password (TOTP) Library: https://github.com/MrTuNNe/GoTOTP
+- Attendance Tracker TUI from scratch, made in go<br>https://github.com/sahaj-b/go-attend
+- lastfmq - command-line tool/web scraper to query Last.fm artist information<br>https://github.com/oiweiwei/lastfmq
+- goFind - file pattern search<br>https://github.com/Lukas-Fohl/goFind?tab=readme-ov-file
+- Gozelle - A Blazing fast smart cd command written in go<br>https://github.com/ATLIOD/Gozelle/
+- AnonymoUS is a web-chatting application that aims to be completely anonymous. Each step, from authenications to messages sent are encrypted with their own technique to provide more security. Enjoy the various plugins like stock predictor or Meme Generator !<br>https://github.com/zelshahawy/AnonymoUS/tree/main
+- vanta - A lightweight protocol-aware packet analyzer and behavioral exporter. Created as a personal response to global academic freedom challenges.<br>https://github.com/lixiasky/vanta
+- tdm is a fast and lightweight download manager that runs in your terminal<br>https://github.com/NamanBalaji/tdm
+- MPM - my_project_manager is a command-line tool designed for developers who manage numerous projects.<br>https://github.com/giovapanasiti/my_project_manager
+- goso - Stack Overflow CLI search tool written in Go<br>https://github.com/shadowy-pycoder/goso
+- for advanced users: anubis - Weighs the soul of incoming HTTP requests to stop AI crawlers<br>https://github.com/TecharoHQ/anubis
+
 
 ## Learning game development from source
 - Cemetery Escape is a game that you can play in your terminal: https://github.com/tom-on-the-internet/cemetery-escape
