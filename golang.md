@@ -219,6 +219,7 @@ https://www.thecoder.cafe/p/concurrency-is-not-parallelism
 - gojobs: https://gojobs.run/
 - Jobs for developers: https://jobsfordevelopers.com/golang-jobs
 - Career Strategy: A Proven Guide to Building Your Path to Success<br>https://diamantinoalmeida.com/career-strategy-a-proven-guide-to-building-your-path-to-success/
+- EasyJob AI<br>https://easyjobai.com/search/golang
 
 
 ## Learning to code from source
@@ -291,6 +292,7 @@ Starting projects to learn from source and to get ideas what to build to learn a
 - MPM - my_project_manager is a command-line tool designed for developers who manage numerous projects.<br>https://github.com/giovapanasiti/my_project_manager
 - goso - Stack Overflow CLI search tool written in Go<br>https://github.com/shadowy-pycoder/goso
 - for advanced users: anubis - Weighs the soul of incoming HTTP requests to stop AI crawlers<br>https://github.com/TecharoHQ/anubis
+- qrypad - A simple terminal UI for quick, ad-hoc database exploration<br>https://github.com/wheelibin/qrypad
 
 
 ## Learning game development from source
