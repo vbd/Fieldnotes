@@ -440,8 +440,7 @@ after:
     b TEXT
     c TEXT
 
-- visual select lines
-- type `:norm A TEXT`, this will add TEXT to the end of all lines visually selected
+- type `:%norm A TEXT`, this will add TEXT to the end of all lines.
 
 ### Prepend and append text to lines in command-line mode
 
