@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   deploy:
@@ -27,6 +28,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Inspect missing Cloudflare credential configuration
+        if: ${{ env.CLOUDFLARE_API_TOKEN == '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          for endpoint in actions/secrets environments/CLOUDFLARE_API_TOKEN/secrets actions/variables environments/CLOUDFLARE_API_TOKEN/variables; do
+            echo "Configuration names in $endpoint:"
+            if ! gh api "repos/$GH_REPO/$endpoint" --jq '(.secrets // .variables // [])[] | .name'; then
+              echo "::notice::Configuration metadata is unavailable to the workflow token."
+            fi
+          done
       - name: Verify Cloudflare authorization
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
