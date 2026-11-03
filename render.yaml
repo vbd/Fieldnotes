@@ -9,7 +9,7 @@ services:
     region: oregon
     repo: https://github.com/superiormandr-star/Fieldnotes
     branch: superior-owner-preview
-    buildCommand: cd superior-owner-website && npm install --omit=dev
+    buildCommand: cd superior-owner-website && npm install --omit=dev && npm test
     startCommand: cd superior-owner-website && node server.js
     healthCheckPath: /api/health
     envVars:
