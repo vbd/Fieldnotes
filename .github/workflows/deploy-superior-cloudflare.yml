@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   deploy:
@@ -26,6 +27,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Inspect deployment environment names
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh api "repos/$GH_REPO/environments" --jq '.environments[].name'
       - name: Verify Cloudflare authorization
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
