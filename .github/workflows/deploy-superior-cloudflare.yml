@@ -27,6 +27,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Identify Cloudflare secret names without displaying values
+        env:
+          SECRET_DATA: ${{ toJSON(secrets) }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          values = json.loads(os.environ.get('SECRET_DATA') or '{}')
+          names = sorted(k for k in values if any(term in k.upper() for term in ('CLOUD', 'D1', 'API_TOKEN')))
+          print('Matching available secret names:', ', '.join(names) if names else '(none)')
+          print('Expected secret appears set:', 'yes' if bool(values.get('CLOUDFLARE_API_TOKEN')) else 'no')
+          PY
       - name: Verify Cloudflare authorization
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
