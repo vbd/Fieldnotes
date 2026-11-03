@@ -44,7 +44,7 @@ function inputItems(arr){
 }
 function makeEstimate(a,original={}){
  const customer=text(a.customer,120),email=text(a.email,254);
- if(!customer||!/^\\S+@\\S+\\.\\S+$/.test(email))throw Error('Customer name and valid email are required.');
+ if(!customer||!/^\S+@\S+\.\S+$/.test(email))throw Error('Customer name and valid email are required.');
  const items=inputItems(a.items),taxRate=Number(a.taxRate||0);
  if(!Number.isFinite(taxRate)||taxRate<0||taxRate>25)throw Error('Tax must be between 0 and 25 percent.');
  const subtotalCents=items.reduce((v,i)=>v+cents(i.total),0);
