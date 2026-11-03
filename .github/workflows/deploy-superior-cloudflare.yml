@@ -57,7 +57,7 @@ jobs:
               sys.exit(1)
           print(f"::add-mask::{token}")
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
-              env.write(f"CLOUDFLARE_API_TOKEN={token}\\n")
+              print(f"CLOUDFLARE_API_TOKEN={token}", file=env)
           PY
       - name: Install dependencies
         run: npm install
