@@ -2,6 +2,7 @@ name: Deploy Superior Command Center to Cloudflare
 on:
   push:
     branches:
+      - main
       - cloudflare-d1-migration
     paths:
       - 'cloudflare-command-center/**'
@@ -29,8 +30,8 @@ jobs:
       - name: Verify Cloudflare authorization
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "::error title=Missing Cloudflare deployment secret::CLOUDFLARE_API_TOKEN is unavailable. Add a secret with this name to the CLOUDFLARE_API_TOKEN deployment environment or the repository Actions secrets."
-            echo "Configure the CLOUDFLARE_API_TOKEN secret in [GitHub Actions secrets](https://github.com/${{ github.repository }}/settings/secrets/actions) or the selected [deployment environment](https://github.com/${{ github.repository }}/settings/environments)." >> "$GITHUB_STEP_SUMMARY"
+            echo "::error title=Missing Cloudflare deployment secret::CLOUDFLARE_API_TOKEN is unavailable. Set CLOUDFLARE_API_TOKEN as an Actions repository secret."
+            echo "Configure the CLOUDFLARE_API_TOKEN repository secret in [GitHub Actions secrets](https://github.com/${{ github.repository }}/settings/secrets/actions)." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
           if [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_TOKEN" ] || [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_UNDERSCORE_TOKEN" ]; then
