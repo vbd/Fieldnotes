@@ -8,3 +8,8 @@ CREATE TABLE IF NOT EXISTS records (
 );
 CREATE INDEX IF NOT EXISTS idx_records_kind_created ON records(kind, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_records_status ON records(kind, status);
+CREATE TABLE IF NOT EXISTS login_attempts (
+  ip TEXT PRIMARY KEY,
+  count INTEGER NOT NULL DEFAULT 0,
+  last_at INTEGER NOT NULL
+);
