@@ -15,7 +15,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: cloudflare-d1-migration
+    environment: CLOUDFLARE_API_TOKEN
     defaults:
       run:
         working-directory: cloudflare-command-center
