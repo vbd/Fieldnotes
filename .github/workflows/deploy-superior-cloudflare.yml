@@ -1,5 +1,12 @@
 name: Deploy Superior Command Center to Cloudflare
 on:
+  push:
+    branches:
+      - cloudflare-d1-migration
+    paths:
+      - 'cloudflare-command-center/**'
+      - 'superior-owner-website/**'
+      - '.github/workflows/deploy-superior-cloudflare.yml'
   workflow_dispatch:
 
 permissions:
