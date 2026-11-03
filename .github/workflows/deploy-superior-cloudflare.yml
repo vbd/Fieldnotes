@@ -42,6 +42,23 @@ jobs:
             echo "::error title=Invalid Cloudflare secret value::The saved token contains whitespace. Save only the raw API token, without a command, header, quotes, or extra spaces."
             exit 1
           fi
+      - name: Normalize Cloudflare API token
+        run: |
+          python3 - <<'PY'
+          import os
+          import sys
+          token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+          if token.lower().startswith("bearer "):
+              token = token[7:].strip()
+          if len(token) > 1 and token[0] in ("'", '"') and token[-1] == token[0]:
+              token = token[1:-1].strip()
+          if not token or any(ord(ch) < 33 or ord(ch) > 126 for ch in token) or any(ch in token for ch in ("'", '"', "\\", ":")):
+              print("::error title=Invalid Cloudflare token format::The GitHub Actions secret must contain only a raw Cloudflare API token, not an entire curl command or Authorization header.")
+              sys.exit(1)
+          print(f"::add-mask::{token}")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
+              env.write(f"CLOUDFLARE_API_TOKEN={token}\\n")
+          PY
       - name: Install dependencies
         run: npm install
       - name: Build Command Center public assets
