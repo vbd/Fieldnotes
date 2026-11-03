@@ -18,7 +18,7 @@ test('credential checks reject unsafe inputs without echoing their contents',()=
    assert.equal(result.status,1);
    const output=result.stdout+result.stderr+readFileSync(summary,'utf8');
    if(value&&!value.startsWith('CLOUDFLARE_API_'))assert.ok(!output.includes(value),'Credential contents must not be printed.');
-   assert.match(output,/repository Actions secret/);
+   assert.match(output,/environment secret/);
   }
   const sentinel='test-only-noncredential-for-format-check';
   const result=spawnSync(process.execPath,[fileURLToPath(new URL('../scripts/validate-cloudflare-token.mjs',import.meta.url))],
