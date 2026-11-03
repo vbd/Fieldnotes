@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: superior-remodeling-owner-preview
+    runtime: node
+    plan: free
+    buildCommand: cd superior-owner-website && npm install --omit=dev
+    startCommand: cd superior-owner-website && node server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OWNER_PASSWORD
+        sync: false
+      - key: DATA_DIR
+        value: ./superior-owner-website/data
+      - key: PUBLIC_BASE_URL
+        value: https://superior-remodeling-owner-preview.onrender.com
