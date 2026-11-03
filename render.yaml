@@ -1,11 +1,13 @@
-# Superior Maintenance and Remodeling — connect existing web service to existing PostgreSQL.
-# This Blueprint does not create a new database or start a paid plan.
+# Superior Maintenance & Remodeling: new full-package Render web service.
+# Uses an EXISTING Postgres database and inherits the owner's existing password.
+# Does not delete or change the existing preview service or database.
 services:
   - type: web
-    name: superior-remodeling-owner-preview
+    name: superior-remodeling-command-center
     runtime: node
     plan: free
     region: oregon
+    repo: https://github.com/superiormandr-star/Fieldnotes
     branch: superior-owner-preview
     buildCommand: cd superior-owner-website && npm install --omit=dev
     startCommand: cd superior-owner-website && node server.js
@@ -18,8 +20,9 @@ services:
           name: superior-command-center-data
           property: connectionString
       - key: OWNER_PASSWORD
-        sync: false
-      - key: PUBLIC_BASE_URL
-        value: https://superior-remodeling-owner-preview.onrender.com
+        fromService:
+          name: superior-remodeling-owner-preview
+          type: web
+          envVarKey: OWNER_PASSWORD
       - key: DATA_DIR
         value: ./superior-owner-website/data
