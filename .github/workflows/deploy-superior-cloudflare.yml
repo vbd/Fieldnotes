@@ -34,6 +34,14 @@ jobs:
             echo "Configure the CLOUDFLARE_API_TOKEN secret in [GitHub Actions secrets](https://github.com/${{ github.repository }}/settings/secrets/actions) or the selected [deployment environment](https://github.com/${{ github.repository }}/settings/environments)." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
+          if [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_TOKEN" ] || [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_UNDERSCORE_TOKEN" ]; then
+            echo "::error title=Invalid Cloudflare secret value::The saved secret contains a setting name instead of an API token. Replace its value with the actual API token copied from Cloudflare."
+            exit 1
+          fi
+          if [[ "$CLOUDFLARE_API_TOKEN" =~ [[:space:]] ]]; then
+            echo "::error title=Invalid Cloudflare secret value::The saved token contains whitespace. Save only the raw API token, without a command, header, quotes, or extra spaces."
+            exit 1
+          fi
       - name: Install dependencies
         run: npm install
       - name: Build Command Center public assets
