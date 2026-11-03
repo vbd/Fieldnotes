@@ -55,7 +55,8 @@ jobs:
       run:
         working-directory: cloudflare-command-center
         shell: bash
-    # Use repository Actions secret to avoid an outdated environment-level override.
+    environment: CLOUDFLARE_API_TOKEN
+    # Environment-level Cloudflare credential is used for deployment; the repository credential is currently not a valid token.
     env:
       CLOUDFLARE_ACCOUNT_ID: c917ac1c9a3824a210d0fb77e5879329
     steps:
