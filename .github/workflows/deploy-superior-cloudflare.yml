@@ -15,7 +15,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: CLOUDFLARE_API_TOKEN
     defaults:
       run:
         working-directory: cloudflare-command-center
