@@ -1,6 +1,7 @@
 // Superior Command Center — Cloudflare Workers + durable D1 storage
 // IMPORTANT: Set OWNER_PASSWORD and SESSION_SECRET as Worker secrets.
 const now=()=>new Date().toISOString();
+const capabilities={additiveRestore:true,customerFeedback:true};
 const text=(v,n=200)=>String(v??'').trim().slice(0,n);
 const id=(kind)=>kind+'-'+new Date().getUTCFullYear()+'-'+crypto.randomUUID().toUpperCase();
 const randomHex=(bytes=32)=>[...crypto.getRandomValues(new Uint8Array(bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
@@ -31,12 +32,13 @@ async function body(req,limit=1024*128){
  if(length>limit)throw Error('Request is too large.');
  const raw=await req.text();
  if(new TextEncoder().encode(raw).byteLength>limit)throw Error('Request is too large.');
- try{return JSON.parse(raw||'{}');}catch{throw Error('Invalid JSON.');}
+ try{const value=JSON.parse(raw||'{}');if(!value||typeof value!=='object'||Array.isArray(value))throw Error();return value;}catch{throw Error('Invalid JSON.');}
 }
 function originMatches(req){const origin=req.headers.get('origin');return !origin||origin===new URL(req.url).origin;}
 function inputItems(arr){
  if(!Array.isArray(arr)||arr.length<1||arr.length>40)throw Error('Add between 1 and 40 line items.');
  return arr.map(item=>{
+  if(!item||typeof item!=='object'||Array.isArray(item))throw Error('Check description, quantity, and unit price.');
   const description=text(item.description,240),qty=Number(item.qty),rate=Number(item.rate);
   if(!description||!Number.isFinite(qty)||qty<=0||qty>100000||!Number.isFinite(rate)||rate<0||rate>1e6)throw Error('Check description, quantity, and unit price.');
   return {description,qty,rate:dollars(cents(rate)),total:dollars(Math.round(qty*cents(rate)))};
@@ -57,6 +59,8 @@ const publicEstimate=e=>{const {reviewToken,customerSignature,email,phone,...saf
 const baseReview=(req,token)=>new URL('/review/'+token,req.url).toString();
 async function select(env,id,kind){return parseRow(await env.DB.prepare('SELECT data FROM records WHERE id=? AND kind=?').bind(id,kind).first());}
 async function records(env,kind){const rows=await env.DB.prepare('SELECT data FROM records WHERE kind=? ORDER BY created_at DESC').bind(kind).all();return rows.results.map(parseRow);}
+async function feedbackFor(env,estimateId){return parseRow(await env.DB.prepare('SELECT data FROM customer_reviews WHERE estimate_id=?').bind(estimateId).first());}
+async function feedbackRecords(env){const rows=await env.DB.prepare('SELECT data FROM customer_reviews ORDER BY created_at DESC').all();return rows.results.map(parseRow);}
 async function insert(env,record,kind,status,token=null){await env.DB.prepare('INSERT INTO records(id,kind,status,created_at,review_token,data) VALUES (?,?,?,?,?,?)').bind(record.id,kind,status,record.createdAt,token,JSON.stringify(record)).run();}
 async function rateLimit(env,ip){
  const current=await env.DB.prepare('SELECT count,last_at FROM login_attempts WHERE ip=?').bind(ip).first();
@@ -76,8 +80,14 @@ async function route(req,env){
   return env.ASSETS.fetch(req);
  }
  if(!env.OWNER_PASSWORD||!env.SESSION_SECRET||!env.DB)return fail(503,'Command Center configuration is incomplete. Set D1, OWNER_PASSWORD, and SESSION_SECRET.');
+ if(m==='GET'&&p==='/api/health'){
+  try{
+   await Promise.all(['records','login_attempts','customer_reviews'].map(table=>env.DB.prepare('SELECT 1 FROM '+table+' LIMIT 1').first()));
+   return reply({ok:true,service:'superior-command-center',database:'ready'});
+  }catch{return fail(503,'Command Center database migrations are incomplete.');}
+ }
  if(['POST','PATCH','PUT','DELETE'].includes(m)&&!originMatches(req))return fail(403,'Invalid request origin.');
- if(m==='GET'&&p==='/api/session')return reply({authenticated:await authorized(req,env)});
+ if(m==='GET'&&p==='/api/session')return reply({authenticated:await authorized(req,env),capabilities});
  if(m==='POST'&&p==='/api/login'){
   const ip=req.headers.get('CF-Connecting-IP')||'unknown';
   if(await rateLimit(env,ip))return fail(429,'Too many sign-in attempts. Try again later.');
@@ -86,13 +96,26 @@ async function route(req,env){
   await env.DB.prepare('DELETE FROM login_attempts WHERE ip=?').bind(ip).run();
   const expiry=String(Date.now()+43200000),nonce=randomHex(16);
   const token=expiry+'.'+nonce+'.'+await hmac(expiry+'.'+nonce,env.SESSION_SECRET);
-  return reply({authenticated:true},200,{'Set-Cookie':sessionCookie(token)});
+  return reply({authenticated:true,capabilities},200,{'Set-Cookie':sessionCookie(token)});
  }
  if(m==='POST'&&p==='/api/logout')return reply({ok:true},200,{'Set-Cookie':'superior_sid=; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=0'});
  if(m==='GET'&&/^\/api\/review\/[a-f0-9]{64}$/.test(p)){
   const token=p.split('/')[3],r=await env.DB.prepare("SELECT data FROM records WHERE kind='estimate' AND review_token=?").bind(token).first();
   if(!r)return fail(404,'Estimate review link not found.');
-  return reply({estimate:publicEstimate(parseRow(r))});
+  const estimate=parseRow(r);
+  return reply({estimate:publicEstimate(estimate),feedback:await feedbackFor(env,estimate.id),feedbackEnabled:true});
+ }
+ if(m==='POST'&&/^\/api\/review\/[a-f0-9]{64}\/feedback$/.test(p)){
+  const token=p.split('/')[3],r=await env.DB.prepare("SELECT data FROM records WHERE kind='estimate' AND review_token=?").bind(token).first();
+  if(!r)return fail(404,'Estimate review link not found.');
+  const estimate=parseRow(r);
+  if(!['approved','declined'].includes(estimate.status))return fail(409,'Approve or decline your estimate before leaving feedback.');
+  const data=await body(req),rating=data.rating;
+  if(!Number.isInteger(rating)||rating<1||rating>5||data.comment!==undefined&&typeof data.comment!=='string'||String(data.comment||'').trim().length>2000)return fail(400,'Choose a rating from 1 to 5 and keep comments under 2000 characters.');
+  const feedback={id:id('REV'),estimateId:estimate.id,customer:estimate.customer,rating,comment:text(data.comment,2000),createdAt:now()};
+  const result=await env.DB.prepare('INSERT INTO customer_reviews(id,estimate_id,created_at,data) VALUES(?,?,?,?) ON CONFLICT(estimate_id) DO NOTHING').bind(feedback.id,feedback.estimateId,feedback.createdAt,JSON.stringify(feedback)).run();
+  if(!result.meta?.changes)return fail(409,'Feedback has already been saved for this estimate.');
+  return reply({feedback},201);
  }
  if(m==='POST'&&/^\/api\/review\/[a-f0-9]{64}\/decision$/.test(p)){
   const token=p.split('/')[3],r=await env.DB.prepare("SELECT data FROM records WHERE kind='estimate' AND review_token=?").bind(token).first();
@@ -106,7 +129,7 @@ async function route(req,env){
   estimate.status=data.decision;estimate.decidedAt=now();estimate.customerSignature=signature;estimate.customerNote=text(data.note,1000);
   const cmd=env.DB.prepare("UPDATE records SET data=?,status=? WHERE id=? AND kind='estimate' AND status='sent'").bind(JSON.stringify(estimate),estimate.status,estimate.id);
   if(estimate.status==='approved'){
-   const inv={id:id('INV'),estimateId:estimate.id,customer:estimate.customer,email:estimate.email,address:estimate.address,project:estimate.project,items:estimate.items,notes:estimate.notes,subtotal:estimate.subtotal,tax:estimate.tax,total:estimate.total,createdAt:now(),paymentStatus:'unpaid'};
+   const inv={id:id('INV'),estimateId:estimate.id,customer:estimate.customer,email:estimate.email,phone:estimate.phone,address:estimate.address,project:estimate.project,items:estimate.items,notes:estimate.notes,taxRate:estimate.taxRate,subtotal:estimate.subtotal,tax:estimate.tax,total:estimate.total,createdAt:now(),paymentStatus:'unpaid'};
    estimate.invoiceId=inv.id;
    const update=env.DB.prepare("UPDATE records SET data=?,status='approved' WHERE id=? AND kind='estimate' AND status='sent'").bind(JSON.stringify(estimate),estimate.id);
    const add=env.DB.prepare("INSERT INTO records(id,kind,status,created_at,review_token,data) SELECT ?,'invoice','unpaid',?,NULL,? WHERE EXISTS (SELECT 1 FROM records WHERE id=? AND status='approved' AND json_extract(data,'$.invoiceId')=?)").bind(inv.id,inv.createdAt,JSON.stringify(inv),estimate.id,inv.id);
@@ -141,40 +164,63 @@ async function route(req,env){
   }
   if(m==='POST'&&estMatch[2]==='share'){
    if(['approved','declined'].includes(e.status))return fail(409,'This estimate has already received a decision.');
+   const previousData=JSON.stringify(e);
    e.reviewToken=e.reviewToken||randomHex();e.status='sent';e.sharedAt=e.sharedAt||now();
-   await env.DB.prepare("UPDATE records SET data=?,status='sent',review_token=? WHERE id=? AND status IN ('draft','sent')").bind(JSON.stringify(e),e.reviewToken,e.id).run();
+   const result=await env.DB.prepare("UPDATE records SET data=?,status='sent',review_token=? WHERE id=? AND status IN ('draft','sent') AND data=?").bind(JSON.stringify(e),e.reviewToken,e.id,previousData).run();
+   if(!result.meta?.changes)return fail(409,'Estimate changed; reload and try again.');
    return reply({estimate:publicEstimate(e),url:baseReview(req,e.reviewToken)});
   }
  }
  if(m==='GET'&&p==='/api/invoices')return reply({invoices:await records(env,'invoice')});
+ if(m==='GET'&&p==='/api/reviews')return reply({reviews:await feedbackRecords(env)});
  const paid=p.match(/^\/api\/invoices\/(INV-[A-Za-z0-9-]+)\/mark-paid$/);
  if(m==='POST'&&paid){
   const inv=await select(env,paid[1],'invoice');if(!inv)return fail(404,'Invoice not found.');
+  if(inv.paymentStatus==='paid')return reply({invoice:inv});
   inv.paymentStatus='paid';inv.paidAt=now();
-  await env.DB.prepare("UPDATE records SET data=?,status='paid' WHERE id=? AND kind='invoice'").bind(JSON.stringify(inv),inv.id).run();
-  return reply({invoice:inv});
+  const result=await env.DB.prepare("UPDATE records SET data=?,status='paid' WHERE id=? AND kind='invoice' AND status='unpaid'").bind(JSON.stringify(inv),inv.id).run();
+  return reply({invoice:result.meta?.changes?inv:await select(env,inv.id,'invoice')});
  }
  if(m==='GET'&&p==='/api/backup'){
-  const estimates=(await records(env,'estimate')).filter(e=>e.status!=='declined'),invoices=await records(env,'invoice');
-  return safeFile({app:'Superior Maintenance and Remodeling - Command Center',version:1,exportedAt:now(),estimates,invoices},'Superior_Command_Center_Backup_'+now().slice(0,10)+'.json');
+  const snapshot=await env.DB.batch([
+   env.DB.prepare("SELECT data FROM records WHERE kind='estimate' ORDER BY created_at DESC"),
+   env.DB.prepare("SELECT data FROM records WHERE kind='invoice' ORDER BY created_at DESC"),
+   env.DB.prepare('SELECT data FROM customer_reviews ORDER BY created_at DESC')
+  ]);
+  const [estimates,invoices,reviews]=snapshot.map(result=>result.results.map(parseRow));
+  return safeFile({app:'Superior Maintenance and Remodeling - Command Center',version:1,exportedAt:now(),estimates,invoices,reviews},'Superior_Command_Center_Backup_'+now().slice(0,10)+'.json');
  }
  if(m==='POST'&&p==='/api/restore'){
   const d=await body(req,8*1024*1024);
-  if(d.app!=='Superior Maintenance and Remodeling - Command Center'||d.version!==1||d.confirm!=='RESTORE'||!Array.isArray(d.estimates)||!Array.isArray(d.invoices))return fail(400,'Invalid backup or missing RESTORE confirmation.');
-  if(d.estimates.length+d.invoices.length>250)return fail(413,'This backup is too large for online restore. Contact support for a staged import.');
-  const commands=[env.DB.prepare('DELETE FROM records')],seen=new Set();
+  if(d.app!=='Superior Maintenance and Remodeling - Command Center'||d.version!==1||d.confirm!=='RESTORE'||!Array.isArray(d.estimates)||!Array.isArray(d.invoices)||d.reviews!==undefined&&!Array.isArray(d.reviews))return fail(400,'Invalid backup or missing RESTORE confirmation.');
+  const reviews=d.reviews||[];
+  if(d.estimates.length+d.invoices.length+reviews.length>250)return fail(413,'This backup is too large for online restore. Contact support for a staged import.');
+  const commands=[],kinds=[],seen=new Set(),seenEstimates=new Set();
   for(const [kind,array,prefix] of [['estimate',d.estimates,'EST'],['invoice',d.invoices,'INV']]){
    for(const r of array){
+    if(!r||typeof r!=='object')return fail(400,'Invalid backup record.');
     const status=kind==='estimate'?r.status:r.paymentStatus;
-    if(!goodId(r.id,prefix)||seen.has(r.id)||!Array.isArray(r.items)||r.items.length>40||typeof r.customer!=='string'||!Number.isFinite(Number(r.total))||(kind==='estimate'?!['draft','sent','approved'].includes(status):!['paid','unpaid'].includes(status)))return fail(400,'Invalid or duplicate backup record.');
+    if(!goodId(r.id,prefix)||seen.has(r.id)||!Array.isArray(r.items)||r.items.length<1||r.items.length>40||typeof r.customer!=='string'||!r.customer.trim()||!Number.isFinite(Number(r.total))||Number(r.total)<0||(r.createdAt!==undefined&&(typeof r.createdAt!=='string'||!Number.isFinite(Date.parse(r.createdAt))))||(kind==='estimate'?!['draft','sent','approved','declined'].includes(status):!['paid','unpaid'].includes(status))||kind==='estimate'&&r.reviewToken&&!/^[a-f0-9]{64}$/.test(r.reviewToken))return fail(400,'Invalid or duplicate backup record.');
+    inputItems(r.items);
+    const record={...r,createdAt:r.createdAt||now()};
     seen.add(r.id);
-    commands.push(env.DB.prepare('INSERT INTO records(id,kind,status,created_at,review_token,data) VALUES(?,?,?,?,?,?)').bind(r.id,kind,status,r.createdAt||now(),kind==='estimate'?r.reviewToken||null:null,JSON.stringify(r)));
+    kinds.push(kind);
+    commands.push(env.DB.prepare('INSERT INTO records(id,kind,status,created_at,review_token,data) VALUES(?,?,?,?,?,?) ON CONFLICT DO NOTHING').bind(record.id,kind,status,record.createdAt,kind==='estimate'?record.reviewToken||null:null,JSON.stringify(record)));
    }
   }
-  await env.DB.batch(commands);return reply({ok:true,estimates:d.estimates.length,invoices:d.invoices.length});
+  for(const r of reviews){
+   if(!r||typeof r!=='object'||!goodId(r.id,'REV')||seen.has(r.id)||!goodId(r.estimateId,'EST')||seenEstimates.has(r.estimateId)||typeof r.customer!=='string'||!r.customer.trim()||!Number.isInteger(r.rating)||r.rating<1||r.rating>5||typeof r.comment!=='string'||r.comment.length>2000||(r.createdAt!==undefined&&(typeof r.createdAt!=='string'||!Number.isFinite(Date.parse(r.createdAt)))))return fail(400,'Invalid or duplicate feedback record.');
+   const record={...r,createdAt:r.createdAt||now()};
+   seen.add(r.id);seenEstimates.add(r.estimateId);kinds.push('review');
+   commands.push(env.DB.prepare("INSERT INTO customer_reviews(id,estimate_id,created_at,data) SELECT ?,?,?,? WHERE EXISTS(SELECT 1 FROM records WHERE id=? AND kind='estimate') ON CONFLICT DO NOTHING").bind(record.id,record.estimateId,record.createdAt,JSON.stringify(record),record.estimateId));
+  }
+  const results=commands.length?await env.DB.batch(commands):[],imported={estimate:0,invoice:0,review:0};
+  for(let i=0;i<results.length;i++)imported[kinds[i]]+=Number(results[i].meta?.changes||0);
+  return reply({ok:true,estimates:imported.estimate,invoices:imported.invoice,reviews:imported.review,skipped:commands.length-imported.estimate-imported.invoice-imported.review});
  }
  if(m==='GET'&&p==='/api/google/status')return reply({configured:false,connected:false,folderUrl:null,lastBackupAt:null,lastError:null,notice:'Cloudflare D1 stores records. Google Drive OAuth is not configured yet.'});
  if(p==='/api/google/connect'||p==='/api/google/backup-now')return fail(503,'Google Drive auto-backup is not connected yet. Download a backup and save it in your private Drive folder.');
  return fail(404,'Not found.');
 }
 export default {async fetch(request,env,ctx){try{return await route(request,env);}catch(e){console.error('Command Center error:',e?.message);const msg=e?.message||'Internal server error';return fail(/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?400:500,/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?msg:'Server error.');}}};
+

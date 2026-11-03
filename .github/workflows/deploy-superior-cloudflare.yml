@@ -1,9 +1,8 @@
 name: Deploy Superior Command Center to Cloudflare
+
 on:
   push:
-    branches:
-      - main
-      - cloudflare-d1-migration
+    branches: [main]
     paths:
       - 'cloudflare-command-center/**'
       - 'superior-owner-website/**'
@@ -13,12 +12,50 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: superior-command-center-production
+  cancel-in-progress: false
+
 jobs:
-  deploy:
+  verify:
+    name: Build and test Command Center
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: cloudflare-command-center
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build public assets
+        run: npm run build
+      - name: Test Worker, persistent invoices, imports, and credential validation
+        run: npm test
+      - name: Test mobile dashboard and customer workflow
+        run: npm run test:browser
+      - name: Validate Cloudflare Worker bundle
+        run: npx wrangler deploy --dry-run
+      - name: Save mobile preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: superior-command-center-mobile-preview
+          path: cloudflare-command-center/test-results/*.png
+          if-no-files-found: ignore
+
+  deploy:
+    name: Deploy and verify Cloudflare
+    needs: verify
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cloudflare-command-center
+        shell: bash
+    # No Actions environment is selected: this is the repository Actions secret.
     env:
       CLOUDFLARE_ACCOUNT_ID: c917ac1c9a3824a210d0fb77e5879329
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -26,44 +63,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - name: Verify Cloudflare authorization
-        run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "::error title=Missing Cloudflare deployment secret::CLOUDFLARE_API_TOKEN is unavailable. Check the secret named CLOUDFLARE_API_TOKEN in the CLOUDFLARE_API_TOKEN Actions environment."
-            echo "Check the `CLOUDFLARE_API_TOKEN` secret in the `CLOUDFLARE_API_TOKEN` [deployment environment](https://github.com/${{ github.repository }}/settings/environments)." >> "$GITHUB_STEP_SUMMARY"
-            exit 1
-          fi
-          if [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_TOKEN" ] || [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_UNDERSCORE_TOKEN" ]; then
-            echo "::error title=Invalid Cloudflare secret value::The saved secret contains a setting name instead of an API token. Replace its value with the actual API token copied from Cloudflare."
-            exit 1
-          fi
-          if [[ "$CLOUDFLARE_API_TOKEN" =~ [[:space:]] ]]; then
-            echo "::error title=Invalid Cloudflare secret value::The saved token contains whitespace. Save only the raw API token, without a command, header, quotes, or extra spaces."
-            exit 1
-          fi
-      - name: Normalize Cloudflare API token
-        run: |
-          python3 - <<'PY'
-          import os
-          import sys
-          token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
-          if token.lower().startswith("bearer "):
-              token = token[7:].strip()
-          if len(token) > 1 and token[0] in ("'", '"') and token[-1] == token[0]:
-              token = token[1:-1].strip()
-          if not token or any(ord(ch) < 33 or ord(ch) > 126 for ch in token) or any(ch in token for ch in ("'", '"', "\\", ":")):
-              print("::error title=Invalid Cloudflare token format::The GitHub Actions secret must contain only a raw Cloudflare API token, not an entire curl command or Authorization header.")
-              sys.exit(1)
-          print(f"::add-mask::{token}")
-          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
-              print(f"CLOUDFLARE_API_TOKEN={token}", file=env)
-          PY
+          node-version: '24'
+      - name: Validate repository Cloudflare secret without displaying it
+        run: node scripts/validate-cloudflare-token.mjs
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
       - name: Build Command Center public assets
         run: npm run build
-      - name: Apply non-destructive D1 schema migrations
+      - name: Apply additive D1 migrations without replacing records
         run: npx wrangler d1 migrations apply superior-command-center --remote
       - name: Deploy Worker and static assets
-        run: npx wrangler deploy
+        run: npx wrangler deploy 2>&1 | tee "$RUNNER_TEMP/superior-deploy.log"
+      - name: Verify live website, owner access protection, and D1 readiness
+        id: live
+        run: node scripts/verify-deployment.mjs "$RUNNER_TEMP/superior-deploy.log"
+
