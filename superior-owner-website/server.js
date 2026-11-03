@@ -19,6 +19,7 @@ const ROOT = __dirname;
 const sessions = new Map();
 const badLogins = new Map();
 const MAX_BODY = 100 * 1024;
+const MAX_RESTORE_BODY = 8 * 1024 * 1024;
 const MIME={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon'};
 fs.mkdirSync(DATA_DIR,{recursive:true});
 let db={estimates:[],invoices:[]};
@@ -36,14 +37,14 @@ const cookieSession=req=>{const match=(req.headers.cookie||'').match(/(?:^|;\s*)
 const headers=(extra={})=>({'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",...extra});
 const json=(res,status,body,extra={})=>{res.writeHead(status,headers({'Content-Type':'application/json; charset=utf-8',...extra}));res.end(JSON.stringify(body));};
 const reject=(res,status,message)=>json(res,status,{error:message});
-const readBody=async req=>{let b='';for await (const chunk of req){b+=chunk;if(b.length>MAX_BODY)throw Error('Request too large');}try{return JSON.parse(b||'{}');}catch{throw Error('Invalid JSON');}};
+const readBody=async(req,limit=MAX_BODY)=>{let b='';let bytes=0;for await(const chunk of req){bytes+=chunk.length;if(bytes>limit)throw Error('Request too large');b+=chunk.toString('utf8');}try{return JSON.parse(b||'{}');}catch{throw Error('Invalid JSON');}};
 const originOk=req=>{const origin=req.headers.origin;if(!origin)return true;try {const host=req.headers.host;return new URL(origin).host===host && /^https?:$/.test(new URL(origin).protocol);}catch{return false;}};
 const ownerOnly=(req,res)=>{if(!cookieSession(req)){reject(res,401,'Sign in as the owner.');return false;}return true;};
 function parseItems(raw){if(!Array.isArray(raw)||raw.length<1||raw.length>40)throw Error('Add between 1 and 40 line items.');return raw.map(v=>{const description=safe(v.description,240),qty=Number(v.qty),rate=Number(v.rate);if(!description||!Number.isFinite(qty)||qty<=0||qty>100000||!Number.isFinite(rate)||rate<0||rate>1000000)throw Error('Check line item description, quantity and unit price.');const total=Math.round(qty*cents(rate));return {description,qty,rate:money(cents(rate)),total:money(total)};});}
 function makeEstimate(input,original){const customer=safe(input.customer,120);const email=safe(input.email,254);const phone=safe(input.phone,50);const address=safe(input.address,240);if(!customer||!validEmail(email))throw Error('A customer name and valid email are required.');const items=parseItems(input.items);const taxRate=Number(input.taxRate||0);if(!Number.isFinite(taxRate)||taxRate<0||taxRate>25)throw Error('Tax rate must be between 0 and 25 percent.');const subtotalCents=items.reduce((sum,item)=>sum+cents(item.total),0);const taxCents=Math.round(subtotalCents*taxRate/100);if(subtotalCents+taxCents>1e10)throw Error('Estimate amount is too large.');return {...(original||{}),customer,email,phone,address,project:safe(input.project,240),notes:safe(input.notes,3000),items,taxRate,subtotal:money(subtotalCents),tax:money(taxCents),total:money(subtotalCents+taxCents)};}
 const publicEstimate=e=>({id:e.id,customer:e.customer,project:e.project,address:e.address,notes:e.notes,items:e.items,taxRate:e.taxRate,subtotal:e.subtotal,tax:e.tax,total:e.total,status:e.status,createdAt:e.createdAt,sharedAt:e.sharedAt,decidedAt:e.decidedAt,customerNote:e.customerNote});
 const reviewUrl=(req,token)=>{if(PUBLIC_BASE_URL) return `${PUBLIC_BASE_URL.replace(/\/$/,'')}/review/${token}`;const proto=(req.headers['x-forwarded-proto']==='https'||req.socket.encrypted)?'https':'http';return `${proto}://${req.headers.host}/review/${token}`;};
-const fileRoutes={'/':'index.html','/index.html':'index.html','/owner':'owner.html','/owner.html':'owner.html','/styles.css':'styles.css','/script.js':'script.js','/owner.css':'owner.css','/owner.js':'owner.js','/review.js':'review.js'};
+const fileRoutes={'/owner/backup':'backup.html','/backup.html':'backup.html','/backup.css':'backup.css','/backup.js':'backup.js','/':'index.html','/index.html':'index.html','/owner':'owner.html','/owner.html':'owner.html','/styles.css':'styles.css','/script.js':'script.js','/owner.css':'owner.css','/owner.js':'owner.js','/review.js':'review.js'};
 const STATIC_ASSETS=new Set(['superior-logo.webp']);
 function staticFile(res,file){if(!fs.existsSync(file)||!fs.statSync(file).isFile())return reject(res,404,'Not found.');const mime=MIME[path.extname(file)]||'application/octet-stream';res.writeHead(200,headers({'Content-Type':mime,'Cache-Control':'public, max-age=300'}));fs.createReadStream(file).pipe(res);}
 const server=http.createServer(async (req,res)=>{try{
@@ -62,6 +63,28 @@ const server=http.createServer(async (req,res)=>{try{
    return json(res,200,{authenticated:true},{'Set-Cookie':`superior_sid=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=43200${secure?'; Secure':''}`});
  }
  if(req.method==='POST'&&pathname==='/api/logout'){const token=cookieSession(req);if(token)sessions.delete(token);return json(res,200,{ok:true},{'Set-Cookie':'superior_sid=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});}
+ if(req.method==='GET'&&pathname==='/api/backup'){
+   if(!ownerOnly(req,res))return;
+   const backup={app:'Superior Maintenance and Remodeling - Command Center',version:1,exportedAt:now(),estimates:db.estimates,invoices:db.invoices};
+   const filename=`Superior_Command_Center_Backup_${new Date().toISOString().slice(0,10)}.json`;
+   res.writeHead(200,headers({'Content-Type':'application/json; charset=utf-8','Content-Disposition':`attachment; filename="${filename}"`}));
+   return res.end(JSON.stringify(backup,null,2));
+ }
+ if(req.method==='POST'&&pathname==='/api/restore'){
+   if(!ownerOnly(req,res))return;
+   let input;try{input=await readBody(req,MAX_RESTORE_BODY);}catch(e){return reject(res,e.message==='Request too large'?413:400,e.message);}
+   if(input?.app!=='Superior Maintenance and Remodeling - Command Center'||input.version!==1||!Array.isArray(input.estimates)||!Array.isArray(input.invoices))return reject(res,400,'This is not a supported Command Center backup.');
+   if(input.confirm!=='RESTORE')return reject(res,400,'Restore confirmation is required.');
+   if(input.estimates.length>100000||input.invoices.length>100000)return reject(res,400,'Backup exceeds allowed record count.');
+   const validEstimate=e=>e&&typeof e==='object'&&/^EST-[A-Za-z0-9-]{1,100}$/.test(e.id||'')&&typeof e.customer==='string'&&Array.isArray(e.items)&&e.items.length<=40&&['draft','sent','approved','declined'].includes(e.status)&&Number.isFinite(Number(e.total));
+   const validInvoice=i=>i&&typeof i==='object'&&/^INV-[A-Za-z0-9-]{1,100}$/.test(i.id||'')&&typeof i.customer==='string'&&Array.isArray(i.items)&&i.items.length<=40&&['paid','unpaid'].includes(i.paymentStatus)&&Number.isFinite(Number(i.total));
+   if(!input.estimates.every(validEstimate)||!input.invoices.every(validInvoice))return reject(res,400,'The backup contains invalid records.');
+   if(new Set(input.estimates.map(e=>e.id)).size!==input.estimates.length||new Set(input.invoices.map(i=>i.id)).size!==input.invoices.length)return reject(res,400,'Duplicate record IDs in backup.');
+   // Save a rollback snapshot on the same volume; the downloaded user backup remains the reliable off-site copy.
+   const prior=db;db={estimates:input.estimates,invoices:input.invoices};
+   try{persist();}catch(e){db=prior;throw e;}
+   return json(res,200,{ok:true,estimates:db.estimates.length,invoices:db.invoices.length});
+ }
  if(req.method==='GET'&&pathname==='/api/estimates'){if(!ownerOnly(req,res))return;return json(res,200,{estimates:db.estimates.map(({reviewToken,...e})=>e)});}
  if(req.method==='POST'&&pathname==='/api/estimates'){
    if(!ownerOnly(req,res))return;let e;try{e=makeEstimate(await readBody(req));}catch(err){return reject(res,400,err.message);}
