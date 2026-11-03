@@ -12,7 +12,7 @@
     {
       "binding": "DB",
       "database_name": "superior-command-center",
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
+      "database_id": "4feb6f63-1102-467a-87e6-256309364f12",
       "migrations_dir": "migrations"
     }
   ]
