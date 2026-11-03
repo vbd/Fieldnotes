@@ -15,7 +15,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: CLOUDFLARE_API_TOKEN
     defaults:
       run:
         working-directory: cloudflare-command-center
@@ -27,17 +26,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Diagnose Cloudflare secret keys without revealing values
-        env:
-          ALL_SECRET_VALUES_JSON: ${{ toJSON(secrets) }}
-        run: |
-          python3 - <<'PY'
-          import json, os
-          secret_data = json.loads(os.environ.get('ALL_SECRET_VALUES_JSON') or '{}')
-          keys = sorted(k for k in secret_data if 'CLOUD' in k.upper() or 'D1' in k.upper())
-          print('Cloudflare-related secret names (values not shown):', ', '.join(keys) if keys else '(none)')
-          print('Exact expected secret available:', 'yes' if secret_data.get('CLOUDFLARE_API_TOKEN') else 'no')
-          PY
       - name: Verify Cloudflare authorization
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
