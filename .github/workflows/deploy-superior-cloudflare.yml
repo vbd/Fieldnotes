@@ -16,6 +16,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: CLOUDFLARE_API_TOKEN
     defaults:
       run:
         working-directory: cloudflare-command-center
@@ -30,8 +31,8 @@ jobs:
       - name: Verify Cloudflare authorization
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "::error title=Missing Cloudflare deployment secret::CLOUDFLARE_API_TOKEN is unavailable. Set CLOUDFLARE_API_TOKEN as an Actions repository secret."
-            echo "Configure the CLOUDFLARE_API_TOKEN repository secret in [GitHub Actions secrets](https://github.com/${{ github.repository }}/settings/secrets/actions)." >> "$GITHUB_STEP_SUMMARY"
+            echo "::error title=Missing Cloudflare deployment secret::CLOUDFLARE_API_TOKEN is unavailable. Check the secret named CLOUDFLARE_API_TOKEN in the CLOUDFLARE_API_TOKEN Actions environment."
+            echo "Check the `CLOUDFLARE_API_TOKEN` secret in the `CLOUDFLARE_API_TOKEN` [deployment environment](https://github.com/${{ github.repository }}/settings/environments)." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
           if [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_TOKEN" ] || [ "$CLOUDFLARE_API_TOKEN" = "CLOUDFLARE_API_UNDERSCORE_TOKEN" ]; then
