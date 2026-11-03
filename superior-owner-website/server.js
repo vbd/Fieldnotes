@@ -9,6 +9,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { URL } = require('node:url');
+const { GoogleDriveBackup } = require('./google-drive');
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = Number(process.env.PORT || 3000);
 const OWNER_PASSWORD = process.env.OWNER_PASSWORD || '';
@@ -24,7 +25,8 @@ const MIME={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8',
 fs.mkdirSync(DATA_DIR,{recursive:true});
 let db={estimates:[],invoices:[]};
 if(fs.existsSync(DATA_FILE)) { try {const saved=JSON.parse(fs.readFileSync(DATA_FILE,'utf8')); if(Array.isArray(saved.estimates)&&Array.isArray(saved.invoices)) db=saved; else throw new Error('Invalid database format');}catch(e){ console.error('Cannot load data store:',e);process.exit(1);} }
-const persist=()=>{ const tmp=DATA_FILE+'.'+crypto.randomBytes(6).toString('hex')+'.tmp';fs.writeFileSync(tmp,JSON.stringify(db,null,2),{mode:0o600});fs.renameSync(tmp,DATA_FILE);};
+const googleDrive=new GoogleDriveBackup({dataDir:DATA_DIR,ownerPassword:OWNER_PASSWORD,getRecords:()=>db});
+const persist=()=>{ const tmp=DATA_FILE+'.'+crypto.randomBytes(6).toString('hex')+'.tmp';fs.writeFileSync(tmp,JSON.stringify(db,null,2),{mode:0o600});fs.renameSync(tmp,DATA_FILE);googleDrive.queueBackup();};
 const cents=v=>Math.round(Number(v)*100);
 const money=v=>Number((v/100).toFixed(2));
 const safe=(v,max=200)=>String(v??'').trim().slice(0,max);
@@ -55,6 +57,26 @@ const server=http.createServer(async (req,res)=>{try{
  if(!pathname.startsWith('/api/'))return reject(res,404,'Not found.');
  if(!OWNER_PASSWORD)return reject(res,503,'Owner login is not configured on the server.');
  if(['POST','PUT','PATCH','DELETE'].includes(req.method)&&!originOk(req))return reject(res,403,'Invalid request origin.');
+ if(req.method==='GET'&&pathname==='/api/google/status'){
+   if(!ownerOnly(req,res))return;return json(res,200,googleDrive.getStatus());
+ }
+ if(req.method==='GET'&&pathname==='/api/google/connect'){
+   if(!ownerOnly(req,res))return;
+   if(!googleDrive.configured())return reject(res,503,'Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in Render environment settings first.');
+   return res.writeHead(302,headers({Location:googleDrive.authUrl()})).end();
+ }
+ if(req.method==='GET'&&pathname==='/api/google/callback'){
+   try{
+     if(url.searchParams.has('error'))return res.writeHead(303,headers({Location:'/owner/backup?drive=denied'})).end();
+     await googleDrive.completeAuth(url.searchParams.get('code'),url.searchParams.get('state'));
+     return res.writeHead(303,headers({Location:'/owner/backup?drive=connected'})).end();
+   }catch(e){console.error('Google OAuth callback failed:',e.message);return res.writeHead(303,headers({Location:'/owner/backup?drive=error'})).end();}
+ }
+ if(req.method==='POST'&&pathname==='/api/google/backup-now'){
+   if(!ownerOnly(req,res))return;
+   try{return json(res,200,{ok:true,...await googleDrive.backupNow()});}
+   catch(e){return reject(res,503,e.message);}
+ }
  if(req.method==='GET'&&pathname==='/api/session')return json(res,200,{authenticated:!!cookieSession(req)});
  if(req.method==='POST'&&pathname==='/api/login'){
    const ip=safe(req.socket.remoteAddress||'unknown',80);const attempts=badLogins.get(ip)||[];const recent=attempts.filter(t=>t>Date.now()-15*60*1000);if(recent.length>=10)return reject(res,429,'Too many sign-in attempts. Try again later.');
