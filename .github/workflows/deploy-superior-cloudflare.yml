@@ -11,7 +11,6 @@ on:
 
 permissions:
   contents: read
-  actions: read
 
 jobs:
   deploy:
@@ -28,22 +27,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Inspect missing Cloudflare credential configuration
-        if: ${{ env.CLOUDFLARE_API_TOKEN == '' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          for endpoint in actions/secrets environments/CLOUDFLARE_API_TOKEN/secrets actions/variables environments/CLOUDFLARE_API_TOKEN/variables; do
-            echo "Configuration names in $endpoint:"
-            if ! gh api "repos/$GH_REPO/$endpoint" --jq '(.secrets // .variables // [])[] | .name'; then
-              echo "::notice::Configuration metadata is unavailable to the workflow token."
-            fi
-          done
       - name: Verify Cloudflare authorization
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "CLOUDFLARE_API_TOKEN is not configured as a GitHub Actions secret."
+            echo "::error title=Missing Cloudflare deployment secret::CLOUDFLARE_API_TOKEN is unavailable. Add a secret with this name to the CLOUDFLARE_API_TOKEN deployment environment or the repository Actions secrets."
+            echo "Configure the CLOUDFLARE_API_TOKEN secret in [GitHub Actions secrets](https://github.com/${{ github.repository }}/settings/secrets/actions) or the selected [deployment environment](https://github.com/${{ github.repository }}/settings/environments)." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
       - name: Install dependencies
