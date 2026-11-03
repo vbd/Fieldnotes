@@ -77,7 +77,7 @@ class GoogleDriveBackup {
  async ensureFolder(){
   if(this.folderId)return this.folderId;
   // drive.file can access only files/folders made or opened by this OAuth app.
-  const query=new URLSearchParams({q:"name = '"+FOLDER_NAME+"' and mimeType = 'application/vnd.google-apps.folder' and trashed = false",fields:'files(id,name),nextPageToken',page_size:'100'});
+  const query=new URLSearchParams({q:"name = '"+FOLDER_NAME+"' and mimeType = 'application/vnd.google-apps.folder' and trashed = false",fields:'files(id,name),nextPageToken',pageSize:'100'});
   const found=await this.driveRequest(ROOT+'/files?'+query.toString());
   if(found.files?.length){this.folderId=found.files[0].id;return this.folderId;}
   const made=await this.driveRequest(ROOT+'/files?fields=id,name',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:FOLDER_NAME,mimeType:'application/vnd.google-apps.folder'})});
