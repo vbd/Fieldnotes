@@ -65,7 +65,7 @@ const server=http.createServer(async (req,res)=>{try{
  if(req.method==='POST'&&pathname==='/api/logout'){const token=cookieSession(req);if(token)sessions.delete(token);return json(res,200,{ok:true},{'Set-Cookie':'superior_sid=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});}
  if(req.method==='GET'&&pathname==='/api/backup'){
    if(!ownerOnly(req,res))return;
-   const backup={app:'Superior Maintenance and Remodeling - Command Center',version:1,exportedAt:now(),estimates:db.estimates,invoices:db.invoices};
+   const backup={app:'Superior Maintenance and Remodeling - Command Center',version:1,exportedAt:now(),estimates:db.estimates.filter(e=>e.status!=='declined'),invoices:db.invoices};
    const filename=`Superior_Command_Center_Backup_${new Date().toISOString().slice(0,10)}.json`;
    res.writeHead(200,headers({'Content-Type':'application/json; charset=utf-8','Content-Disposition':`attachment; filename="${filename}"`}));
    return res.end(JSON.stringify(backup,null,2));
