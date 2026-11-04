@@ -21,7 +21,7 @@ jobs:
         working-directory: cloudflare-command-center
     env:
       CLOUDFLARE_ACCOUNT_ID: c917ac1c9a3824a210d0fb77e5879329
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLODAPI_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
