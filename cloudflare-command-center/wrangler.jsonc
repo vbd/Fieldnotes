@@ -1,0 +1,19 @@
+{
+  "name": "superior-command-center",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-03",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "superior-command-center",
+      "database_id": "4feb6f63-1102-467a-87e6-256309364f12",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
