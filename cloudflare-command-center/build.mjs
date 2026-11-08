@@ -3,7 +3,7 @@ import {resolve, join} from 'node:path';
 const base=resolve('../superior-owner-website'),dest=resolve('public');
 await rm(dest,{recursive:true,force:true});
 await mkdir(join(dest,'assets'),{recursive:true});
-const files=['index.html','styles.css','script.js','owner.html','owner.css','owner.js','review.html','review.js','backup.html','backup.css','backup.js'];
+const files=['index.html','styles.css','script.js','owner.html','owner.css','owner.js','review.html','review.js','review-mobile.css','backup.html','backup.css','backup.js'];
 for(const file of files){
  let s=await readFile(join(base,file),'utf8');
  if(file==='owner.html')s=s.replace(/<p class="preview-alert">[\s\S]*?<\/p>/g,'');
