@@ -71,3 +71,69 @@ button:disabled{opacity:.55;cursor:wait}button:focus-visible,a:focus-visible{out
 @media print{
   #editor-dialog.modal{position:static;height:auto;max-height:none;overflow:visible}
 }
+
+
+/* Mobile-first Command Center refinement — November 2026 */
+html,body{max-width:100%;overflow-x:clip}
+.app-shell,.main-panel,.content,.panel,.record-list,.record,.record-main,.greeting>div,.page-head>div{min-width:0}
+h1,h2,h3,p,.eyebrow,.record-name,.record-meta{overflow-wrap:break-word}
+button,a,input,textarea,select{touch-action:manipulation}
+@media(max-width:770px){
+ .topbar{min-height:66px;height:auto;padding:12px 16px;gap:8px}
+ .topbar-brand{min-width:0;flex:1}
+ .topbar-brand>div{min-width:0}
+ .topbar-brand small{letter-spacing:.7px;overflow-wrap:anywhere}
+ .topbar-brand strong{font-size:14px}
+ .top-actions{gap:6px;flex-shrink:0}
+ .top-actions .website-link{font-size:11px;text-align:right}
+ .content{padding:22px 14px calc(100px + env(safe-area-inset-bottom));width:100%}
+ .greeting,.page-head{gap:12px;margin-bottom:22px}
+ .greeting h1,.page-head h1{font-size:clamp(29px,9vw,40px);line-height:1.12;letter-spacing:-1px}
+ .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:20px}
+ .stat{min-width:0;min-height:122px;padding:14px}
+ .stat>div{font-size:10px;letter-spacing:.5px;overflow-wrap:anywhere}
+ .stat>strong{font-size:clamp(19px,6vw,28px);white-space:normal;overflow-wrap:anywhere;margin-top:13px}
+ .stat>small{font-size:10px}
+ .panel-head{padding:16px;gap:8px}
+ .panel-head h2{font-size:18px}
+ .record{padding:14px 12px;gap:8px}
+ .record-name,.record-meta{white-space:normal;overflow-wrap:anywhere;line-height:1.3}
+ .record-right{flex-shrink:0}
+ .quick-row{padding:18px}
+ .workflow-steps{gap:6px}
+ .workflow-steps span{padding:8px}
+ .bottom-nav{height:calc(68px + env(safe-area-inset-bottom));align-items:flex-start}
+ .bottom-nav button{min-width:0;flex:1;min-height:58px;padding:8px 2px;font-size:10px}
+ .modal{position:fixed;inset:0;width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border:0;border-radius:0;overflow-y:auto;overscroll-behavior:contain}
+ .modal-top{padding:15px 16px;min-height:70px;gap:10px}
+ .modal-top h2{font-size:20px;overflow-wrap:anywhere}
+ .modal-body{padding:18px 16px 28px;gap:16px}
+ .modal-foot{padding:12px 16px calc(12px + env(safe-area-inset-bottom));gap:8px}
+ .modal-foot .primary,.modal-foot .ghost{flex:1;min-width:0;padding:12px 9px;text-align:center}
+ .field-grid{grid-template-columns:1fr;gap:14px}
+ .line-item{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px}
+ .line-item label:first-child{grid-column:1/-1}
+ .line-item label{min-width:0;font-size:12px}
+ .line-item input{font-size:16px;padding:12px 10px}
+ .remove-line{grid-column:1/-1;width:100%;height:40px}
+ .total-area{grid-template-columns:1fr;gap:14px}
+ .total-area>label{max-width:none}
+ .detail-paper{padding:15px 12px}
+ .doc-meta{flex-wrap:wrap;gap:12px}
+ .paper-brand{flex-wrap:wrap}
+ .paper-table{table-layout:fixed;width:100%;font-size:10px}
+ .paper-table th,.paper-table td{padding:8px 4px;overflow-wrap:anywhere}
+ .paper-totals>div{max-width:100%}
+ .login-panel{padding:30px 22px}
+ .login-panel h1{font-size:clamp(32px,10vw,46px)}
+}
+@media(max-width:360px){
+ .top-actions .website-link{font-size:10px}
+ .stat{padding:11px}
+ .record-icon{display:none}
+ .status{font-size:9px}
+}
+@media print{
+ html,body{overflow:visible!important}
+ .modal[open]{position:static!important;width:100%!important;height:auto!important;max-height:none!important;overflow:visible!important}
+}
