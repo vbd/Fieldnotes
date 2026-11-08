@@ -156,3 +156,15 @@ button,a,input,textarea,select{touch-action:manipulation}
   padding:0;font-size:24px;line-height:1;border-radius:8px;
  }
 }
+
+/* Compact mobile save/cancel bar while retaining 44px touch targets. */
+@media(max-width:770px){
+ #editor-dialog .modal-foot{
+  padding:6px 12px calc(6px + env(safe-area-inset-bottom));
+  gap:8px;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);
+ }
+ #editor-dialog .modal-foot button{
+  min-height:44px;min-width:0;padding:8px 6px;
+  font-size:12px;line-height:1.2;white-space:normal;
+ }
+}
