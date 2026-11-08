@@ -137,3 +137,22 @@ button,a,input,textarea,select{touch-action:manipulation}
  html,body{overflow:visible!important}
  .modal[open]{position:static!important;width:100%!important;height:auto!important;max-height:none!important;overflow:visible!important}
 }
+
+/* Keep the phone estimate header compact, including enlarged browser text. */
+@media(max-width:770px){
+ #editor-dialog .modal-top{
+  min-height:0;gap:8px;
+  padding:calc(6px + env(safe-area-inset-top)) 12px 6px;
+ }
+ #editor-dialog .modal-top>div{min-width:0;flex:1}
+ #editor-dialog .modal-top .eyebrow{
+  margin:0 0 2px;font-size:9px;line-height:1.2;letter-spacing:1px;
+ }
+ #editor-dialog .modal-top h2{
+  margin:0;font-size:18px;line-height:1.2;letter-spacing:0;
+ }
+ #editor-dialog .modal-top .icon-btn{
+  flex:0 0 44px;width:44px;height:44px;min-height:44px;
+  padding:0;font-size:24px;line-height:1;border-radius:8px;
+ }
+}
