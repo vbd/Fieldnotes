@@ -1,4 +1,5 @@
 name: Deploy Superior Command Center to Cloudflare
+# Redeploy current verified code without modifying database records.
 
 on:
   push:
