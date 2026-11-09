@@ -33,21 +33,46 @@ $('restore').addEventListener('click',async()=>{
  }catch(error){status(error.message,true);}finally{restoring=false;$('restore').disabled=!restoreSupported||!$('backup-file').files.length;}
 });
 const driveStatus=$('drive-connection-status'),driveDetails=$('drive-details');
+let emailBackups=false,backupBusy=false;
 async function checkDrive(){
  try{
-  const s=await(await req('/api/google/status')).json();$('drive-connect').disabled=!s.configured;$('drive-backup-now').disabled=!s.connected;
-  driveStatus.textContent=!s.configured?(s.notice||'Google Drive backup is not configured.'):s.connected?'Google Drive connected.':'Not connected to Google Drive yet.';
-  driveDetails.textContent=(s.lastBackupAt?'Last cloud backup: '+new Date(s.lastBackupAt).toLocaleString()+'. ':'')+(s.lastError?'Backup error: '+s.lastError+'. ':'')+(s.folderUrl?'Backup folder: '+s.folderUrl+'. ':'');
+  const s=await(await req('/api/google/status')).json();emailBackups=Boolean(s.email);$('drive-connect').disabled=backupBusy||!s.configured;$('drive-backup-now').disabled=backupBusy||!s.connected;
+  $('drive-connect').textContent=emailBackups?'Connect Drive & email':'Connect Google Drive';
+  driveStatus.textContent=!s.configured?(s.notice||'Google backup connection needs setup.'):s.connected?(emailBackups?'Google connected for Drive and email backups.':'Google Drive connected.'):'Connect your Google account to enable backups.';
+  const details=[];
+  if(emailBackups)details.push('Backups run after a new estimate is saved and when an invoice is created or paid. Copies go to your private Drive folder and '+s.email+'.');
+  if(s.pendingCount)details.push(s.pendingCount+' backup'+(s.pendingCount===1?' is':'s are')+' waiting to finish.');
+  if(s.latestRun&&s.latestRun.status!=='complete'){
+   const drive={saved:'saved',failed:'failed',unknown:'unconfirmed',uploading:'in progress',pending:'waiting'}[s.latestRun.driveState]||'waiting';
+   const email={sent:'sent',failed:'failed',unknown:'unconfirmed',sending:'in progress',pending:'waiting'}[s.latestRun.emailState]||'waiting';
+   details.push('Latest backup: Drive '+drive+'; email '+email+'.');
+  }
+  if(s.lastBackupAt)details.push('Last completed backup: '+new Date(s.lastBackupAt).toLocaleString()+'.');
+  if(emailBackups&&s.lastDriveBackupAt)details.push('Drive saved: '+new Date(s.lastDriveBackupAt).toLocaleString()+'.');
+  if(emailBackups&&s.lastEmailBackupAt)details.push('Email sent: '+new Date(s.lastEmailBackupAt).toLocaleString()+'.');
+  if(s.lastError)details.push('Backup needs attention: '+s.lastError);
+  if(s.needsAttention)details.push('Check your backup folder and Gmail before retrying an unconfirmed delivery.');
+  driveDetails.replaceChildren(document.createTextNode(details.join(' ')));
+  if(s.folderUrl&&/^https:\/\/drive\.google\.com\/drive\/folders\/[A-Za-z0-9_-]+$/.test(s.folderUrl)){
+   const link=document.createElement('a');link.href=s.folderUrl;link.textContent='Open private backup folder';link.target='_blank';link.rel='noopener noreferrer';
+   driveDetails.append(document.createTextNode(' '),link);
+  }
  }catch(error){driveStatus.textContent='Unable to check Google Drive.';driveDetails.textContent=error.message;}
 }
 $('drive-connect').addEventListener('click',()=>{location.href='/api/google/connect';});
 $('drive-backup-now').addEventListener('click',async()=>{
- const button=$('drive-backup-now');if(button.disabled)return;button.disabled=true;
- try{driveStatus.textContent='Saving a new Drive backup…';const s=await(await req('/api/google/backup-now',{method:'POST'})).json();driveStatus.textContent='Google Drive backup saved successfully.';driveDetails.textContent='Saved '+s.filename+' at '+new Date(s.savedAt).toLocaleString()+'. '+s.folderUrl;}
- catch(error){driveStatus.textContent='Google Drive backup failed.';driveDetails.textContent=error.message;}finally{await checkDrive();}
+ const button=$('drive-backup-now');if(button.disabled||backupBusy)return;backupBusy=true;button.disabled=true;
+ try{
+  driveStatus.textContent=emailBackups?'Saving to Drive and sending your backup email…':'Saving a new Drive backup…';
+  const s=await(await req('/api/google/backup-now',{method:'POST',headers:{'Idempotency-Key':crypto.randomUUID()}})).json();
+  if(emailBackups&&(!s.driveSaved||!s.emailSent))throw Error('The backup did not complete both deliveries. Check its status before trying again.');
+  status(emailBackups?'Backup saved to Drive and sent to your email.':'Google Drive backup saved successfully.');
+ }
+ catch(error){status(error.message,true);}finally{backupBusy=false;await checkDrive();}
 });
 checkDrive();
 const driveParam=new URLSearchParams(location.search).get('drive');
-if(driveParam==='connected')status('Google Drive authorized and first backup saved.');
+if(driveParam==='connected')status('Google authorized and first backup saved.');
+if(driveParam==='backup-error')status('Google connected, but the first backup did not finish. Check its delivery status above.',true);
 if(driveParam==='denied')status('Google authorization was not approved.',true);
 if(driveParam==='error')status('Google authorization failed. Check Google OAuth settings and try again.',true);

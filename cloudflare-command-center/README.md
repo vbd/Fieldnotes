@@ -43,7 +43,24 @@ Imports are **additive**: existing records, paid invoices, and feedback are reta
 
 The older Node/Render server is a separate fallback runtime. Shared frontend assets disable unsupported feedback and unsafe legacy restore until the server advertises the required capabilities. Export old records before changing any old hosting service; this deployment does not shut it down or import private data automatically. Old approval links need the new Cloudflare origin when moving between hosts.
 
-Automatic Google Drive backup is not configured by this deployment. D1 is the primary storage; privately saved downloads provide off-site recovery.
+## Automatic Drive and email backups
+
+Saving a new estimate atomically queues its backup alongside the D1 record. Customer approval queues the resulting invoice, and recording payment queues its updated state. The Worker starts delivery after the save; a scheduled catch-up runs every 15 minutes for pending deliveries. It does not generate a separate daily email. A Google outage cannot remove the saved document or its queued backup.
+
+Each delivery includes one complete, restore-compatible JSON snapshot of all estimate statuses, invoices and customer feedback. The same file is saved to the existing private **Superior Command Center — Private Backups** folder and attached to an email sent to **superiormandr@gmail.com**. Delivery receipts remain in D1. Repeated processing does not duplicate completed deliveries; an uncertain Gmail outcome requires checking Gmail and is never blindly resent. Drive and email timestamps show confirmed delivery separately. A complete-backup timestamp is recorded only when both destinations confirm success.
+
+### Connect the business Google account
+
+The app needs its own Google authorization. Google Drive and Gmail connected to ChatGPT do not authorize this separate Cloudflare Worker.
+
+1. Reuse the existing Google OAuth web client if one is already available. Enable the Google Drive API and Gmail API for its Google Cloud project. Register this exact authorized redirect URI: `https://superior-command-center.superiormandr.workers.dev/api/google/callback`.
+2. In Cloudflare **Workers & Pages → superior-command-center → Settings → Variables and Secrets**, securely configure `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. The client secret must use type **Secret**. Keep the existing `OWNER_PASSWORD` and `SESSION_SECRET`; do not paste any secret into chat or commit it to the repository.
+3. Sign in to the Command Center, open **Backup & restore**, select **Connect Drive & email**, and authorize the selected business Google account. Google approval grants access to the existing private backup folder and permits sending backup attachments to the same business Gmail. The app validates the account and private folder before retaining encrypted offline authorization in D1.
+4. Confirm the first backup reports both Drive and email delivery. The existing folder and Gmail attachment are independent recoverable copies. Until authorization and delivery succeed, the page reports pending setup and manual downloads remain available.
+
+The destination is configured by the nonsecret `BACKUP_EMAIL` and `GOOGLE_DRIVE_BACKUP_FOLDER_ID` Wrangler values. Runtime operations are restricted to that recipient and folder; they never change folder sharing or delete existing backups. A publicly shared destination is rejected. OAuth refresh tokens are encrypted using the existing session secret and persist across deployments. Changing that secret requires reconnecting Google.
+
+For unattended use, check the Google OAuth application's publishing status: Google can expire offline tokens issued by an app left in **Testing** after seven days. Provider revocation or expiration is reported on the backup page and requires reconnecting. Automatic delivery is limited to complete JSON files up to 8 MB; larger datasets require a manual export and staged recovery. Existing imports remain additive and limited to 250 records per request.
 
 ## Local checks
 

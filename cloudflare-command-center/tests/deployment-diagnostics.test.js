@@ -4,13 +4,20 @@ import {mkdtemp,readFile,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {describeHealth,verifyDeployment} from '../scripts/verify-deployment.mjs';
-import {describeWorkerSettings,inspectWorkerSettings} from '../scripts/inspect-worker-settings.mjs';
+import {describeWorkerSettings,describeBackupSettings,inspectWorkerSettings} from '../scripts/inspect-worker-settings.mjs';
 
 const sentinel='FAKE-CREDENTIAL-MUST-NEVER-APPEAR';
 const account='a'.repeat(32),database='4feb6f63-1102-467a-87e6-256309364f12';
 const json=(body,status=200)=>Response.json(body,{status});
 const settings=bindings=>({success:true,result:{bindings}});
 const env={CLOUDFLARE_ACCOUNT_ID:account,CLOUDFLARE_API_TOKEN:sentinel};
+
+test('backup settings report configuration presence without exposing client credentials',()=>{
+ const pending=describeBackupSettings(settings([]));assert.deepEqual(pending.missing,['GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET']);
+ const configured=describeBackupSettings(settings([{name:'GOOGLE_CLIENT_ID',type:'plain_text',text:sentinel},{name:'GOOGLE_CLIENT_SECRET',type:'secret_text',text:sentinel}]));
+ assert.equal(configured.unsafeSecret,false);assert.deepEqual(configured.missing,[]);assert.ok(!JSON.stringify(configured).includes(sentinel));
+ assert.equal(describeBackupSettings(settings([{name:'GOOGLE_CLIENT_SECRET',type:'plain_text',text:sentinel}])).unsafeSecret,true);
+});
 
 test('health diagnostics distinguish known causes and never echo arbitrary fields or bodies',async()=>{
  const cases=[

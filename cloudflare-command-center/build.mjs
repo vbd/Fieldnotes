@@ -9,6 +9,8 @@ for(const file of files){
  if(file==='owner.html')s=s.replace(/<p class="preview-alert">[\s\S]*?<\/p>/g,'').replace('href="owner.css"','href="/owner.css"').replace('src="owner.js"','src="/owner.js"');
  if(file==='review.html')s=s.replace('href="owner.css"','href="/owner.css"').replace('src="review.js"','src="/review.js"');
  if(file==='backup.html'){
+  s=s.replace('Automatic Google Drive backups','Automatic Drive & email backups');
+  s=s.replace('When Google Drive backups are configured, connect your private account and check the connection status below.','Connect your business Google account to automatically save a recoverable backup to your private Drive folder and business email after each new estimate is saved. New invoices and recorded payments also trigger backups.');
   s=s.replace('The free website can lose records when it restarts—download backups regularly.','Records are stored in Cloudflare D1. Download encrypted or privately stored copies regularly for disaster recovery.');
   s=s.replace('On the free Render plan, you might need to reconnect Google after a redeploy or restart. Until this page reports a successful cloud backup, download manual backups too.','Automatic Google Drive sync is not yet enabled. Use Download backup and save the file privately in Google Drive.');
   s=s.replace('Use this if Render loses your data.','Use this only when recovering from a saved backup.');

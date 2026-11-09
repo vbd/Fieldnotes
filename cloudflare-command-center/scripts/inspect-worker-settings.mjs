@@ -27,6 +27,20 @@ export function describeWorkerSettings(payload){
  return {lines,missing,unsafeOwnerBinding,wrongDatabase};
 }
 
+export function describeBackupSettings(payload){
+ if(payload?.success!==true||!Array.isArray(payload.result?.bindings))throw Error('Cloudflare Worker settings metadata is invalid.');
+ const lines=[],missing=[];let unsafeSecret=false;
+ for(const name of ['GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET']){
+  const matches=payload.result.bindings.filter(binding=>binding?.name===name);
+  if(matches.length>1)throw Error('Cloudflare Worker settings contain duplicate Google binding names.');
+  const binding=matches[0];
+  if(!binding){lines.push(name+': missing; cloud backup activation pending.');missing.push(name);continue;}
+  lines.push(name+': present ('+(knownTypes.has(binding.type)?binding.type:'unknown')+').');
+  if(name==='GOOGLE_CLIENT_SECRET'&&binding.type!=='secret_text')unsafeSecret=true;
+ }
+ return {lines,missing,unsafeSecret};
+}
+
 export async function inspectWorkerSettings({env=process.env,fetchImpl=fetch,write=console.log}={}){
  const account=env.CLOUDFLARE_ACCOUNT_ID||env.ACCOUNT_ID||'',token=env.CLOUDFLARE_API_TOKEN||'';
  if(!/^[a-f0-9]{32}$/i.test(account))throw Error('A valid CLOUDFLARE_ACCOUNT_ID is required for the read-only settings check.');
@@ -45,13 +59,18 @@ export async function inspectWorkerSettings({env=process.env,fetchImpl=fetch,wri
   throw Error('Cloudflare Worker settings request failed (HTTP '+status+(codes.length?'; API codes '+codes.join(', '):'')+').');
  }
  const report=describeWorkerSettings(payload);
+ const backups=describeBackupSettings(payload);
  for(const line of report.lines)write(line);
+ for(const line of backups.lines)write(line);
  const notices=[];
  if(report.missing.length)notices.push('Missing expected bindings: '+report.missing.join(', ')+'. In Cloudflare, open Workers & Pages → superior-command-center → Settings → Variables and Secrets. Add OWNER_PASSWORD and SESSION_SECRET as Secret values if missing; never paste values in chat or logs.');
  if(report.unsafeOwnerBinding)notices.push('Deployment blocked: OWNER_PASSWORD and SESSION_SECRET must use Secret bindings (secret_text), never plaintext variables.');
  if(report.wrongDatabase)notices.push('Deployment blocked: DB does not match the configured D1 database. Preserve the existing database and investigate its binding.');
+ if(backups.missing.length)notices.push('Drive and email backup delivery remains pending secure Google client configuration and owner authorization. Invoice storage and manual export remain available.');
+ if(backups.unsafeSecret)notices.push('Deployment blocked: GOOGLE_CLIENT_SECRET must be stored as a Secret binding, never plaintext.');
  for(const notice of notices)write(notice);
- if(env.GITHUB_STEP_SUMMARY)await appendFile(env.GITHUB_STEP_SUMMARY,[...report.lines,...notices].join('\n\n')+'\n');
+ if(env.GITHUB_STEP_SUMMARY)await appendFile(env.GITHUB_STEP_SUMMARY,[...report.lines,...backups.lines,...notices].join('\n\n')+'\n');
+ if(backups.unsafeSecret)throw Error('Google client credentials must use secret_text before deployment.');
  if(report.unsafeOwnerBinding)throw Error('Owner credential bindings must use secret_text before deployment.');
  if(report.wrongDatabase)throw Error('DB binding must match the configured D1 database before deployment.');
  return report;

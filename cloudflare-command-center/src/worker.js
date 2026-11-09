@@ -1,5 +1,6 @@
 // Superior Command Center — Cloudflare Workers + durable D1 storage
 // IMPORTANT: Set OWNER_PASSWORD and SESSION_SECRET as Worker secrets.
+import {backupSnapshot,backupStatus,startGoogleConnection,completeGoogleConnection,runCloudBackup,backupQueueStatement,processBackupQueue} from './backups.js';
 const now=()=>new Date().toISOString();
 const capabilities={additiveRestore:true,customerFeedback:true};
 const text=(v,n=200)=>String(v??'').trim().slice(0,n);
@@ -61,7 +62,15 @@ async function select(env,id,kind){return parseRow(await env.DB.prepare('SELECT 
 async function records(env,kind){const rows=await env.DB.prepare('SELECT data FROM records WHERE kind=? ORDER BY created_at DESC').bind(kind).all();return rows.results.map(parseRow);}
 async function feedbackFor(env,estimateId){return parseRow(await env.DB.prepare('SELECT data FROM customer_reviews WHERE estimate_id=?').bind(estimateId).first());}
 async function feedbackRecords(env){const rows=await env.DB.prepare('SELECT data FROM customer_reviews ORDER BY created_at DESC').all();return rows.results.map(parseRow);}
-async function insert(env,record,kind,status,token=null){await env.DB.prepare('INSERT INTO records(id,kind,status,created_at,review_token,data) VALUES (?,?,?,?,?,?)').bind(record.id,kind,status,record.createdAt,token,JSON.stringify(record)).run();}
+async function insert(env,record,kind,status,token=null){
+ await env.DB.batch([
+  env.DB.prepare('INSERT INTO records(id,kind,status,created_at,review_token,data) VALUES (?,?,?,?,?,?)').bind(record.id,kind,status,record.createdAt,token,JSON.stringify(record)),
+  backupQueueStatement(env,{runId:kind+'-'+record.id,trigger:kind+'-created',sourceId:record.id,sourceKind:kind})
+ ]);
+}
+function deliverQueuedBackups(env,ctx){
+ if(typeof ctx?.waitUntil==='function')ctx.waitUntil(processBackupQueue(env,{limit:3}).catch(()=>console.error('Cloud backup is pending. Check the owner backup status.')));
+}
 async function rateLimit(env,ip){
  const current=await env.DB.prepare('SELECT count,last_at FROM login_attempts WHERE ip=?').bind(ip).first();
  return !!(current&&Date.now()-Number(current.last_at)<900000&&Number(current.count)>=10);
@@ -71,7 +80,7 @@ async function badPassword(env,ip){
  await env.DB.prepare('INSERT INTO login_attempts(ip,count,last_at) VALUES(?,1,?) ON CONFLICT(ip) DO UPDATE SET count=CASE WHEN ?-last_at>900000 THEN 1 ELSE count+1 END,last_at=?').bind(ip,t,t,t).run();
 }
 const goodId=(value,prefix)=>new RegExp('^'+prefix+'-[A-Za-z0-9-]{1,100}$').test(value||'');
-async function route(req,env){
+async function route(req,env,ctx){
  const url=new URL(req.url),p=url.pathname,m=req.method;
  if(!p.startsWith('/api/')){
   if(p==='/owner'||p==='/owner/')return env.ASSETS.fetch(new URL('/owner.html',url));
@@ -82,11 +91,14 @@ async function route(req,env){
  if(!env.OWNER_PASSWORD||!env.SESSION_SECRET||!env.DB)return fail(503,'Command Center configuration is incomplete. Set D1, OWNER_PASSWORD, and SESSION_SECRET.');
  if(m==='GET'&&p==='/api/health'){
   try{
-   await Promise.all(['records','login_attempts','customer_reviews'].map(table=>env.DB.prepare('SELECT 1 FROM '+table+' LIMIT 1').first()));
+   await Promise.all(['records','login_attempts','customer_reviews','backup_connections','backup_oauth_states','backup_runs','backup_locks'].map(table=>env.DB.prepare('SELECT 1 FROM '+table+' LIMIT 1').first()));
    return reply({ok:true,service:'superior-command-center',database:'ready'});
   }catch{return fail(503,'Command Center database migrations are incomplete.');}
  }
  if(['POST','PATCH','PUT','DELETE'].includes(m)&&!originMatches(req))return fail(403,'Invalid request origin.');
+ // Google returns from a different site, so the single-use OAuth state protects
+ // this callback instead of relying on the owner's SameSite=Strict cookie.
+ if(m==='GET'&&p==='/api/google/callback')return completeGoogleConnection(req,env);
  if(m==='GET'&&p==='/api/session')return reply({authenticated:await authorized(req,env),capabilities});
  if(m==='POST'&&p==='/api/login'){
   const ip=req.headers.get('CF-Connecting-IP')||'unknown';
@@ -133,8 +145,9 @@ async function route(req,env){
    estimate.invoiceId=inv.id;
    const update=env.DB.prepare("UPDATE records SET data=?,status='approved' WHERE id=? AND kind='estimate' AND status='sent'").bind(JSON.stringify(estimate),estimate.id);
    const add=env.DB.prepare("INSERT INTO records(id,kind,status,created_at,review_token,data) SELECT ?,'invoice','unpaid',?,NULL,? WHERE EXISTS (SELECT 1 FROM records WHERE id=? AND status='approved' AND json_extract(data,'$.invoiceId')=?)").bind(inv.id,inv.createdAt,JSON.stringify(inv),estimate.id,inv.id);
-   const results=await env.DB.batch([update,add]);
+   const results=await env.DB.batch([update,add,backupQueueStatement(env,{runId:'invoice-'+inv.id,trigger:'invoice-created',sourceId:inv.id,sourceKind:'invoice'})]);
    if(!results[0].meta?.changes||!results[1].meta?.changes)return fail(409,'This estimate was already processed.');
+   deliverQueuedBackups(env,ctx);
    return reply({estimate:publicEstimate(estimate),invoiceId:inv.id});
   }
   const result=await cmd.run();
@@ -149,7 +162,7 @@ async function route(req,env){
  }
  if(m==='POST'&&p==='/api/estimates'){
   const e=makeEstimate(await body(req));e.id=id('EST');e.status='draft';e.createdAt=now();e.updatedAt=e.createdAt;
-  await insert(env,e,'estimate','draft');return reply({estimate:e},201);
+  await insert(env,e,'estimate','draft');deliverQueuedBackups(env,ctx);return reply({estimate:e,backup:{status:'queued'}},201);
  }
  const estMatch=p.match(/^\/api\/estimates\/(EST-[A-Za-z0-9-]+)(?:\/(share))?$/);
  if(estMatch){
@@ -178,17 +191,15 @@ async function route(req,env){
   const inv=await select(env,paid[1],'invoice');if(!inv)return fail(404,'Invoice not found.');
   if(inv.paymentStatus==='paid')return reply({invoice:inv});
   inv.paymentStatus='paid';inv.paidAt=now();
-  const result=await env.DB.prepare("UPDATE records SET data=?,status='paid' WHERE id=? AND kind='invoice' AND status='unpaid'").bind(JSON.stringify(inv),inv.id).run();
-  return reply({invoice:result.meta?.changes?inv:await select(env,inv.id,'invoice')});
+  const results=await env.DB.batch([
+   env.DB.prepare("UPDATE records SET data=?,status='paid' WHERE id=? AND kind='invoice' AND status='unpaid'").bind(JSON.stringify(inv),inv.id),
+   backupQueueStatement(env,{runId:'payment-'+inv.id,trigger:'payment-recorded',sourceId:inv.id,sourceKind:'invoice'})
+  ]);
+  deliverQueuedBackups(env,ctx);
+  return reply({invoice:results[0].meta?.changes?inv:await select(env,inv.id,'invoice')});
  }
  if(m==='GET'&&p==='/api/backup'){
-  const snapshot=await env.DB.batch([
-   env.DB.prepare("SELECT data FROM records WHERE kind='estimate' ORDER BY created_at DESC"),
-   env.DB.prepare("SELECT data FROM records WHERE kind='invoice' ORDER BY created_at DESC"),
-   env.DB.prepare('SELECT data FROM customer_reviews ORDER BY created_at DESC')
-  ]);
-  const [estimates,invoices,reviews]=snapshot.map(result=>result.results.map(parseRow));
-  return safeFile({app:'Superior Maintenance and Remodeling - Command Center',version:1,exportedAt:now(),estimates,invoices,reviews},'Superior_Command_Center_Backup_'+now().slice(0,10)+'.json');
+  return safeFile(await backupSnapshot(env),'Superior_Command_Center_Backup_'+now().slice(0,10)+'.json');
  }
  if(m==='POST'&&p==='/api/restore'){
   const d=await body(req,8*1024*1024);
@@ -218,9 +229,26 @@ async function route(req,env){
   for(let i=0;i<results.length;i++)imported[kinds[i]]+=Number(results[i].meta?.changes||0);
   return reply({ok:true,estimates:imported.estimate,invoices:imported.invoice,reviews:imported.review,skipped:commands.length-imported.estimate-imported.invoice-imported.review});
  }
- if(m==='GET'&&p==='/api/google/status')return reply({configured:false,connected:false,folderUrl:null,lastBackupAt:null,lastError:null,notice:'Cloudflare D1 stores records. Google Drive OAuth is not configured yet.'});
- if(p==='/api/google/connect'||p==='/api/google/backup-now')return fail(503,'Google Drive auto-backup is not connected yet. Download a backup and save it in your private Drive folder.');
+ if(m==='GET'&&p==='/api/google/status')return reply(await backupStatus(env));
+ if(m==='GET'&&p==='/api/google/connect')return startGoogleConnection(req,env);
+ if(m==='POST'&&p==='/api/google/backup-now'){
+  const key=req.headers.get('Idempotency-Key')||crypto.randomUUID();
+  if(!/^[A-Za-z0-9-]{1,80}$/.test(key))return fail(400,'Invalid backup request.');
+  try{return reply(await runCloudBackup(env,{runId:'manual-'+key,trigger:'manual'}));}
+  catch{return fail(502,'Cloud backup did not finish. Check the connection and delivery status before trying again.');}
+ }
  return fail(404,'Not found.');
 }
-export default {async fetch(request,env,ctx){try{return await route(request,env);}catch(e){console.error('Command Center error:',e?.message);const msg=e?.message||'Internal server error';return fail(/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?400:500,/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?msg:'Server error.');}}};
+export default {
+ async fetch(request,env,ctx){try{return await route(request,env,ctx);}catch(e){console.error('Command Center error:',e?.message);const msg=e?.message||'Internal server error';return fail(/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?400:500,/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?msg:'Server error.');}},
+ async scheduled(controller,env,ctx){
+  const task=(async()=>{
+   const state=await backupStatus(env);
+   if(!state.configured||!state.connected)return;
+   await processBackupQueue(env,{limit:3});
+  })().catch(()=>console.error('Scheduled cloud backup did not finish. Check the owner backup status.'));
+  ctx.waitUntil(task);
+  await task;
+ }
+};
 

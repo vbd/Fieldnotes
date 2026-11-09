@@ -58,15 +58,18 @@ test('approval creates one durable invoice, retains customer details, and suppor
  assert.equal((await h.call('/api/invoices')).status,401);
  const login=await h.login();assert.match(login.headers.get('set-cookie'),/Secure; HttpOnly; SameSite=Strict/);assert.deepEqual(login.data.capabilities,{additiveRestore:true,customerFeedback:true});
  const {estimate,token}=await h.createAndShare();
+ assert.equal(h.count('backup_runs'),1,'saving one estimate durably queues one automatic backup');
  assert.equal(estimate.subtotal,1151);assert.equal(estimate.tax,89.2);assert.equal(estimate.total,1240.2);
  let result=await h.call('/api/review/'+token);assert.equal(result.status,200);assert.equal(result.data.estimate.email,undefined);assert.equal(result.data.estimate.phone,undefined);assert.equal(result.data.estimate.reviewToken,undefined);assert.equal(result.data.feedback,null);assert.equal(result.data.feedbackEnabled,true);
  result=await h.call('/api/review/'+token+'/decision',{method:'POST',body:{decision:'approved'}});assert.equal(result.status,400);
  const decisions=await Promise.all([1,2].map(()=>h.call('/api/review/'+token+'/decision',{method:'POST',body:{decision:'approved',signature:input.customer}})));
  assert.deepEqual(decisions.map(r=>r.status).sort(),[200,409]);
  const invoiceId=decisions.find(r=>r.status===200).data.invoiceId;
+ assert.equal(h.count('backup_runs'),2,'concurrent approval creates only one invoice backup');
  result=await h.call('/api/invoices',{auth:true});assert.equal(result.data.invoices.length,1);assert.equal(result.data.invoices[0].id,invoiceId);assert.equal(result.data.invoices[0].total,estimate.total);assert.equal(result.data.invoices[0].phone,input.phone);assert.equal(result.data.invoices[0].taxRate,input.taxRate);
  result=await h.call('/api/invoices/'+invoiceId+'/mark-paid',{method:'POST',body:{},auth:true});assert.equal(result.status,200);const paidAt=result.data.invoice.paidAt;
  result=await h.call('/api/invoices/'+invoiceId+'/mark-paid',{method:'POST',body:{},auth:true});assert.equal(result.data.invoice.paidAt,paidAt);
+ assert.equal(h.count('backup_runs'),3,'payment retries do not duplicate the automatic backup');
  result=await h.call('/api/review/'+token+'/feedback',{method:'POST',body:{rating:5,comment:'Careful work and clear communication.'}});assert.equal(result.status,201);
  assert.equal((await h.call('/api/review/'+token+'/feedback',{method:'POST',body:{rating:1,comment:'Duplicate'}})).status,409);
  h.reopen();

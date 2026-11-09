@@ -4,6 +4,13 @@
   "compatibility_date": "2026-11-03",
   "workers_dev": true,
   "keep_vars": true,
+  "vars": {
+    "BACKUP_EMAIL": "superiormandr@gmail.com",
+    "GOOGLE_DRIVE_BACKUP_FOLDER_ID": "1yaMI4U93EE9LaPkVuEVYkUzgaE8afHDp"
+  },
+  "triggers": {
+    "crons": ["*/15 * * * *"]
+  },
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
