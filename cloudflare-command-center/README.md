@@ -9,7 +9,7 @@ GitHub Actions in `.github/workflows/deploy-superior-cloudflare.yml` deploys **m
 1. A separate validation job installs the pinned development tools, builds public assets, runs SQLite-backed Worker tests and mobile/desktop browser checks, and validates the Wrangler bundle.
 2. The deployment job explicitly selects the existing **GitHub Actions environment** named `CLOUDFLARE_API_TOKEN`. Its environment secret `CLOUDFLARE_API_TOKEN` overrides a repository secret of the same name. A format-only scope check confirmed that the environment value is usable while the old repository value is a setting-name placeholder. Actual permissions are verified by the deployment commands.
 3. The workflow rejects a setting name, pasted command/header, or whitespace instead of silently rewriting the credential. The token is never printed or written into source.
-4. Wrangler applies pending additive D1 migrations, then deploys the Worker and allowlisted public assets.
+4. A Worker settings check reports only the presence and binding type of required settings. It never prints their values. Wrangler applies pending additive D1 migrations, then deploys the Worker and allowlisted public assets. A denied migration is reported; deployment can still proceed against an existing schema, but the live readiness check must pass.
 5. A read-only live check verifies the actual Wrangler-reported website URL, public pages, D1 schema readiness, and owner access protection. The URL is written to the successful run's summary only after these checks pass.
 
 The Worker is `superior-command-center`. Its D1 binding is `DB`, database name `superior-command-center`, and configured database ID is `4feb6f63-1102-467a-87e6-256309364f12`. Do not create a replacement database or change this ID when preserving existing business records.
@@ -21,6 +21,8 @@ The Worker is `superior-command-center`. Its D1 binding is `DB`, database name `
 - **Cloudflare Worker secret `SESSION_SECRET`:** a private random signing secret with at least 32 bytes of entropy.
 
 Configure Worker secrets in Cloudflare or with `npx wrangler secret put OWNER_PASSWORD` and `npx wrangler secret put SESSION_SECRET`. Retain existing values; redeployments must not rotate them automatically. Do not paste credentials in chat or commit them, `.dev.vars`, `.env` files, invoices, or private backups.
+
+In Cloudflare, open **Workers & Pages → superior-command-center → Settings → Variables and Secrets**. Add `OWNER_PASSWORD` and `SESSION_SECRET` with type **Secret**, not Text. Use a new private owner password if a previous value appeared in public deployment logs. The settings check blocks a deployment that would expose either setting as plaintext. `keep_vars: true` preserves dashboard-managed variables; secrets remain managed in Cloudflare and are not embedded in the Wrangler configuration.
 
 A deployment blocked by the token check is not a live success. Correct the secret inside environment `CLOUDFLARE_API_TOKEN` at https://github.com/superiormandr-star/Fieldnotes/settings/environments and rerun the latest main workflow. GitHub cannot reveal the saved token value; an invalid token must be replaced securely at that page.
 
@@ -61,4 +63,5 @@ Browser tests use installed Chrome/Chromium or a Playwright browser; `CHROME_PAT
 `GET /api/health` is a read-only readiness check for the D1 binding, required schema, and owner-secret presence. It does not disclose business records or secret values. Live deployment checks read this endpoint and verify that anonymous requests cannot read estimates, invoices, or feedback.
 
 The build copies only allowlisted website assets. It excludes the Node server, Google credentials, private backups, and test data.
+
 

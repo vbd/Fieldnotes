@@ -72,6 +72,10 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Build Command Center public assets
         run: npm run build
+      - name: Check required Worker settings without displaying values
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/inspect-worker-settings.mjs
       - name: Apply additive D1 migrations without replacing records
         id: migration
         continue-on-error: true
