@@ -147,3 +147,16 @@ test('concurrent sharing cannot invalidate a previously returned customer approv
  assert.equal((await h.call('/api/review/'+token)).status,200);
  const reshare=await h.call('/api/estimates/'+estimateId+'/share',{method:'POST',body:{},auth:true});assert.equal(reshare.data.url,link);
 });
+
+test('backup owner routes request the canonical asset without an HTML redirect',async()=>{
+ for(const path of ['/owner/backup','/owner/backup/']){
+  const env={ASSETS:{fetch:async request=>{
+   assert.ok(request instanceof Request);
+   assert.equal(new URL(request.url).pathname,'/backup');
+   return new Response('<title>Backup & Restore</title>',{headers:{'Content-Type':'text/html'}});
+  }}};
+  const response=await worker.fetch(new Request('https://command.test'+path),env,{});
+  assert.equal(response.status,200);
+  assert.match(await response.text(),/Backup & Restore/);
+ }
+});

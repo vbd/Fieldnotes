@@ -84,7 +84,7 @@ async function route(req,env,ctx){
  const url=new URL(req.url),p=url.pathname,m=req.method;
  if(!p.startsWith('/api/')){
   if(p==='/owner'||p==='/owner/')return env.ASSETS.fetch(new URL('/owner.html',url));
-  if(p==='/owner/backup')return env.ASSETS.fetch(new URL('/backup.html',url));
+  if(p==='/owner/backup'||p==='/owner/backup/')return env.ASSETS.fetch(new Request(new URL('/backup',url),req));
   if(/^\/review\/[a-f0-9]{64}$/.test(p))return env.ASSETS.fetch(new URL('/review.html',url));
   return env.ASSETS.fetch(req);
  }
