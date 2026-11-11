@@ -36,6 +36,7 @@ async function token(env,fields){
 }
 export async function startMicrosoft(req,env){
  if(!env.MICROSOFT_CLIENT_ID||!env.MICROSOFT_CLIENT_SECRET||!env.SESSION_SECRET)throw Error('Microsoft backup credentials are not configured');
+ if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(env.MICROSOFT_CLIENT_ID.trim()))throw Error('Microsoft application ID is invalid. Check MICROSOFT_CLIENT_ID in Cloudflare Worker secrets.');
  const state=nonce();
  await env.DB.prepare('INSERT INTO backup_oauth_states(state_hash,expires_at) VALUES(?,?)').bind(await sha(state),Date.now()+600000).run();
  const url=new URL(LOGIN+'/authorize');
