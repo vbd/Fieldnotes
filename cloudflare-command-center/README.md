@@ -82,3 +82,12 @@ Browser tests use installed Chrome/Chromium or a Playwright browser; `CHROME_PAT
 The build copies only allowlisted website assets. It excludes the Node server, Google credentials, private backups, and test data.
 
 
+
+
+### Production deployment source
+
+Use `.github/workflows/deploy-superior-cloudflare.yml` as the production deployment pipeline. Cloudflare Workers Builds automatic builds must stay disabled for this Worker. A duplicate build connection rooted at the repository root deployed static-only versions and stripped runtime bindings. The Actions preflight now rejects duplicate auto-builds and missing required bindings before uploading.
+
+Worker rollback changes the active version, but secret inheritance uses the latest uploaded version. After an accidental static-only upload, restoring an older deployment alone does not repair the next upload's inherited secrets. Recover existing bindings through version references; never rotate `SESSION_SECRET` during recovery because persisted provider refresh tokens are encrypted with it. Keep the existing D1 database binding and apply only additive migrations.
+
+The production OneDrive inspection reports binding presence, encrypted-token-envelope presence, and the last confirmed upload timestamp. This is separate from basic website/D1 readiness. A successful deployment does not establish Microsoft consent or automatic backup delivery.

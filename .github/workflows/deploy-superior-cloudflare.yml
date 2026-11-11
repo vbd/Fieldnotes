@@ -75,10 +75,18 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Build Command Center public assets
         run: npm run build
+      - name: Prevent competing Cloudflare build deployments
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/inspect-deployment-source.mjs
       - name: Check required Worker settings without displaying values
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/inspect-worker-settings.mjs
+      - name: Capture business record digests without logging customer data
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/verify-record-preservation.mjs snapshot "$RUNNER_TEMP/superior-record-digests.json"
       - name: Apply additive D1 migrations without replacing records
         id: migration
         continue-on-error: true
@@ -104,6 +112,10 @@ jobs:
         id: live
         run: node scripts/verify-deployment.mjs "$RUNNER_TEMP/superior-deploy.log"
 
+      - name: Verify existing business records are unchanged
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/verify-record-preservation.mjs verify "$RUNNER_TEMP/superior-record-digests.json"
       - name: Report OneDrive readiness without exposing credentials or customer records
         if: success()
         env:
