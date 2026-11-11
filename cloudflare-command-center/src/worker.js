@@ -265,8 +265,8 @@ export default {
    const state=await backupStatus(env);
    if(state.configured&&state.connected)await processBackupQueue(env,{limit:3});
    if(env.MICROSOFT_CLIENT_ID&&env.MICROSOFT_CLIENT_SECRET){
-    const conn=await env.DB.prepare('SELECT id FROM microsoft_backup_connection WHERE id=1').first();
-    if(conn){const stamp=now();const result=await uploadMicrosoftSnapshot(env,await backupSnapshot(env),'Superior_Command_Center_Scheduled_'+stamp.replace(/[:.]/g,'-')+'.json');if(result.id)await env.DB.prepare('UPDATE microsoft_backup_connection SET last_backup_at=? WHERE id=1').bind(stamp).run();}
+    const conn=await env.DB.prepare('SELECT id,last_backup_at FROM microsoft_backup_connection WHERE id=1').first();
+    if(conn&&(!conn.last_backup_at||Date.now()-Date.parse(conn.last_backup_at)>=24*60*60*1000)){const stamp=now();const result=await uploadMicrosoftSnapshot(env,await backupSnapshot(env),'Superior_Command_Center_Scheduled_'+stamp.replace(/[:.]/g,'-')+'.json');if(result.id)await env.DB.prepare('UPDATE microsoft_backup_connection SET last_backup_at=? WHERE id=1').bind(stamp).run();}
    }
   })().catch(()=>console.error('Scheduled cloud backup did not finish. Check the owner backup status.'));
   ctx.waitUntil(task);
