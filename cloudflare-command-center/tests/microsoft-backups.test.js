@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {webcrypto} from 'node:crypto';
-import {startMicrosoft,finishMicrosoft,uploadMicrosoftSnapshot} from '../src/microsoft-backups.js';
+import {startMicrosoft,finishMicrosoft,uploadMicrosoftSnapshot,microsoftConfiguration} from '../src/microsoft-backups.js';
 
 globalThis.crypto ??= webcrypto;
 const origin='https://superior-command-center.superiormandr.workers.dev';
@@ -60,7 +60,8 @@ test('OneDrive snapshot upload confirms returned file metadata',async()=>{
   if(u.endsWith('/token'))return Response.json({access_token:'access-test',refresh_token:'sensitive-refresh'});
   if(u.includes('/me?$select='))return Response.json({id:'account-123'});
   if(u.includes('/root/children?'))return Response.json({value:[{id:'folder-id',name:'Superior Command Center Backups',folder:{}}]});
-  if(u.includes('/content')){uploaded=JSON.parse(options.body);return Response.json({id:'file-id',name:'backup.json',size:100,webUrl:'https://onedrive.live.com/test'});}
+  if(u.includes('/content')){uploaded=JSON.parse(options.body);return Response.json({id:'file-id',name:'backup.json',size:new TextEncoder().encode(options.body).byteLength,webUrl:'https://onedrive.live.com/test'});}
+  if(u.includes('/items/file-id?'))return Response.json({id:'file-id',size:new TextEncoder().encode(JSON.stringify(uploaded,null,2)).byteLength});
   throw Error('Unexpected fetch '+u);
  };
  try{
@@ -71,4 +72,26 @@ test('OneDrive snapshot upload confirms returned file metadata',async()=>{
   assert.deepEqual(uploaded,snapshot);
   assert.equal(rows.get('connection').account_id,'account-123');
  }finally{globalThis.fetch=oldFetch;}
+});
+
+test('missing or malformed Microsoft client IDs cannot initiate OAuth; whitespace is normalized for both legs',async()=>{
+ const {env}=fixture();
+ for(const value of ['', 'undefined', 'not-an-application-id']){
+  assert.equal(microsoftConfiguration({...env,MICROSOFT_CLIENT_ID:value}).configured,false);
+  await assert.rejects(()=>startMicrosoft(new Request(origin+'/api/microsoft/connect'),{...env,MICROSOFT_CLIENT_ID:value}),/not configured/);
+ }
+ env.MICROSOFT_CLIENT_ID='  '+env.MICROSOFT_CLIENT_ID+'  ';
+ const start=await startMicrosoft(new Request(origin+'/api/microsoft/connect'),env);
+ const auth=new URL(start.headers.get('Location'));
+ assert.equal(auth.searchParams.get('client_id'),env.MICROSOFT_CLIENT_ID.trim());
+ const oldFetch=globalThis.fetch;
+ globalThis.fetch=async(url,options)=>{
+  if(String(url).endsWith('/token')){
+   assert.equal(options.body.get('client_id'),auth.searchParams.get('client_id'));
+   return Response.json({access_token:'test-access',refresh_token:'test-refresh'});
+  }
+  return Response.json({id:'test-account'});
+ };
+ try{assert.equal((await finishMicrosoft(new Request(origin+'/api/microsoft/callback?state='+auth.searchParams.get('state')+'&code=test'),env)).status,303);}
+ finally{globalThis.fetch=oldFetch;}
 });

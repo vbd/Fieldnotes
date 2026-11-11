@@ -160,3 +160,41 @@ test('backup owner routes request the canonical asset without an HTML redirect',
   assert.match(await response.text(),/Backup & Restore/);
  }
 });
+
+test('scheduled OneDrive upload uses the durable encrypted connection, verifies bytes, and runs once daily',async t=>{
+ const {startMicrosoft,finishMicrosoft}=await import('../src/microsoft-backups.js');
+ const h=setup(t);await h.login();await h.createAndShare();
+ Object.assign(h.env,{MICROSOFT_CLIENT_ID:'123e4567-e89b-42d3-a456-426614174000',MICROSOFT_CLIENT_SECRET:'test-only-microsoft-secret'});
+ const start=await startMicrosoft(new Request('https://command.test/api/microsoft/connect'),h.env);
+ const state=new URL(start.headers.get('Location')).searchParams.get('state');
+ const originalFetch=globalThis.fetch;let uploads=0,bytes=0;
+ globalThis.fetch=async(url,options={})=>{
+  const path=new URL(url).pathname;
+  if(path.endsWith('/token'))return Response.json({access_token:'test-access',refresh_token:'test-refresh'});
+  if(path.endsWith('/me'))return Response.json({id:'test-account'});
+  if(path.endsWith('/root/children'))return Response.json({value:[{id:'folder',name:'Superior Command Center Backups',folder:{}}]});
+  if(path.endsWith('/content')){
+   uploads++;bytes=new TextEncoder().encode(options.body).byteLength;
+   assert.equal(JSON.parse(options.body).estimates.length,1);
+   return Response.json({id:'uploaded-file',size:bytes,name:'snapshot.json'});
+  }
+  if(path.endsWith('/items/uploaded-file'))return Response.json({id:'uploaded-file',size:bytes,name:'snapshot.json'});
+  throw Error('Unexpected provider request');
+ };
+ try{
+  await finishMicrosoft(new Request('https://command.test/api/microsoft/callback?state='+state+'&code=test'),h.env);
+  h.reopen();
+  const stored=await h.env.DB.prepare('SELECT refresh_token FROM microsoft_backup_connection WHERE id=1').first();
+  assert.doesNotMatch(stored.refresh_token,/test-refresh/);
+  for(let i=0;i<2;i++){
+   let task;
+   await worker.scheduled({},h.env,{waitUntil(promise){task=promise;}});
+   await task;
+  }
+  assert.equal(uploads,1);
+  const result=await h.call('/api/microsoft/status',{auth:true});
+  assert.equal(result.data.connected,true);
+  assert.ok(Number.isFinite(Date.parse(result.data.lastBackupAt)));
+  assert.equal(h.count('records'),1);
+ }finally{globalThis.fetch=originalFetch;}
+});

@@ -1,5 +1,5 @@
 // Microsoft OneDrive Personal backup adapter for Superior Command Center.
-// Not active until worker routes, owner UI, D1 migration and secrets are wired.
+// Connected through owner routes, encrypted D1 storage, and the daily scheduler.
 // Required: MICROSOFT_CLIENT_ID, MICROSOFT_CLIENT_SECRET, SESSION_SECRET.
 // Microsoft Entra app registration: personal Microsoft accounts supported;
 // delegated Files.ReadWrite, User.Read, offline_access. Redirect URI:
@@ -27,20 +27,28 @@ async function unseal(env,value){
  const obj=JSON.parse(value);
  return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(obj.iv)},await key(env),unb64(obj.data)));
 }
+export function microsoftConfiguration(env){
+ const clientId=String(env.MICROSOFT_CLIENT_ID||'').trim();
+ const clientSecret=String(env.MICROSOFT_CLIENT_SECRET||'').trim();
+ const validId=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clientId);
+ return {clientId,clientSecret,configured:Boolean(validId&&clientSecret&&env.SESSION_SECRET)};
+}
 async function token(env,fields){
- const response=await fetch(LOGIN+'/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:env.MICROSOFT_CLIENT_ID,client_secret:env.MICROSOFT_CLIENT_SECRET,...fields})});
+ const config=microsoftConfiguration(env);
+ if(!config.configured)throw Error('Microsoft backup credentials are not configured');
+ const response=await fetch(LOGIN+'/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:config.clientId,client_secret:config.clientSecret,...fields})});
  if(!response.ok)throw Error('Microsoft authorization failed');
  const body=await response.json();
  if(!body.access_token)throw Error('Microsoft access token missing');
  return body;
 }
 export async function startMicrosoft(req,env){
- if(!env.MICROSOFT_CLIENT_ID||!env.MICROSOFT_CLIENT_SECRET||!env.SESSION_SECRET)throw Error('Microsoft backup credentials are not configured');
- if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(env.MICROSOFT_CLIENT_ID.trim()))throw Error('Microsoft application ID is invalid. Check MICROSOFT_CLIENT_ID in Cloudflare Worker secrets.');
+ const config=microsoftConfiguration(env);
+ if(!config.configured)throw Error('Microsoft backup credentials are not configured');
  const state=nonce();
  await env.DB.prepare('INSERT INTO backup_oauth_states(state_hash,expires_at) VALUES(?,?)').bind(await sha(state),Date.now()+600000).run();
  const url=new URL(LOGIN+'/authorize');
- Object.entries({client_id:env.MICROSOFT_CLIENT_ID,response_type:'code',redirect_uri:callback(req),response_mode:'query',scope:SCOPES,state,prompt:'select_account'}).forEach(([k,v])=>url.searchParams.set(k,v));
+ Object.entries({client_id:config.clientId,response_type:'code',redirect_uri:callback(req),response_mode:'query',scope:SCOPES,state,prompt:'select_account'}).forEach(([k,v])=>url.searchParams.set(k,v));
  return new Response(null,{status:303,headers:{Location:url.toString(),'Cache-Control':'no-store'}});
 }
 export async function finishMicrosoft(req,env){
@@ -78,6 +86,8 @@ export async function uploadMicrosoftSnapshot(env,snapshot,filename){
  const safe=filename.replace(/[^a-zA-Z0-9._-]/g,'_');
  const path='/me/drive/items/'+encodeURIComponent(dir.id)+':/'+encodeURIComponent(safe)+':/content';
  const result=await graph(grant.access_token,path,{method:'PUT',headers:{'Content-Type':'application/json'},body:payload});
- if(!result.id||!result.size)throw Error('OneDrive upload was not confirmed');
+ if(!result.id||result.size!==enc.encode(payload).byteLength)throw Error('OneDrive upload was not confirmed');
+ const receipt=await graph(grant.access_token,'/me/drive/items/'+encodeURIComponent(result.id)+'?$select=id,name,size');
+ if(receipt.id!==result.id||receipt.size!==result.size)throw Error('OneDrive upload verification failed');
  return {id:result.id,name:result.name,size:result.size,webUrl:result.webUrl};
 }

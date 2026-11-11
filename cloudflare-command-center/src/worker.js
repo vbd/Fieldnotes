@@ -1,7 +1,7 @@
 // Superior Command Center — Cloudflare Workers + durable D1 storage
 // IMPORTANT: Set OWNER_PASSWORD and SESSION_SECRET as Worker secrets.
 import {backupSnapshot,backupStatus,startGoogleConnection,completeGoogleConnection,runCloudBackup,backupQueueStatement,processBackupQueue} from './backups.js';
-import {startMicrosoft,finishMicrosoft,uploadMicrosoftSnapshot} from './microsoft-backups.js';
+import {startMicrosoft,finishMicrosoft,uploadMicrosoftSnapshot,microsoftConfiguration} from './microsoft-backups.js';
 const now=()=>new Date().toISOString();
 const capabilities={additiveRestore:true,customerFeedback:true};
 const text=(v,n=200)=>String(v??'').trim().slice(0,n);
@@ -92,7 +92,7 @@ async function route(req,env,ctx){
  if(!env.OWNER_PASSWORD||!env.SESSION_SECRET||!env.DB)return fail(503,'Command Center configuration is incomplete. Set D1, OWNER_PASSWORD, and SESSION_SECRET.');
  if(m==='GET'&&p==='/api/health'){
   try{
-   await Promise.all(['records','login_attempts','customer_reviews','backup_connections','backup_oauth_states','backup_runs','backup_locks'].map(table=>env.DB.prepare('SELECT 1 FROM '+table+' LIMIT 1').first()));
+   await Promise.all(['records','login_attempts','customer_reviews','backup_connections','backup_oauth_states','backup_runs','backup_locks','microsoft_backup_connection'].map(table=>env.DB.prepare('SELECT 1 FROM '+table+' LIMIT 1').first()));
    return reply({ok:true,service:'superior-command-center',database:'ready'});
   }catch{return fail(503,'Command Center database migrations are incomplete.');}
  }
@@ -240,7 +240,7 @@ async function route(req,env,ctx){
   return reply({ok:true,estimates:imported.estimate,invoices:imported.invoice,reviews:imported.review,skipped:commands.length-imported.estimate-imported.invoice-imported.review});
  }
  if(m==='GET'&&p==='/api/microsoft/status'){
-  const ready=Boolean(env.MICROSOFT_CLIENT_ID&&env.MICROSOFT_CLIENT_SECRET&&env.SESSION_SECRET);
+  const ready=microsoftConfiguration(env).configured;
   const conn=await env.DB.prepare('SELECT account_id,connected_at,last_backup_at FROM microsoft_backup_connection WHERE id=1').first();
   return reply({configured:ready,connected:ready&&Boolean(conn),connectedAt:conn?.connected_at||null,lastBackupAt:conn?.last_backup_at||null});
  }
@@ -279,9 +279,9 @@ export default {
    } catch(e) {
     console.error('Scheduled Google backup failed:',e?.message);
    }
-   if(env.MICROSOFT_CLIENT_ID&&env.MICROSOFT_CLIENT_SECRET){
+   if(microsoftConfiguration(env).configured){
     const conn=await env.DB.prepare('SELECT id,last_backup_at FROM microsoft_backup_connection WHERE id=1').first();
-    if(conn&&(!conn.last_backup_at||Date.now()-Date.parse(conn.last_backup_at)>=24*60*60*1000)){const stamp=now();const result=await uploadMicrosoftSnapshot(env,await backupSnapshot(env),'Superior_Command_Center_Scheduled_'+stamp.replace(/[:.]/g,'-')+'.json');if(result.id)await env.DB.prepare('UPDATE microsoft_backup_connection SET last_backup_at=? WHERE id=1').bind(stamp).run();}
+    if(conn&&(!Number.isFinite(Date.parse(conn.last_backup_at))||Date.now()-Date.parse(conn.last_backup_at)>=24*60*60*1000)){const stamp=now();const result=await uploadMicrosoftSnapshot(env,await backupSnapshot(env),'Superior_Command_Center_Scheduled_'+stamp.replace(/[:.]/g,'-')+'.json');if(result.id)await env.DB.prepare('UPDATE microsoft_backup_connection SET last_backup_at=? WHERE id=1').bind(stamp).run();}
    }
   })().catch(()=>console.error('Scheduled cloud backup did not finish. Check the owner backup status.'));
   ctx.waitUntil(task);

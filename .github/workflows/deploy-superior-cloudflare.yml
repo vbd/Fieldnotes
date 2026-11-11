@@ -17,6 +17,8 @@ concurrency:
   group: superior-command-center-production
   cancel-in-progress: false
 
+# Serialize production writes, but discard obsolete runs before deployment.
+
 jobs:
   verify:
     name: Build and test Command Center
@@ -30,7 +32,7 @@ jobs:
         with:
           node-version: '24'
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Build public assets
         run: npm run build
       - name: Test Worker, persistent invoices, imports, and credential validation
@@ -70,7 +72,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/validate-cloudflare-token.mjs
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
       - name: Build Command Center public assets
         run: npm run build
       - name: Check required Worker settings without displaying values
@@ -88,6 +90,12 @@ jobs:
         run: |
           echo '::warning title=D1 migration blocked::Cloudflare denied direct D1 access. Attempting Worker deployment without changing database records; live readiness must still pass.'
           echo 'Cloudflare denied D1 migration. No database records were modified by this step. Worker deployment and live readiness checks will still run.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Confirm this is still the latest production commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest=$(gh api "repos/${{ github.repository }}/git/ref/heads/main" --jq .object.sha)
+          test "$latest" = "$GITHUB_SHA" || { echo "::error::Superseded deployment; run the workflow on current main."; exit 1; }
       - name: Deploy Worker and static assets
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -96,3 +104,8 @@ jobs:
         id: live
         run: node scripts/verify-deployment.mjs "$RUNNER_TEMP/superior-deploy.log"
 
+      - name: Report OneDrive readiness without exposing credentials or customer records
+        if: success()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/inspect-onedrive-readiness.mjs
