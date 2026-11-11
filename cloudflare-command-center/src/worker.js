@@ -1,6 +1,7 @@
 // Superior Command Center — Cloudflare Workers + durable D1 storage
 // IMPORTANT: Set OWNER_PASSWORD and SESSION_SECRET as Worker secrets.
 import {backupSnapshot,backupStatus,startGoogleConnection,completeGoogleConnection,runCloudBackup,backupQueueStatement,processBackupQueue} from './backups.js';
+import {startMicrosoft,finishMicrosoft,uploadMicrosoftSnapshot} from './microsoft-backups.js';
 const now=()=>new Date().toISOString();
 const capabilities={additiveRestore:true,customerFeedback:true};
 const text=(v,n=200)=>String(v??'').trim().slice(0,n);
@@ -99,6 +100,7 @@ async function route(req,env,ctx){
  // Google returns from a different site, so the single-use OAuth state protects
  // this callback instead of relying on the owner's SameSite=Strict cookie.
  if(m==='GET'&&p==='/api/google/callback')return completeGoogleConnection(req,env);
+ if(m==='GET'&&p==='/api/microsoft/callback')return finishMicrosoft(req,env);
  if(m==='GET'&&p==='/api/session')return reply({authenticated:await authorized(req,env),capabilities});
  if(m==='POST'&&p==='/api/login'){
   const ip=req.headers.get('CF-Connecting-IP')||'unknown';
@@ -229,6 +231,23 @@ async function route(req,env,ctx){
   for(let i=0;i<results.length;i++)imported[kinds[i]]+=Number(results[i].meta?.changes||0);
   return reply({ok:true,estimates:imported.estimate,invoices:imported.invoice,reviews:imported.review,skipped:commands.length-imported.estimate-imported.invoice-imported.review});
  }
+ if(m==='GET'&&p==='/api/microsoft/status'){
+  const ready=Boolean(env.MICROSOFT_CLIENT_ID&&env.MICROSOFT_CLIENT_SECRET&&env.SESSION_SECRET);
+  const conn=await env.DB.prepare('SELECT account_id,connected_at,last_backup_at FROM microsoft_backup_connection WHERE id=1').first();
+  return reply({configured:ready,connected:ready&&Boolean(conn),connectedAt:conn?.connected_at||null,lastBackupAt:conn?.last_backup_at||null});
+ }
+ if(m==='GET'&&p==='/api/microsoft/connect'){
+  if(!env.MICROSOFT_CLIENT_ID||!env.MICROSOFT_CLIENT_SECRET)return fail(503,'Microsoft OAuth is not configured yet.');
+  return startMicrosoft(req,env);
+ }
+ if(m==='POST'&&p==='/api/microsoft/backup-now'){
+  try{
+   const snapshot=await backupSnapshot(env);
+   const result=await uploadMicrosoftSnapshot(env,snapshot,'Superior_Command_Center_'+now().replace(/[:.]/g,'-')+'.json');
+   await env.DB.prepare('UPDATE microsoft_backup_connection SET last_backup_at=? WHERE id=1').bind(now()).run();
+   return reply({ok:true,file:result});
+  }catch(e){console.error('OneDrive backup failed:',e?.message);return fail(502,'OneDrive backup failed. Check Microsoft connection and try again.');}
+ }
  if(m==='GET'&&p==='/api/google/status')return reply(await backupStatus(env));
  if(m==='GET'&&p==='/api/google/connect')return startGoogleConnection(req,env);
  if(m==='POST'&&p==='/api/google/backup-now'){
@@ -243,9 +262,16 @@ export default {
  async fetch(request,env,ctx){try{return await route(request,env,ctx);}catch(e){console.error('Command Center error:',e?.message);const msg=e?.message||'Internal server error';return fail(/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?400:500,/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?msg:'Server error.');}},
  async scheduled(controller,env,ctx){
   const task=(async()=>{
-   const state=await backupStatus(env);
-   if(!state.configured||!state.connected)return;
-   await processBackupQueue(env,{limit:3});
+   try {
+    const state=await backupStatus(env);
+    if(state.configured&&state.connected)await processBackupQueue(env,{limit:3});
+   } catch(e) {
+    console.error('Scheduled Google backup failed:',e?.message);
+   }
+   if(env.MICROSOFT_CLIENT_ID&&env.MICROSOFT_CLIENT_SECRET){
+    const conn=await env.DB.prepare('SELECT id,last_backup_at FROM microsoft_backup_connection WHERE id=1').first();
+    if(conn&&(!conn.last_backup_at||Date.now()-Date.parse(conn.last_backup_at)>=24*60*60*1000)){const stamp=now();const result=await uploadMicrosoftSnapshot(env,await backupSnapshot(env),'Superior_Command_Center_Scheduled_'+stamp.replace(/[:.]/g,'-')+'.json');if(result.id)await env.DB.prepare('UPDATE microsoft_backup_connection SET last_backup_at=? WHERE id=1').bind(stamp).run();}
+   }
   })().catch(()=>console.error('Scheduled cloud backup did not finish. Check the owner backup status.'));
   ctx.waitUntil(task);
   await task;
