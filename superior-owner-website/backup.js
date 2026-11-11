@@ -76,3 +76,25 @@ if(driveParam==='connected')status('Google authorized and first backup saved.');
 if(driveParam==='backup-error')status('Google connected, but the first backup did not finish. Check its delivery status above.',true);
 if(driveParam==='denied')status('Google authorization was not approved.',true);
 if(driveParam==='error')status('Google authorization failed. Check Google OAuth settings and try again.',true);
+
+let microsoftBusy=false;
+async function checkMicrosoft(){
+ const state=$('microsoft-status'),details=$('microsoft-details'),connect=$('microsoft-connect'),backup=$('microsoft-backup-now');
+ try{
+  const m=await(await req('/api/microsoft/status')).json();
+  connect.disabled=microsoftBusy||!m.configured;
+  backup.disabled=microsoftBusy||!m.connected;
+  state.textContent=!m.configured?'Microsoft connection needs configuration.':m.connected?'Microsoft OneDrive connected.':'Microsoft OneDrive is ready to connect.';
+  details.textContent=m.lastBackupAt?'Last confirmed OneDrive backup: '+new Date(m.lastBackupAt).toLocaleString():m.connected?'Connected. Save a test backup to confirm delivery.':'Your existing estimates and invoices remain in Cloudflare D1.';
+ }catch(e){state.textContent='Microsoft backup not available on this deployment.';details.textContent=e.message;connect.disabled=true;backup.disabled=true;}
+}
+$('microsoft-connect').addEventListener('click',()=>{location.assign('/api/microsoft/connect');});
+$('microsoft-backup-now').addEventListener('click',async()=>{
+ if(microsoftBusy)return;microsoftBusy=true;$('microsoft-backup-now').disabled=true;
+ try{
+  $('microsoft-status').textContent='Uploading your private backup to OneDrive…';
+  const result=await(await req('/api/microsoft/backup-now',{method:'POST'})).json();
+  status(result.ok?'Microsoft OneDrive backup saved successfully.':'OneDrive backup was not confirmed.',!result.ok);
+ }catch(e){status(e.message,true);}finally{microsoftBusy=false;await checkMicrosoft();}
+});
+checkMicrosoft();
