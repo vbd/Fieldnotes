@@ -262,8 +262,12 @@ export default {
  async fetch(request,env,ctx){try{return await route(request,env,ctx);}catch(e){console.error('Command Center error:',e?.message);const msg=e?.message||'Internal server error';return fail(/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?400:500,/Invalid JSON|Request is too large|Check |Add between|Customer name|Tax must|Estimate amount/.test(msg)?msg:'Server error.');}},
  async scheduled(controller,env,ctx){
   const task=(async()=>{
-   const state=await backupStatus(env);
-   if(state.configured&&state.connected)await processBackupQueue(env,{limit:3});
+   try {
+    const state=await backupStatus(env);
+    if(state.configured&&state.connected)await processBackupQueue(env,{limit:3});
+   } catch(e) {
+    console.error('Scheduled Google backup failed:',e?.message);
+   }
    if(env.MICROSOFT_CLIENT_ID&&env.MICROSOFT_CLIENT_SECRET){
     const conn=await env.DB.prepare('SELECT id,last_backup_at FROM microsoft_backup_connection WHERE id=1').first();
     if(conn&&(!conn.last_backup_at||Date.now()-Date.parse(conn.last_backup_at)>=24*60*60*1000)){const stamp=now();const result=await uploadMicrosoftSnapshot(env,await backupSnapshot(env),'Superior_Command_Center_Scheduled_'+stamp.replace(/[:.]/g,'-')+'.json');if(result.id)await env.DB.prepare('UPDATE microsoft_backup_connection SET last_backup_at=? WHERE id=1').bind(stamp).run();}
