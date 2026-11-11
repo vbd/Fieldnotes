@@ -1,6 +1,10 @@
 name: Encrypted Superior Command Center D1 backup
 # Database-only backup. Does not deploy, migrate, or modify the live website.
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/backup-superior-d1.yml'
   workflow_dispatch:
   schedule:
     - cron: '41 10 * * *'
