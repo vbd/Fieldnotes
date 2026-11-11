@@ -14,7 +14,7 @@ function fixture(){
   if(sql.startsWith('UPDATE microsoft_backup_connection SET refresh_token')){rows.get('connection').refresh_token=args[0];return {meta:{changes:1}};}
   throw Error('Unexpected SQL: '+sql);
  },async first(){if(sql.includes('microsoft_backup_connection'))return rows.get('connection')||null;throw Error('Unexpected SQL: '+sql);}}}};
- return {env:{DB:db,MICROSOFT_CLIENT_ID:'test-client',MICROSOFT_CLIENT_SECRET:'test-secret',SESSION_SECRET:'test-session-secret'},rows};
+ return {env:{DB:db,MICROSOFT_CLIENT_ID:'123e4567-e89b-42d3-a456-426614174000',MICROSOFT_CLIENT_SECRET:'test-secret',SESSION_SECRET:'test-session-secret'},rows};
 }
 test('Microsoft authorization uses consumer OAuth, approved scopes and one-time state',async()=>{
  const {env,rows}=fixture();
