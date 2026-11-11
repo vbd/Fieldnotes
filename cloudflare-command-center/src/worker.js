@@ -100,7 +100,15 @@ async function route(req,env,ctx){
  // Google returns from a different site, so the single-use OAuth state protects
  // this callback instead of relying on the owner's SameSite=Strict cookie.
  if(m==='GET'&&p==='/api/google/callback')return completeGoogleConnection(req,env);
- if(m==='GET'&&p==='/api/microsoft/callback')return finishMicrosoft(req,env);
+ if(m==='GET'&&p==='/api/microsoft/callback'){
+  try{return await finishMicrosoft(req,env);}
+  catch(error){
+   const detail=String(error?.message||'');
+   console.error('OneDrive OAuth callback failed:',detail);
+   const reason=/authorization state/i.test(detail)?'state':/authorization was not completed/i.test(detail)?'denied':/offline authorization/i.test(detail)?'offline':/Microsoft authorization failed/i.test(detail)?'credentials':/account could not be verified/i.test(detail)?'account':'callback';
+   return new Response(null,{status:303,headers:{Location:new URL('/owner/backup?onedrive='+reason,new URL(req.url).origin).toString(),'Cache-Control':'no-store','Referrer-Policy':'no-referrer'}});
+  }
+ }
  if(m==='GET'&&p==='/api/session')return reply({authenticated:await authorized(req,env),capabilities});
  if(m==='POST'&&p==='/api/login'){
   const ip=req.headers.get('CF-Connecting-IP')||'unknown';
