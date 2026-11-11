@@ -6,15 +6,15 @@ const UPLOAD = 'https://www.googleapis.com/upload/drive/v3/files';
 const GMAIL = 'https://gmail.googleapis.com/gmail/v1/users/me/messages/send';
 const TOKEN = 'https://oauth2.googleapis.com/token';
 const USERINFO = 'https://www.googleapis.com/oauth2/v3/userinfo';
-const SCOPES = ['openid', 'email', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/gmail.send'];
+const SCOPES = ['openid', 'email', 'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/gmail.send'];
 const MAX_BYTES = 8 * 1024 * 1024;
 const encoder = new TextEncoder();
 const now = () => new Date().toISOString();
 const random = (bytes = 24) => [...crypto.getRandomValues(new Uint8Array(bytes))].map(v => v.toString(16).padStart(2, '0')).join('');
 const emailFor = env => String(env.BACKUP_EMAIL || 'superiormandr@gmail.com').trim().toLowerCase();
 const folderFor = env => String(env.GOOGLE_DRIVE_BACKUP_FOLDER_ID || '1yaMI4U93EE9LaPkVuEVYkUzgaE8afHDp').trim();
-const folderUrl = env => 'https://drive.google.com/drive/folders/' + encodeURIComponent(folderFor(env));
-const configured = env => Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.SESSION_SECRET && /^[^\s<>@\r\n]+@[^\s<>@\r\n]+\.[^\s<>@\r\n]+$/.test(emailFor(env)) && /^[A-Za-z0-9_-]{10,200}$/.test(folderFor(env)));
+const folderUrl = (env, folderId) => 'https://drive.google.com/drive/folders/' + encodeURIComponent(folderId || folderFor(env));
+const configured = env => Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.SESSION_SECRET && /^[^\s<>@\r\n]+@[^\s<>@\r\n]+\.[^\s<>@\r\n]+$/.test(emailFor(env)) );
 const connection = env => env.DB.prepare('SELECT * FROM backup_connections WHERE id=1').first();
 const runRow = (env, id) => env.DB.prepare('SELECT * FROM backup_runs WHERE id=?').bind(id).first();
 const hash = async value => [...new Uint8Array(await crypto.subtle.digest('SHA-256', encoder.encode(value)))].map(v => v.toString(16).padStart(2, '0')).join('');
@@ -73,11 +73,18 @@ async function accessToken(env, conn) {
 async function drive(env, access, path, options={}) {
   return google(env, DRIVE + path, {...options, headers:{Authorization:'Bearer ' + access, ...options.headers}}, 'Google Drive backup request failed. Check the connected account and folder access.');
 }
-async function validateFolder(env, access) {
-  const response = await drive(env, access, '/files/' + encodeURIComponent(folderFor(env)) + '?fields=id,mimeType,trashed,shared,capabilities(canAddChildren)');
+async function validateFolder(env, access, folderId) {
+  const response = await drive(env, access, '/files/' + encodeURIComponent(folderId) + '?fields=id,mimeType,trashed,shared,capabilities(canAddChildren)');
   const folder = await jsonResponse(response, 'Google Drive folder could not be verified.');
-  if (folder.id !== folderFor(env) || folder.mimeType !== 'application/vnd.google-apps.folder' || folder.trashed === true || folder.capabilities?.canAddChildren !== true) throw Error('The selected private Drive folder is unavailable or is not writable.');
+  if (folder.id !== folderId || folder.mimeType !== 'application/vnd.google-apps.folder' || folder.trashed === true || folder.capabilities?.canAddChildren !== true) throw Error('The selected private Drive folder is unavailable or is not writable.');
   if (folder.shared !== false) throw Error('The selected backup folder must be verified private to the business Google account.');
+}
+async function createBackupFolder(env, access) {
+  const response = await drive(env, access, '/files?fields=id,mimeType', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'Superior Command Center Backups',mimeType:'application/vnd.google-apps.folder',description:'Private application-created backups for Superior Command Center'})});
+  const folder = await jsonResponse(response,'Google Drive backup folder could not be created.');
+  if (!/^[A-Za-z0-9_-]{10,200}$/.test(folder.id || '') || folder.mimeType !== 'application/vnd.google-apps.folder') throw Error('Google Drive backup folder could not be verified.');
+  await validateFolder(env,access,folder.id);
+  return folder.id;
 }
 async function rememberError(env, message) {
   await env.DB.prepare('UPDATE backup_connections SET last_error=? WHERE id=1').bind(message).run();
@@ -99,11 +106,11 @@ export async function backupStatus(env) {
   const attention = await env.DB.prepare("SELECT COUNT(*) AS count FROM backup_runs WHERE status<>'complete' AND (email_state IN ('sending','unknown') OR drive_state IN ('uploading','unknown'))").first();
   const latest = await env.DB.prepare('SELECT created_at,completed_at,status,drive_state,email_state,last_error FROM backup_runs ORDER BY created_at DESC,id DESC LIMIT 1').first();
   const ready = configured(env);
-  let connected = ready && Boolean(conn?.refresh_token) && conn.email === emailFor(env) && conn.folder_id === folderFor(env);
+  let connected = ready && Boolean(conn?.refresh_token) && conn.email === emailFor(env) && /^[A-Za-z0-9_-]{10,200}$/.test(conn.folder_id || '');
   let decryptError = false;
   if (connected) try { await decryptToken(conn.refresh_token, env); } catch { connected=false; decryptError=true; }
   return {
-    configured:ready, connected, email:emailFor(env), folderUrl:folderUrl(env),
+    configured:ready, connected, email:emailFor(env), folderUrl:conn?.folder_id ? folderUrl(env,conn.folder_id) : null,
     lastBackupAt:conn?.last_backup_at || null, lastDriveBackupAt:conn?.last_drive_backup_at || null,
     lastEmailBackupAt:conn?.last_email_backup_at || null,
     lastError:decryptError ? 'Google authorization needs to be renewed. Connect Google backups again.' : conn?.last_error || null,
@@ -119,7 +126,7 @@ export async function startGoogleConnection(req, env) {
   const state = random(32), expiry = Date.now() + 10*60*1000;
   await env.DB.prepare('DELETE FROM backup_oauth_states WHERE expires_at<?').bind(Date.now()).run();
   await env.DB.prepare('INSERT INTO backup_oauth_states(state_hash,expires_at) VALUES(?,?)').bind(await hash(state), expiry).run();
-  const params = new URLSearchParams({client_id:String(env.GOOGLE_CLIENT_ID),redirect_uri:new URL('/api/google/callback',req.url).toString(),response_type:'code',scope:SCOPES.join(' '),access_type:'offline',prompt:'consent',include_granted_scopes:'true',login_hint:emailFor(env),state});
+  const params = new URLSearchParams({client_id:String(env.GOOGLE_CLIENT_ID),redirect_uri:new URL('/api/google/callback',req.url).toString(),response_type:'code',scope:SCOPES.join(' '),access_type:'offline',prompt:'consent',include_granted_scopes:'false',login_hint:emailFor(env),state});
   return new Response(null, {status:303, headers:{Location:'https://accounts.google.com/o/oauth2/v2/auth?' + params,'Cache-Control':'no-store','Referrer-Policy':'no-referrer'}});
 }
 
@@ -135,13 +142,13 @@ export async function completeGoogleConnection(req, env) {
     const response = await google(env, TOKEN, {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({code,client_id:String(env.GOOGLE_CLIENT_ID),client_secret:String(env.GOOGLE_CLIENT_SECRET),redirect_uri:new URL('/api/google/callback',req.url).toString(),grant_type:'authorization_code'})}, 'Google authorization failed. Connect Google backups again.');
     const result = await jsonResponse(response, 'Google authorization failed.');
     if (!result.access_token || !result.refresh_token) throw Error('Google did not grant offline backup authorization. Connect Google backups again.');
-    if (typeof result.scope === 'string' && !['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/gmail.send'].every(scope=>result.scope.split(' ').includes(scope))) throw Error('Google Drive and Gmail send permissions are both required for these backups.');
+    if (typeof result.scope === 'string' && !['https://www.googleapis.com/auth/drive.file','https://www.googleapis.com/auth/gmail.send'].every(scope=>result.scope.split(' ').includes(scope))) throw Error('Google Drive and Gmail send permissions are both required for these backups.');
     const identityResponse = await google(env, USERINFO, {headers:{Authorization:'Bearer ' + result.access_token}}, 'The Google account could not be verified.');
     const identity = await jsonResponse(identityResponse, 'The Google account could not be verified.');
     if (identity.email_verified !== true || String(identity.email||'').toLowerCase() !== emailFor(env)) throw Error('Connect the selected business Google account to enable its backups.');
-    await validateFolder(env, result.access_token);
+    const folderId = await createBackupFolder(env, result.access_token);
     const encrypted = await encryptToken(result.refresh_token, env);
-    await env.DB.prepare('INSERT INTO backup_connections(id,email,folder_id,refresh_token,connected_at) VALUES(1,?,?,?,?) ON CONFLICT(id) DO UPDATE SET email=excluded.email,folder_id=excluded.folder_id,refresh_token=excluded.refresh_token,connected_at=excluded.connected_at,last_error=NULL').bind(emailFor(env),folderFor(env),encrypted,now()).run();
+    await env.DB.prepare('INSERT INTO backup_connections(id,email,folder_id,refresh_token,connected_at) VALUES(1,?,?,?,?) ON CONFLICT(id) DO UPDATE SET email=excluded.email,folder_id=excluded.folder_id,refresh_token=excluded.refresh_token,connected_at=excluded.connected_at,last_error=NULL').bind(emailFor(env),folderId,encrypted,now()).run();
   } catch (error) {
     await rememberError(env, error instanceof GoogleFailure || error?.message?.startsWith('Google ') || error?.message?.startsWith('The selected ') || error?.message?.startsWith('Connect the selected ') || error?.message?.startsWith('The Google ') ? error.message : 'Google authorization failed. Connect Google backups again.');
     return redirect(req, 'error');
@@ -152,8 +159,9 @@ export async function completeGoogleConnection(req, env) {
   } catch { return redirect(req, 'backup-error'); }
 }
 
-function resultFor(env, run) {
-  return {runId:run.id,filename:run.filename,savedAt:run.completed_at || null,folderUrl:folderUrl(env),driveSaved:Boolean(run.drive_file_id),emailSent:run.email_state==='sent',status:run.status};
+async function resultFor(env, run) {
+  const conn = await connection(env);
+  return {runId:run.id,filename:run.filename,savedAt:run.completed_at || null,folderUrl:conn?.folder_id ? folderUrl(env,conn.folder_id) : null,driveSaved:Boolean(run.drive_file_id),emailSent:run.email_state==='sent',status:run.status};
 }
 async function completeRun(env, runId) {
   const completed = now();
@@ -168,8 +176,8 @@ async function acquireLock(env, owner) {
   const lock = await env.DB.prepare("INSERT INTO backup_locks(id,owner,expires_at) VALUES('delivery',?,?) ON CONFLICT(id) DO UPDATE SET owner=excluded.owner,expires_at=excluded.expires_at WHERE backup_locks.expires_at<?").bind(owner,time+10*60*1000,time).run();
   if (!lock.meta?.changes) throw Error('Another cloud backup is in progress. Please check its status shortly.');
 }
-async function findUploadedFile(env, access, runId) {
-  const q = "'" + folderFor(env) + "' in parents and trashed=false and appProperties has { key='superior_backup_run' and value='" + await hash(runId) + "' }";
+async function findUploadedFile(env, access, runId, folderId) {
+  const q = "'" + folderId + "' in parents and trashed=false and appProperties has { key='superior_backup_run' and value='" + await hash(runId) + "' }";
   const response = await drive(env, access, '/files?' + new URLSearchParams({q,fields:'files(id,name,mimeType,size)',pageSize:'2'}));
   const result = await jsonResponse(response, 'The previous Drive backup could not be checked.');
   const found = result.files?.[0];
@@ -187,7 +195,7 @@ async function uploadedPayload(env, access, fileId) {
   if (backup.app!==APP || backup.version!==1 || !Array.isArray(backup.estimates) || !Array.isArray(backup.invoices) || !Array.isArray(backup.reviews)) throw Error('The saved Drive backup is not a valid recoverable backup.');
   return payload;
 }
-function mimeMessage(env, run, payload, runHash) {
+function mimeMessage(env, run, payload, runHash, folderId) {
   const boundary = 'superior-backup-' + runHash;
   const attachment = base64(encoder.encode(payload)).match(/.{1,76}/g)?.join('\r\n') || '';
   const message = [
@@ -197,7 +205,7 @@ function mimeMessage(env, run, payload, runHash) {
     'MIME-Version: 1.0', 'Content-Type: multipart/mixed; boundary="' + boundary + '"', '',
     '--' + boundary, 'Content-Type: text/plain; charset=UTF-8', '',
     'Your complete Superior Command Center backup is attached as a JSON file.',
-    'The same file is saved in your private Google Drive backup folder:', folderUrl(env),
+    'The same file is saved in your private Google Drive backup folder:', folderUrl(env,folderId),
     'Keep this attachment private. Restore missing records from Backup & Restore in your Command Center.', '',
     '--' + boundary, 'Content-Type: application/json; name="' + run.filename + '"',
     'Content-Disposition: attachment; filename="' + run.filename + '"',
@@ -248,7 +256,7 @@ export async function runCloudBackup(env, {runId='manual-' + random(16),trigger=
   if (!/^[A-Za-z0-9:_-]{1,150}$/.test(runId)) throw Error('Invalid backup request.');
   if (!configured(env)) throw Error('Google backups are not configured in Cloudflare yet.');
   const conn = await connection(env);
-  if (!conn || conn.email!==emailFor(env) || conn.folder_id!==folderFor(env)) throw Error('Connect the selected business Google account before saving cloud backups.');
+  if (!conn || conn.email!==emailFor(env) || !/^[A-Za-z0-9_-]{10,200}$/.test(conn.folder_id || '')) throw Error('Connect the selected business Google account before saving cloud backups.');
   let run = await runRow(env, runId);
   if (run?.status==='complete') return resultFor(env, run);
   const lockOwner = random();
@@ -269,10 +277,10 @@ export async function runCloudBackup(env, {runId='manual-' + random(16),trigger=
       throw Error('Email delivery is unconfirmed. Check Gmail before retrying this backup.');
     }
     const access = await accessToken(env, conn);
-    await validateFolder(env,access);
+    await validateFolder(env,access,conn.folder_id);
     let payload;
     if (!run.drive_file_id) {
-      const previous = await findUploadedFile(env,access,runId);
+      const previous = await findUploadedFile(env,access,runId,conn.folder_id);
       if (previous) {
         await env.DB.prepare("UPDATE backup_runs SET drive_file_id=?,drive_state='saved',status='drive_saved' WHERE id=?").bind(previous.id,runId).run();
         run = await runRow(env,runId);
@@ -281,7 +289,7 @@ export async function runCloudBackup(env, {runId='manual-' + random(16),trigger=
         payload = JSON.stringify(await backupSnapshot(env),null,2);
         if (encoder.encode(payload).length>MAX_BYTES) throw Error('The backup exceeds the 8 MB automatic-delivery limit. Download a full backup and use a staged import for recovery.');
         const boundary = 'superior-' + random();
-        const metadata = {name:run.filename,mimeType:'application/json',parents:[folderFor(env)],appProperties:{superior_backup_run:await hash(runId),superior_backup_app:'command-center-v1'}};
+        const metadata = {name:run.filename,mimeType:'application/json',parents:[conn.folder_id],appProperties:{superior_backup_run:await hash(runId),superior_backup_app:'command-center-v1'}};
         const uploadBody = '--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + JSON.stringify(metadata) + '\r\n--' + boundary + '\r\nContent-Type: application/json\r\n\r\n' + payload + '\r\n--' + boundary + '--\r\n';
         await env.DB.prepare("UPDATE backup_runs SET drive_state='uploading',status='uploading',last_error=NULL WHERE id=?").bind(runId).run();
         try {
@@ -300,7 +308,7 @@ export async function runCloudBackup(env, {runId='manual-' + random(16),trigger=
     if (!payload) payload = await uploadedPayload(env,access,run.drive_file_id);
     await env.DB.prepare("UPDATE backup_runs SET email_state='sending',status='sending' WHERE id=?").bind(runId).run();
     try {
-      const response = await google(env,GMAIL,{method:'POST',headers:{Authorization:'Bearer ' + access,'Content-Type':'application/json'},body:JSON.stringify({raw:mimeMessage(env,run,payload,await hash(runId))})}, 'Gmail did not confirm the emailed backup.');
+      const response = await google(env,GMAIL,{method:'POST',headers:{Authorization:'Bearer ' + access,'Content-Type':'application/json'},body:JSON.stringify({raw:mimeMessage(env,run,payload,await hash(runId),conn.folder_id)})}, 'Gmail did not confirm the emailed backup.');
       const sent = await jsonResponse(response,'Email delivery is unconfirmed. Check Gmail before retrying this backup.');
       if (typeof sent.id!=='string' || !sent.id) throw new GoogleFailure('Email delivery is unconfirmed. Check Gmail before retrying this backup.',{ambiguous:true});
       await env.DB.prepare("UPDATE backup_runs SET email_state='sent',email_message_id=? WHERE id=?").bind(sent.id,runId).run();

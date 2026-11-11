@@ -71,6 +71,11 @@ function googleFixture(){
   }
   if(/userinfo$/.test(url.pathname))return json({email:state.email,email_verified:state.verified,verified_email:state.verified});
   assert.equal(request.headers.get('authorization'),'Bearer '+accessToken,'provider calls use the ephemeral access token');
+  if(url.pathname==='/drive/v3/files'&&request.method==='POST'){
+   const metadata=JSON.parse(body);
+   assert.equal(metadata.mimeType,'application/vnd.google-apps.folder');
+   return json({id:folder,mimeType:'application/vnd.google-apps.folder'});
+  }
   if(url.pathname==='/drive/v3/files/'+folder)return json({id:folder,name:'Private fixture backups',mimeType:'application/vnd.google-apps.folder',trashed:false,shared:state.folderShared,ownedByMe:true,owners:[{me:true,emailAddress:recipient}],capabilities:{canAddChildren:true}});
   if(url.pathname==='/drive/v3/files'&&request.method==='GET'){
    const query=url.searchParams.get('q')||'';
@@ -126,6 +131,9 @@ function setup(t,{configured=true}={}){
   assert.equal(url.hostname,'accounts.google.com');
   assert.equal(url.searchParams.get('redirect_uri'),'https://command.test/api/google/callback');
   assert.equal(url.searchParams.get('access_type'),'offline');
+  assert.ok(url.searchParams.get('scope').includes('https://www.googleapis.com/auth/drive.file'));
+  assert.ok(!url.searchParams.get('scope').split(' ').includes('https://www.googleapis.com/auth/drive'));
+  assert.equal(url.searchParams.get('include_granted_scopes'),'false');
   assert.match(url.searchParams.get('state'),/^[A-Za-z0-9_-]{32,}$/);
   const callback=new URL('https://command.test/api/google/callback');callback.searchParams.set('state',url.searchParams.get('state'));callback.searchParams.set('code','synthetic-code');
   return {url,callback};
