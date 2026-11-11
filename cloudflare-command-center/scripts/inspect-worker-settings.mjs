@@ -73,6 +73,7 @@ export async function inspectWorkerSettings({env=process.env,fetchImpl=fetch,wri
  if(backups.unsafeSecret)throw Error('Google client credentials must use secret_text before deployment.');
  if(report.unsafeOwnerBinding)throw Error('Owner credential bindings must use secret_text before deployment.');
  if(report.wrongDatabase)throw Error('DB binding must match the configured D1 database before deployment.');
+ if(report.missing.length)throw Error('Required Worker bindings are missing; deployment stopped to preserve the existing production version.');
  return report;
 }
 

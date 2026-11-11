@@ -60,7 +60,7 @@ test('settings report only allowlisted binding metadata and expected database ma
  assert.equal(report.unsafeOwnerBinding,false);assert.equal(report.wrongDatabase,false);assert.ok(!JSON.stringify(report).includes(sentinel));
 });
 
-test('settings preflight permits missing secrets with safe summary but blocks plaintext credentials',async()=>{
+test('settings preflight blocks missing or plaintext credentials with a safe summary',async()=>{
  const dir=await mkdtemp(join(tmpdir(),'superior-settings-'));
  try{
   for(const type of [null,'plain_text',sentinel]){
@@ -71,7 +71,7 @@ test('settings preflight permits missing secrets with safe summary but blocks pl
     assert.equal(options.headers.Authorization,'Bearer '+sentinel);assert.equal(options.redirect,'error');
     return json(settings(bindings));
    }});
-   if(type)await assert.rejects(task,/must use secret_text/);else await task;
+   if(type)await assert.rejects(task,/must use secret_text/);else await assert.rejects(task,/Required Worker bindings are missing/);
    const output=lines.join('\n')+await readFile(summary,'utf8');
    assert.match(output,/SESSION_SECRET: missing/);assert.ok(!output.includes(sentinel));
   }
