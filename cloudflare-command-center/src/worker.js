@@ -238,7 +238,10 @@ async function route(req,env,ctx){
  }
  if(m==='GET'&&p==='/api/microsoft/connect'){
   if(!env.MICROSOFT_CLIENT_ID||!env.MICROSOFT_CLIENT_SECRET)return fail(503,'Microsoft OAuth is not configured yet.');
-  return startMicrosoft(req,env);
+  const clientId=String(env.MICROSOFT_CLIENT_ID).trim();
+  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clientId))return fail(503,'OneDrive application ID is invalid. Set MICROSOFT_CLIENT_ID to the Application (client) ID from Microsoft Entra.');
+  try{return await startMicrosoft(req,{...env,MICROSOFT_CLIENT_ID:clientId});}
+  catch(error){console.error('OneDrive connection initialization failed:',error?.message);return fail(503,'OneDrive connection could not start. Check the Cloudflare Worker logs and D1 OAuth state table.');}
  }
  if(m==='POST'&&p==='/api/microsoft/backup-now'){
   try{
