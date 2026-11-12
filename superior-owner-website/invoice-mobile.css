@@ -1,0 +1,44 @@
+/* Owner estimate and converted invoice share a readable phone layout. */
+#detail-dialog .detail-paper,#detail-dialog .doc-meta,#detail-dialog .paper-table,#detail-dialog .paper-totals{min-width:0;max-width:100%}
+#detail-dialog .doc-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#detail-dialog .doc-meta>div,#detail-dialog .doc-meta b{min-width:0;overflow-wrap:anywhere;word-break:break-word}
+#detail-dialog .paper-table{table-layout:fixed}
+#detail-dialog .paper-table th:first-child{width:43%}
+#detail-dialog .paper-table th:nth-child(2){width:12%}
+#detail-dialog .paper-table th:nth-child(3){width:22%}
+#detail-dialog .paper-table th:nth-child(4){width:23%}
+#detail-dialog .paper-totals{width:100%}
+#detail-dialog .paper-totals>div{width:min(100%,270px)}
+#detail-dialog .paper-totals b{white-space:nowrap;font-variant-numeric:tabular-nums}
+#detail-dialog .modal-top h2{overflow-wrap:anywhere;word-break:break-word;font-size:clamp(17px,3vw,24px)}
+@media(max-width:600px){
+ #detail-dialog .modal-body{padding:12px}
+ #detail-dialog .detail-paper{padding:16px 12px}
+ #detail-dialog .paper-brand{gap:8px;align-items:flex-start}
+ #detail-dialog .paper-brand strong{font-size:17px;letter-spacing:1px}
+ #detail-dialog .paper-brand small{font-size:8px;letter-spacing:0}
+ #detail-dialog .paper-brand .doc-type{font-size:12px}
+ #detail-dialog .doc-meta{grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:18px;font-size:12px}
+ #detail-dialog .doc-meta b{font-size:12px}
+ #detail-dialog .paper-table,#detail-dialog .paper-table tbody,#detail-dialog .paper-table tr,#detail-dialog .paper-table td{display:block;width:100%}
+ #detail-dialog .paper-table thead{display:none}
+ #detail-dialog .paper-table tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 8px;border-bottom:1px solid #d3d0c8;padding:12px 0}
+ #detail-dialog .paper-table td{border:0;padding:0;text-align:left!important;min-width:0;font-size:13px;overflow-wrap:anywhere;word-break:normal}
+ #detail-dialog .paper-table td:first-child{grid-column:1/-1;font-size:15px;font-weight:700;margin-bottom:5px}
+ #detail-dialog .paper-table td:nth-child(2)::before{content:'Qty';display:block;color:#777;font-size:10px;font-weight:700}
+ #detail-dialog .paper-table td:nth-child(3)::before{content:'Rate';display:block;color:#777;font-size:10px;font-weight:700}
+ #detail-dialog .paper-table td:nth-child(4)::before{content:'Amount';display:block;color:#777;font-size:10px;font-weight:700}
+ #detail-dialog .paper-totals>div{width:100%;font-size:13px}
+ #detail-dialog .paper-totals .final{font-size:19px}
+ #detail-dialog .modal-foot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ #detail-dialog .modal-foot button{min-width:0;white-space:normal;overflow-wrap:anywhere}
+}
+@media print{
+ #detail-dialog .paper-table{display:table;table-layout:auto}
+ #detail-dialog .paper-table thead{display:table-header-group}
+ #detail-dialog .paper-table tbody{display:table-row-group}
+ #detail-dialog .paper-table tr{display:table-row}
+ #detail-dialog .paper-table td{display:table-cell}
+ #detail-dialog .paper-table td::before{display:none!important}
+ #detail-dialog .doc-meta{grid-template-columns:1fr 1fr}
+}

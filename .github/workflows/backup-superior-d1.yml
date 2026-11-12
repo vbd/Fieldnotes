@@ -1,0 +1,62 @@
+name: Encrypted Superior Command Center D1 backup
+# Database-only backup. Does not deploy, migrate, or modify the live website.
+# Recheck encrypted backup after passphrase secret update.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/backup-superior-d1.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '41 10 * * *'
+permissions:
+  contents: read
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    environment: CLOUDFLARE_API_TOKEN
+    defaults:
+      run:
+        working-directory: cloudflare-command-center
+    env:
+      CLOUDFLARE_ACCOUNT_ID: c917ac1c9a3824a210d0fb77e5879329
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      SUPERIOR_BACKUP_PASSPHRASE: ${{ secrets.SUPERIOR_BACKUP_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify backup credentials are configured
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$SUPERIOR_BACKUP_PASSPHRASE" ]; then
+            echo "::error::Backup requires Cloudflare access and SUPERIOR_BACKUP_PASSPHRASE in the CLOUDFLARE_API_TOKEN environment."
+            exit 1
+          fi
+          if [ "${#SUPERIOR_BACKUP_PASSPHRASE}" -lt 24 ]; then
+            echo "::error::Backup passphrase must be at least 24 characters."
+            exit 1
+          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install Wrangler
+        run: npm install --no-audit --no-fund
+      - name: Export remote D1 without modifying records
+        run: |
+          umask 077
+          npx wrangler d1 export superior-command-center --remote --output="$RUNNER_TEMP/superior-d1.sql"
+          test -s "$RUNNER_TEMP/superior-d1.sql"
+      - name: Encrypt export before upload
+        run: |
+          umask 077
+          openssl enc -aes-256-cbc -pbkdf2 -iter 250000 -salt \
+            -in "$RUNNER_TEMP/superior-d1.sql" \
+            -out "$RUNNER_TEMP/superior-d1.sql.enc" \
+            -pass env:SUPERIOR_BACKUP_PASSPHRASE
+          rm -f "$RUNNER_TEMP/superior-d1.sql"
+          test -s "$RUNNER_TEMP/superior-d1.sql.enc"
+      - name: Store encrypted backup artifact for 7 days
+        uses: actions/upload-artifact@v4
+        with:
+          name: superior-d1-encrypted-${{ github.run_id }}
+          path: ${{ runner.temp }}/superior-d1.sql.enc
+          retention-days: 7
+          if-no-files-found: error

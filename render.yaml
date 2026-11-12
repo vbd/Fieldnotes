@@ -1,0 +1,28 @@
+# Superior Maintenance & Remodeling: new full-package Render web service.
+# Uses an EXISTING Postgres database and inherits the owner's existing password.
+# Does not delete or change the existing preview service or database.
+services:
+  - type: web
+    name: superior-remodeling-command-center
+    runtime: node
+    plan: free
+    region: oregon
+    repo: https://github.com/superiormandr-star/Fieldnotes
+    branch: superior-owner-preview
+    buildCommand: cd superior-owner-website && npm install --omit=dev && npm test
+    startCommand: cd superior-owner-website && node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: superior-command-center-data
+          property: connectionString
+      - key: OWNER_PASSWORD
+        fromService:
+          name: superior-remodeling-owner-preview
+          type: web
+          envVarKey: OWNER_PASSWORD
+      - key: DATA_DIR
+        value: ./superior-owner-website/data

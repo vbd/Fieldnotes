@@ -1,0 +1,26 @@
+import {mkdir, readFile, writeFile, copyFile, rm} from 'node:fs/promises';
+import {resolve, join} from 'node:path';
+const base=resolve('../superior-owner-website'),dest=resolve('public');
+await rm(dest,{recursive:true,force:true});
+await mkdir(join(dest,'assets'),{recursive:true});
+const files=['index.html','styles.css','script.js','owner.html','owner.css','owner.js','invoice-mobile.css','review.html','review.js','review-mobile.css','backup.html','backup.css','backup.js'];
+for(const file of files){
+ let s=await readFile(join(base,file),'utf8');
+ if(file==='owner.html')s=s.replace(/<p class="preview-alert">[\s\S]*?<\/p>/g,'').replaceAll('href="owner.css"','href="/owner.css"').replaceAll('src="owner.js"','src="/owner.js"');
+ if(file==='review.html')s=s.replace('href="owner.css"','href="/owner.css"').replace('src="review.js"','src="/review.js"');
+ if(file==='backup.html'){
+  s=s.replace('Automatic Google Drive backups','Automatic Drive & email backups');
+  s=s.replace('When Google Drive backups are configured, connect your private account and check the connection status below.','Connect your business Google account to automatically save a recoverable backup to your private Drive folder and business email after each new estimate is saved. New invoices and recorded payments also trigger backups.');
+  s=s.replace('The free website can lose records when it restarts—download backups regularly.','Records are stored in Cloudflare D1. Download encrypted or privately stored copies regularly for disaster recovery.');
+  s=s.replace('On the free Render plan, you might need to reconnect Google after a redeploy or restart. Until this page reports a successful cloud backup, download manual backups too.','Automatic Google Drive sync is not yet enabled. Use Download backup and save the file privately in Google Drive.');
+  s=s.replace('Use this if Render loses your data.','Use this only when recovering from a saved backup.');
+  s=s.replace('This is a manual backup solution, not automatic permanent storage. When the business starts taking real customer records, connect a durable database and automated off-site backups.','Cloudflare D1 is the primary database; downloaded copies are off-site disaster recovery backups.');
+ }
+ if(file==='backup.js'){
+  s=s.replace("Setup needed: add Google OAuth client ID and secret to Render.","Automatic Google Drive sync not configured on this Cloudflare deployment.");
+  s=s.replace("Free Render may require reconnection after restart.","D1 records are retained independently of app redeploys.");
+ }
+ await writeFile(join(dest,file),s);
+}
+await copyFile(join(base,'assets/superior-logo.webp'),join(dest,'assets/superior-logo.webp'));
+console.log('Built public website assets for Cloudflare Workers; private server files were excluded.');
