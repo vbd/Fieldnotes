@@ -1,0 +1,49 @@
+/* Customer estimate: readable on narrow phones, print layout unaffected. */
+.review-body,.review-main,.review-card,.review-card .detail-paper{min-width:0;max-width:100%}
+.review-card{overflow:hidden}
+.review-card>.eyebrow{overflow-wrap:anywhere;word-break:break-word;line-height:1.5}
+.review-card .doc-meta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.review-card .doc-meta>div{min-width:0;overflow-wrap:anywhere}
+.review-card .doc-meta b{overflow-wrap:anywhere;word-break:break-word}
+.review-card .paper-table{table-layout:fixed;width:100%}
+.review-card .paper-table th:first-child{width:43%}
+.review-card .paper-table th:nth-child(2){width:12%}
+.review-card .paper-table th:nth-child(3){width:22%}
+.review-card .paper-table th:nth-child(4){width:23%}
+.review-card .paper-table th,.review-card .paper-table td{overflow-wrap:normal;word-break:normal}
+.review-card .paper-totals{width:100%}
+.review-card .paper-totals>div{max-width:100%;width:min(100%,270px)}
+.review-card .paper-totals b{white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(max-width:600px){
+ .review-main{padding:28px 12px 56px}
+ .review-intro h1{font-size:clamp(30px,9vw,43px)}
+ .review-card{margin:18px 0;padding:12px}
+ .review-card .detail-paper{padding:16px 12px;margin-top:12px}
+ .review-card .paper-brand{align-items:flex-start;gap:8px}
+ .review-card .paper-brand strong{font-size:17px;letter-spacing:1px}
+ .review-card .paper-brand small{font-size:8px;letter-spacing:0}
+ .review-card .paper-brand .doc-type{font-size:12px}
+ .review-card .doc-meta{grid-template-columns:minmax(0,1fr);gap:12px;font-size:12px;margin-bottom:18px}
+ .review-card .doc-meta b{font-size:12px}
+ .review-card .paper-table,.review-card .paper-table tbody,.review-card .paper-table tr,.review-card .paper-table td{display:block;width:100%}
+ .review-card .paper-table thead{display:none}
+ .review-card .paper-table tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 8px;border-bottom:1px solid #d3d0c8;padding:12px 0}
+ .review-card .paper-table td{padding:0;border:0;text-align:left!important;min-width:0;font-size:13px;overflow-wrap:anywhere}
+ .review-card .paper-table td:first-child{grid-column:1/-1;font-size:15px;font-weight:700;margin-bottom:5px}
+ .review-card .paper-table td:nth-child(2)::before{content:'Qty';display:block;color:#777;font-size:10px;font-weight:700}
+ .review-card .paper-table td:nth-child(3)::before{content:'Rate';display:block;color:#777;font-size:10px;font-weight:700}
+ .review-card .paper-table td:nth-child(4)::before{content:'Amount';display:block;color:#777;font-size:10px;font-weight:700}
+ .review-card .paper-totals{padding-top:14px}
+ .review-card .paper-totals>div{width:100%;font-size:13px}
+ .review-card .paper-totals .final{font-size:19px}
+ .review-decision{padding:16px}
+ .decision-buttons{display:grid;grid-template-columns:1fr}
+ .decision-buttons button{width:100%;min-height:48px}
+}
+@media print{
+ .review-card .paper-table{display:table;table-layout:auto}
+ .review-card .paper-table thead{display:table-header-group}
+ .review-card .paper-table tbody{display:table-row-group}
+ .review-card .paper-table tr{display:table-row}
+ .review-card .paper-table td{display:table-cell}
+}

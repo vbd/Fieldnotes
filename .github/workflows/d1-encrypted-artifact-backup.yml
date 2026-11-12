@@ -1,0 +1,42 @@
+name: Encrypted D1 backup (no R2 billing)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 10 * * *'
+permissions:
+  contents: read
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export and encrypt D1
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          D1_DATABASE_NAME: ${{ vars.D1_DATABASE_NAME }}
+          BACKUP_ENCRYPTION_KEY: ${{ secrets.BACKUP_ENCRYPTION_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${CLOUDFLARE_API_TOKEN:?Missing Cloudflare token}"
+          : "${CLOUDFLARE_ACCOUNT_ID:?Missing account ID}"
+          : "${D1_DATABASE_NAME:?Missing D1 database name}"
+          : "${BACKUP_ENCRYPTION_KEY:?Missing encryption key}"
+          umask 077
+          mkdir -p backup
+          npx --yes wrangler@4 d1 export "$D1_DATABASE_NAME" --remote --output backup/export.sql
+          test -s backup/export.sql
+          openssl enc -aes-256-cbc -pbkdf2 -iter 250000 -salt -in backup/export.sql -out backup/d1.sql.enc -pass env:BACKUP_ENCRYPTION_KEY
+          rm -f backup/export.sql
+          sha256sum backup/d1.sql.enc > backup/d1.sql.enc.sha256
+      - name: Upload encrypted backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: encrypted-d1-backup-${{ github.run_id }}
+          path: |
+            backup/d1.sql.enc
+            backup/d1.sql.enc.sha256
+          retention-days: 30
+          if-no-files-found: error

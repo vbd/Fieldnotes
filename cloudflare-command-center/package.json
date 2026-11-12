@@ -1,0 +1,17 @@
+{
+  "name": "superior-command-center-cloudflare",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:browser": "node tests/frontend.browser.cjs",
+    "build": "node build.mjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "migrate": "wrangler d1 migrations apply superior-command-center --remote"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "wrangler": "4.157.0"
+  }
+}

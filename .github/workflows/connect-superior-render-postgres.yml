@@ -1,0 +1,43 @@
+name: Connect Superior Render PostgreSQL
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/connect-superior-render-postgres.yml']
+permissions:
+  contents: read
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    env:
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+    steps:
+      - name: Wire existing Render database securely if authorized
+        shell: bash
+        run: |
+          node <<'NODE'
+          async function main(){
+            const token=process.env.RENDER_API_KEY;
+            if(!token){
+              console.error('No RENDER_API_KEY GitHub secret is configured. No resources were changed.');
+              process.exitCode=1;
+              return;
+            }
+            const headers={'Authorization':'Bearer '+token,'Accept':'application/json','Content-Type':'application/json'};
+            async function request(path,method='GET',value){
+              const response=await fetch('https://api.render.com/v1'+path,{method,headers,body:value?JSON.stringify(value):undefined,signal:AbortSignal.timeout(30000)});
+              if(!response.ok)throw new Error('Render API '+method+' request failed (HTTP '+response.status+').');
+              return response.json();
+            }
+            const databaseId='dpg-dbk7gkou01pc73999650-a';
+            const serviceId='srv-dbklr4qjnfac739acqag';
+            const connection=await request('/postgres/'+databaseId+'/connection-info');
+            const url=connection.internalConnectionString;
+            if(typeof url!=='string'||!/^postgres(?:ql)?:\/\//.test(url))throw Error('Render did not return an internal PostgreSQL connection URL.');
+            await request('/services/'+serviceId+'/env-vars/DATABASE_URL','PUT',{value:url});
+            console.log('Connected existing PostgreSQL database to existing Superior website service.');
+            const deploy=await request('/services/'+serviceId+'/deploys','POST',{clearCache:'do_not_clear',deployMode:'build_and_deploy'});
+            console.log('Render deployment started: '+String(deploy.id||'requested'));
+          }
+          main().catch(e=>{console.error(e.message);process.exitCode=1;});
+          NODE
