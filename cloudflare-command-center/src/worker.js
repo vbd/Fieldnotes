@@ -186,6 +186,13 @@ async function route(req,env,ctx){
    return reply({estimate:publicEstimate(e),url:baseReview(req,e.reviewToken)});
   }
  }
+ if(m==='POST'&&p==='/api/invoices'){
+  const data=makeEstimate(await body(req));
+  const inv={...data,id:id('INV'),estimateId:null,standalone:true,createdAt:now(),updatedAt:now(),paymentStatus:'unpaid'};
+  await insert(env,inv,'invoice','unpaid');
+  deliverQueuedBackups(env,ctx);
+  return reply({invoice:inv,backup:{status:'queued'}},201);
+ }
  if(m==='GET'&&p==='/api/invoices')return reply({invoices:await records(env,'invoice')});
  if(m==='GET'&&p==='/api/reviews')return reply({reviews:await feedbackRecords(env)});
  const paid=p.match(/^\/api\/invoices\/(INV-[A-Za-z0-9-]+)\/mark-paid$/);
