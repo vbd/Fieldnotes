@@ -198,3 +198,25 @@ test('scheduled OneDrive upload uses the durable encrypted connection, verifies 
   assert.equal(h.count('records'),1);
  }finally{globalThis.fetch=originalFetch;}
 });
+
+
+test('standalone invoices validate, persist customer details and totals, queue backups, and record payment',async t=>{
+ const h=setup(t);
+ assert.equal((await h.call('/api/invoices',{method:'POST',body:input})).status,401);
+ await h.login();
+ assert.equal((await h.call('/api/invoices',{method:'POST',body:{...input,items:[]},auth:true})).status,400);
+ assert.equal(h.count('records'),0);
+ const created=await h.call('/api/invoices',{method:'POST',body:input,auth:true});
+ assert.equal(created.status,201);
+ const invoice=created.data.invoice;
+ assert.equal(invoice.standalone,true);assert.equal(invoice.estimateId,null);
+ assert.equal(invoice.total,1240.2);assert.equal(invoice.tax,89.2);
+ for(const key of ['customer','email','phone','address','project','notes','taxRate'])assert.equal(invoice[key],input[key]);
+ assert.equal(h.count('backup_runs'),1);
+ h.reopen();
+ const listed=await h.call('/api/invoices',{auth:true});assert.deepEqual(listed.data.invoices,[invoice]);
+ assert.equal((await h.call('/api/estimates',{auth:true})).data.estimates.length,0);
+ const paid=await h.call('/api/invoices/'+invoice.id+'/mark-paid',{method:'POST',body:{},auth:true});
+ assert.equal(paid.status,200);assert.equal(paid.data.invoice.paymentStatus,'paid');assert.ok(paid.data.invoice.paidAt);
+ assert.equal(h.count('backup_runs'),2);
+});

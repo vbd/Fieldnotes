@@ -60,6 +60,15 @@ if(summaryPath)await appendFile(summaryPath,
  'Public pages respond, the live D1 binding can read the application schema, and owner records require authentication. '+
  'Production checks do not create, replace, or delete business records.\n');
 console.log('Verified website: '+url);
+const owner=await (await get('/owner')).text();
+assert.match(owner,/class="primary new-invoice"/,'Live owner page must include standalone invoice action.');
+const script=await get('/owner.js');assert.equal(script.status,200);
+const javascript=await script.text();
+assert.ok(javascript.includes("$$('.new-invoice').forEach"),'Live invoice action must use the working event handler.');
+assert.ok(javascript.includes("isInvoice?'/api/invoices'"),'Live editor must save standalone invoices.');
+const denied=await fetchImpl(url+'/api/invoices',{method:'POST',headers:{'Content-Type':'application/json','Origin':url},body:'{}',signal:AbortSignal.timeout(15000)});
+assert.equal(denied.status,401,'Anonymous invoice creation must be denied.');
+console.log('Live standalone invoice assets and API authentication verified without creating records.');
 console.log('Live D1 readiness and owner access protection passed.');
 }
 

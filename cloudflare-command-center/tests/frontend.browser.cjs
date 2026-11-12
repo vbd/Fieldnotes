@@ -30,6 +30,10 @@ let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0,owne
    if(path==='/api/estimates'&&request.method()==='POST'){
     const input=request.postDataJSON();const e={...input,id:'EST-2026-NEW',status:'draft',createdAt:fixture.createdAt};e.items=input.items.map(i=>({...i,total:Math.round(i.qty*Math.round(i.rate*100))/100}));e.subtotal=e.items.reduce((n,i)=>n+i.total,0);e.tax=0;e.total=e.subtotal;estimates.unshift(e);return json({estimate:e},201);
    }
+   if(path==='/api/invoices'&&request.method()==='POST'){
+    const input=request.postDataJSON();const invoice={...input,id:'INV-2026-STANDALONE',standalone:true,estimateId:null,paymentStatus:'unpaid',createdAt:fixture.createdAt};
+    invoice.items=input.items.map(i=>({...i,total:Math.round(i.qty*i.rate*100)/100}));invoice.subtotal=invoice.items.reduce((n,i)=>n+i.total,0);invoice.tax=Math.round(invoice.subtotal*Number(input.taxRate))/100;invoice.total=invoice.subtotal+invoice.tax;invoices.push(invoice);return json({invoice},201);
+   }
    if(path==='/api/invoices')return json({invoices});
    if(path==='/api/reviews')return legacy?json({error:'Not found'},404):json({reviews});
    if(path==='/api/invoices/INV-2026-TEST/mark-paid'){invoices[0].paymentStatus='paid';invoices[0].paidAt=fixture.createdAt;return json({invoice:invoices[0]});}
@@ -51,6 +55,13 @@ let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0,owne
  await page.locator('.bottom-nav [data-view="invoices"]').click();await page.locator('#invoices-list .record').click();
  assert.match(await page.locator('#detail-content').innerText(),/test@example\.invalid/);assert.match(await page.locator('#detail-content').innerText(),/555-0100/);
  await page.getByRole('button',{name:'Mark paid',exact:true}).click();await page.waitForFunction(()=>document.querySelector('#detail-content').textContent.includes('Payment recorded'));
+ await page.locator('[data-close="detail-dialog"]').click();
+ await page.locator('.new-invoice').click();await page.locator('#editor-title').filter({hasText:'New standalone invoice'}).waitFor();
+ await page.locator('[name="customer"]').fill('Standalone Fixture');await page.locator('[name="email"]').fill('invoice@example.invalid');await page.locator('[name="phone"]').fill('555-0101');await page.locator('[name="address"]').fill('Fixture address');await page.locator('[name="notes"]').fill('Fixture invoice notes');
+ await page.locator('.line-description').fill('Standalone work');await page.locator('.line-qty').fill('2');await page.locator('.line-rate').fill('125.50');await page.locator('#tax-rate').fill('7.75');
+ assert.equal(await page.locator('#form-total').innerText(),'$270.45');assert.equal(await page.evaluate(()=>document.querySelector('#editor-dialog').scrollWidth<=innerWidth),true);
+ await page.locator('#editor-form [type="submit"]').click();await page.locator('#detail-dialog[open]').waitFor();assert.match(await page.locator('#detail-content').innerText(),/Standalone Fixture/);assert.match(await page.locator('#detail-content').innerText(),/Fixture invoice notes/);
+ assert.equal(invoices.filter(i=>i.standalone).length,1);await page.evaluate(()=>{window.print=()=>{window.__printed=true;};});await page.getByRole('button',{name:'Print / Save PDF',exact:true}).click();assert.equal(await page.evaluate(()=>window.__printed),true);
  await page.locator('[data-close="detail-dialog"]').click();
  await page.locator('.bottom-nav [data-view="feedback"]').click();assert.match(await page.locator('#feedback-list').innerText(),/<img src=x/);assert.equal(await page.evaluate(()=>window.__xss),undefined);
  await page.locator('#mobile-add').click();await page.locator('[name="customer"]').fill('Fixture New');await page.locator('[name="email"]').fill('fixture@example.invalid');await page.locator('.line-description').fill('Long itemized work description for a narrow phone display');await page.locator('.line-qty').fill('1.25');await page.locator('.line-rate').fill('42.20');
