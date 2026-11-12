@@ -6,7 +6,7 @@ await mkdir(join(dest,'assets'),{recursive:true});
 const files=['index.html','styles.css','script.js','owner.html','owner.css','owner.js','invoice-mobile.css','review.html','review.js','review-mobile.css','backup.html','backup.css','backup.js'];
 for(const file of files){
  let s=await readFile(join(base,file),'utf8');
- if(file==='owner.html')s=s.replace(/<p class="preview-alert">[\s\S]*?<\/p>/g,'').replace('href="owner.css"','href="/owner.css"').replace('src="owner.js"','src="/owner.js"');
+ if(file==='owner.html')s=s.replace(/<p class="preview-alert">[\s\S]*?<\/p>/g,'').replaceAll('href="owner.css"','href="/owner.css"').replaceAll('src="owner.js"','src="/owner.js"');
  if(file==='review.html')s=s.replace('href="owner.css"','href="/owner.css"').replace('src="review.js"','src="/review.js"');
  if(file==='backup.html'){
   s=s.replace('Automatic Google Drive backups','Automatic Drive & email backups');
