@@ -2,7 +2,7 @@
 const $=id=>document.getElementById(id);
 const status=(txt,isError=false)=>{const el=$('backup-status');el.textContent=txt;el.style.color=isError?'#e3a09c':'#8ccaab';};
 let restoreSupported=false,restoring=false;
-async function req(url,opts={}){const r=await fetch(url,{credentials:'same-origin',cache:'no-store',...opts});if(r.status===401){location.assign('/owner');throw Error('Please sign in to the owner Command Center.');}if(!r.ok){let msg='Request failed';try{msg=(await r.json()).error||msg;}catch{}const error=Error(msg);error.status=r.status;throw error;}return r;}
+async function req(url,opts={}){const r=await fetch(url,{credentials:'same-origin',cache:'no-store',...opts});if(r.status===401){location.assign('/owner?returnTo='+encodeURIComponent('/owner/backup'+location.search));throw Error('Please sign in to the owner Command Center.');}if(!r.ok){let msg='Request failed';try{msg=(await r.json()).error||msg;}catch{}const error=Error(msg);error.status=r.status;throw error;}return r;}
 async function refreshCounts(){
  const [e,i]=await Promise.all([req('/api/estimates').then(r=>r.json()),req('/api/invoices').then(r=>r.json())]);
  let feedback='';try{const r=await(await req('/api/reviews')).json();feedback=` • ${r.reviews.length} customer responses`;}catch(error){if(error.status!==404)throw error;}
@@ -98,3 +98,26 @@ $('microsoft-backup-now').addEventListener('click',async()=>{
  }catch(e){status(e.message,true);}finally{microsoftBusy=false;await checkMicrosoft();}
 });
 checkMicrosoft();
+
+const microsoftReturn=new URLSearchParams(location.search).get('onedrive');
+const microsoftMessages={
+ connected:'Microsoft OneDrive authorization completed. Automatic backup will run on the next scheduled check.',
+ state:'Microsoft sign-in expired or could not be verified. Start again using Connect Microsoft OneDrive.',
+ denied:'Microsoft authorization was not completed. Connect again and approve the requested access.',
+ credentials:'Microsoft rejected the application credentials. Check the client ID, client secret value, and registered redirect URI.',
+ offline:'Microsoft offline access was not granted. Connect again and approve offline access.',
+ account:'Microsoft could not verify the account. Connect again with your personal Microsoft account.',
+ callback:'Microsoft connection could not be completed. Connect again or check the Worker logs.'
+};
+if(Object.hasOwn(microsoftMessages,microsoftReturn))status(microsoftMessages[microsoftReturn],microsoftReturn!=='connected');
+
+const microsoftErrorCode=new URLSearchParams(location.search).get('microsoft_error');
+const microsoftCredentialErrors={
+ '7000215':'Microsoft rejected the client secret. Set MICROSOFT_CLIENT_SECRET to the secret Value, not the Secret ID, in Cloudflare.',
+ '7000222':'The Microsoft client secret has expired. Add the replacement secret Value securely in Cloudflare.',
+ '7000218':'Microsoft did not receive the required application secret. Check the client secret and Entra Web app configuration.',
+ '700016':'Microsoft could not find this application. Check the Application (client) ID and personal-account support in Entra.',
+ '50011':'The Microsoft redirect URI does not match. Register this site’s /api/microsoft/callback as an Entra Web redirect URI.'
+};
+if(microsoftReturn==='credentials'&&Object.hasOwn(microsoftCredentialErrors,microsoftErrorCode))status('AADSTS'+microsoftErrorCode+': '+microsoftCredentialErrors[microsoftErrorCode],true);
+if(microsoftReturn==='credentials'&&/^[0-9]{1,8}$/.test(microsoftErrorCode||'')&&!Object.hasOwn(microsoftCredentialErrors,microsoftErrorCode))status('Microsoft authorization failed (AADSTS'+microsoftErrorCode+'). Check the Microsoft application configuration and try again.',true);

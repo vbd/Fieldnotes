@@ -18,10 +18,24 @@ function loginView(isLoggedIn){
  if(!isLoggedIn){state.estimates=[];state.invoices=[];state.reviews=[];$('#detail-dialog').close();$('#editor-dialog').close();}
 }
 async function load(){const [e,i,r]=await Promise.all([api('/api/estimates'),api('/api/invoices'),api('/api/reviews').catch(error=>{if(error.status===404)return {reviews:[],available:false};throw error;})]);state.estimates=e.estimates;state.invoices=i.invoices;state.reviews=r.reviews;state.feedbackAvailable=r.available!==false;render();}
-async function boot(){try{const result=await api('/api/session');if(result.authenticated)await load();loginView(result.authenticated);}catch(e){loginView(false);$('#login-error').textContent=e.message;}}
+function resumeBackup(){
+ const next=new URLSearchParams(location.search).get('returnTo');
+ if(!next)return false;
+ try{
+  const target=new URL(next,location.origin);
+  if(target.origin!==location.origin||target.pathname!=='/owner/backup')return false;
+  const params=new URLSearchParams();
+  const allowed={drive:['connected','backup-error','denied','error'],onedrive:['connected','state','denied','credentials','offline','account','callback']};
+  for(const [name,values] of Object.entries(allowed))if(values.includes(target.searchParams.get(name)))params.set(name,target.searchParams.get(name));
+  const code=target.searchParams.get('microsoft_error');
+  if(/^[0-9]{1,8}$/.test(code||''))params.set('microsoft_error',code);
+  location.replace('/owner/backup'+(params.size?'?'+params.toString():''));return true;
+ }catch{return false;}
+}
+async function boot(){try{const result=await api('/api/session');if(result.authenticated&&resumeBackup())return;if(result.authenticated)await load();loginView(result.authenticated);}catch(e){loginView(false);$('#login-error').textContent=e.message;}}
 $('#login-form').addEventListener('submit',async ev=>{
  ev.preventDefault();const error=$('#login-error'),button=ev.currentTarget.querySelector('button');if(button.disabled)return;error.textContent='';button.disabled=true;
- try{await submit('/api/login',{password:$('#password').value});$('#password').value='';await load();loginView(true);}catch(e){loginView(false);error.textContent=e.message;}finally{button.disabled=false;}
+ try{await submit('/api/login',{password:$('#password').value});$('#password').value='';if(resumeBackup())return;await load();loginView(true);}catch(e){loginView(false);error.textContent=e.message;}finally{button.disabled=false;}
 });
 $('#logout').addEventListener('click',async()=>{const button=$('#logout');if(button.disabled)return;button.disabled=true;try{await submit('/api/logout',{});loginView(false);}catch(error){toast(error.message);}finally{button.disabled=false;}});
 function setView(view){$$('.view').forEach(el=>el.classList.toggle('active',el.id==='view-'+view));$$('[data-view]').forEach(el=>el.classList.toggle('selected',el.dataset.view===view));$('#top-title').textContent={overview:'Command Center',estimates:'Estimates',invoices:'Invoices',feedback:'Customer feedback'}[view];window.scrollTo({top:0,behavior:'instant'});}

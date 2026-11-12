@@ -95,3 +95,19 @@ test('missing or malformed Microsoft client IDs cannot initiate OAuth; whitespac
  try{assert.equal((await finishMicrosoft(new Request(origin+'/api/microsoft/callback?state='+auth.searchParams.get('state')+'&code=test'),env)).status,303);}
  finally{globalThis.fetch=oldFetch;}
 });
+
+test('Microsoft token failure exposes only allowlisted category and numeric provider code',async()=>{
+ const {env}=fixture();
+ const start=await startMicrosoft(new Request(origin+'/api/microsoft/connect'),env);
+ const state=new URL(start.headers.get('Location')).searchParams.get('state');
+ const originalFetch=globalThis.fetch;
+ globalThis.fetch=async()=>Response.json({error:'invalid_client',error_codes:[7000215],error_description:'PRIVATE-CREDENTIAL-DETAILS',access_token:'PRIVATE-TOKEN'},{status:401});
+ try{
+  await assert.rejects(()=>finishMicrosoft(new Request(origin+'/api/microsoft/callback?state='+state+'&code=test'),env),error=>{
+   assert.equal(error.microsoftCode,7000215);
+   assert.match(error.message,/invalid_client; AADSTS7000215/);
+   assert.doesNotMatch(error.message,/PRIVATE/);
+   return true;
+  });
+ }finally{globalThis.fetch=originalFetch;}
+});

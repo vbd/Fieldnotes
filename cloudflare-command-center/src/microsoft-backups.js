@@ -13,7 +13,7 @@ const unb64=s=>Uint8Array.from(atob(s),x=>x.charCodeAt(0));
 const nonce=()=>b64(crypto.getRandomValues(new Uint8Array(32))).replaceAll('+','-').replaceAll('/','_').replaceAll('=','');
 const sha=async s=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',enc.encode(s))),x=>x.toString(16).padStart(2,'0')).join('');
 const callback=req=>new URL('/api/microsoft/callback',req.url).toString();
-const redirect=req=>new Response(null,{status:303,headers:{Location:new URL('/owner/backup',req.url).toString(),'Cache-Control':'no-store'}});
+const redirect=req=>new Response(null,{status:303,headers:{Location:new URL('/owner/backup?onedrive=connected',req.url).toString(),'Cache-Control':'no-store'}});
 async function key(env){
  const material=await crypto.subtle.importKey('raw',enc.encode(env.SESSION_SECRET),'HKDF',false,['deriveKey']);
  return crypto.subtle.deriveKey({name:'HKDF',hash:'SHA-256',salt:enc.encode('superior-command-center'),info:enc.encode('microsoft-backup-refresh-token-v1')},material,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
@@ -37,8 +37,16 @@ async function token(env,fields){
  const config=microsoftConfiguration(env);
  if(!config.configured)throw Error('Microsoft backup credentials are not configured');
  const response=await fetch(LOGIN+'/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:config.clientId,client_secret:config.clientSecret,...fields})});
- if(!response.ok)throw Error('Microsoft authorization failed');
- const body=await response.json();
+ let body;
+ try{body=await response.json();}catch{throw Error('Microsoft authorization failed');}
+ if(!response.ok){
+  const allowed=['invalid_client','invalid_grant','invalid_request','interaction_required','consent_required','unauthorized_client'];
+  const kind=allowed.includes(body?.error)?body.error:'rejected';
+  const code=Array.isArray(body?.error_codes)?body.error_codes.find(value=>Number.isSafeInteger(value)&&value>0&&value<100000000):undefined;
+  const error=Error('Microsoft authorization failed ('+kind+(code?'; AADSTS'+code:'')+').');
+  if(code)error.microsoftCode=code;
+  throw error;
+ }
  if(!body.access_token)throw Error('Microsoft access token missing');
  return body;
 }

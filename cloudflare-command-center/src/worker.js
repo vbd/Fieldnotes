@@ -106,7 +106,9 @@ async function route(req,env,ctx){
    const detail=String(error?.message||'');
    console.error('OneDrive OAuth callback failed:',detail);
    const reason=/authorization state/i.test(detail)?'state':/authorization was not completed/i.test(detail)?'denied':/offline authorization/i.test(detail)?'offline':/Microsoft authorization failed/i.test(detail)?'credentials':/account could not be verified/i.test(detail)?'account':'callback';
-   return new Response(null,{status:303,headers:{Location:new URL('/owner/backup?onedrive='+reason,new URL(req.url).origin).toString(),'Cache-Control':'no-store','Referrer-Policy':'no-referrer'}});
+   const target=new URL('/owner/backup?onedrive='+reason,new URL(req.url).origin);
+   if(Number.isSafeInteger(error?.microsoftCode)&&error.microsoftCode>0&&error.microsoftCode<100000000)target.searchParams.set('microsoft_error',String(error.microsoftCode));
+   return new Response(null,{status:303,headers:{Location:target.toString(),'Cache-Control':'no-store','Referrer-Policy':'no-referrer'}});
   }
  }
  if(m==='GET'&&p==='/api/session')return reply({authenticated:await authorized(req,env),capabilities});

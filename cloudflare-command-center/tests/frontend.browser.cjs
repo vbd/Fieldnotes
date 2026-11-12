@@ -12,7 +12,7 @@ const fixture={id:'EST-2026-TEST',customer:'Test Customer',email:'test@example.i
 const estimates=[{...fixture,id:'EST-2026-APPROVED',status:'approved',invoiceId:'INV-2026-TEST',customerSignature:'Test Signer',customerNote:'Approved scope',decidedAt:'2026-01-02T10:00:00Z'}];
 const invoices=[{...fixture,id:'INV-2026-TEST',estimateId:'EST-2026-APPROVED',paymentStatus:'unpaid'}];
 const reviews=[{id:'REV-2026-TEST',estimateId:'EST-2026-APPROVED',customer:'Test Customer',rating:5,comment:'<img src=x onerror="window.__xss=1">',createdAt:'2026-01-03T10:00:00Z'}];
-let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0;
+let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0,ownerAuthenticated=true;
 (async()=>{
  if(!existsSync(join(base,'owner.html')))throw Error('Built public assets are missing. Run npm run build before npm run test:browser.');
  const browser=await chromium.launch({executablePath,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
@@ -22,7 +22,10 @@ let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0;
   const request=route.request(),path=new URL(request.url()).pathname;
   const json=(data,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(data)});
   if(path.startsWith('/api/')){
-   if(path==='/api/session')return json({authenticated:true,...(!legacy?{capabilities:{additiveRestore:true,customerFeedback:true}}:{})});
+   if(path==='/api/login'){ownerAuthenticated=true;return json({authenticated:true});}
+   if(!ownerAuthenticated&&['/api/estimates','/api/invoices','/api/reviews','/api/google/status','/api/microsoft/status'].includes(path))return json({error:'Owner sign-in required'},401);
+   if(path==='/api/microsoft/status')return json({configured:true,connected:false});
+   if(path==='/api/session')return json({authenticated:ownerAuthenticated,...(!legacy?{capabilities:{additiveRestore:true,customerFeedback:true}}:{})});
    if(path==='/api/estimates'&&request.method()==='GET')return json({estimates});
    if(path==='/api/estimates'&&request.method()==='POST'){
     const input=request.postDataJSON();const e={...input,id:'EST-2026-NEW',status:'draft',createdAt:fixture.createdAt};e.items=input.items.map(i=>({...i,total:Math.round(i.qty*Math.round(i.rate*100))/100}));e.subtotal=e.items.reduce((n,i)=>n+i.total,0);e.tax=0;e.total=e.subtotal;estimates.unshift(e);return json({estimate:e},201);
@@ -67,6 +70,16 @@ let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0;
  legacy=true;await page.reload();await page.locator('#restore-help').filter({hasText:'unavailable'}).waitFor();await page.locator('#backup-file').setInputFiles({name:'backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});assert.equal(await page.locator('#restore').isDisabled(),true,'legacy destructive restore cannot be invoked');assert.equal(restorePosts,1);
  await page.goto('https://superior.test/owner');await page.locator('#app-shell:not(.hidden)').waitFor();await page.locator('.bottom-nav [data-view="feedback"]').click();assert.match(await page.locator('#feedback-summary').innerText(),/unavailable/);
  await page.goto('https://superior.test/review/'+token);await page.locator('#review-content .detail-paper').waitFor();assert.equal(await page.locator('#feedback-section').isVisible(),false,'unsupported legacy feedback is hidden');
+ legacy=false;ownerAuthenticated=false;
+ await page.goto('https://superior.test/owner/backup?onedrive=credentials&microsoft_error=7000215');
+ await page.waitForURL(url=>url.pathname==='/owner'&&url.searchParams.has('returnTo'));
+ await page.locator('#password').fill('fixture-only-password');
+ await page.locator('#login-form button').click();
+ await page.waitForURL(url=>url.pathname==='/owner/backup');
+ await page.locator('#backup-status').filter({hasText:'AADSTS7000215: Microsoft rejected the client secret'}).waitFor();
+ await page.goto('https://superior.test/owner?returnTo=https%3A%2F%2Fexample.invalid%2Fowner%2Fbackup');
+ await page.locator('#app-shell:not(.hidden)').waitFor();
+ assert.equal(new URL(page.url()).origin,'https://superior.test','external login redirect is rejected');
  assert.deepEqual(errors,[],'no frontend runtime errors');console.log('PASS: mobile and desktop layout, itemized estimate save, invoice payment status, customer decision and feedback, escaped content, additive import and legacy safety.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
