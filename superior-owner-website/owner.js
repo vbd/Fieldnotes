@@ -83,9 +83,14 @@ function openDetail(kind,id){
   if(e.status==='draft'||e.status==='sent')box.append(action(e.status==='sent'?'Get approval link':'Prepare approval link','primary',()=>shareLink(e.id,e.email)));
   if(e.status==='approved'&&e.invoiceId)box.append(action('View invoice ↗','primary',()=>{$('#detail-dialog').close();setView('invoices');openDetail('invoice',e.invoiceId);}));
  }else if(e.paymentStatus==='unpaid'){
+  box.append(action('Get payment link','ghost',()=>sharePaymentLink(e.id)));
   box.append(action('Mark paid','primary',async()=>{if(!window.confirm('Mark this invoice as paid? Only do this after confirming payment received.'))return;await submit('/api/invoices/'+e.id+'/mark-paid',{});await load();openDetail('invoice',e.id);toast('Invoice marked paid.');}));
  }
  if(!$('#detail-dialog').open)$('#detail-dialog').showModal();
 }
 async function shareLink(id,email){try{const data=await submit('/api/estimates/'+id+'/share',{});await load();openDetail('estimate',id);const url=data.url;const info=document.createElement('div');info.className='link-share-info';info.innerHTML='<p class="eyebrow">CUSTOMER APPROVAL LINK</p><label>Copy this link or open an email draft<input id="share-url" type="text" readonly></label><p class="muted">This creates a review link; it does not send an email by itself.</p>';$('#detail-content').prepend(info);$('#share-url').value=url;const box=$('#detail-actions');box.innerHTML='';box.append(action('Print / Save PDF','ghost',()=>window.print()));box.append(action('Copy link','ghost',async()=>{try{await navigator.clipboard.writeText(url);toast('Approval link copied.');}catch{$('#share-url').focus();$('#share-url').select();toast('Select and copy the link.');}}));box.append(action('Email customer ↗','primary',()=>{const subject=encodeURIComponent('Your Superior Maintenance and Remodeling estimate');const body=encodeURIComponent(`Hello,\n\nPlease review your Superior Maintenance and Remodeling itemized estimate. You can approve or decline it at this link:\n${url}\n\nThank you,\nSuperior Maintenance and Remodeling`);window.location.href=`mailto:${encodeURIComponent(email)}?subject=${subject}&body=${body}`;}));toast('Customer approval link ready.');}catch(e){toast(e.message);}}
+async function sharePaymentLink(id){
+ try{const {url}=await submit('/api/invoices/'+id+'/share',{});const info=document.createElement('div');info.className='link-share-info';const label=document.createElement('label');label.textContent='Private invoice link — copy and send to your customer';const input=document.createElement('input');input.readOnly=true;input.value=url;label.append(input);info.append(label);$('#detail-content').prepend(info);input.focus();input.select();try{await navigator.clipboard.writeText(url);toast('Invoice link copied.');}catch{toast('Select and copy the invoice link.');}}
+ catch(error){toast(error.message);}
+}
 boot();

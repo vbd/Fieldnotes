@@ -1,6 +1,8 @@
 import {mkdir, readFile, writeFile, copyFile, rm} from 'node:fs/promises';
-import {resolve, join} from 'node:path';
-const base=resolve('../superior-owner-website'),dest=resolve('public');
+import {resolve, join, dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=dirname(fileURLToPath(import.meta.url));
+const base=resolve(root,'../superior-owner-website'),dest=resolve(root,'public');
 await rm(dest,{recursive:true,force:true});
 await mkdir(join(dest,'assets'),{recursive:true});
 const files=['index.html','styles.css','script.js','owner.html','owner.css','owner.js','invoice-mobile.css','review.html','review.js','review-mobile.css','backup.html','backup.css','backup.js'];

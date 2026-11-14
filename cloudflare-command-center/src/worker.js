@@ -1,3 +1,4 @@
+import {InvoicePayments,PaymentError,paymentConfigured} from './paypal.js';
 // Superior Command Center — Cloudflare Workers + durable D1 storage
 // IMPORTANT: Set OWNER_PASSWORD and SESSION_SECRET as Worker secrets.
 import {backupSnapshot,backupStatus,startGoogleConnection,completeGoogleConnection,runCloudBackup,backupQueueStatement,processBackupQueue} from './backups.js';
@@ -93,7 +94,7 @@ async function route(req,env,ctx){
  if(m==='GET'&&p==='/api/health'){
   try{
    await Promise.all(['records','login_attempts','customer_reviews','backup_connections','backup_oauth_states','backup_runs','backup_locks','microsoft_backup_connection'].map(table=>env.DB.prepare('SELECT 1 FROM '+table+' LIMIT 1').first()));
-   return reply({ok:true,service:'superior-command-center',database:'ready'});
+   return reply({ok:true,service:'superior-command-center',database:'ready',paymentsConfigured:paymentConfigured(env)});
   }catch{return fail(503,'Command Center database migrations are incomplete.');}
  }
  if(['POST','PATCH','PUT','DELETE'].includes(m)&&!originMatches(req))return fail(403,'Invalid request origin.');
@@ -123,10 +124,41 @@ async function route(req,env,ctx){
   return reply({authenticated:true,capabilities},200,{'Set-Cookie':sessionCookie(token)});
  }
  if(m==='POST'&&p==='/api/logout')return reply({ok:true},200,{'Set-Cookie':'superior_sid=; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=0'});
+ const paymentRoute=p.match(/^\/api\/review\/([a-f0-9]{64})\/payment(?:\/(create|capture))?$/);
+ if(paymentRoute){
+  const row=await env.DB.prepare("SELECT data,kind FROM records WHERE review_token=? AND kind IN ('estimate','invoice')").bind(paymentRoute[1]).first();
+  const estimate=parseRow(row);
+  if(!estimate||(row.kind!=='invoice'&&(estimate.status!=='approved'||!estimate.invoiceId)))return fail(404,'Approved invoice not found.');
+  const invoice=row.kind==='invoice'?estimate:await select(env,estimate.invoiceId,'invoice');
+  if(!invoice||(row.kind!=='invoice'&&invoice.estimateId!==estimate.id))return fail(404,'Invoice not found.');
+  if(m==='GET'&&!paymentRoute[2])return reply({invoice:{id:invoice.id,total:invoice.total,paymentStatus:invoice.paymentStatus},enabled:paymentConfigured(env)});
+  if(m!=='POST'||!paymentRoute[2])return fail(405,'Method not allowed.');
+  if(invoice.paymentStatus==='paid')return reply({paid:true});
+  try{
+   const paypal=new InvoicePayments(env);
+   if(invoice.paypalOrderId&&(invoice.paypalMode!==env.PAYPAL_MODE||invoice.paypalMerchantId!==env.PAYPAL_MERCHANT_ID))return fail(409,'PayPal configuration changed. Contact Superior before retrying payment.');
+   if(paymentRoute[2]==='create'){
+    const order=invoice.paypalOrderId&&invoice.paypalApprovalUrl?{orderId:invoice.paypalOrderId,approvalUrl:invoice.paypalApprovalUrl}:await paypal.create(invoice,baseReview(req,paymentRoute[1]));
+    const updated={...invoice,paypalOrderId:order.orderId,paypalApprovalUrl:order.approvalUrl,paypalMode:env.PAYPAL_MODE,paypalMerchantId:env.PAYPAL_MERCHANT_ID};
+    const result=await env.DB.prepare("UPDATE records SET data=? WHERE id=? AND kind='invoice' AND status='unpaid' AND data=?").bind(JSON.stringify(updated),invoice.id,JSON.stringify(invoice)).run();
+    if(!result.meta?.changes)return fail(409,'Invoice changed. Reload before paying.');
+    return reply(order);
+   }
+   const receipt=await paypal.capture(invoice);
+   const updated={...invoice,paymentStatus:'paid',paidAt:receipt.paidAt,paymentMethod:'paypal',paypalCaptureId:receipt.captureId};
+   await env.DB.batch([
+    env.DB.prepare("UPDATE records SET data=?,status='paid' WHERE id=? AND kind='invoice' AND status='unpaid'").bind(JSON.stringify(updated),invoice.id),
+    backupQueueStatement(env,{runId:'payment-'+invoice.id,trigger:'payment-recorded',sourceId:invoice.id,sourceKind:'invoice'})
+   ]);
+   deliverQueuedBackups(env,ctx);
+   return reply({paid:true});
+  }catch(error){if(error instanceof PaymentError)return fail(error.status,error.message);throw error;}
+ }
  if(m==='GET'&&/^\/api\/review\/[a-f0-9]{64}$/.test(p)){
-  const token=p.split('/')[3],r=await env.DB.prepare("SELECT data FROM records WHERE kind='estimate' AND review_token=?").bind(token).first();
+  const token=p.split('/')[3],r=await env.DB.prepare("SELECT data,kind FROM records WHERE review_token=? AND kind IN ('estimate','invoice')").bind(token).first();
   if(!r)return fail(404,'Estimate review link not found.');
   const estimate=parseRow(r);
+  if(r.kind==='invoice'){const {id,customer,address,project,items,notes,taxRate,subtotal,tax,total,createdAt}=estimate;return reply({estimate:{id,customer,address,project,items,notes,taxRate,subtotal,tax,total,createdAt,status:estimate.paymentStatus,isInvoice:true},feedbackEnabled:false});}
   return reply({estimate:publicEstimate(estimate),feedback:await feedbackFor(env,estimate.id),feedbackEnabled:true});
  }
  if(m==='POST'&&/^\/api\/review\/[a-f0-9]{64}\/feedback$/.test(p)){
@@ -202,6 +234,14 @@ async function route(req,env,ctx){
   await insert(env,inv,'invoice','unpaid');
   deliverQueuedBackups(env,ctx);
   return reply({invoice:inv,backup:{status:'queued'}},201);
+ }
+ const invoiceShare=p.match(/^\/api\/invoices\/(INV-[A-Za-z0-9-]+)\/share$/);
+ if(m==='POST'&&invoiceShare){
+  const invoice=await select(env,invoiceShare[1],'invoice');if(!invoice)return fail(404,'Invoice not found.');
+  const previous=JSON.stringify(invoice);invoice.paymentToken=invoice.paymentToken||randomHex();
+  const result=await env.DB.prepare("UPDATE records SET data=?,review_token=? WHERE id=? AND kind='invoice' AND data=?").bind(JSON.stringify(invoice),invoice.paymentToken,invoice.id,previous).run();
+  if(!result.meta?.changes)return fail(409,'Invoice changed. Reload and try again.');
+  return reply({url:baseReview(req,invoice.paymentToken)});
  }
  if(m==='GET'&&p==='/api/invoices')return reply({invoices:await records(env,'invoice')});
  if(m==='GET'&&p==='/api/reviews')return reply({reviews:await feedbackRecords(env)});

@@ -121,7 +121,7 @@ test('health checks schema readiness without exposing data, and migrations prese
  result=await h.call('/api/health',{environment:{...h.env,SESSION_SECRET:undefined}});assert.equal(result.status,503);assert.equal(JSON.stringify(result.data).includes(password),false);
  h.applyMigrations();await h.login();await h.createAndShare();
  h.applyMigrations();assert.equal(h.count('records'),1);
- result=await h.call('/api/health');assert.deepEqual(result.data,{ok:true,service:'superior-command-center',database:'ready'});assert.equal(result.status,200);assert.equal(result.headers.get('cache-control'),'no-store');
+ result=await h.call('/api/health');assert.deepEqual(result.data,{ok:true,service:'superior-command-center',database:'ready',paymentsConfigured:false});assert.equal(result.status,200);assert.equal(result.headers.get('cache-control'),'no-store');
 });
 
 test('owner APIs reject cross-origin writes and malformed input, and login failures are rate limited',async t=>{
@@ -219,4 +219,47 @@ test('standalone invoices validate, persist customer details and totals, queue b
  const paid=await h.call('/api/invoices/'+invoice.id+'/mark-paid',{method:'POST',body:{},auth:true});
  assert.equal(paid.status,200);assert.equal(paid.data.invoice.paymentStatus,'paid');assert.ok(paid.data.invoice.paidAt);
  assert.equal(h.count('backup_runs'),2);
+});
+
+test('invoice checkout is private, disabled without credentials, and cannot accept client paid state',async t=>{
+ const h=setup(t);await h.login();const {token}=await h.createAndShare();
+ assert.equal((await h.call('/api/review/'+token+'/payment')).status,404);
+ const approved=await h.call('/api/review/'+token+'/decision',{method:'POST',body:{decision:'approved',signature:'Customer Test'}});
+ assert.equal(approved.status,200);
+ const status=await h.call('/api/review/'+token+'/payment');assert.equal(status.data.enabled,false);assert.equal(status.data.invoice.paymentStatus,'unpaid');
+ assert.equal((await h.call('/api/review/'+'a'.repeat(64)+'/payment')).status,404);
+ const capture=await h.call('/api/review/'+token+'/payment/capture',{method:'POST',body:{paid:true,total:0}});
+ assert.equal(capture.status,503);
+ h.reopen();const invoices=await h.call('/api/invoices',{auth:true});assert.equal(invoices.data.invoices[0].paymentStatus,'unpaid');
+});
+
+test('PayPal capture persists only verified payment and retries preserve one receipt and backup',async t=>{
+ const h=setup(t);await h.login();const {token}=await h.createAndShare();
+ const approval=await h.call('/api/review/'+token+'/decision',{method:'POST',body:{decision:'approved',signature:'Customer Test'}});
+ const invoiceId=approval.data.invoiceId,originalFetch=globalThis.fetch;
+ Object.assign(h.env,{PAYPAL_MODE:'sandbox',PAYPAL_CLIENT_ID:'test-id',PAYPAL_CLIENT_SECRET:'test-secret',PAYPAL_MERCHANT_ID:'TESTMERCHANT1'});
+ let captured=false,amount='0.01',captureCalls=0;
+ globalThis.fetch=async(url,options)=>{
+  if(url.endsWith('/token'))return Response.json({access_token:'mock-token'});
+  if(url.endsWith('/v2/checkout/orders'))return Response.json({id:'ORDER123456789',links:[{rel:'payer-action',href:'https://www.sandbox.paypal.com/checkoutnow?token=ORDER123456789'}]});
+  if(url.endsWith('/capture')){captureCalls++;captured=true;return Response.json({status:'COMPLETED'});}
+  return Response.json({id:'ORDER123456789',status:captured?'COMPLETED':'APPROVED',purchase_units:[{custom_id:invoiceId,invoice_id:invoiceId,payee:{merchant_id:'TESTMERCHANT1'},payments:{captures:[{id:'CAPTURE12345',status:'COMPLETED',final_capture:true,amount:{currency_code:'USD',value:amount},create_time:'2026-11-14T01:00:00Z'}]}}]});
+ };
+ t.after(()=>{globalThis.fetch=originalFetch;});
+ let result=await h.call('/api/review/'+token+'/payment/create',{method:'POST',body:{total:0.01}});assert.equal(result.status,200);
+ result=await h.call('/api/review/'+token+'/payment/capture',{method:'POST'});assert.equal(result.status,409);
+ let invoices=await h.call('/api/invoices',{auth:true});assert.equal(invoices.data.invoices[0].paymentStatus,'unpaid');
+ amount='1240.20';result=await h.call('/api/review/'+token+'/payment/capture',{method:'POST'});assert.equal(result.status,200);
+ h.reopen();invoices=await h.call('/api/invoices',{auth:true});assert.equal(invoices.data.invoices[0].paymentStatus,'paid');assert.equal(invoices.data.invoices[0].paypalCaptureId,'CAPTURE12345');assert.equal(invoices.data.invoices[0].paidAt,'2026-11-14T01:00:00Z');
+ const backups=h.count('backup_runs');assert.equal((await h.call('/api/review/'+token+'/payment/capture',{method:'POST'})).data.paid,true);assert.equal(captureCalls,1);assert.equal(h.count('backup_runs'),backups);
+});
+
+test('standalone invoice links expose itemized receipt without email, credentials, or approval controls',async t=>{
+ const h=setup(t);await h.login();const created=await h.call('/api/invoices',{method:'POST',body:input,auth:true});
+ const path='/api/invoices/'+created.data.invoice.id+'/share';assert.equal((await h.call(path,{method:'POST'})).status,401);
+ const shared=await h.call(path,{method:'POST',auth:true});assert.equal(shared.status,200);
+ const token=shared.data.url.split('/').pop(),view=await h.call('/api/review/'+token);assert.equal(view.status,200);assert.equal(view.data.estimate.isInvoice,true);assert.equal(view.data.estimate.email,undefined);assert.equal(view.data.estimate.paymentToken,undefined);assert.equal(view.data.feedbackEnabled,false);
+ assert.equal((await h.call('/api/review/'+token+'/payment')).data.invoice.total,1240.2);
+ assert.equal((await h.call('/api/review/'+token+'/decision',{method:'POST',body:{decision:'approved',signature:'Test'}})).status,404);
+ assert.equal((await h.call(path,{method:'POST',auth:true})).data.url,shared.data.url);h.reopen();assert.equal((await h.call('/api/review/'+token)).status,200);
 });

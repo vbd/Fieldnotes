@@ -12,7 +12,7 @@ const fixture={id:'EST-2026-TEST',customer:'Test Customer',email:'test@example.i
 const estimates=[{...fixture,id:'EST-2026-APPROVED',status:'approved',invoiceId:'INV-2026-TEST',customerSignature:'Test Signer',customerNote:'Approved scope',decidedAt:'2026-01-02T10:00:00Z'}];
 const invoices=[{...fixture,id:'INV-2026-TEST',estimateId:'EST-2026-APPROVED',paymentStatus:'unpaid'}];
 const reviews=[{id:'REV-2026-TEST',estimateId:'EST-2026-APPROVED',customer:'Test Customer',rating:5,comment:'<img src=x onerror="window.__xss=1">',createdAt:'2026-01-03T10:00:00Z'}];
-let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0,ownerAuthenticated=true;
+let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0,ownerAuthenticated=true,paymentPaid=false,invoiceView=false;
 (async()=>{
  if(!existsSync(join(base,'owner.html')))throw Error('Built public assets are missing. Run npm run build before npm run test:browser.');
  const browser=await chromium.launch({executablePath,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
@@ -37,19 +37,22 @@ let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0,owne
    if(path==='/api/invoices')return json({invoices});
    if(path==='/api/reviews')return legacy?json({error:'Not found'},404):json({reviews});
    if(path==='/api/invoices/INV-2026-TEST/mark-paid'){invoices[0].paymentStatus='paid';invoices[0].paidAt=fixture.createdAt;return json({invoice:invoices[0]});}
-   if(path==='/api/review/'+token)return json({estimate:customerEstimate,feedback,...(!legacy?{feedbackEnabled:true}:{})});
+   if(path==='/api/review/'+token+'/payment/capture'){paymentPaid=true;return json({paid:true});}
+   if(path==='/api/review/'+token+'/payment')return json({enabled:invoiceView,invoice:{id:'INV-2026-CUSTOMER',total:100,paymentStatus:paymentPaid?'paid':'unpaid'}});
+   if(path==='/api/review/'+token)return json({estimate:invoiceView?{...customerEstimate,isInvoice:true,status:paymentPaid?'paid':'unpaid'}:customerEstimate,feedback,...(!legacy?{feedbackEnabled:!invoiceView}:{})});
    if(path==='/api/review/'+token+'/decision'){const d=request.postDataJSON();customerEstimate={...customerEstimate,status:d.decision,customerSignature:d.signature,customerNote:d.note,decidedAt:fixture.createdAt};return json({estimate:customerEstimate,invoiceId:'INV-2026-CUSTOMER'});}
    if(path==='/api/review/'+token+'/feedback'){feedback={...request.postDataJSON(),createdAt:fixture.createdAt};return json({feedback},201);}
    if(path==='/api/google/status')return json({configured:false,connected:false,notice:'Automatic backup not configured.'});
    if(path==='/api/restore'){restorePosts++;assert.equal(request.postDataJSON().confirm,'RESTORE');return json({ok:true,estimates:1,invoices:0,reviews:0,skipped:1});}
    return json({error:'Unexpected test route'},404);
   }
-  let file=path==='/owner'?'owner.html':path==='/owner/backup'?'backup.html':path==='/review/'+token?'review.html':path.slice(1);
-  if(!['owner.html','owner.css','owner.js','review.html','review.js','backup.html','backup.js','backup.css'].includes(file))return route.fulfill({status:404,body:'Not found'});
+  let file=path==='/'?'index.html':path==='/owner'?'owner.html':path==='/owner/backup'?'backup.html':path==='/review/'+token?'review.html':path.slice(1);
+  if(!['index.html','styles.css','script.js','owner.html','owner.css','owner.js','review.html','review.js','backup.html','backup.js','backup.css','invoice-mobile.css','review-mobile.css'].includes(file))return route.fulfill({status:404,body:'Not found'});
   const body=await readFile(join(base,file),'utf8');
   return route.fulfill({contentType:file.endsWith('.html')?'text/html':file.endsWith('.css')?'text/css':'application/javascript',body});
  });
  const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));page.on('dialog',dialog=>dialog.accept());
+ await page.goto('https://superior.test/');for(const width of [320,375,390]){await page.setViewportSize({width,height:812});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'public website fits '+width+'px');}await page.setViewportSize({width:375,height:812});
  await page.goto('https://superior.test/owner');await page.locator('#app-shell:not(.hidden)').waitFor();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'mobile dashboard fits viewport');
  await page.locator('.bottom-nav [data-view="invoices"]').click();await page.locator('#invoices-list .record').click();
@@ -75,7 +78,10 @@ let customerEstimate={...fixture},feedback=null,legacy=false,restorePosts=0,owne
  await page.setViewportSize({width:375,height:812});
  await page.goto('https://superior.test/review/'+token);await page.locator('#review-decision:not(.hidden)').waitFor();assert.equal(await page.locator('#feedback-section').isVisible(),false);
  await page.locator('#signature').fill('Test Signer');await page.locator('#decision-note').fill('Customer confirmation note');await page.locator('[data-decision="approved"]').click();await page.locator('#feedback-section:not(.hidden)').waitFor();
+ assert.match(await page.locator('#payment-status').innerText(),/Contact Superior/);assert.equal(await page.locator('#pay-invoice').isVisible(),false);for(const width of [320,375,390]){await page.setViewportSize({width,height:812});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'customer page fits '+width+'px');}
  await page.locator('.rating-options label').nth(4).click();await page.locator('#feedback-comment').fill('<b>Helpful quote</b>');await page.locator('#feedback-form button').click();await page.locator('#feedback-saved:not(.hidden)').waitFor();assert.match(await page.locator('#feedback-saved').innerText(),/<b>Helpful quote<\/b>/);assert.equal(await page.locator('#feedback-saved b').count(),0);assert.equal(await page.locator('#feedback-form').isVisible(),false);
+ invoiceView=true;await page.goto('https://superior.test/review/'+token);await page.locator('#pay-invoice:not(.hidden)').waitFor();assert.equal(await page.locator('#review-decision').isVisible(),false);assert.equal(await page.locator('#feedback-section').isVisible(),false);assert.match(await page.locator('.doc-type').innerText(),/INVOICE/);
+ await page.goto('https://superior.test/review/'+token+'?paypal=return');await page.locator('#payment-status').filter({hasText:'Payment received'}).waitFor();assert.equal(await page.locator('#pay-invoice').isVisible(),false);assert.equal(paymentPaid,true);invoiceView=false;
  const backup={app:'Superior Maintenance and Remodeling - Command Center',version:1,estimates:[fixture,estimates[0]],invoices:[],reviews:[]};
  await page.goto('https://superior.test/owner/backup');await page.locator('#record-count').filter({hasText:'ready for backup'}).waitFor();await page.locator('#backup-file').setInputFiles({name:'backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});await page.locator('#restore').click();await page.locator('#backup-status').filter({hasText:'Import complete'}).waitFor();assert.match(await page.locator('#backup-status').innerText(),/1 existing or conflicting records skipped/);assert.equal(restorePosts,1);
  legacy=true;await page.reload();await page.locator('#restore-help').filter({hasText:'unavailable'}).waitFor();await page.locator('#backup-file').setInputFiles({name:'backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});assert.equal(await page.locator('#restore').isDisabled(),true,'legacy destructive restore cannot be invoked');assert.equal(restorePosts,1);

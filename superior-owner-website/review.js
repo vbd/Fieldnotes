@@ -4,7 +4,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 const fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n)||0);
 const token=encodeURIComponent(location.pathname.split('/').pop());
 let current=null;
-function paper(e){return `<div class="detail-paper"><div class="paper-brand"><div><strong>SUPERIOR</strong><small>MAINTENANCE & REMODELING</small></div><div class="doc-type">ESTIMATE</div></div><div class="doc-meta"><div><b>Prepared for</b><span>${esc(e.customer)}</span><span>${esc(e.address)}</span><span>${esc(e.project)}</span></div><div><b>${esc(e.id)}</b><span>${new Date(e.createdAt).toLocaleDateString('en-US')}</span><span>909-352-3627</span></div></div><table class="paper-table"><thead><tr><th>DESCRIPTION</th><th>QTY</th><th>RATE</th><th>AMOUNT</th></tr></thead><tbody>${e.items.map(i=>`<tr><td>${esc(i.description)}</td><td>${esc(i.qty)}</td><td>${fmt(i.rate)}</td><td>${fmt(i.total)}</td></tr>`).join('')}</tbody></table><div class="paper-totals"><div><span>Subtotal</span><b>${fmt(e.subtotal)}</b></div><div><span>Tax</span><b>${fmt(e.tax)}</b></div><div class="final"><span>Total</span><b>${fmt(e.total)}</b></div></div>${e.notes?`<div class="paper-notes"><b>Notes and terms</b><p>${esc(e.notes)}</p></div>`:''}</div>`;}
+function paper(e){return `<div class="detail-paper"><div class="paper-brand"><div><strong>SUPERIOR</strong><small>MAINTENANCE & REMODELING</small></div><div class="doc-type">${e.isInvoice?'INVOICE':'ESTIMATE'}</div></div><div class="doc-meta"><div><b>Prepared for</b><span>${esc(e.customer)}</span><span>${esc(e.address)}</span><span>${esc(e.project)}</span></div><div><b>${esc(e.id)}</b><span>${new Date(e.createdAt).toLocaleDateString('en-US')}</span><span>909-352-3627</span></div></div><table class="paper-table"><thead><tr><th>DESCRIPTION</th><th>QTY</th><th>RATE</th><th>AMOUNT</th></tr></thead><tbody>${e.items.map(i=>`<tr><td>${esc(i.description)}</td><td>${esc(i.qty)}</td><td>${fmt(i.rate)}</td><td>${fmt(i.total)}</td></tr>`).join('')}</tbody></table><div class="paper-totals"><div><span>Subtotal</span><b>${fmt(e.subtotal)}</b></div><div><span>Tax</span><b>${fmt(e.tax)}</b></div><div class="final"><span>Total</span><b>${fmt(e.total)}</b></div></div>${e.notes?`<div class="paper-notes"><b>Notes and terms</b><p>${esc(e.notes)}</p></div>`:''}</div>`;}
 async function request(path,options={}){
  const res=await fetch('/api/review/'+token+path,{cache:'no-store',...options});
  let data;try{data=await res.json();}catch{throw Error('The server could not complete the request. Please try again.');}
@@ -21,9 +21,10 @@ function renderFeedback(feedback,estimate,enabled){
 async function load(){
  try{
   const data=await request(''),e=data.estimate;current=e;
+  if(e.isInvoice){document.title='Your Invoice | Superior Maintenance & Remodeling';$('.review-intro .eyebrow').textContent='YOUR INVOICE';$('.review-intro h1').textContent='Your project invoice';$('.review-intro > p:last-child').textContent='Review the itemized invoice and payment status below.';}
   const decisionDate=e.decidedAt?' on '+new Date(e.decidedAt).toLocaleDateString('en-US'):'';
-  $('#review-content').innerHTML=`<p class="eyebrow">${esc(e.id)} · ${esc(e.status.toUpperCase())}</p>`+paper(e)+(e.status!=='sent'?`<p class="muted">This estimate was ${esc(e.status)}${decisionDate}. Your decision has been recorded.</p>`:'');
-  $('#review-decision').classList.toggle('hidden',e.status!=='sent');renderFeedback(data.feedback,e,data.feedbackEnabled===true);
+  $('#review-content').innerHTML=`<p class="eyebrow">${esc(e.id)} · ${esc(e.status.toUpperCase())}</p>`+paper(e)+(!e.isInvoice&&e.status!=='sent'?`<p class="muted">This estimate was ${esc(e.status)}${decisionDate}. Your decision has been recorded.</p>`:'');
+  $('#review-decision').classList.toggle('hidden',e.status!=='sent');renderFeedback(data.feedback,e,data.feedbackEnabled===true);await loadPayment(e);
  }catch(err){current=null;$('#review-content').textContent=err.message;$('#review-decision').classList.add('hidden');$('#feedback-section').classList.add('hidden');}
 }
 $('#decision-form').addEventListener('click',event=>{const button=event.target.closest('[data-decision]');if(button)$('#decision-form').dataset.decision=button.dataset.decision;});
@@ -45,5 +46,26 @@ $('#feedback-form').addEventListener('submit',async event=>{
  try{await request('/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rating,comment:$('#feedback-comment').value.trim()})});await load();}
  catch(err){if(err.status===409)await load();else error.textContent=err.message;}
  finally{button.disabled=false;form.setAttribute('aria-busy','false');}
+});
+async function loadPayment(estimate){
+ const section=$('#payment-section'),button=$('#pay-invoice'),status=$('#payment-status');
+ section.classList.toggle('hidden',!estimate.isInvoice&&estimate.status!=='approved');button.classList.add('hidden');
+ if(!estimate.isInvoice&&estimate.status!=='approved')return;
+ try{
+  let data=await request('/payment');
+  if(new URLSearchParams(location.search).get('paypal')==='return'&&data.invoice.paymentStatus!=='paid'){
+   status.textContent='Verifying payment with PayPal…';
+   await request('/payment/capture',{method:'POST'});data=await request('/payment');
+   history.replaceState(null,'',location.pathname);
+  }
+  status.textContent=data.invoice.paymentStatus==='paid'?'Payment received. Thank you.':`Invoice ${data.invoice.id}: ${fmt(data.invoice.total)} due. ${data.enabled?'Pay securely with PayPal.':'Contact Superior to arrange payment.'}`;
+  button.classList.toggle('hidden',!data.enabled||data.invoice.paymentStatus==='paid');
+ }catch(error){status.textContent=error.message;}
+}
+$('#pay-invoice').addEventListener('click',async()=>{
+ const button=$('#pay-invoice');if(button.disabled)return;button.disabled=true;
+ try{const data=await request('/payment/create',{method:'POST'});if(data.paid){await load();return;}location.assign(data.approvalUrl);}
+ catch(error){$('#payment-status').textContent=error.message;}
+ finally{button.disabled=false;}
 });
 load();
